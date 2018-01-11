@@ -1,8 +1,8 @@
-package fr.unice.polytech.PEL.PolyEscape;
+package fr.unice.polytech.pel.polyescape;
 
-import fr.unice.polytech.PEL.PolyEscape.Data.Enigma;
-import fr.unice.polytech.PEL.PolyEscape.Server.Decoder;
-import fr.unice.polytech.PEL.PolyEscape.Server.Encoder;
+import fr.unice.polytech.pel.polyescape.Data.Enigma;
+import fr.unice.polytech.pel.polyescape.Server.Decoder;
+import fr.unice.polytech.pel.polyescape.Server.Encoder;
 import org.json.JSONObject;
 
 /**

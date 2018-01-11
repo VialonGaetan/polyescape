@@ -1,4 +1,4 @@
-package fr.unice.polytech.PEL.PolyEscape.Data;
+package fr.unice.polytech.pel.polyescape.Data;
 
 public class Enigma {
 

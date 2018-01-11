@@ -1,6 +1,6 @@
-package fr.unice.polytech.PEL.PolyEscape.Server;
+package fr.unice.polytech.pel.polyescape.Server;
 
-import fr.unice.polytech.PEL.PolyEscape.Data.Enigma;
+import fr.unice.polytech.pel.polyescape.Data.Enigma;
 import org.json.JSONObject;
 
 public class Decoder {
