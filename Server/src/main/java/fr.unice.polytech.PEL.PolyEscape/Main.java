@@ -1,11 +1,15 @@
-package Data;
+package fr.unice.polytech.PEL.PolyEscape;
 
-import Server.Decoder;
-import Server.Encoder;
-import org.json.simple.JSONObject;
+import fr.unice.polytech.PEL.PolyEscape.Data.Enigma;
+import fr.unice.polytech.PEL.PolyEscape.Server.Decoder;
+import fr.unice.polytech.PEL.PolyEscape.Server.Encoder;
+import org.json.JSONObject;
 
+/**
+ * @author Gaetan Vialon
+ * Created the 11/01/2018.
+ */
 public class Main {
-
     public static void main(String[] args) {
         Encoder encoder = new Encoder();
         Decoder decoder = new Decoder();

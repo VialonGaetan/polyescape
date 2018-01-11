@@ -1,7 +1,7 @@
-package Server;
+package fr.unice.polytech.PEL.PolyEscape.Server;
 
-import Data.Enigma;
-import org.json.simple.JSONObject;
+import fr.unice.polytech.PEL.PolyEscape.Data.Enigma;
+import org.json.JSONObject;
 
 public class Encoder{
 
