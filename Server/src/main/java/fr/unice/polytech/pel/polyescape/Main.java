@@ -1,24 +1,32 @@
 package fr.unice.polytech.pel.polyescape;
 
-import fr.unice.polytech.pel.polyescape.Data.Enigma;
-import fr.unice.polytech.pel.polyescape.Server.Decoder;
-import fr.unice.polytech.pel.polyescape.Server.Encoder;
-import org.json.JSONObject;
+import fr.unice.polytech.pel.polyescape.Server.GameServerEndPoint;
+import org.glassfish.tyrus.server.Server;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 /**
  * @author Gaetan Vialon
  * Created the 11/01/2018.
  */
 public class Main {
+
     public static void main(String[] args) {
-        Encoder encoder = new Encoder();
-        Decoder decoder = new Decoder();
-        Enigma enigma = new Enigma("ma description", "ma reponse");
-        JSONObject jsonObject = encoder.encode(enigma);
-        System.out.println("ok encode\n");
-        Enigma returnedEnigma = decoder.decode(jsonObject);
-        System.out.println(returnedEnigma.getDescription());
-        System.out.println(returnedEnigma.getResponse());
-        System.out.println("ok");
+        runServer();
+    }
+
+    public static void runServer() {
+        Server server = new Server("192.168.43.35", 8025, "/websockets", GameServerEndPoint.class);
+        boolean listening = true;
+
+        try {
+            server.start();
+            System.out.print("Adresse du server ws://localhost:8025/websockets/gameserver");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        while (listening);
+        server.stop();
     }
 }
