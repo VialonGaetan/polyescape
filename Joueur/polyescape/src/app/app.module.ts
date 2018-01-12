@@ -4,6 +4,7 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
 import { EscapeScreenPage } from '../pages/escapeScreen/escapeScreen';
+import { EndGameScreenPage } from '../pages/endGameScreen/endGameScreen'
 import { TeamScreenPage } from '../pages/teamScreen/teamScreen';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -16,6 +17,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     TeamScreenPage,
     EscapeScreenPage,
+    EndGameScreenPage,
     HomePage,
     TabsPage
   ],
@@ -28,6 +30,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     MyApp,
     TeamScreenPage,
     EscapeScreenPage,
+    EndGameScreenPage,
     HomePage,
     TabsPage
   ],
