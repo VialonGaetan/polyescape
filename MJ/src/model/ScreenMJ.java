@@ -90,9 +90,11 @@ public class ScreenMJ extends Stage{
                         "Option 2",
                         "Option 3"
                 );
+
         listPlayer = new ComboBox(options);
         listPlayer.setLayoutX(0);
         listPlayer.setLayoutY(4*HAUTEUR/15);
+        
 
         basePane.getChildren().addAll(choicePlayer, listPlayer);
         //definition temps restant + graph minuteur
