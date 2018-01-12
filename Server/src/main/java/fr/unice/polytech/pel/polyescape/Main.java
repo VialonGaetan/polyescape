@@ -17,7 +17,7 @@ public class Main {
     }
 
     public static void runServer() {
-        Server server = new Server("localhost", 8025, "/websockets", GameServerEndPoint.class);
+        Server server = new Server("192.168.43.35", 8025, "/websockets", GameServerEndPoint.class);
         boolean listening = true;
 
         try {

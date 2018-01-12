@@ -6,8 +6,11 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Button;
+import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -18,11 +21,17 @@ import java.awt.*;
 public class ScreenMJ extends Stage{
 
     private ProgressBar progressBar;
+    private ProgressIndicator timeIndicator;
+    private StackPane bottomPane;
+
     private MJController control;
 
     private StackPane topPane;
 
     private Pane basePane;
+
+    private HBox timeHB;
+
     private Group root ;
     private Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
     private final int HAUTEUR = (int)dimension.getHeight();
@@ -30,8 +39,12 @@ public class ScreenMJ extends Stage{
     Text teamName;
     Text escapeGameName;
     Text playerName;
-    Text remindedTime;
+    Label remindedTime;
+    Text descriptionEnigma;
     ComboBox listPlayer;
+    private TextArea answer;
+    private Button btnAnswer;
+    private Label choicePlayer;
 
     public ScreenMJ(){
 
@@ -61,12 +74,16 @@ public class ScreenMJ extends Stage{
         progressBar = new ProgressBar();
         progressBar = new ProgressBar();
         progressBar.setProgress(0.5);
-        progressBar.setLayoutX(LARGEUR/2 - 47);
-        progressBar.setLayoutY(HAUTEUR/15);
+        progressBar.layoutXProperty().bind(basePane.widthProperty().subtract(progressBar.widthProperty()).divide(2));
+        progressBar.setLayoutY(HAUTEUR*0.15);
 
         basePane.getChildren().addAll(progressBar);
 
-        //definition de la liste des joueurs et du temps restant (3eme couche)
+        //definition de la liste des joueurs
+        choicePlayer =new Label("choix du joueur");
+        choicePlayer.setLayoutX(0);
+        choicePlayer.setLayoutY(HAUTEUR*0.25);
+
         ObservableList<String> options =
                 FXCollections.observableArrayList(
                         "Option 1",
@@ -75,15 +92,45 @@ public class ScreenMJ extends Stage{
                 );
         listPlayer = new ComboBox(options);
         listPlayer.setLayoutX(0);
-        listPlayer.setLayoutY(2*HAUTEUR/15);
+        listPlayer.setLayoutY(4*HAUTEUR/15);
 
-        remindedTime = new Text("1:00:00");
-        remindedTime.setLayoutX(LARGEUR/2 - 47);
-        remindedTime.setLayoutY(2*HAUTEUR/15);
+        basePane.getChildren().addAll(choicePlayer, listPlayer);
+        //definition temps restant + graph minuteur
+        timeHB = new HBox(2);
+        remindedTime = new Label("1:00:00");
 
+        timeIndicator = new ProgressIndicator();
+        timeIndicator.setProgress(0.3);
 
-        basePane.getChildren().addAll(listPlayer, remindedTime);
+        timeHB.getChildren().addAll(remindedTime, timeIndicator);
 
+        timeHB.layoutXProperty().bind(basePane.widthProperty().subtract(timeHB.widthProperty()).divide(2));
+        timeHB.setLayoutY(HAUTEUR*0.08);
+        basePane.getChildren().addAll(timeHB);
+
+        //Definition du chaps de description de l'énigme
+        descriptionEnigma = new Text();
+        descriptionEnigma.setText("Ceci est la description de l'énigme actuellement proposée à l'étudiant");
+        descriptionEnigma.setLayoutX(0);
+        descriptionEnigma.setLayoutY(6*HAUTEUR/15);
+
+        basePane.getChildren().addAll(descriptionEnigma);
+
+        //Definition champ réponse + btn envoie
+        bottomPane = new StackPane();
+        bottomPane.setPrefSize(4*LARGEUR/5,5* HAUTEUR/15);
+        answer = new TextArea("Entrez un indice/réponse");
+        btnAnswer = new Button("Envoyer");
+        btnAnswer.setLayoutX(4*LARGEUR/5);
+        btnAnswer.setLayoutY(10*HAUTEUR/15);
+        btnAnswer.setPrefSize(LARGEUR/5, HAUTEUR/3);
+
+        bottomPane.getChildren().addAll(answer);
+
+        bottomPane.setLayoutY(10*HAUTEUR/15);
+        bottomPane.setLayoutX(0);
+        basePane.getChildren().addAll(bottomPane);
+        basePane.getChildren().addAll(btnAnswer);
 
         //Génération de la scene
         root.getChildren().add(basePane);
