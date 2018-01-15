@@ -1,0 +1,49 @@
+<ion-header>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <ion-navbar>
+    <ion-title>
+      Enigme
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background: lavender;">
+  <ion-label id="title"> Escape game en cours:
+    Mathématiques
+  </ion-label>
+  <ion-label id="time">
+    temps restant: 01:33:26
+  </ion-label>
+  <ion-label style="margin-left: 20px;">
+    Lieu de l'énigme:
+  </ion-label>
+  <ion-label style="margin-left: 20px;">
+    salle XXXX
+  </ion-label>
+  <ion-label style="margin-left: 20px;">
+    Description
+  </ion-label>
+  <div style=" overflow-y:scroll;width:100%; height:200px;">
+    <ion-label text-wrap="true" style="margin-left: 20px; margin-right: 20px">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam sit amet porttitor nibh. Orci varius natoque
+      penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vivamus blandit quam et arcu sagittis mollis. Sed non libero ac
+      tellus iaculis pharetra a id magna. Nulla in varius diam. Fusce aliquet scelerisque urna, ac finibus justo. Duis cursus consectetur sapien
+      bibendum facilisis. Proin turpis libero, hendrerit quis tristique vitae, condimentum ac nibh. Morbi eleifend ligula id nunc ullamcorper,
+      non tempus est tincidunt. Morbi nec facilisis mi. Maecenas quis mauris vel libero efficitur tristique. Morbi accumsan in erat
+      auctor commodo. Vestibulum tincidunt suscipit massa.
+    </ion-label>
+  </div>
+  <ion-item class="input1">
+    <ion-input type="team name" placeholder="Votre réponse"></ion-input>
+  </ion-item>
+  <div style="position:absolute;bottom:0;" padding-bottom="10px">
+    <button ion-button margin-left="150px" icon-right>
+      valider
+      <ion-icon name="key"></ion-icon>
+    </button>
+    <button ion-button id="help" icon-right>
+      demander de l'aide
+      <ion-icon name="help-circle"></ion-icon>
+    </button>
+  </div>
+</ion-content>

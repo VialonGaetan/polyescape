@@ -4,6 +4,9 @@ page-about {
 
 .listButton{
   background: #488aff;
+  color: #ffffff;
+  border-radius: 3px;
+  font-weight: bold;
 }
 
 div #teamName{
@@ -25,4 +28,8 @@ div #teamName{
   margin-left: 32px;
   font-size: 20px;
   font-weight: bold;
+}
+
+.input2{
+  background: lavender;
 }

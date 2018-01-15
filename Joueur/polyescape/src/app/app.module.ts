@@ -9,8 +9,10 @@ import { TeamScreenPage } from '../pages/teamScreen/teamScreen';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {EnigmePage} from "../pages/enigme/enigme";
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     EscapeScreenPage,
     EndGameScreenPage,
     HomePage,
+    EnigmePage,
     TabsPage
   ],
   imports: [
@@ -32,6 +35,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     EscapeScreenPage,
     EndGameScreenPage,
     HomePage,
+    EnigmePage,
     TabsPage
   ],
   providers: [
