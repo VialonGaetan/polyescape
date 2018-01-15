@@ -5,14 +5,14 @@
 <ion-content style="background: lavender;" padding>
   <ion-img class="logo" src="../../assets/imgs/logoPoly1.png"></ion-img>
   <ion-item class="input" style="background: lavender">
-    <ion-input type="pseudo" placeholder="Entrez votre identifiant" ></ion-input>
+    <ion-input [(ngModel)]="inputName" type="pseudo" placeholder="Entrez votre identifiant" ></ion-input>
   </ion-item>
   <div id = "buttons">
-    <button class="homeButton" ion-button icon-right>
+    <button (click)='goToEscapePage()' class="homeButton" ion-button icon-right>
       Jouer seul
       <ion-icon name="person"></ion-icon>
     </button>
-    <button class="homeButton" ion-button icon-right>
+    <button (click)='goToTeamPage()' class="homeButton" ion-button icon-right>
       Jouer à plusieurs
       <ion-icon name="people"></ion-icon>
     </button>
