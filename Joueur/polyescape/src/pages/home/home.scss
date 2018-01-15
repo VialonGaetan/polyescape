@@ -10,13 +10,17 @@ page-home {
 
 .input{
   background: lavender;
+  position:absolute;
+  bottom:90px;
 }
 
 .logo{
-  height: 200px;
-  width: 200px;
+  height: 80%;
+  width: 70%;
   font-size: 300px;
   margin-top: 60px;
-  margin-bottom: 190px;
-  margin-left: 95px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background: lavender;
 }
