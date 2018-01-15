@@ -17,7 +17,7 @@ export class HomePage {
 
   presentToast() {
     let toast = this.toastCtrl.create({
-      message: 'Veuillez entrer un nom',
+      message: 'Veuillez entrer votre identifiant',
       duration: 3000,
       position: 'bottom'
     });
@@ -31,6 +31,7 @@ export class HomePage {
       this.presentToast();
       return false;
     }
+    this.inputName = "";
     return true;
   }
 
@@ -43,5 +44,4 @@ export class HomePage {
     if (this.verifyInputName())
       this.navCtrl.push(TeamScreenPage);
   }
-
 }

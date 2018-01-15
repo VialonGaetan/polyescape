@@ -25,8 +25,8 @@ export class EnigmePage {
   }
 
   submitAnswer() {
-    if (this.inputAnswer.length == 0)
+    if (this.inputAnswer.length == 0){
       this.presentToast();
+    }
   }
-
 }

@@ -10,16 +10,14 @@ page-home {
 
 .input{
   background: lavender;
-  position:absolute;
-  bottom:12%;
   width: 80%;
+  position:absolute;
+  bottom:60px;
 }
 
 .logo{
-  height: 80%;
-  width: 70%;
-  font-size: 300px;
-  margin-top: 60px;
+  height: 65%;
+  width: 65%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -27,9 +25,13 @@ page-home {
 }
 
 .homeButton{
+  width: 45%;
+  height: 100%;
+  font-size: 80%;
 }
 #buttons{
-  margin-top: 5%;
-  height: 10%;
+  position: absolute;
+  bottom: 0;
+  height: 7%;
   width: 100%;
 }

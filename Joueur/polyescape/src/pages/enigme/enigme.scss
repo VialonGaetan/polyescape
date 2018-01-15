@@ -24,7 +24,16 @@ page-enigme{
 }
 
 #help{
-  font-size: 100%;
 
 }
-
+.enigmeButtons{
+  width: 45%;
+  height: 100%;
+  font-size: 80%;
+}
+#enigmeButtonsDiv{
+  height: 9%;
+  width: 100%;
+  position:absolute;
+  bottom:0;
+}

@@ -36,8 +36,8 @@
   <ion-item class="input1">
     <ion-input [(ngModel)]="inputAnswer" type="text" placeholder="Votre réponse"></ion-input>
   </ion-item>
-  <div style="position:absolute;bottom:0;" padding-bottom="10px">
-    <button (click)='submitAnswer()' ion-button margin-left="150px" icon-right>
+  <div id="enigmeButtonsDiv" padding-bottom="10px">
+    <button class="enigmeButtons" (click)='submitAnswer()' ion-button margin-left="150px" icon-right>
       valider
       <ion-icon name="key"></ion-icon>
     </button>

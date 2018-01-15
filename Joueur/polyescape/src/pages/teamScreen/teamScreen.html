@@ -13,10 +13,10 @@
     Créer une équipe
   </ion-label>
   <div id="teamName">
-    <ion-item class="input2">
-      <ion-input type="text" placeholder="Nom de l'équipe à créer" ></ion-input>
+    <ion-item style="background: lavender">
+      <ion-input id="input2" [(ngModel)]="qty" type="text" placeholder="Nom de l'équipe à créer" ></ion-input>
     </ion-item>
-    <button ion-button margin-top="100px" margin-left="150px" icon-right>
+    <button ion-button (click)="createTeam()" margin-top="100px" margin-left="150px" icon-right>
       Créer mon équipe
       <ion-icon name="people"></ion-icon>
     </button>
@@ -29,8 +29,8 @@
       2 joueurs
     </ion-card-header>
 
-    <ion-list margin-left="10px" margin-right="10px">
-      <button ion-item class="listButton">
+    <ion-list id="l" margin-left="10px" margin-right="10px">
+      <button id="b1" (click)="joinTeam('b1');" ion-item class="listButton">
         <ion-icon name="people" item-start></ion-icon>
         Team 1
       </button>
@@ -39,27 +39,27 @@
       3 joueurs
     </ion-card-header>
     <ion-list margin-left="10px" margin-right="10px">
-      <button ion-item class="listButton">
+      <button id="b2" ion-item (click)="joinTeam('b2');" class="listButton">
         <ion-icon name="people" item-start></ion-icon>
         Team 2
       </button>
-      <button ion-item class="listButton">
+      <button id="b3" ion-item (click)="joinTeam('b3');" class="listButton">
         <ion-icon name="people" item-start></ion-icon>
         Team 3
       </button>
-      <button ion-item class="listButton">
+      <button id="b4" ion-item (click)="joinTeam('b4');" class="listButton">
         <ion-icon name="people" item-start></ion-icon>
         Team 20
       </button>
-      <button ion-item class="listButton">
+      <button id="b5" ion-item (click)="joinTeam('b5');" class="listButton">
         <ion-icon name="people" item-start></ion-icon>
         Team 32
       </button>
-      <button ion-item class="listButton">
+      <button id="b6" ion-item (click)="joinTeam('b6');" class="listButton">
         <ion-icon name="people" item-start></ion-icon>
         Team 23
       </button>
-      <button ion-item class="listButton">
+      <button id="b7" ion-item (click)="joinTeam('b7');" class="listButton">
         <ion-icon name="people" item-start></ion-icon>
         Team 33
       </button>
@@ -68,16 +68,16 @@
       4 joueurs
     </ion-card-header>
     <ion-list margin-left="10px" margin-right="10px">
-      <button ion-item class="listButton">
+      <button id="b8" ion-item (click)="joinTeam('b8');" class="listButton">
         <ion-icon name="people" item-start></ion-icon>
         Team 4
       </button>
-      <button ion-item class="listButton">
+      <button id="b9" ion-item (click)="joinTeam('b9');" class="listButton">
         <ion-icon name="people" item-start></ion-icon>
         Team 5
       </button>
 
-      <button ion-item class="listButton">
+      <button id="b10" ion-item (click)="joinTeam('b10');" class="listButton">
         <ion-icon name="people" item-start></ion-icon>
         Team 6
       </button>

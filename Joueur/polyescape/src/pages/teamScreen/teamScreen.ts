@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {NavController, ToastController} from 'ionic-angular';
+import {EscapeScreenPage} from "../escapeScreen/escapeScreen";
 
 @Component({
   selector: 'page-team',
@@ -7,8 +8,38 @@ import { NavController } from 'ionic-angular';
 })
 export class TeamScreenPage {
 
-  constructor(public navCtrl: NavController) {
+  private qty = '';
+  private teamName = '';
+  private _id: number;
 
+  constructor(public navCtrl: NavController,public toastCtrl: ToastController) {
+    this._id = 99;
   }
 
+  joinTeam(p_id : number){
+    alert(p_id);
+    this.navCtrl.push(EscapeScreenPage);
+  }
+
+  createTeam(){
+    if(this.qty.length == 0){
+      this.presentToast();
+    }
+    else {
+      this.teamName = this.qty;
+      this.qty = "";
+      this.navCtrl.push(EscapeScreenPage)
+    }
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Veuillez entrer un nom valide (au moins 1 caractère)',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+
+    toast.present();
+  }
 }
