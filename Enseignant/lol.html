@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>Cover Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+</head>
+
+<body>
+<form>
+
+    <input id="textMessage" type="text">
+    <input onclick="sendMessage();" value="Send Me" type="button">
+</form>
+<br>
+<textarea id="messageTextArea" rows="10" cols="50">
+    </textarea>
+<script type="text/javascript">
+    var webSocket = new WebSocket("ws://localhost:15555/websockets/gameserver");
+    var messagetextArea = document.getElementById("messageTextArea");
+    var textMessage = document.getElementById("textMessage");
+    webSocket.onopen = function (message) {
+        processOpen(message)
+    };
+    webSocket.onmessage = function (message) {
+        processMessage(message)
+    };
+    webSocket.onclose = function (message) {
+        processClose(message)
+    };
+
+    function processOpen(message) {
+        messagetextArea.value += "Server Connect..." + "\n";
+    }
+
+    function processMessage(message) {
+        messagetextArea.value += "Receive from the server" + message.data+ "\n";
+    }
+
+    function processClose(message) {
+        messagetextArea.value += "Server disconnect..." + "\n";
+    }
+
+    function sendMessage() {
+        webSocket.send(textMessage.value);
+        messagetextArea.value += "Send to the server : " + textMessage.value + "\n";
+        textMessage.value = "";
+    }
+
+</script>
+</body>
+</html>
+
+
+x += "<table class=\"table\">\n" +
+    "            <thead>\n" +
+    "            <tr>\n" +
+        "                <th>Nom</th>\n" +
+        "                <th>Description</th>\n" +
+        "                <th>Reponse</th>\n" +
+        "            </tr>\n" +
+    "            </thead>";
+    myObj = ev.data;
+
+    x+="<tbody>"
+    for (i in myObj.enigmes) {
+    x += "<tr>";
+        x += "<h2>" + myObj.enigmes[i].nom + "</h2>";
+        x += myObj.enigmes[i].description + "<br>";
+        x += myObj.enigmes[i].reponse + "<br>";
+        x += "</tr>";
+    }
+    x+="</tbody>\n" +
+    "        </table>";
