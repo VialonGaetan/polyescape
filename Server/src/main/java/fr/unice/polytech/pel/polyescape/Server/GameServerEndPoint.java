@@ -1,8 +1,10 @@
 package fr.unice.polytech.pel.polyescape.Server;
 
+import fr.unice.polytech.pel.polyescape.Transmission.requests.Request;
+import fr.unice.polytech.pel.polyescape.Transmission.requests.RequestFactory;
+
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
@@ -21,9 +23,10 @@ public class GameServerEndPoint {
 
     @OnMessage
     public String onMessage(String message, Session session) {
-        System.out.println("Message Receive");
-        System.out.println(message);
-        return message + " sending by the server";
+        logger.info("Message Receive : " + message);
+        Request request = new RequestFactory().createTypeRequest(message, session);
+        logger.info("Message send : " + request.getAnswer());
+        return request.getAnswer().toString();
     }
 
     @OnClose
