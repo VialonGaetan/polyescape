@@ -59,25 +59,3 @@
 </script>
 </body>
 </html>
-
-
-x += "<table class=\"table\">\n" +
-    "            <thead>\n" +
-    "            <tr>\n" +
-        "                <th>Nom</th>\n" +
-        "                <th>Description</th>\n" +
-        "                <th>Reponse</th>\n" +
-        "            </tr>\n" +
-    "            </thead>";
-    myObj = ev.data;
-
-    x+="<tbody>"
-    for (i in myObj.enigmes) {
-    x += "<tr>";
-        x += "<h2>" + myObj.enigmes[i].nom + "</h2>";
-        x += myObj.enigmes[i].description + "<br>";
-        x += myObj.enigmes[i].reponse + "<br>";
-        x += "</tr>";
-    }
-    x+="</tbody>\n" +
-    "        </table>";
