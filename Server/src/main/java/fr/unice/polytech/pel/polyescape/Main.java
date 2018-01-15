@@ -17,14 +17,15 @@ public class Main {
     }
 
     public static void runServer() {
-        Server server = new Server("localhost", 8025, "/websockets", GameServerEndPoint.class);
+        Server server = new Server("localhost", 15555, "/websockets", GameServerEndPoint.class);
         boolean listening = true;
 
         try {
             server.start();
-            System.out.print("Adresse du server ws://localhost:8025/websockets/gameserver");
+            System.out.print("Adresse du server ws://localhost:15555/websockets/gameserver");
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.err.println("Could not listen on port: 15555.");
+            System.exit(-1);
         }
         while (listening);
         server.stop();
