@@ -34,10 +34,10 @@
     </ion-label>
   </div>
   <ion-item class="input1">
-    <ion-input type="team name" placeholder="Votre réponse"></ion-input>
+    <ion-input [(ngModel)]="inputAnswer" type="text" placeholder="Votre réponse"></ion-input>
   </ion-item>
   <div style="position:absolute;bottom:0;" padding-bottom="10px">
-    <button ion-button margin-left="150px" icon-right>
+    <button (click)='submitAnswer()' ion-button margin-left="150px" icon-right>
       valider
       <ion-icon name="key"></ion-icon>
     </button>

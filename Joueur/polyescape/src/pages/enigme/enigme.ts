@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {NavController, ToastController} from 'ionic-angular';
 
 @Component({
   selector: 'page-enigme',
@@ -7,8 +7,26 @@ import { NavController } from 'ionic-angular';
 })
 export class EnigmePage {
 
-  constructor(public navCtrl: NavController) {
+  private inputAnswer = '';
 
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController) {
+
+  }
+
+  presentToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Veuillez entrer une réponse',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+
+    toast.present();
+  }
+
+  submitAnswer() {
+    if (this.inputAnswer.length == 0)
+      this.presentToast();
   }
 
 }
