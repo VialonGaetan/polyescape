@@ -8,17 +8,27 @@ import {EnigmePage} from "../enigme/enigme";
 })
 export class EscapeScreenPage {
 
-  escapeGames: any;
+  escapeGames = [];
 
   constructor(public navCtrl: NavController) {
-    this.escapeGames = [
-      'Escape Game 1',
-      'Escape Game 2',
-      'Escape Game 3'
-    ];
+
+    var webSocket = new WebSocket("ws://localhost:15555/websockets/gameserver");
+    webSocket.onopen = function (ev) {
+      var request = {request: "GET_ESCAPE"};
+      webSocket.send(JSON.stringify(request));
+    };
+
+    webSocket.onmessage = function(event) {
+      var jsonData = JSON.parse(event.data);
+
+      for (var i = 0; i < jsonData.escapesGame.length; i++)
+        this.escapeGames.push(jsonData.escapesGame[i].nom);
+    }.bind(this);
   }
 
   startGame() {
     this.navCtrl.push(EnigmePage);
   }
+
+
 }
