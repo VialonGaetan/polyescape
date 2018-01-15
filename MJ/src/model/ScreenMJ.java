@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -20,6 +22,7 @@ import java.awt.*;
 
 public class ScreenMJ extends Stage{
 
+    private ImageView logo;
     private ProgressBar progressBar;
     private ProgressIndicator timeIndicator;
     private StackPane bottomPane;
@@ -94,7 +97,7 @@ public class ScreenMJ extends Stage{
         listPlayer = new ComboBox(options);
         listPlayer.setLayoutX(0);
         listPlayer.setLayoutY(4*HAUTEUR/15);
-        
+
 
         basePane.getChildren().addAll(choicePlayer, listPlayer);
         //definition temps restant + graph minuteur
@@ -134,12 +137,24 @@ public class ScreenMJ extends Stage{
         basePane.getChildren().addAll(bottomPane);
         basePane.getChildren().addAll(btnAnswer);
 
+        //Definition du logo au centre de la page
+        logo = new ImageView("images/logoPoly.png");
+        logo.setLayoutX(LARGEUR/2 - logo.getImage().getWidth()/2);
+        logo.setLayoutY(HAUTEUR/2 - logo.getImage().getHeight()/2);
+
+        logo.setOpacity(0.1);
+
+        basePane.getChildren().addAll(logo);
         //Génération de la scene
         root.getChildren().add(basePane);
         this.setTitle("FENETRE DU MJ");
+        this.getIcons().add(new Image(getClass().getClassLoader().getResource("images/loupe.jpg").toString()));
+
         this.setScene(scene);
+        this.getScene().getStylesheets().addAll(getClass().getClassLoader().getResource("styles/style.css").toExternalForm());
+
         this.show();
-        //control = new MJController(scene,btn);
+        control = new MJController(scene, topPane,progressBar,choicePlayer, listPlayer,timeHB,bottomPane, btnAnswer);
         return control;
     }
 
