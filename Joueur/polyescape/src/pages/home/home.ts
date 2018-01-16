@@ -13,7 +13,6 @@ export class HomePage {
   private userName = '';
 
   constructor(public navCtrl: NavController, public toastCtrl: ToastController) {
-
   }
 
   presentToast() {

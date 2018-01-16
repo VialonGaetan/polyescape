@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
-import {TimeInterval} from "rxjs/Rx";
 
 @Component({
   selector: 'page-enigme',
@@ -16,30 +15,27 @@ export class EnigmePage {
   private nomEscape = '';
   private enigmeInfos:string = '';
   private webSocket:WebSocket;
-  private timer;
+  private minutes:number = 0;
+  private secondes:number = 0;
+  private timer:any;
 
 
   constructor(public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController) {
     this.userName = navParams.get("username");
     this.nomEscape = navParams.get("name");
     this.webSocket = navParams.get("websocket");
-    if(navParams.get("infos") == ""){
-      var request = {request: "CREATE_PARTIE", type:"SOLO",username:this.userName,escapegame:this.nomEscape};
-      this.webSocket.send(JSON.stringify(request));
-      this.webSocket.onmessage = function(event) {
-        var jsonData = JSON.parse(event.data);
-        if(jsonData.reponse == "ok"){
-          this.nomEnigme = jsonData.nom;
-          this.enigmeInfos = jsonData.infos;
-          this.idPartie = jsonData.idpartie;
-        }
-      }.bind(this);
-    }
-    else {
-      this.nomEnigme = navParams.get("nomEnigme");
-      this.enigmeInfos = navParams.get("infos");
-      this.idPartie = this.navParams.get("idpartie");
-    }
+    var request = {request: "CREATE_PARTIE", type:"SOLO",username:this.userName,escapegame:this.nomEscape};
+    this.webSocket.send(JSON.stringify(request));
+    this.webSocket.onmessage = function(event) {
+      var jsonData = JSON.parse(event.data);
+      if(jsonData.reponse == "ok"){
+        this.nomEnigme = jsonData.nom;
+        this.enigmeInfos = jsonData.infos;
+        this.idPartie = jsonData.idpartie;
+        this.minutes = jsonData.temps;
+        this.timer = setInterval(this.decreaseTime(),1000);
+      }
+    }.bind(this);
   }
 
   presentToastNoAnswer() {
@@ -63,8 +59,18 @@ export class EnigmePage {
     toast.present();
   }
 
-  timeIsOut(){
-
+  decreaseTime(){
+    alert("hey");
+    if(this.secondes == 0 && this.minutes != 0){
+      this.secondes = 60;
+      this.minutes--;
+    }
+    else if(this.secondes == 0 && this.minutes == 0){
+      this.navCtrl.push(EndGameScreenPage,{score:0});
+    }
+    else {
+      this.secondes--;
+    }
   }
 
   submitAnswer() {
@@ -80,10 +86,13 @@ export class EnigmePage {
           this.presentToastIncorectAnswer();
         }
         else if(jsonData.reponse == "ok"){
-          this.navCtrl.push(EnigmePage,{username:this.userName,name:this.nomEscape,websocket:this.webSocket,infos:jsonData.infos,nomEnigme:jsonData.nom,idpartie:this.idPartie,timer:this.timer});
+          this.enigmeInfos = jsonData.infos;
+          this.nomEnigme = jsonData.nom;
+          this.inputAnswer = "";
         }
         else if(jsonData.reponse == "finish"){
           this.navCtrl.push(EndGameScreenPage,{score:jsonData.score});
+          clearInterval(this.timer);
         }
       }.bind(this);
 
