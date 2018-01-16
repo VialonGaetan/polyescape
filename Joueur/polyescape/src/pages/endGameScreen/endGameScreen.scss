@@ -3,7 +3,7 @@ page-end {
   text-align: center;
 }
 
-#escapeNameLabel {
+#escapeNameLabel, #results {
   color: #488aff;
   margin-top: 20px;
   margin-left: 32px;
@@ -11,12 +11,28 @@ page-end {
   font-weight: bold;
 }
 
+#score {
+  color: #488aff;
+  margin-top: 20px;
+  margin-left: 32px;
+}
+
 #failedEnigmas {
   color: #f53d3d;
+  margin-top: 20px;
+  margin-left: 32px;
 }
 
 #wonEnigmas {
   color: #32db64;
+  margin-top: 20px;
+  margin-left: 32px;
+}
+
+#end {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 
