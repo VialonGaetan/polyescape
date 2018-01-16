@@ -4,9 +4,6 @@ import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.Assert.*;
 
 /**
@@ -53,7 +50,7 @@ public class EnigmeTest {
 
     @Test
     public void checkJsonFormatAndInformation(){
-        assertEquals(description,enigme.toJson().getString(JsonArguments.DESCRIPTION.toString()));
+        assertEquals(description,enigme.toJson().getString(JsonArguments.INFOS.toString()));
         assertEquals(nom,enigme.toJson().getString(JsonArguments.NOM.toString()));
         assertEquals(solution,enigme.toJson().getString(JsonArguments.REPONSE.toString()));
     }

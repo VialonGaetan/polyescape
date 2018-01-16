@@ -36,7 +36,7 @@ public class Joueur implements Serialize {
     public void sendEnigmeToPlayer(Enigme enigme) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(JsonArguments.NOM.toString(),enigme.getName())
-                .put(JsonArguments.DESCRIPTION.toString(),enigme.getDescription());
+                .put(JsonArguments.INFOS.toString(),enigme.getDescription());
         try {
             session.getBasicRemote().sendText(jsonObject.toString());
         } catch (IOException e) {

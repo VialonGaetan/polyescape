@@ -9,7 +9,7 @@ public enum  JsonArguments {
     TYPE("type"),
     SOLO("solo"),
     NOM("nom"),
-    DESCRIPTION("description"),
+    INFOS("infos"),
     REPONSE("reponse"),
     TEMPS("temps"),
     ENIGMES("enigmes"),
