@@ -60,7 +60,8 @@ public class CreatePartieRequest implements Request {
                     .put(JsonArguments.REPONSE.name(), JsonArguments.OK.name())
                     .put(JsonArguments.ID.name(), id)
                     .put(JsonArguments.NOM.toString(),gestionnaire.getPartieByID(id).getCurrentEnigmesOfaPlayer(joueur).get().getName())
-                    .put(JsonArguments.DESCRIPTION.toString(),gestionnaire.getPartieByID(id).getCurrentEnigmesOfaPlayer(joueur).get().getDescription());
+                    .put(JsonArguments.DESCRIPTION.toString(),gestionnaire.getPartieByID(id).getCurrentEnigmesOfaPlayer(joueur).get().getDescription())
+                    .put(JsonArguments.TEMPS.toString(),gestionnaire.getPartieByID(id).getTime());
         else
             return new JSONObject()
                     .put(JsonArguments.REPONSE.name(), JsonArguments.OK.name())

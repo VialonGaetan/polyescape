@@ -53,8 +53,10 @@ public class CreatePartieRequestTest {
 
     @Test
     public void createNewGame(){
+        System.out.println(request);
         createPartieRequest = new CreatePartieRequest(request,session);
         assertEquals(1,gestionnaire.getPartieEnCours().values().size());
+        System.out.println(createPartieRequest.getAnswer());
         //assertEquals(new Partie(gestionnaire.getEscapeGamesDisponible().get(0),new Joueur(name,null)),gestionnaire.getPartieByID(1));
     }
 }

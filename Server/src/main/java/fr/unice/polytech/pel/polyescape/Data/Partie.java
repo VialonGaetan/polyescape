@@ -61,6 +61,10 @@ public class Partie implements Serialize {
         return association.get(joueur).stream().filter(enigme -> enigme.isResolve()==false).findFirst();
     }
 
+    public int getTime() {
+        return time;
+    }
+
     @Override
     public JSONObject toJson() {
         return null;
