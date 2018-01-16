@@ -17,7 +17,7 @@ export class EnigmePage {
   private webSocket:WebSocket;
   private minutes:number = 0;
   private secondes:number = 0;
-  private timer:any;
+  private timer:number;
 
 
   constructor(public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController) {
@@ -61,10 +61,11 @@ export class EnigmePage {
 
   decreaseTime(){
     if(this.secondes == 0 && this.minutes != 0){
-      this.secondes = 60;
+      this.secondes = 59;
       this.minutes--;
     }
     else if(this.secondes == 0 && this.minutes == 0){
+      clearInterval(this.timer);
       this.navCtrl.push(EndGameScreenPage,{score:0});
     }
     else {
@@ -90,15 +91,11 @@ export class EnigmePage {
           this.inputAnswer = "";
         }
         else if(jsonData.reponse == "finish"){
-          this.navCtrl.push(EndGameScreenPage,{score:jsonData.score});
           clearInterval(this.timer);
+          this.navCtrl.push(EndGameScreenPage,{score:jsonData.score});
         }
       }.bind(this);
 
     }
-  }
-
-  label(){
-    return this.userName;
   }
 }
