@@ -27,7 +27,6 @@ export class EnigmePage {
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);
         if(jsonData.REPONSE == "OK"){
-          alert("hey");
           this.nomEnigme = jsonData.nom;
           this.enigmeInfos = jsonData.infos;
           this.idPartie = jsonData.ID;
@@ -40,7 +39,7 @@ export class EnigmePage {
     }
   }
 
-  presentToast() {
+  presentToastNoAnswer() {
     let toast = this.toastCtrl.create({
       message: 'Veuillez entrer une réponse',
       duration: 3000,
@@ -51,7 +50,7 @@ export class EnigmePage {
     toast.present();
   }
 
-  presentToast2() {
+  presentToastIncorectAnswer() {
     let toast = this.toastCtrl.create({
       message: 'Réponse incorrecte',
       duration: 3000,
@@ -63,7 +62,7 @@ export class EnigmePage {
 
   submitAnswer() {
     if (this.inputAnswer.length == 0){
-      this.presentToast();
+      this.presentToastNoAnswer();
     }
     else {
       var request = {request:"Response", "idPartie":this.idPartie,"reponse":this.inputAnswer};
@@ -71,7 +70,7 @@ export class EnigmePage {
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);
         if(jsonData.response == "KO") {
-          this.presentToast2();
+          this.presentToastIncorectAnswer();
         }
         else if(jsonData.response == "OK"){
           this.navCtrl.push(EnigmePage,{username:this.userName,name:this.nomEscape,websocket:this.webSocket,infos:jsonData.infos,nomEnigme:jsonData.nom});
