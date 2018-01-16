@@ -5,7 +5,7 @@ page-escape {
 
 #escapeLabel {
   color: #488aff;
-  margin-top: 20px;
+  margin-top: 30%;
   margin-left: 32px;
   font-size: 20px;
   font-weight: bold;
@@ -17,4 +17,22 @@ page-escape {
   border: hidden #488aff;
   outline: #488aff;
 
+}
+#usr1{
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-top: 10px;
+  margin-right: 20px;
+  text-align: center;
+}
+#userIcon1{
+  font-size: 40px;
+}
+
+#userName1{
+  text-align: center;
+  padding-left: 10px;
+  font-size: 20px;
+  color: #488aff;
 }

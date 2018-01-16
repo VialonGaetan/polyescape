@@ -10,6 +10,7 @@ import {TeamScreenPage} from "../teamScreen/teamScreen";
 export class HomePage {
 
   private inputName = '';
+  private userName = '';
 
   constructor(public navCtrl: NavController, public toastCtrl: ToastController) {
 
@@ -31,13 +32,17 @@ export class HomePage {
       this.presentToast();
       return false;
     }
+    this.userName = this.inputName;
     this.inputName = "";
     return true;
   }
 
   goToEscapePage() {
-    if (this.verifyInputName())
-      this.navCtrl.push(EscapeScreenPage);
+    if (this.verifyInputName()){
+      var us = this.userName;
+      this.navCtrl.push(EscapeScreenPage,{username:us});
+    }
+
   }
 
   goToTeamPage() {
