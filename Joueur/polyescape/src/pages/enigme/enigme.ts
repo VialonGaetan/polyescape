@@ -26,10 +26,10 @@ export class EnigmePage {
       this.webSocket.send(JSON.stringify(request));
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);
-        if(jsonData.REPONSE == "OK"){
+        if(jsonData.REPONSE == "ok"){
           this.nomEnigme = jsonData.nom;
           this.enigmeInfos = jsonData.infos;
-          this.idPartie = jsonData.ID;
+          this.idPartie = jsonData.id;
         }
       }.bind(this);
     }
@@ -69,10 +69,10 @@ export class EnigmePage {
       this.webSocket.send(JSON.stringify(request));
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);
-        if(jsonData.response == "KO") {
+        if(jsonData.response == "ko") {
           this.presentToastIncorectAnswer();
         }
-        else if(jsonData.response == "OK"){
+        else if(jsonData.response == "ok"){
           this.navCtrl.push(EnigmePage,{username:this.userName,name:this.nomEscape,websocket:this.webSocket,infos:jsonData.infos,nomEnigme:jsonData.nom});
         }
         else{
