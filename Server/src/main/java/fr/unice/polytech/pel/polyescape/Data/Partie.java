@@ -41,7 +41,7 @@ public class Partie implements Serialize {
 
     private void attributeEnigme() {
         for (Enigme enigme : escapeGame.getEnigmes()) {
-            association.get(getRandomJoueur(readyToStart.keySet())).add(enigme);
+            association.get(getRandomJoueur(association.keySet())).add(new Enigme(enigme.getName(),enigme.getDescription(),enigme.getReponse()));
         }
     }
 

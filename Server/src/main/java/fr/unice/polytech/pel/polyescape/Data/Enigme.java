@@ -55,4 +55,19 @@ public class Enigme implements Serialize {
     public Boolean isResolve() {
         return isResolve;
     }
+
+    @Override
+    public boolean equals(Object o) {
+
+        Enigme enigme = (Enigme) o;
+        return this.name.equals(enigme.name) && this.description.equals(enigme.description) && this.reponse.equals(enigme.reponse);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name != null ? name.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (reponse != null ? reponse.hashCode() : 0);
+        return result;
+    }
 }
