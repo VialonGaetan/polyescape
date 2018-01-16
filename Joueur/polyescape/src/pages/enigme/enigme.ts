@@ -33,7 +33,7 @@ export class EnigmePage {
         this.enigmeInfos = jsonData.infos;
         this.idPartie = jsonData.idpartie;
         this.minutes = jsonData.temps;
-        this.timer = setInterval(this.decreaseTime(),1000);
+        this.timer = setInterval(this.decreaseTime.bind(this),1000);
       }
     }.bind(this);
   }
@@ -60,7 +60,6 @@ export class EnigmePage {
   }
 
   decreaseTime(){
-    alert("hey");
     if(this.secondes == 0 && this.minutes != 0){
       this.secondes = 60;
       this.minutes--;
