@@ -51,4 +51,8 @@ public class Enigme implements Serialize {
                 ", reponse='" + reponse + '\'' +
                 '}';
     }
+
+    public Boolean isResolve() {
+        return isResolve;
+    }
 }

@@ -3,44 +3,67 @@ package fr.unice.polytech.pel.polyescape.Transmission.requests;
 import fr.unice.polytech.pel.polyescape.Data.EscapeGame;
 import fr.unice.polytech.pel.polyescape.Data.Joueur;
 import fr.unice.polytech.pel.polyescape.Data.Partie;
+import fr.unice.polytech.pel.polyescape.Data.TypePartie;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
 import fr.unice.polytech.pel.polyescape.Transmission.InvalidJsonRequest;
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
 import org.json.JSONObject;
 
 import javax.websocket.Session;
-import java.util.Optional;
+import java.util.logging.Logger;
 
 /**
  * @author Gaetan Vialon
  * Created the 15/01/2018.
  */
 public class CreatePartieRequest implements Request {
+
+    private Logger logger = Logger.getLogger(this.getClass().getName());
+
     private Gestionnaire gestionnaire = Gestionnaire.getInstance();
     private int id;
+    private Session session;
+    private TypePartie typePartie;
+    private Joueur joueur;
 
     public CreatePartieRequest(String message, Session session) {
-        id = decodeCreatePartie(message,session);
+        logger.info("Creation d'une nouvelle partie");
+        System.out.println(message);
+        id = decodeCreatePartie(message, session);
     }
 
 
-    private int decodeCreatePartie(String message,Session session){
-        JSONObject decode = new JSONObject(message);
-        EscapeGame escapeGame = gestionnaire.getEscapeGame(decode.getString(JsonArguments.ESCAPEGAME.name()));
-        if (escapeGame != null)
-            return gestionnaire.createNewPartie(new Partie(escapeGame,
-                    new Joueur(decode.getString(JsonArguments.USERNAME.name()),session)));
-        return 0;
+    private int decodeCreatePartie(String message, Session session) {
+        try {
+            JSONObject decode = new JSONObject(message);
+            EscapeGame escapeGame = gestionnaire.getEscapeGame(decode.getString(JsonArguments.ESCAPEGAME.toString()));
+            typePartie = TypePartie.valueOf(decode.getString(JsonArguments.TYPE.toString()));
+            joueur = new Joueur(decode.getString(JsonArguments.USERNAME.toString()), session);
+            if (escapeGame != null)
+                return gestionnaire.createNewPartie(new Partie(escapeGame,
+                        joueur,
+                        typePartie));
+            return 0;
+        } catch (Exception e) {
+            throw new InvalidJsonRequest();
+        }
     }
 
 
     @Override
     public JSONObject getAnswer() {
-        if (id==0)
+        if (id == 0)
             return new JSONObject()
-                    .put(JsonArguments.REPONSE.name(),JsonArguments.KO.name());
-        return new JSONObject()
-                .put(JsonArguments.REPONSE.name(),JsonArguments.OK.name())
-                .put(JsonArguments.ID.name(),id);
+                    .put(JsonArguments.REPONSE.name(), JsonArguments.KO.name());
+        else if (typePartie.equals(TypePartie.SOLO) && gestionnaire.getPartieByID(id).getCurrentEnigmesOfaPlayer(joueur).isPresent())
+            return new JSONObject()
+                    .put(JsonArguments.REPONSE.name(), JsonArguments.OK.name())
+                    .put(JsonArguments.ID.name(), id)
+                    .put(JsonArguments.NOM.toString(),gestionnaire.getPartieByID(id).getCurrentEnigmesOfaPlayer(joueur).get().getName())
+                    .put(JsonArguments.DESCRIPTION.toString(),gestionnaire.getPartieByID(id).getCurrentEnigmesOfaPlayer(joueur).get().getDescription());
+        else
+            return new JSONObject()
+                    .put(JsonArguments.REPONSE.name(), JsonArguments.OK.name())
+                    .put(JsonArguments.ID.name(), id);
     }
 }

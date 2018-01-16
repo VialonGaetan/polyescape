@@ -5,6 +5,9 @@ package fr.unice.polytech.pel.polyescape.Transmission;
  * Created the 12/01/2018.
  */
 public enum  JsonArguments {
+    REQUEST("request"),
+    TYPE("type"),
+    SOLO("solo"),
     NOM("nom"),
     DESCRIPTION("description"),
     REPONSE("reponse"),

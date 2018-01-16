@@ -66,4 +66,8 @@ public class Gestionnaire {
     public Map<Integer,Partie> getPartieEnCours() {
         return partieEnCours;
     }
+
+    public Partie getPartieByID(int id){
+        return partieEnCours.get(id);
+    }
 }
