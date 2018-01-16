@@ -25,14 +25,16 @@ public class CheckResponseRequest implements Request {
     public CheckResponseRequest(String message,Session session) {
         logger.info("Reponse à une question");
         JSONObject decode = new JSONObject(message);
-        partieID = decode.getInt(JsonArguments.IDPARTIE.name());
+        partieID = decode.getInt(JsonArguments.IDPARTIE.toString());
         joueur = new Joueur(decode.getString(JsonArguments.USERNAME.toString()),session);
         isGood = checkReponse(decode.getString(JsonArguments.REPONSE.toString()));
 
     }
 
     private boolean checkReponse(String reponse){
-        return gestionnaire.getPartieByID(partieID).getCurrentEnigmesOfaPlayer(joueur).get().checkAnswer(reponse);
+        if (gestionnaire.getPartieByID(partieID).getCurrentEnigmesOfaPlayer(joueur).isPresent())
+            return gestionnaire.getPartieByID(partieID).getCurrentEnigmesOfaPlayer(joueur).get().checkAnswer(reponse);
+        else return false;
     }
 
     @Override
@@ -48,9 +50,10 @@ public class CheckResponseRequest implements Request {
                         .put(JsonArguments.NOM.toString(),gestionnaire.getPartieByID(partieID).getCurrentEnigmesOfaPlayer(joueur).get().getName())
                         .put(JsonArguments.INFOS.toString(),gestionnaire.getPartieByID(partieID).getCurrentEnigmesOfaPlayer(joueur).get().getDescription());
             else
-                return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.FINISH.toString());
+                return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.FINISH.toString())
+                        .put(JsonArguments.SCORE.toString(),100);
         }else
-            return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.KO.toString()).put(JsonArguments.SCORE.toString(),100);
+            return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.KO.toString());
 
     }
 }

@@ -54,8 +54,16 @@ public class Joueur implements Serialize {
         Joueur joueur = (Joueur) o;
         if (this.session == null || joueur.session == null)//Uniquement pour faire des test
             return this.nom.equals(joueur.nom);
-        else
+        else {
             return joueur.nom != null && this.nom != null && this.session != null && joueur.session != null &&
                     this.nom.equals(joueur.nom) && this.session.getId().equals(joueur.session.getId());
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int result = nom != null ? nom.hashCode() : 0;
+        result = 31 * result + (session != null ? session.hashCode() : 0);
+        return result;
     }
 }

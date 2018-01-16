@@ -69,13 +69,13 @@ export class EnigmePage {
       this.webSocket.send(JSON.stringify(request));
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);
-        if(jsonData.response == "ko") {
+        if(jsonData.reponse == "ko") {
           this.presentToastIncorectAnswer();
         }
-        else if(jsonData.response == "ok"){
+        else if(jsonData.reponse == "ok"){
           this.navCtrl.push(EnigmePage,{username:this.userName,name:this.nomEscape,websocket:this.webSocket,infos:jsonData.infos,nomEnigme:jsonData.nom});
         }
-        else if(jsonData.response == "finish"){
+        else if(jsonData.reponse == "finish"){
           this.navCtrl.push(EndGameScreenPage,{score:jsonData.score});
         }
       }.bind(this);
