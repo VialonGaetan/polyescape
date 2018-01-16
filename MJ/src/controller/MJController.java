@@ -40,6 +40,7 @@ public class MJController {
 
     private int hour;
     private int minute;
+    private int givenMinutes;
 
     public MJController(Scene scene, StackPane topPane, ProgressBar progressBar, Label choicePlayer, ComboBox listPlayer, HBox timeHB, StackPane bottomPane, Button btn, Label progressLabel, ProgressIndicator timeIndicator) {
         //il faut ici recuperer les hours et minutes en instanciant un client et envoyant des requetes
@@ -58,6 +59,7 @@ public class MJController {
         this.selectedPlayer = "";
         this.hour=0;
         this.minute=2;
+        this.givenMinutes = 2;
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -75,7 +77,7 @@ public class MJController {
     }
 
     public void initialize() {
-        firstRemainingTime(hour,minute);
+        firstRemainingTime();
         ObservableList<String> listOfPlayers = FXCollections.observableArrayList();
         listOfPlayers.add("Pierre");
         listOfPlayers.add("Theo");
@@ -96,16 +98,6 @@ public class MJController {
                 ((Text) (topPane.getChildren().get(2))).setText(selectedPlayer);
             }
         });
-       /* remindedTime.setOnMouseEntered(new EventHandler<javafx.scene.input.MouseEvent>() {
-            @Override
-            public void handle(javafx.scene.input.MouseEvent event) {
-                try {
-                    display();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });*/
     }
 
     public void envoieIndice() {
@@ -148,9 +140,10 @@ public class MJController {
         else if (!(this.minute<10) && this.hour<10)tobeDisplayed="0"+this.hour+" : "+this.minute;
         else if (!(this.minute<10) && !(this.hour<10))tobeDisplayed=this.hour+" : "+this.minute;
         remindedTime.setText(tobeDisplayed);
+        progressIndicatorTime.setProgress(((double)(hour*60 + minute))/((double)(givenMinutes)));
     }
 
-    private void firstRemainingTime(int hour, int minute) {
+    private void firstRemainingTime() {
         if (this.minute<10 && this.hour<10) this.remindedTime.setText("0"+this.hour+" : "+"0"+this.minute);
         else if (this.minute<10 && !(this.hour<10)) this.remindedTime.setText(this.hour+" : "+"0"+this.minute);
         else if (!(this.minute<10) && this.hour<10)this.remindedTime.setText("0"+this.hour+" : "+this.minute);
