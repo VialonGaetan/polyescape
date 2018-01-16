@@ -24,6 +24,7 @@ public class ScreenMJ extends Stage{
 
     private ImageView logo;
     private ProgressBar progressBar;
+    private Label progressLabel;
     private ProgressIndicator timeIndicator;
     private StackPane bottomPane;
 
@@ -50,7 +51,7 @@ public class ScreenMJ extends Stage{
     private Label choicePlayer;
 
     public ScreenMJ(){
-
+        init();
     }
 
     public MJController init(){
@@ -63,8 +64,11 @@ public class ScreenMJ extends Stage{
         topPane = new StackPane();
         topPane.setPrefSize(LARGEUR,HAUTEUR/15);
         escapeGameName = new Text("Escape game A");
+        escapeGameName.setId("escapeGameName");
         teamName=new Text("Equipe A");
+        teamName.setId("teamName");
         playerName = new Text("Nom du joueur");
+        playerName.setId("playerName");
 
         topPane.getChildren().addAll(escapeGameName,teamName,playerName);
 
@@ -73,19 +77,25 @@ public class ScreenMJ extends Stage{
         topPane.setAlignment(playerName,Pos.TOP_RIGHT);
         basePane.getChildren().addAll(topPane);
 
-        //definition de la progressBar
+        //definition de la progressBar + progressLabel
         progressBar = new ProgressBar();
-        progressBar = new ProgressBar();
+        progressBar.setId("progressBar");
         progressBar.setProgress(0.5);
         progressBar.layoutXProperty().bind(basePane.widthProperty().subtract(progressBar.widthProperty()).divide(2));
-        progressBar.setLayoutY(HAUTEUR*0.15);
+        progressBar.setLayoutY(HAUTEUR*0.10);
+        progressLabel = new Label("50%");
+        progressLabel.setId("progressLabel");
+        progressLabel.layoutXProperty().bind(basePane.widthProperty().subtract(progressLabel.widthProperty()).divide(2));
+        progressLabel.setLayoutY(progressBar.getLayoutY()+HAUTEUR/50);
 
-        basePane.getChildren().addAll(progressBar);
+
+        basePane.getChildren().addAll(progressBar, progressLabel);
 
         //definition de la liste des joueurs
-        choicePlayer =new Label("choix du joueur");
+        choicePlayer =new Label("choix du joueur :");
         choicePlayer.setLayoutX(0);
         choicePlayer.setLayoutY(HAUTEUR*0.25);
+        choicePlayer.setId("choicePlayer");
 
         ObservableList<String> options =
                 FXCollections.observableArrayList(
@@ -95,42 +105,55 @@ public class ScreenMJ extends Stage{
                 );
 
         listPlayer = new ComboBox(options);
+        listPlayer.setId("listPlayer");
         listPlayer.setLayoutX(0);
-        listPlayer.setLayoutY(4*HAUTEUR/15);
+        listPlayer.setLayoutY(HAUTEUR*0.3);
 
 
         basePane.getChildren().addAll(choicePlayer, listPlayer);
+
         //definition temps restant + graph minuteur
         timeHB = new HBox(2);
         remindedTime = new Label("1:00:00");
+        remindedTime.setId("remindedTime");
 
         timeIndicator = new ProgressIndicator();
         timeIndicator.setProgress(0.3);
+        timeIndicator.setId("timeIndicator");
 
         timeHB.getChildren().addAll(remindedTime, timeIndicator);
 
-        timeHB.layoutXProperty().bind(basePane.widthProperty().subtract(timeHB.widthProperty()).divide(2));
-        timeHB.setLayoutY(HAUTEUR*0.08);
+        timeHB.layoutXProperty().bind(basePane.widthProperty().subtract(timeHB.widthProperty()).divide(1.1));
+        timeHB.setLayoutY(6*HAUTEUR/15);
+        timeHB.setSpacing(LARGEUR/40);
+
         basePane.getChildren().addAll(timeHB);
 
         //Definition du chaps de description de l'énigme
         descriptionEnigma = new Text();
-        descriptionEnigma.setText("Ceci est la description de l'énigme actuellement proposée à l'étudiant");
+        descriptionEnigma.setText("Ceci est la description de l'énigme actuellement proposée à l'étudiant - Ceci est la description de l'énigme actuellement proposée à l'étudiant - Ceci est la description de l'énigme actuellement proposée à l'étudiant - Ceci est la description de l'énigme actuellement proposée à l'étudiant - Ceci est la description de l'énigme actuellement proposée à l'étudiant");
         descriptionEnigma.setLayoutX(0);
         descriptionEnigma.setLayoutY(6*HAUTEUR/15);
+        descriptionEnigma.setWrappingWidth(2*LARGEUR/3);
+        descriptionEnigma.setId("descriptionEnigma");
 
         basePane.getChildren().addAll(descriptionEnigma);
 
         //Definition champ réponse + btn envoie
         bottomPane = new StackPane();
         bottomPane.setPrefSize(4*LARGEUR/5,5* HAUTEUR/15);
-        answer = new TextArea("Entrez un indice/réponse");
+        answer = new TextArea();
+        answer.setId("answer");
+        answer.setStyle("-fx-background-color:#488aff;");
+        answer.setWrapText(true);
         btnAnswer = new Button("Envoyer");
+        btnAnswer.setId("btnAnswer");
         btnAnswer.setLayoutX(4*LARGEUR/5);
         btnAnswer.setLayoutY(10*HAUTEUR/15);
         btnAnswer.setPrefSize(LARGEUR/5, HAUTEUR/3);
 
         bottomPane.getChildren().addAll(answer);
+        bottomPane.setId("bottomPane");
 
         bottomPane.setLayoutY(10*HAUTEUR/15);
         bottomPane.setLayoutX(0);
@@ -138,23 +161,26 @@ public class ScreenMJ extends Stage{
         basePane.getChildren().addAll(btnAnswer);
 
         //Definition du logo au centre de la page
-        logo = new ImageView("images/logoPoly.png");
+        logo = new ImageView("model/logoPoly.png");
         logo.setLayoutX(LARGEUR/2 - logo.getImage().getWidth()/2);
         logo.setLayoutY(HAUTEUR/2 - logo.getImage().getHeight()/2);
+        logo.setId("logo");
 
-        logo.setOpacity(0.1);
+        logo.setOpacity(0.10);
 
         basePane.getChildren().addAll(logo);
+        basePane.setId("basePane");
+
         //Génération de la scene
         root.getChildren().add(basePane);
         this.setTitle("FENETRE DU MJ");
-        this.getIcons().add(new Image(getClass().getClassLoader().getResource("images/loupe.jpg").toString()));
+        this.getIcons().add(new Image(getClass().getClassLoader().getResource("model/loupe.jpg").toString()));
 
         this.setScene(scene);
         this.getScene().getStylesheets().addAll(getClass().getClassLoader().getResource("styles/style.css").toExternalForm());
 
         this.show();
-        control = new MJController(scene, topPane,progressBar,choicePlayer, listPlayer,timeHB,bottomPane, btnAnswer);
+        control = new MJController(scene, topPane,progressBar,choicePlayer, listPlayer,timeHB,bottomPane, btnAnswer, progressLabel, timeIndicator);
         return control;
     }
 
