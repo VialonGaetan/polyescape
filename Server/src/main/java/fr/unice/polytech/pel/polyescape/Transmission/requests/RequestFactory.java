@@ -22,13 +22,13 @@ public class RequestFactory {
             case GET_ESCAPE:
                 return new EscapeGameDispoListRequest();
             case CREATE_PARTIE:
-                return new CreatePartieRequest(message,session);
+                return new CreatePartieRequest(message, session);
             case CREATE_ENIGME:
                 return new CreateEnigmeRequest();
             case CREATE_ESCAPE:
                 return new CreateEscapeRequest();
             case RESPONSE:
-                return new CheckResponseRequest(message,session);
+                return new CheckResponseRequest(message, session);
             default:
                 return new InvalidJsonRequest("InvalidElementRequest");
         }

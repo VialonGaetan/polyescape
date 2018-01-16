@@ -1,5 +1,7 @@
 package fr.unice.polytech.pel.polyescape.Data;
 
+import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.*;
@@ -67,6 +69,20 @@ public class Partie implements Serialize {
 
     @Override
     public JSONObject toJson() {
-        return null;
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put(JsonArguments.ESCAPEGAME.toString(),escapeGame.getName());
+        jsonObject.put(JsonArguments.TEMPS.toString(),getTime());
+        JSONArray jsonArray = new JSONArray();
+        for (Joueur joueur: association.keySet()) {
+            JSONArray jsonArrayEnigme = new JSONArray();
+            jsonArray.put(joueur.toJson());
+            for (Enigme enigme : association.get(joueur)) {
+                jsonArrayEnigme.put(enigme.toJson());
+            }
+            jsonArray.put(jsonArrayEnigme);
+        }
+        jsonObject.put(JsonArguments.JOUEURS.toString(),jsonArray);
+
+        return jsonObject;
     }
 }

@@ -1,20 +1,13 @@
 package fr.unice.polytech.pel.polyescape.Data;
 
-import fr.unice.polytech.pel.polyescape.Gestionnaire;
-import fr.unice.polytech.pel.polyescape.Transmission.InvalidJsonRequest;
-import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
-import fr.unice.polytech.pel.polyescape.Transmission.TypeRequest;
-import fr.unice.polytech.pel.polyescape.Transmission.requests.CreatePartieRequest;
-import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Gaetan Vialon

@@ -20,7 +20,10 @@ public enum  JsonArguments {
     KO("ko"),
     FINISH("finish"),
     SCORE("score"),
-    IDPARTIE("idpartie");
+    JOUEURS("joueurs"),
+    PARTIEENCOURS("partieencours"),
+    IDPARTIE("idpartie"),
+    ISRESOLVE("isresolve");
 
 
     /**

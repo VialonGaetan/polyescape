@@ -1,6 +1,5 @@
 package fr.unice.polytech.pel.polyescape.Server;
 
-import fr.unice.polytech.pel.polyescape.Transmission.InvalidJsonRequest;
 import fr.unice.polytech.pel.polyescape.Transmission.requests.Request;
 import fr.unice.polytech.pel.polyescape.Transmission.requests.RequestFactory;
 

@@ -40,7 +40,8 @@ public class Enigme implements Serialize {
     public JSONObject toJson(){
         return new JSONObject().put(JsonArguments.NOM.toString(),name)
                 .put(JsonArguments.INFOS.toString(),description)
-                .put(JsonArguments.REPONSE.toString(),reponse);
+                .put(JsonArguments.REPONSE.toString(),reponse)
+                .put(JsonArguments.ISRESOLVE.toString(),isResolve);
     }
 
     @Override

@@ -3,9 +3,6 @@ package fr.unice.polytech.pel.polyescape;
 import fr.unice.polytech.pel.polyescape.Server.GameServerEndPoint;
 import org.glassfish.tyrus.server.Server;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 /**
  * @author Gaetan Vialon
  * Created the 11/01/2018.

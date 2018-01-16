@@ -1,6 +1,5 @@
 package fr.unice.polytech.pel.polyescape.Data;
 
-import fr.unice.polytech.pel.polyescape.Data.Enigme;
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
 import org.json.JSONObject;
 
@@ -46,7 +45,7 @@ public class Joueur implements Serialize {
 
     @Override
     public JSONObject toJson() {
-        return null;
+        return new JSONObject().put(JsonArguments.NOM.toString(),this.nom);
     }
 
     @Override

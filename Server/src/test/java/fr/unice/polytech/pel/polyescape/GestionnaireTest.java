@@ -1,15 +1,9 @@
 package fr.unice.polytech.pel.polyescape;
 
-import fr.unice.polytech.pel.polyescape.Data.TypePartie;
-import fr.unice.polytech.pel.polyescape.Transmission.InvalidJsonRequest;
-import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
-import fr.unice.polytech.pel.polyescape.Transmission.TypeRequest;
-import fr.unice.polytech.pel.polyescape.Transmission.requests.CreatePartieRequest;
-import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Gaetan Vialon
