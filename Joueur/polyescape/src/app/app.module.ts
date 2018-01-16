@@ -7,7 +7,7 @@ import { EscapeScreenPage } from '../pages/escapeScreen/escapeScreen';
 import { EndGameScreenPage } from '../pages/endGameScreen/endGameScreen'
 import { TeamScreenPage } from '../pages/teamScreen/teamScreen';
 import { HomePage } from '../pages/home/home';
-import { TabsPage } from '../pages/tabs/tabs';
+
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -21,8 +21,7 @@ import {EnigmePage} from "../pages/enigme/enigme";
     EscapeScreenPage,
     EndGameScreenPage,
     HomePage,
-    EnigmePage,
-    TabsPage
+    EnigmePage
   ],
   imports: [
     BrowserModule,
@@ -35,8 +34,8 @@ import {EnigmePage} from "../pages/enigme/enigme";
     EscapeScreenPage,
     EndGameScreenPage,
     HomePage,
-    EnigmePage,
-    TabsPage
+    EnigmePage
+
   ],
   providers: [
     StatusBar,

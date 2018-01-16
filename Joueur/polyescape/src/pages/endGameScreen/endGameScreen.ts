@@ -15,6 +15,6 @@ export class EndGameScreenPage {
   }
 
   goToHomePage() {
-    this.navCtrl.push(HomePage);
+    this.navCtrl.setRoot(HomePage);
   }
 }
