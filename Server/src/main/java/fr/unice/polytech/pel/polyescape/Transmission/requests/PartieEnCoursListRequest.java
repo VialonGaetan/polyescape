@@ -12,7 +12,12 @@ public class PartieEnCoursListRequest implements Request {
     }
 
     @Override
-    public JSONObject getAnswer() {
+    public String getAnswer() {
+        return null;
+    }
+
+    @Override
+    public JSONObject answerInJson() {
         return null;
     }
 }

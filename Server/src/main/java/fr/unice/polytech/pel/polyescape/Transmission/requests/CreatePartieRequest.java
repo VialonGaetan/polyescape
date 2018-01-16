@@ -51,20 +51,25 @@ public class CreatePartieRequest implements Request {
 
 
     @Override
-    public JSONObject getAnswer() {
+    public String getAnswer() {
+        return answerInJson().toString();
+    }
+
+    @Override
+    public JSONObject answerInJson() {
         if (id == 0)
             return new JSONObject()
-                    .put(JsonArguments.REPONSE.name(), JsonArguments.KO.name());
+                    .put(JsonArguments.REPONSE.toString(), JsonArguments.KO.toString());
         else if (typePartie.equals(TypePartie.SOLO) && gestionnaire.getPartieByID(id).getCurrentEnigmesOfaPlayer(joueur).isPresent())
             return new JSONObject()
-                    .put(JsonArguments.REPONSE.name(), JsonArguments.OK.name())
-                    .put(JsonArguments.ID.name(), id)
+                    .put(JsonArguments.REPONSE.toString(), JsonArguments.OK.toString())
+                    .put(JsonArguments.IDPARTIE.toString(), id)
                     .put(JsonArguments.NOM.toString(),gestionnaire.getPartieByID(id).getCurrentEnigmesOfaPlayer(joueur).get().getName())
                     .put(JsonArguments.INFOS.toString(),gestionnaire.getPartieByID(id).getCurrentEnigmesOfaPlayer(joueur).get().getDescription())
                     .put(JsonArguments.TEMPS.toString(),gestionnaire.getPartieByID(id).getTime());
         else
             return new JSONObject()
-                    .put(JsonArguments.REPONSE.name(), JsonArguments.OK.name())
-                    .put(JsonArguments.ID.name(), id);
+                    .put(JsonArguments.REPONSE.toString(), JsonArguments.OK.toString())
+                    .put(JsonArguments.IDPARTIE.toString(), id);
     }
 }

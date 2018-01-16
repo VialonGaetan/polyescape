@@ -18,7 +18,9 @@ public enum  JsonArguments {
     USERNAME("username"),
     OK("ok"),
     KO("ko"),
-    ID("id");
+    FINISH("finish"),
+    SCORE("score"),
+    IDPARTIE("idpartie");
 
 
     /**

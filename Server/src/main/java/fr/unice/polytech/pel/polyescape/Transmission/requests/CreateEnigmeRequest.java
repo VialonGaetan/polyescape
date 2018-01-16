@@ -8,7 +8,12 @@ import org.json.JSONObject;
  */
 public class CreateEnigmeRequest implements Request {
     @Override
-    public JSONObject getAnswer() {
+    public String getAnswer() {
+        return null;
+    }
+
+    @Override
+    public JSONObject answerInJson() {
         return null;
     }
 }

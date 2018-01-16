@@ -1,5 +1,6 @@
 package fr.unice.polytech.pel.polyescape.Server;
 
+import fr.unice.polytech.pel.polyescape.Transmission.InvalidJsonRequest;
 import fr.unice.polytech.pel.polyescape.Transmission.requests.Request;
 import fr.unice.polytech.pel.polyescape.Transmission.requests.RequestFactory;
 
@@ -26,7 +27,7 @@ public class GameServerEndPoint {
         logger.info("Message Receive : " + message);
         Request request = new RequestFactory().createTypeRequest(message, session);
         logger.info("Message send : " + request.getAnswer());
-        return request.getAnswer().toString();
+        return request.getAnswer();
     }
 
     @OnClose

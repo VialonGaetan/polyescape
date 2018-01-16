@@ -28,7 +28,7 @@ public class PartieTest {
     private Partie partie;
 
     @Before
-    public void setUp()
+    public void setUpPartyOnePlayer()
     {
         enigmes = new ArrayList<>();
         enigmes.add(new Enigme("1","1","1"));
@@ -57,7 +57,7 @@ public class PartieTest {
 
 
     @Test
-    public void validateFirstResponse()
+    public void validateFirstResponseAndDontValidateTheNext()
     {
         partie.getCurrentEnigmesOfaPlayer(joueur).get().checkAnswer(partie.getCurrentEnigmesOfaPlayer(joueur).get().getReponse());
         assertEquals(escapeGame.getEnigmes().size(),partie.getEnigmesOfaPlayer(joueur).size());

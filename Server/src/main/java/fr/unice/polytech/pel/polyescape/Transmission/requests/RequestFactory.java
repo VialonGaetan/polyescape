@@ -27,8 +27,10 @@ public class RequestFactory {
                 return new CreateEnigmeRequest();
             case CREATE_ESCAPE:
                 return new CreateEscapeRequest();
+            case RESPONSE:
+                return new CheckResponseRequest(message,session);
             default:
-                throw new InvalidJsonRequest();
+                return new InvalidJsonRequest("InvalidElementRequest");
         }
     }
 

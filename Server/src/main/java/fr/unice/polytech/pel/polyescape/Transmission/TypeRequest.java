@@ -10,6 +10,7 @@ public enum TypeRequest {
     GET_ESCAPE,
     JOIN_PARTIE,
     READY,
+    RESPONSE,
     CREATE_PARTIE,
     CREATE_ENIGME,
     CREATE_ESCAPE;

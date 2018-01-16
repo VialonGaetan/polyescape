@@ -23,7 +23,12 @@ public class EnigmeDispoRequest implements Request {
     }
 
     @Override
-    public JSONObject getAnswer() {
+    public String getAnswer() {
+        return answerInJson().toString();
+    }
+
+    @Override
+    public JSONObject answerInJson() {
         JSONArray jsonArray = new JSONArray();
         for (Enigme enigme : gestionnaire.getEnigmeDisponible()) {
             jsonArray.put(enigme.toJson());

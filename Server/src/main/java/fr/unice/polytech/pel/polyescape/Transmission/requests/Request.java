@@ -10,7 +10,9 @@ import javax.websocket.Session;
  */
 public interface Request {
 
-    JSONObject getAnswer();
+    String getAnswer();
+
+    JSONObject answerInJson();
 
 
 }
