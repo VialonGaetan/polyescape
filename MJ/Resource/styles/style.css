@@ -71,6 +71,7 @@
 }
 
 #descriptionEnigma{
+    -fx-font: 20px Tahoma;
 }
 
 #answer {
