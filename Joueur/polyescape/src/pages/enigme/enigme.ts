@@ -26,10 +26,10 @@ export class EnigmePage {
       this.webSocket.send(JSON.stringify(request));
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);
-        if(jsonData.REPONSE == "ok"){
+        if(jsonData.reponse == "ok"){
           this.nomEnigme = jsonData.nom;
           this.enigmeInfos = jsonData.infos;
-          this.idPartie = jsonData.id;
+          this.idPartie = jsonData.idpartie;
         }
       }.bind(this);
     }
@@ -65,7 +65,7 @@ export class EnigmePage {
       this.presentToastNoAnswer();
     }
     else {
-      var request = {request:"Response", "idPartie":this.idPartie,"reponse":this.inputAnswer};
+      var request = {request:"RESPONSE", "idpartie":this.idPartie,"reponse":this.inputAnswer,username:this.userName};
       this.webSocket.send(JSON.stringify(request));
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);
@@ -75,7 +75,7 @@ export class EnigmePage {
         else if(jsonData.response == "ok"){
           this.navCtrl.push(EnigmePage,{username:this.userName,name:this.nomEscape,websocket:this.webSocket,infos:jsonData.infos,nomEnigme:jsonData.nom});
         }
-        else{
+        else if(jsonData.response == "finish"){
           this.navCtrl.push(EndGameScreenPage,{score:jsonData.score});
         }
       }.bind(this);
