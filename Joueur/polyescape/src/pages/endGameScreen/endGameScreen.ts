@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {HomePage} from "../home/home";
 
 @Component({
@@ -8,12 +8,13 @@ import {HomePage} from "../home/home";
 })
 export class EndGameScreenPage {
 
-  constructor(public navCtrl: NavController) {
+  private score;
 
+  constructor(public navCtrl: NavController,public navParams:NavParams) {
+    this.score = navParams.get("score");
   }
 
   goToHomePage() {
     this.navCtrl.push(HomePage);
   }
-
 }
