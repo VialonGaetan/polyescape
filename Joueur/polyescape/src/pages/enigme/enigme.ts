@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
+import {TimeInterval} from "rxjs/Rx";
 
 @Component({
   selector: 'page-enigme',
@@ -10,11 +11,12 @@ export class EnigmePage {
 
   private inputAnswer = '';
   private userName = '';
-  private idPartie:number = 0;
+  private idPartie:number;
   private nomEnigme:string ='';
   private nomEscape = '';
   private enigmeInfos:string = '';
   private webSocket:WebSocket;
+  private timer;
 
 
   constructor(public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController) {
@@ -36,6 +38,7 @@ export class EnigmePage {
     else {
       this.nomEnigme = navParams.get("nomEnigme");
       this.enigmeInfos = navParams.get("infos");
+      this.idPartie = this.navParams.get("idpartie");
     }
   }
 
@@ -60,6 +63,10 @@ export class EnigmePage {
     toast.present();
   }
 
+  timeIsOut(){
+
+  }
+
   submitAnswer() {
     if (this.inputAnswer.length == 0){
       this.presentToastNoAnswer();
@@ -73,7 +80,7 @@ export class EnigmePage {
           this.presentToastIncorectAnswer();
         }
         else if(jsonData.reponse == "ok"){
-          this.navCtrl.push(EnigmePage,{username:this.userName,name:this.nomEscape,websocket:this.webSocket,infos:jsonData.infos,nomEnigme:jsonData.nom});
+          this.navCtrl.push(EnigmePage,{username:this.userName,name:this.nomEscape,websocket:this.webSocket,infos:jsonData.infos,nomEnigme:jsonData.nom,idpartie:this.idPartie,timer:this.timer});
         }
         else if(jsonData.reponse == "finish"){
           this.navCtrl.push(EndGameScreenPage,{score:jsonData.score});
