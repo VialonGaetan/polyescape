@@ -92,7 +92,7 @@ export class EnigmePage {
         }
         else if(jsonData.reponse == "finish"){
           clearInterval(this.timer);
-          this.navCtrl.push(EndGameScreenPage,{score:jsonData.score});
+          this.navCtrl.setRoot(EndGameScreenPage,{score:jsonData.score});
         }
       }.bind(this);
 

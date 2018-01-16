@@ -30,7 +30,7 @@ export class EscapeScreenPage {
   }
 
   startGame(game : any) {
-    this.navCtrl.push(EnigmePage,{username:this.userName,name:game,websocket:this.webSocket});
+    this.navCtrl.setRoot(EnigmePage,{username:this.userName, name:game, websocket:this.webSocket});
   }
 
 }
