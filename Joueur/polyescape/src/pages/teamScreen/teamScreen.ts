@@ -17,7 +17,6 @@ export class TeamScreenPage {
   }
 
   joinTeam(p_id : number){
-    alert(p_id);
     this.navCtrl.push(EscapeScreenPage);
   }
 

@@ -95,7 +95,6 @@ export class EnigmePage {
           this.navCtrl.setRoot(EndGameScreenPage,{score:jsonData.score});
         }
       }.bind(this);
-
     }
   }
 }
