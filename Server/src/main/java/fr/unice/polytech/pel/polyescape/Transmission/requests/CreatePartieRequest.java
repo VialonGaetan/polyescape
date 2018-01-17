@@ -21,7 +21,7 @@ public class CreatePartieRequest implements Request {
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
     private Gestionnaire gestionnaire = Gestionnaire.getInstance();
-    private int id;
+    private int id=0;
     private Session session;
     private TypePartie typePartie;
     private Joueur joueur;
@@ -33,7 +33,7 @@ public class CreatePartieRequest implements Request {
     }
 
 
-    private int decodeCreatePartie(String message, Session session) {
+    private int decodeCreatePartie(String message, Session session){
         try {
             JSONObject decode = new JSONObject(message);
             EscapeGame escapeGame = gestionnaire.getEscapeGame(decode.getString(JsonArguments.ESCAPEGAME.toString()));

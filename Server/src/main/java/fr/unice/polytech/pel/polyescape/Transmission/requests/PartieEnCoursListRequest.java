@@ -32,6 +32,7 @@ public class PartieEnCoursListRequest implements Request {
             if (partie.hasStart())
                 jsonArray.put(partie.toJson());
         }
-        return new JSONObject().put(JsonArguments.PARTIEENCOURS.toString(),jsonArray);
+        return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.INFOS.toString())
+                .put(JsonArguments.PARTIEENCOURS.toString(),jsonArray);
     }
 }

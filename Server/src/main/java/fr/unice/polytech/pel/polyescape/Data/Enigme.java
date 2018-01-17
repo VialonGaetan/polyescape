@@ -44,15 +44,6 @@ public class Enigme implements Serialize {
                 .put(JsonArguments.ISRESOLVE.toString(),isResolve);
     }
 
-    @Override
-    public String toString() {
-        return "Enigme{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", reponse='" + reponse + '\'' +
-                '}';
-    }
-
     public Boolean isResolve() {
         return isResolve;
     }
