@@ -23,8 +23,8 @@ export class EscapeScreenPage {
 
     this.webSocket.onmessage = function(event) {
       var jsonData = JSON.parse(event.data);
-      for (var i = 0; i < jsonData.escapesGame.length; i++)
-        this.escapeGames.push(jsonData.escapesGame[i].nom);
+      for (var i = 0; i < jsonData.escapegames.length; i++)
+        this.escapeGames.push(jsonData.escapegames[i].nom);
     }.bind(this);
     this.userName = this.navParams.get("username");
   }
