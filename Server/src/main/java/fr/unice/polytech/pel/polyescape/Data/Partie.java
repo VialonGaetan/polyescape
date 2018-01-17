@@ -63,26 +63,33 @@ public class Partie implements Serialize {
         return association.get(joueur).stream().filter(enigme -> enigme.isResolve()==false).findFirst();
     }
 
+    public boolean joinPartie(Joueur joueur){
+        if (hasStart)
+            return false;
+        else if (readyToStart.keySet().size()>=4)
+            return false;
+        else {
+            return readyToStart.put(joueur,false);
+        }
+
+    }
     public int getTime() {
         return time;
     }
 
     @Override
     public JSONObject toJson() {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put(JsonArguments.ESCAPEGAME.toString(),escapeGame.getName());
-        jsonObject.put(JsonArguments.TEMPS.toString(),getTime());
         JSONArray jsonArray = new JSONArray();
         for (Joueur joueur: association.keySet()) {
             JSONArray jsonArrayEnigme = new JSONArray();
-            jsonArray.put(joueur.toJson());
             for (Enigme enigme : association.get(joueur)) {
                 jsonArrayEnigme.put(enigme.toJson());
             }
-            jsonArray.put(jsonArrayEnigme);
+            jsonArray.put(joueur.toJson().put(JsonArguments.ENIGMES.toString(),jsonArrayEnigme));
         }
-        jsonObject.put(JsonArguments.JOUEURS.toString(),jsonArray);
 
-        return jsonObject;
+        return new JSONObject().put(JsonArguments.TEMPS.toString(),getTime())
+                    .put(JsonArguments.JOUEURS.toString(),jsonArray)
+                    .put(JsonArguments.ESCAPEGAME.toString(),escapeGame.getName());
     }
 }
