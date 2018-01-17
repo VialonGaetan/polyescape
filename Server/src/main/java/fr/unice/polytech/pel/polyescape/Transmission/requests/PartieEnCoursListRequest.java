@@ -28,7 +28,7 @@ public class PartieEnCoursListRequest implements Request {
     @Override
     public JSONObject answerInJson() {
         JSONArray jsonArray = new JSONArray();
-        for (Partie partie : Gestionnaire.getInstance().getPartieEnCours().values()) {
+        for (Partie partie : Gestionnaire.getInstance().getParties().values()) {
             if (partie.hasStart())
                 jsonArray.put(partie.toJson());
         }

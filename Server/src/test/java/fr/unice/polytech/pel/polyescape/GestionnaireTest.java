@@ -24,7 +24,7 @@ public class GestionnaireTest {
     @Test
     public void initialisation()
     {
-        assertEquals(0,gestionnaire.getPartieEnCours().size());
+        assertEquals(0,gestionnaire.getParties().size());
     }
 
     @Test

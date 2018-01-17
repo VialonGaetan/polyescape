@@ -1,5 +1,7 @@
 package fr.unice.polytech.pel.polyescape.Transmission.requests;
 
+import fr.unice.polytech.pel.polyescape.Data.Joueur;
+import fr.unice.polytech.pel.polyescape.Data.Partie;
 import fr.unice.polytech.pel.polyescape.Data.TypePartie;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
 import fr.unice.polytech.pel.polyescape.Transmission.InvalidJsonRequest;
@@ -10,6 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.websocket.Session;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Gaetan Vialon
@@ -46,10 +50,8 @@ public class CreatePartieRequestTest {
 
     @Test
     public void createNewGame(){
-        System.out.println(request);
+        int numberPartieBeforeNewPartie = gestionnaire.getParties().values().size();
         createPartieRequest = new CreatePartieRequest(request,session);
-//        assertEquals(1,gestionnaire.getPartieEnCours().values().size());
-        System.out.println(createPartieRequest.getAnswer());
-        //assertEquals(new Partie(gestionnaire.getEscapeGamesDisponible().get(0),new Joueur(name,null)),gestionnaire.getPartieByID(1));
+        assertEquals(numberPartieBeforeNewPartie + 1,gestionnaire.getParties().values().size());
     }
 }
