@@ -63,13 +63,20 @@ public class Partie implements Serialize {
         return association.get(joueur).stream().filter(enigme -> enigme.isResolve()==false).findFirst();
     }
 
+    public void setJoueurReadyOrNot(Joueur joueur, Boolean ready){
+        readyToStart.replace(joueur,ready);
+        if (!readyToStart.values().stream().filter(aBoolean -> aBoolean==false).findAny().isPresent())
+            startTheGame();
+    }
+
     public boolean joinPartie(Joueur joueur){
         if (hasStart)
             return false;
         else if (readyToStart.keySet().size()>=4)
             return false;
         else {
-            return readyToStart.put(joueur,false);
+            readyToStart.put(joueur,false);
+            return true;
         }
 
     }

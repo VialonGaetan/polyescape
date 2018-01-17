@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -16,6 +17,7 @@ import static org.junit.Assert.assertTrue;
 public class PartieTest {
 
     private Joueur joueur;
+    private Joueur secondJoueur;
     private List<Enigme> enigmes;
     private EscapeGame escapeGame;
     private Partie partieSolo;
@@ -30,6 +32,7 @@ public class PartieTest {
         enigmes.add(new Enigme("3","3","3"));
 
        joueur = new Joueur("Loic",null);
+       secondJoueur = new Joueur("GuiGui",null);
 
        escapeGame = new EscapeGame("titi",enigmes,50);
        partieSolo = new Partie(escapeGame,joueur,TypePartie.SOLO);
@@ -63,6 +66,17 @@ public class PartieTest {
 
 
     @Test
-    public void create(){}
+    public void initialisationTeam(){
+        assertFalse(partieTeam.hasStart());
+        partieTeam.joinPartie(secondJoueur);
+        assertFalse(partieTeam.hasStart());
+        partieTeam.setJoueurReadyOrNot(joueur,true);
+        assertFalse(partieTeam.hasStart());
+        partieTeam.setJoueurReadyOrNot(joueur,false);
+        partieTeam.setJoueurReadyOrNot(secondJoueur,true);
+        assertFalse(partieTeam.hasStart());
+        partieTeam.setJoueurReadyOrNot(joueur,true);
+        assertTrue(partieTeam.hasStart());
+    }
 
 }
