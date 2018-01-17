@@ -2,6 +2,7 @@ package fr.unice.polytech.pel.polyescape.Transmission.requests;
 
 import fr.unice.polytech.pel.polyescape.Data.EscapeGame;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
+import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -32,6 +33,6 @@ public class EscapeGameDispoListRequest implements Request {
         for (EscapeGame escapeGame : gestionnaire.getEscapeGamesDisponible()) {
             jsonArray.put(escapeGame.toJson());
         }
-        return new JSONObject().put("escapesGame",jsonArray);
+        return new JSONObject().put(JsonArguments.ESCAPEGAMES.toString(),jsonArray);
     }
 }
