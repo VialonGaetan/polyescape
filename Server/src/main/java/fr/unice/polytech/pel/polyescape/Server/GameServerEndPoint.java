@@ -1,5 +1,7 @@
 package fr.unice.polytech.pel.polyescape.Server;
 
+import fr.unice.polytech.pel.polyescape.Data.GameMaster;
+import fr.unice.polytech.pel.polyescape.Gestionnaire;
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
 import fr.unice.polytech.pel.polyescape.Transmission.TypeRequest;
 import fr.unice.polytech.pel.polyescape.Transmission.requests.HelpRequest;
@@ -22,8 +24,6 @@ import java.util.logging.Logger;
 public class GameServerEndPoint {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
-    private Session sessionMJ;
-    private Session sessionAppli;
 
     @OnOpen
     public void onOpen(Session session) {
@@ -33,18 +33,19 @@ public class GameServerEndPoint {
     @OnMessage
     public String onMessage(String message, Session session) throws IOException {
         if (new JSONObject(message).getString(JsonArguments.REQUEST.toString()).equals(TypeRequest.GET_PARTIES.toString())){
-            this.sessionMJ = session;
+            Gestionnaire.getInstance().setSessionMG(session);
         }
         if (new JSONObject(message).getString(JsonArguments.REQUEST.toString()).equals(TypeRequest.HELP.toString())){
-            this.sessionAppli = session;
-            HelpRequest helpRequest = new HelpRequest(message, sessionMJ);
-            sessionMJ.getBasicRemote().sendText(message);
-            return "";
+            HelpRequest helpRequest = new HelpRequest(message, Gestionnaire.getInstance().getSessionMG());
+            System.out.println("message envoyé : "+message);
+            System.out.println("ok");
+            System.out.println(Gestionnaire.getInstance().getSessionMG() == null);
+            Gestionnaire.getInstance().getSessionMG().getBasicRemote().sendText(message);
         }
         if (new JSONObject(message).getString(JsonArguments.REQUEST.toString()).equals(TypeRequest.HELP_RESPONSE.toString())){
-            HelpResponseRequest helpRequest = new HelpResponseRequest(message, sessionAppli);
-            sessionMJ.getBasicRemote().sendText(message);
-            return helpRequest.getAnswer();
+//            HelpResponseRequest helpRequest = new HelpResponseRequest(message, sessionAppli);
+//            sessionAppli.getBasicRemote().sendText(message);
+//            return helpRequest.getAnswer();
         }
         logger.info("Message Receive : " + message);
         Request request = new RequestFactory().createTypeRequest(message, session);

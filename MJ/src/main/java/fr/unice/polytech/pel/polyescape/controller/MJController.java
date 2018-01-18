@@ -171,7 +171,7 @@ public class MJController {
 //        if (new JSONObject(request).getString(JsonArguments.REPONSE.toString()).equals("infos")){
 //            envoieIndice();
 //        }
-        request = "{\"request\":\"HELP\",\"idpartie\":2,\"username\":\"bob\",\"enigme\":\"Dans quel rayon se trouve le livre \\\"Le code pour les nuls\\\"\"}";
+        //request = "{\"request\":\"HELP\",\"idpartie\":2,\"username\":\"bob\",\"enigme\":\"Dans quel rayon se trouve le livre \\\"Le code pour les nuls\\\"\"}";
         ClientMJ clientMJ = new ClientMJ(request, progressIndicatorTime, teamName, escapeGameName, listPlayer, this);
         ClientManager client = ClientManager.createClient();
         client.connectToServer(clientMJ, new URI("ws://localhost:15555/websockets/gameserver"));

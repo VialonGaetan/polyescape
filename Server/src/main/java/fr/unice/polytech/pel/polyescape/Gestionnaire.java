@@ -2,6 +2,7 @@ package fr.unice.polytech.pel.polyescape;
 
 import fr.unice.polytech.pel.polyescape.Data.*;
 
+import javax.websocket.Session;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ public class Gestionnaire {
     private final Map<String,Enigme> enigmeDisponible;
     private final Map<Integer,Partie> parties;
     private int id = 0;
-
+    private Session sessionMG;
 
     public static Gestionnaire getInstance() {
         return ourInstance;
@@ -69,5 +70,13 @@ public class Gestionnaire {
 
     public Partie getPartieByID(int id){
         return parties.get(id);
+    }
+
+    public void setSessionMG(Session sessionMG) {
+        this.sessionMG = sessionMG;
+    }
+
+    public Session getSessionMG() {
+        return sessionMG;
     }
 }

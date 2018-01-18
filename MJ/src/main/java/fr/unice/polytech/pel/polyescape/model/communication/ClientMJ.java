@@ -78,6 +78,7 @@ public class ClientMJ {
 
     @OnMessage
     public void onMessage(String message, Session session) throws InterruptedException {
+        System.out.println(message);
         dataParser = new DataParser(message);
         this.answer = message;
         System.out.println(this.answer);
