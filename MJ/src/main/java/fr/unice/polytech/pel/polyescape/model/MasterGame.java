@@ -161,7 +161,7 @@ public class MasterGame extends Stage{
         basePane.getChildren().addAll(btnAnswer);
 
         //Definition du logo au centre de la page
-        logo = new ImageView("model/logoPoly.png");
+        logo = new ImageView("images/logoPoly.png");
         logo.setLayoutX(LARGEUR/2 - logo.getImage().getWidth()/2);
         logo.setLayoutY(HAUTEUR/2 - logo.getImage().getHeight()/2);
         logo.setId("logo");
@@ -174,7 +174,7 @@ public class MasterGame extends Stage{
         //Génération de la scene
         root.getChildren().add(basePane);
         this.setTitle("FENETRE DU MJ");
-        this.getIcons().add(new Image(getClass().getClassLoader().getResource("model/loupe.jpg").toString()));
+        this.getIcons().add(new Image(getClass().getClassLoader().getResource("images/loupe.jpg").toString()));
 
         this.setScene(scene);
         this.getScene().getStylesheets().addAll(getClass().getClassLoader().getResource("styles/style.css").toExternalForm());

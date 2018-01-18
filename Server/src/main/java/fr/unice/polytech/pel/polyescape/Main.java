@@ -1,15 +1,12 @@
 package fr.unice.polytech.pel.polyescape;
 
-import fr.unice.polytech.pel.polyescape.Server.GameServerEndPoint;
-import org.glassfish.tyrus.server.Server;
-
 /**
  * @author Gaetan Vialon
  * Created the 11/01/2018.
  */
 public class Main {
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         runServer();
     }
 
@@ -23,7 +20,7 @@ public class Main {
             System.err.println("Could not listen on port: 15555.");
             System.exit(-1);
         }
-        while (listening);
+        while (listening) ;
         server.stop();
-    }
+    }*/
 }

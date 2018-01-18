@@ -1,4 +1,4 @@
-package fr.unice.polytech.pel.polyescape.controller;
+package controller;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -35,8 +35,7 @@ public class MJController {
     private TextArea answerField;
     private Label remindedTime;
     private Label progressLabel;
-    private Text teamName;
-    private Text escapeGameName;
+
     private String selectedPlayer;
 
     private int hour;
@@ -58,21 +57,15 @@ public class MJController {
         this.remindedTime = ((Label) (timeHB.getChildren().get(0)));
         this.answerField = ((TextArea) (bottomPane.getChildren().get(0)));
         this.selectedPlayer = "";
-        this.hour=0;
-        this.minute=2;
+        this.hour=2;
+        this.minute=10;
         this.givenMinutes = 2;
-        this.teamName = ((Text) (topPane.getChildren().get(1)));
-        this.escapeGameName = ((Text) (topPane.getChildren().get(0)));
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 Platform.runLater(() -> {
-                    try {
-                        display();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    display();
                 });
             }
         }, 60000, 60000);
@@ -105,7 +98,7 @@ public class MJController {
 
     public void envoieIndice() {
         try {
-            Media hit = new Media(getClass().getClassLoader().getResource("sound/notification.wav").toString());
+            Media hit = new Media(getClass().getClassLoader().getResource("controller/notification.wav").toString());
             MediaPlayer mediaPlayer = new MediaPlayer(hit);
             mediaPlayer.play();
         } catch (Exception e) {
@@ -117,7 +110,7 @@ public class MJController {
         answerField.setText("");
     }
 
-    public void display() throws InterruptedException {
+    public void display() {
         String tobeDisplayed="";
         if (this.minute==0 && this.hour!=0){
             this.hour--;
@@ -128,13 +121,13 @@ public class MJController {
         }
         if (this.hour==0 && this.minute==0){
             finDuJeu=true;
-            Media hit = new Media(getClass().getClassLoader().getResource("sound/sonnerie.wav").toString());
+            Media hit = new Media(getClass().getClassLoader().getResource("controller/sonnerie.wav").toString());
             MediaPlayer mediaPlayer = new MediaPlayer(hit);
             mediaPlayer.play();
         }
         if (this.hour==0 && this.minute==1){//A MODIF
             Notifications.create().title("Temps faible").text("Temps restant :1 minute !").darkStyle().position(Pos.CENTER).showWarning();
-            Media hit = new Media(getClass().getClassLoader().getResource("sound/1min.mp3").toString());
+            Media hit = new Media(getClass().getClassLoader().getResource("controller/1min.mp3").toString());
             MediaPlayer mediaPlayer = new MediaPlayer(hit);
             mediaPlayer.play();
         }

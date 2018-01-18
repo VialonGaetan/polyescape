@@ -1,8 +1,6 @@
 package fr.unice.polytech.pel.polyescape;
 
-import fr.unice.polytech.pel.polyescape.Data.Enigme;
-import fr.unice.polytech.pel.polyescape.Data.EscapeGame;
-import fr.unice.polytech.pel.polyescape.Data.Partie;
+import fr.unice.polytech.pel.polyescape.Data.*;
 
 import java.util.HashMap;
 import java.util.List;

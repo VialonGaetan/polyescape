@@ -1,13 +1,7 @@
 package fr.unice.polytech.pel.polyescape.Server;
 
-import org.glassfish.tyrus.client.ClientManager;
-
 import javax.websocket.*;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.logging.Logger;
 
 @ClientEndpoint
@@ -15,6 +9,7 @@ public class MyClientEndPoint {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private final String message;
+    private String answer ="vide";
 
     public MyClientEndPoint(String message) {
         this.message = message;
@@ -23,8 +18,10 @@ public class MyClientEndPoint {
     @OnOpen
     public void onOpen(Session session) {
         logger.info("Connected ... " + session.getId());
+        logger.info(this.answer);
+        logger.info(this.message);
         try {
-            session.getBasicRemote().sendText("start");
+            session.getBasicRemote().sendText(message);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -40,14 +37,9 @@ public class MyClientEndPoint {
 
     @OnMessage
     public String onMessage(String message, Session session) {
-        BufferedReader bufferRead = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            logger.info("Received ...." + message);
-            String userInput = bufferRead.readLine();
-            return userInput;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        this.answer = message;
+        System.out.println(message);
+        return this.answer;
     }
 
     @OnClose
@@ -55,7 +47,7 @@ public class MyClientEndPoint {
         logger.info(String.format("Session %s close because of %s", session.getId(), closeReason));
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         MyClientEndPoint myClientEndPoint = new MyClientEndPoint("lol");
         ClientManager client = ClientManager.createClient();
@@ -65,6 +57,6 @@ public class MyClientEndPoint {
         } catch (DeploymentException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
 }
