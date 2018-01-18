@@ -17,8 +17,6 @@ public class CheckResponseRequest implements Request {
     private Gestionnaire gestionnaire = Gestionnaire.getInstance();
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private Boolean isGood;
-    private String message;
-    private Session session;
     private Joueur joueur;
     private int partieID;
 

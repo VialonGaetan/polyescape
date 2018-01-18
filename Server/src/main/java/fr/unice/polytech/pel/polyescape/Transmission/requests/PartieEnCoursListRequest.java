@@ -17,6 +17,7 @@ public class PartieEnCoursListRequest implements Request {
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public PartieEnCoursListRequest() {
+        logger.info("Recupération de la liste des parties en cours");
     }
 
     @Override
