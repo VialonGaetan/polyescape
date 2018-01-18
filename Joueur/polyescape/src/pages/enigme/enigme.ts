@@ -78,7 +78,7 @@ export class EnigmePage {
       this.presentToastNoAnswer();
     }
     else {
-      var request = {request:"RESPONSE", "idpartie":this.idPartie,"reponse":this.inputAnswer,username:this.userName};
+      var request = {request:"RESPONSE", "idpartie":this.idPartie, "reponse":this.inputAnswer, username:this.userName};
       this.webSocket.send(JSON.stringify(request));
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);
@@ -96,5 +96,17 @@ export class EnigmePage {
         }
       }.bind(this);
     }
+  }
+
+  requestHelp() {
+    var request = {request:"HELP", idpartie:this.idPartie, username:this.userName, enigme: this.enigmeInfos};
+    this.webSocket.send(JSON.stringify(request));
+
+    this.webSocket.onmessage = function(event) {
+      //var jsonData = JSON.parse(event.data);
+      alert(event.data);
+
+
+    }.bind(this);
   }
 }
