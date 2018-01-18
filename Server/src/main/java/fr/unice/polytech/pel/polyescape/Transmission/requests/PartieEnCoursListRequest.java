@@ -27,10 +27,11 @@ public class PartieEnCoursListRequest implements Request {
     @Override
     public JSONObject answerInJson() {
         JSONArray jsonArray = new JSONArray();
-        for (Partie partie : Gestionnaire.getInstance().getPartieEnCours().values()) {
+        for (Partie partie : Gestionnaire.getInstance().getParties().values()) {
             if (partie.hasStart())
                 jsonArray.put(partie.toJson());
         }
-        return new JSONObject().put(JsonArguments.PARTIEENCOURS.toString(),jsonArray);
+        return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.INFOS.toString())
+                .put(JsonArguments.PARTIEENCOURS.toString(),jsonArray);
     }
 }

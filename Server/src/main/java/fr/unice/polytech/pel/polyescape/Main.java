@@ -16,7 +16,6 @@ public class Main {
     public static void runServer() {
         Server server = new Server("localhost", 15555, "/websockets", GameServerEndPoint.class);
         boolean listening = true;
-
         try {
             server.start();
             System.out.print("Adresse du server ws://localhost:15555/websockets/gameserver");

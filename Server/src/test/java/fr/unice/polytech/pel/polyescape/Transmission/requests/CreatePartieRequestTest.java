@@ -11,6 +11,7 @@ import org.junit.Test;
 import javax.websocket.Session;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Gaetan Vialon
@@ -20,7 +21,8 @@ public class CreatePartieRequestTest {
 
     private Gestionnaire gestionnaire = Gestionnaire.getInstance();
     private CreatePartieRequest createPartieRequest;
-    private String request;
+    private String requestSolo;
+    private String requestTeam;
     private Session session;
     private String name;
 
@@ -28,10 +30,16 @@ public class CreatePartieRequestTest {
     public void setUp()
     {
         name = "Claude";
-        request = new JSONObject().put(JsonArguments.REQUEST.toString(), TypeRequest.CREATE_PARTIE)
+        requestSolo = new JSONObject().put(JsonArguments.REQUEST.toString(), TypeRequest.CREATE_PARTIE)
                 .put(JsonArguments.USERNAME.toString(),name)
                 .put(JsonArguments.ESCAPEGAME.toString(),gestionnaire.getEscapeGamesDisponible().get(0).getName())
                 .put(JsonArguments.TEAMNAME.toString(),"")
+                .toString();
+
+        requestTeam = new JSONObject().put(JsonArguments.REQUEST.toString(), TypeRequest.CREATE_PARTIE)
+                .put(JsonArguments.USERNAME.toString(),name)
+                .put(JsonArguments.ESCAPEGAME.toString(),gestionnaire.getEscapeGamesDisponible().get(0).getName())
+                .put(JsonArguments.TYPE.toString(), TypePartie.TEAM)
                 .toString();
         session = null;
 
@@ -46,11 +54,31 @@ public class CreatePartieRequestTest {
     }
 
     @Test
-    public void createNewGame(){
-        System.out.println(request);
-        int lol = gestionnaire.getPartieEnCours().size();
-        createPartieRequest = new CreatePartieRequest(request,session);
-        assertEquals(lol +1 ,gestionnaire.getPartieEnCours().values().size());
-        System.out.println(createPartieRequest.getAnswer());
+    public void createNewGameSolo(){
+        int numberPartieBeforeNewPartie = gestionnaire.getParties().values().size();
+        createPartieRequest = new CreatePartieRequest(requestSolo,session);
+        assertEquals(numberPartieBeforeNewPartie + 1,gestionnaire.getParties().values().size());
+        checkReponse();
+        checkSupplement();
+
+    }
+
+    @Test
+    public void createNewGameWithTeam(){
+        int numberPartieBeforeNewPartie = gestionnaire.getParties().values().size();
+        createPartieRequest = new CreatePartieRequest(requestTeam,session);
+        assertEquals(numberPartieBeforeNewPartie + 1,gestionnaire.getParties().values().size());
+        checkReponse();
+    }
+
+    private void checkReponse(){
+        assertTrue(createPartieRequest.getAnswer().contains(JsonArguments.IDPARTIE.toString()));
+        assertTrue(createPartieRequest.getAnswer().contains(JsonArguments.REPONSE.toString()));
+    }
+
+    private void checkSupplement(){
+        assertTrue(createPartieRequest.getAnswer().contains(JsonArguments.INFOS.toString()));
+        assertTrue(createPartieRequest.getAnswer().contains(JsonArguments.TEMPS.toString()));
+        assertTrue(createPartieRequest.getAnswer().contains(JsonArguments.NOM.toString()));
     }
 }
