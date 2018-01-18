@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import {NavController, ToastController} from 'ionic-angular';
+import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {EscapeScreenPage} from "../escapeScreen/escapeScreen";
+import {TeamWaitScreen} from "../teamWaitScreen/teamWaitScreen"
+import {TeamProgressionScreenPage} from "../teamProgressionScreenPage/teamProgressionScreenPage";
 
 @Component({
   selector: 'page-team',
@@ -9,15 +11,23 @@ import {EscapeScreenPage} from "../escapeScreen/escapeScreen";
 export class TeamScreenPage {
 
   private qty = '';
+  private userName = '';
   private teamName = '';
   private _id: number;
+  private webSocket:WebSocket;
 
-  constructor(public navCtrl: NavController,public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController,public navParams:NavParams,public toastCtrl: ToastController) {
     this._id = 99;
+    this.userName = this.navParams.get("username");
+    this.webSocket = this.navParams.get("websocket");
+    this.webSocket.send(JSON.stringify({request:"GET_SALONS"}));
+    this.webSocket.onmessage = function (event) {
+      var jsonData = JSON.parse(event.data);
+    }
   }
 
   joinTeam(p_id : number){
-    this.navCtrl.push(EscapeScreenPage);
+    this.navCtrl.push(TeamProgressionScreenPage);
   }
 
   createTeam(){

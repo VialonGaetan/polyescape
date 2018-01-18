@@ -11,8 +11,10 @@ export class HomePage {
 
   private inputName = '';
   private userName = '';
+  private webSocket:WebSocket;
 
   constructor(public navCtrl: NavController, public toastCtrl: ToastController) {
+    this.webSocket = new WebSocket("ws://localhost:15555/websockets/gameserver");
   }
 
   presentToast() {
@@ -38,14 +40,14 @@ export class HomePage {
 
   goToEscapePage() {
     if (this.verifyInputName()){
-      var us = this.userName;
-      this.navCtrl.push(EscapeScreenPage,{username:us});
+      this.navCtrl.push(EscapeScreenPage,{username:this.userName,websocket:this.webSocket});
     }
 
   }
 
   goToTeamPage() {
-    if (this.verifyInputName())
-      this.navCtrl.push(TeamScreenPage);
+    if (this.verifyInputName()){
+      this.navCtrl.push(TeamScreenPage,{username:this.userName,websocket:this.webSocket});
+    }
   }
 }

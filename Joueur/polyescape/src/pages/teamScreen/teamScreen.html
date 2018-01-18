@@ -9,9 +9,10 @@
 
 
 <ion-content style="background: lavender;">
-  <div id="usr">
-    <ion-icon id="userIcon" name="person"></ion-icon>
-    <label id="userName">User</label>
+  <div id="usr1">
+    <ion-icon id="userIcon1" name="person"></ion-icon>
+    <br />
+    <label id="userName1" >{{userName}}</label>
   </div>
   <ion-label id="label2">
     Créer une équipe
@@ -20,7 +21,7 @@
     <ion-item style="background: lavender">
       <ion-input id="input2" [(ngModel)]="qty" type="text" placeholder="Nom de l'équipe à créer" ></ion-input>
     </ion-item>
-    <button ion-button (click)="createTeam()" margin-top="100px" margin-left="150px" icon-right>
+    <button ion-button (click)="createTeam()" margin-top="100px" margin-left="150px" style="border-radius: 3px" icon-right>
       Créer mon équipe
       <ion-icon name="people"></ion-icon>
     </button>
@@ -29,61 +30,36 @@
     Rejoindre une équipe
   </ion-label>
   <div style=" overflow-y:scroll;width:100%; height:300px;">
-    <ion-card-header>
-      2 joueurs
-    </ion-card-header>
-
-    <ion-list id="l" margin-left="10px" margin-right="10px">
-      <button id="b1" (click)="joinTeam('b1');" ion-item class="listButton">
+    <ion-header>1 joueur</ion-header>
+    <ion-list margin-left="10px" margin-right="10px" *ngFor="let escapeName of escapeGames; let teamName of teamName ">
+      <button id="b1" ion-item (click)="joinTeam('b2');" class="listButton">
         <ion-icon name="people" item-start></ion-icon>
-        Team 1
+        <ion-label style="text-align: left" margin-left="20px">{{teamName}}</ion-label>
+        <ion-label style="text-align: right">{{escapeGameName}}</ion-label>
       </button>
     </ion-list>
-    <ion-card-header>
-      3 joueurs
-    </ion-card-header>
+    <ion-header>2 joueurs</ion-header>
     <ion-list margin-left="10px" margin-right="10px">
       <button id="b2" ion-item (click)="joinTeam('b2');" class="listButton">
         <ion-icon name="people" item-start></ion-icon>
-        Team 2
-      </button>
-      <button id="b3" ion-item (click)="joinTeam('b3');" class="listButton">
-        <ion-icon name="people" item-start></ion-icon>
-        Team 3
-      </button>
-      <button id="b4" ion-item (click)="joinTeam('b4');" class="listButton">
-        <ion-icon name="people" item-start></ion-icon>
-        Team 20
-      </button>
-      <button id="b5" ion-item (click)="joinTeam('b5');" class="listButton">
-        <ion-icon name="people" item-start></ion-icon>
-        Team 32
-      </button>
-      <button id="b6" ion-item (click)="joinTeam('b6');" class="listButton">
-        <ion-icon name="people" item-start></ion-icon>
-        Team 23
-      </button>
-      <button id="b7" ion-item (click)="joinTeam('b7');" class="listButton">
-        <ion-icon name="people" item-start></ion-icon>
-        Team 33
+        <ion-label style="text-align: left" margin-left="20px">{{teamName}}</ion-label>
+        <ion-label style="text-align: right">{{escapeGameName}}</ion-label>
       </button>
     </ion-list>
-    <ion-card-header>
-      4 joueurs
-    </ion-card-header>
+    <ion-header>3 joueurs</ion-header>
     <ion-list margin-left="10px" margin-right="10px">
-      <button id="b8" ion-item (click)="joinTeam('b8');" class="listButton">
+      <button id="b3" ion-item (click)="joinTeam('b2');" class="listButton">
         <ion-icon name="people" item-start></ion-icon>
-        Team 4
+        <ion-label style="text-align: left" margin-left="20px">{{teamName}}</ion-label>
+        <ion-label style="text-align: right">{{escapeGameName}}</ion-label>
       </button>
-      <button id="b9" ion-item (click)="joinTeam('b9');" class="listButton">
+    </ion-list>
+    <ion-header>4 joueurs</ion-header>
+    <ion-list margin-left="10px" margin-right="10px">
+      <button id="b4" ion-item (click)="joinTeam('b2');" class="listButton">
         <ion-icon name="people" item-start></ion-icon>
-        Team 5
-      </button>
-
-      <button id="b10" ion-item (click)="joinTeam('b10');" class="listButton">
-        <ion-icon name="people" item-start></ion-icon>
-        Team 6
+        <ion-label style="text-align: left" margin-left="20px">{{teamName}}</ion-label>
+        <ion-label style="text-align: right">{{escapeGameName}}</ion-label>
       </button>
     </ion-list>
   </div>

@@ -9,7 +9,15 @@ page-about {
   font-weight: bold;
 }
 
+.item-md.item-block .item-inner {
+  border-bottom: none;
+}
+
+#b2{
+  text-align: right;
+}
 div #teamName{
+  text-align: justify;
   background: lavender;
   margin-left: 15px;
 }
@@ -39,14 +47,21 @@ div #teamName{
   top: 0;
   margin-top: 10px;
   margin-right: 20px;
+  text-align: center;
 }
+
 #userIcon{
   font-size: 30px;
   color: #488aff;
 }
 
 #userName{
+  text-align: center;
   font-size: 15px;
   font-weight: bold;
+  color: #488aff;
+}
+
+.ion-card-header{
   color: #488aff;
 }

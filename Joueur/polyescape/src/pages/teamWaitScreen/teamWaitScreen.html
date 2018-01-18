@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<ion-header>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <ion-navbar>
+    <ion-title>
+      Escape Game en attente
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background: lavender;">
+  <div id="usr3">
+    <ion-icon id="userIcon3" name="people"></ion-icon>
+    <br />
+    <label id="userName3" >{{teamName}}</label>
+  </div>
+
+  <ion-list *ngFor="let name of players">
+    <ion-icon name="person"></ion-icon>
+    <ion-label>{{name}}</ion-label>
+  </ion-list>
+
+  <button (click)="ready()">Prêt</button>
+</ion-content>
+
+</html>
