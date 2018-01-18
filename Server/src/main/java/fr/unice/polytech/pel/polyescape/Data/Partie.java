@@ -12,7 +12,7 @@ import java.util.*;
 public class Partie implements Serialize {
 
     protected EscapeGame escapeGame;
-    protected int time;
+    private int time;
     protected boolean hasStart=false;
     private Joueur joueur;
 

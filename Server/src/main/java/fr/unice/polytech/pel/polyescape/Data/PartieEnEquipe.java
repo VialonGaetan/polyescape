@@ -8,7 +8,6 @@ import java.util.List;
  */
 public class PartieEnEquipe extends Partie implements Serialize {
 
-    private String teamName;
     private Equipe equipe;
 
     public PartieEnEquipe(EscapeGame escapeGame, Joueur joueur, String teamName) {
