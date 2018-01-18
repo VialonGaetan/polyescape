@@ -22,7 +22,7 @@ public class CreatePartieRequest implements Request {
 
     private Gestionnaire gestionnaire = Gestionnaire.getInstance();
     private int id;
-    private TypePartie typePartie;
+    private String teamName;
     private Joueur joueur;
 
     public CreatePartieRequest(String message, Session session) {
@@ -36,12 +36,16 @@ public class CreatePartieRequest implements Request {
         try {
             JSONObject decode = new JSONObject(message);
             EscapeGame escapeGame = gestionnaire.getEscapeGame(decode.getString(JsonArguments.ESCAPEGAME.toString()));
-            typePartie = TypePartie.valueOf(decode.getString(JsonArguments.TYPE.toString()));
+            teamName = decode.getString(JsonArguments.TEAMNAME.toString());
             joueur = new Joueur(decode.getString(JsonArguments.USERNAME.toString()), session);
-            if (escapeGame != null)
-                return gestionnaire.createNewPartie(new Partie(escapeGame,
-                        joueur,
-                        typePartie));
+            if (escapeGame != null){
+                if(teamName.isEmpty())
+                    return gestionnaire.createNewPartie(new Partie(escapeGame,joueur));
+
+                else
+                    return gestionnaire.createNewPartie(new Partie(escapeGame,joueur,teamName));
+            }
+
             return 0;
         } catch (Exception e) {
             throw new InvalidJsonRequest();
@@ -59,7 +63,7 @@ public class CreatePartieRequest implements Request {
         if (id == 0)
             return new JSONObject()
                     .put(JsonArguments.REPONSE.toString(), JsonArguments.KO.toString());
-        else if (typePartie.equals(TypePartie.SOLO) && gestionnaire.getPartieByID(id).getCurrentEnigmesOfaPlayer(joueur).isPresent())
+        else if (gestionnaire.getPartieByID(id).hasStart())
             return new JSONObject()
                     .put(JsonArguments.REPONSE.toString(), JsonArguments.OK.toString())
                     .put(JsonArguments.IDPARTIE.toString(), id)

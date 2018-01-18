@@ -7,6 +7,7 @@ package fr.unice.polytech.pel.polyescape.Transmission;
 public enum  JsonArguments {
     REQUEST("request"),
     TYPE("type"),
+    TEAMNAME("teamname"),
     SOLO("solo"),
     NOM("nom"),
     INFOS("infos"),

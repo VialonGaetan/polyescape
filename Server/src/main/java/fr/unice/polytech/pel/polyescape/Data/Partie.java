@@ -16,13 +16,13 @@ public class Partie implements Serialize {
     private int time;
     private boolean hasStart=false;
 
-    public Partie(EscapeGame escapeGame, Joueur joueur, TypePartie typePartie) {
+    public Partie(EscapeGame escapeGame, Joueur joueur) {
         this.escapeGame = escapeGame;
         this.time = escapeGame.getTime();
         equipe = new Equipe("",joueur);
     }
 
-    public Partie(EscapeGame escapeGame, Joueur joueur, TypePartie typePartie, String teamName) {
+    public Partie(EscapeGame escapeGame, Joueur joueur, String teamName) {
         this.equipe = new Equipe(teamName,joueur);
         this.escapeGame = escapeGame;
         this.time = escapeGame.getTime();

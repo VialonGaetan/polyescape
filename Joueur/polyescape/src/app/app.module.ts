@@ -7,12 +7,12 @@ import { EscapeScreenPage } from '../pages/escapeScreen/escapeScreen';
 import { EndGameScreenPage } from '../pages/endGameScreen/endGameScreen'
 import { TeamScreenPage } from '../pages/teamScreen/teamScreen';
 import { HomePage } from '../pages/home/home';
-
-
+import {EnigmePage} from "../pages/enigme/enigme";
+import {TeamWaitScreen} from "../pages/teamWaitScreen/teamWaitScreen";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {EnigmePage} from "../pages/enigme/enigme";
+import {TeamProgressionScreenPage} from "../pages/teamProgressionScreenPage/teamProgressionScreenPage";
 
 @NgModule({
   declarations: [
@@ -21,7 +21,9 @@ import {EnigmePage} from "../pages/enigme/enigme";
     EscapeScreenPage,
     EndGameScreenPage,
     HomePage,
-    EnigmePage
+    EnigmePage,
+    TeamWaitScreen,
+    TeamProgressionScreenPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,9 @@ import {EnigmePage} from "../pages/enigme/enigme";
     EscapeScreenPage,
     EndGameScreenPage,
     HomePage,
-    EnigmePage
+    EnigmePage,
+    TeamWaitScreen,
+    TeamProgressionScreenPage
 
   ],
   providers: [
