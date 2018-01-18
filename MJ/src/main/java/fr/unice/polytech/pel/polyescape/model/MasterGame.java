@@ -18,7 +18,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import javax.websocket.DeploymentException;
 import java.awt.*;
+import java.net.URISyntaxException;
 
 public class MasterGame extends Stage{
 
@@ -50,11 +52,11 @@ public class MasterGame extends Stage{
     private Button btnAnswer;
     private Label choicePlayer;
 
-    public MasterGame(){
+    public MasterGame() throws URISyntaxException, DeploymentException, InterruptedException {
         init();
     }
 
-    public MJController init(){
+    public MJController init() throws URISyntaxException, DeploymentException, InterruptedException {
         //Definition de base
         basePane = new Pane();
         root = new Group();

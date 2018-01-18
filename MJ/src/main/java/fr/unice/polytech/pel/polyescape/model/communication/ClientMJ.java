@@ -1,12 +1,26 @@
 package fr.unice.polytech.pel.polyescape.model.communication;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
+import fr.unice.polytech.pel.polyescape.controller.MJController;
+import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.cell.ComboBoxListCell;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
+import org.controlsfx.control.Notifications;
 import org.json.JSONObject;
 
 import javax.websocket.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -22,9 +36,14 @@ public class ClientMJ {
     private javafx.scene.text.Text teamName;
     private ComboBox listPlayer;
     private Boolean firstTime = true;
-    private int timeInMinute;
+    private int timeInMinute = 0;
+    MJController mjController;
+    private Boolean needHelp = false;
+    private String currentEnigma = "";
+    private String nameOfThePlayer = "";
 
-    public ClientMJ(String message, ProgressIndicator progressIndicator, Text teamNameText, Text escapeGameName, ComboBox listPlayer, int timeInMinute) {
+
+    public ClientMJ(String message, ProgressIndicator progressIndicator, Text teamNameText, Text escapeGameName, ComboBox listPlayer, MJController mjController) {
         this.message = message;
         this.answer = "";
         this.dataParser = new DataParser(message);
@@ -32,7 +51,7 @@ public class ClientMJ {
         this.progressIndicatorTime = progressIndicator;
         this.escapeGameName = escapeGameName;
         this.teamName = teamNameText;
-        this.timeInMinute= timeInMinute;
+        this.mjController = mjController;
     }
 
     public ClientMJ(String message) {
@@ -58,26 +77,28 @@ public class ClientMJ {
     }
 
     @OnMessage
-    public String onMessage(String message, Session session) {
+    public void onMessage(String message, Session session) throws InterruptedException {
         dataParser = new DataParser(message);
         this.answer = message;
         System.out.println(this.answer);
-        switch (new JSONObject(message).getString(JsonArguments.REPONSE.toString())) {
-            case "help": {
-                System.out.println("protocol help");
-                protocolHelp();
-                break;
-            }
-            case "infos": {
-                System.out.println("protocol infos");
-                protocolInfos();
-                break;
-            }
-            default: {
-                System.out.println("default");
-            }
+        if (new JSONObject(message).getString(JsonArguments.REPONSE.toString()).equals("infos")) {
+            System.out.println("protocol infos");
+            protocolInfos();
+            this.needHelp = true;
+            return;
         }
-        return message;
+        JSONObject jsonObject = new JSONObject(message);
+        /*
+        System.out.println("request : " + jsonObject.getString("request"));
+        System.out.println("enigme : "+jsonObject.getString("enigme"));
+        System.out.println("Nom du joueur : "+jsonObject.getString("username"));
+         */
+        if (jsonObject.getString("request").equals("HELP")) {
+            this.currentEnigma = jsonObject.getString("enigme");
+            this.nameOfThePlayer = jsonObject.getString("username");
+            protocolHelp();
+        }
+        return;
     }
 
     @OnClose
@@ -91,21 +112,23 @@ public class ClientMJ {
 
     private void protocolHelp() {
         System.out.println("demande d'aide");
-    }
-
-    private void protocolInfos() {
-        if (firstTime){
-            this.timeInMinute = this.dataParser.getTime();
-            this.listPlayer.setItems(this.dataParser.getPlayers());
-            this.escapeGameName.setText(this.dataParser.getTeamName());
-            firstTime = false;
-        }else{
-            return;
+        try {
+            Media hit = new Media(getClass().getClassLoader().getResource("sound/aide.mp3").toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(hit);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public Logger getLogger() {
-        return logger;
+    private void protocolInfos() {
+        if (firstTime) {
+            this.timeInMinute = this.dataParser.getTime();
+            this.listPlayer.setItems(this.dataParser.getPlayers());
+            this.escapeGameName.setText(this.dataParser.getTeamName());
+            updateListPlayer(this.nameOfThePlayer, false);
+            firstTime = false;
+        }
     }
 
     public String getMessage() {
@@ -138,5 +161,48 @@ public class ClientMJ {
 
     public int getTimeInMinute() {
         return timeInMinute;
+    }
+
+    public Boolean getNeedHelp() {
+        return needHelp;
+    }
+
+    public String getCurrentEnigma() {
+        return currentEnigma;
+    }
+
+    public String getNameOfThePlayer() {
+        return nameOfThePlayer;
+    }
+
+    public void updateListPlayer(String username, boolean isHelped) {
+        listPlayer.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+                final ListCell<String> cell = new ListCell<String>() {
+                    {
+                        super.setPrefWidth(100);
+                    }
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setText(item);
+                            if (item.contains(username)) {
+                                if (isHelped) {
+                                    setTextFill(Color.GREEN);
+                                } else {
+                                    setTextFill(Color.RED);
+                                }
+                            }
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
     }
 }
