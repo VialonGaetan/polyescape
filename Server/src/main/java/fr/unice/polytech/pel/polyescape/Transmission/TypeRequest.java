@@ -8,7 +8,7 @@ public enum TypeRequest {
     GET_PARTIES,
     GET_ENIGME,
     GET_ESCAPE,
-    JOIN_PARTIE,
+    JOIN_TEAM,
     GET_SALONS,
     READY,
     RESPONSE,

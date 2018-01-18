@@ -13,13 +13,9 @@ export class EscapeScreenPage {
   private webSocket:WebSocket;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-
-    this.webSocket = new WebSocket("ws://localhost:15555/websockets/gameserver");
-    var webs = this.webSocket;
-    this.webSocket.onopen = function (ev) {
-      var request = {request: "GET_ESCAPE"};
-      webs.send(JSON.stringify(request));
-    };
+    this.webSocket = this.navParams.get("websocket");
+    var request = {request: "GET_ESCAPE"};
+    this.webSocket.send(JSON.stringify(request));
 
     this.webSocket.onmessage = function(event) {
       var jsonData = JSON.parse(event.data);
