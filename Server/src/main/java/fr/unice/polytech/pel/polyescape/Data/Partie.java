@@ -20,6 +20,7 @@ public class Partie implements Serialize {
         this.escapeGame = escapeGame;
         this.time = escapeGame.getTime();
         equipe = new Equipe("",joueur);
+        startTheGame();
     }
 
     public Partie(EscapeGame escapeGame, Joueur joueur, String teamName) {

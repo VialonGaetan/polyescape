@@ -16,17 +16,21 @@ public class Equipe implements Serialize{
         this.name = name;
         readyToStart = new HashMap<>();
         association = new HashMap<>();
+        readyToStart.put(joueurs,false);
     }
 
 
     void attributeEnigme(EscapeGame escapeGame){
+        for (Joueur joueur: readyToStart.keySet()) {
+            association.put(joueur, new ArrayList<>());
+        }
         for (Enigme enigme : escapeGame.getEnigmes()) {
-            association.get(getRandomJoueur(association.keySet())).add(new Enigme(enigme.getName(),enigme.getDescription(),enigme.getReponse()));
+            association.get(getRandomJoueur()).add(new Enigme(enigme.getName(),enigme.getDescription(),enigme.getReponse()));
         }
     }
 
-    private Joueur getRandomJoueur(Set<Joueur> joueurs) {
-        return joueurs.stream().findFirst().get();
+    private Joueur getRandomJoueur() {
+        return association.keySet().stream().findFirst().get();
     }
 
     public List<Enigme> getEnigmesOfaPlayer(Joueur joueur){

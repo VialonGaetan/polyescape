@@ -1,6 +1,5 @@
 package fr.unice.polytech.pel.polyescape.Transmission.requests;
 
-import fr.unice.polytech.pel.polyescape.Data.TypePartie;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
 import fr.unice.polytech.pel.polyescape.Transmission.InvalidJsonRequest;
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
@@ -32,7 +31,7 @@ public class CreatePartieRequestTest {
         request = new JSONObject().put(JsonArguments.REQUEST.toString(), TypeRequest.CREATE_PARTIE)
                 .put(JsonArguments.USERNAME.toString(),name)
                 .put(JsonArguments.ESCAPEGAME.toString(),gestionnaire.getEscapeGamesDisponible().get(0).getName())
-                .put(JsonArguments.TYPE.toString(), TypePartie.SOLO)
+                .put(JsonArguments.TEAMNAME.toString(),"")
                 .toString();
         session = null;
 
@@ -49,8 +48,9 @@ public class CreatePartieRequestTest {
     @Test
     public void createNewGame(){
         System.out.println(request);
+        int lol = gestionnaire.getPartieEnCours().values().size();
         createPartieRequest = new CreatePartieRequest(request,session);
-        assertEquals(1,gestionnaire.getPartieEnCours().values().size());
+        assertEquals(lol +1 ,gestionnaire.getPartieEnCours().values().size());
         System.out.println(createPartieRequest.getAnswer());
     }
 }

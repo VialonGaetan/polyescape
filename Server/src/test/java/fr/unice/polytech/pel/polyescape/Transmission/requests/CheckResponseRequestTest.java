@@ -40,7 +40,7 @@ public class CheckResponseRequestTest {
         enigmes.add(new Enigme("3","3","3"));
         escapeGame = new EscapeGame("1",enigmes,50);
         joueur = new Joueur(name,session);
-        partie = new Partie(escapeGame,joueur,TypePartie.SOLO);
+        partie = new Partie(escapeGame,joueur);
         idPArtie = gestionnaire.createNewPartie(partie);
 
     }

@@ -17,7 +17,6 @@ public class PartieEnCoursListRequest implements Request {
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public PartieEnCoursListRequest() {
-
     }
 
     @Override

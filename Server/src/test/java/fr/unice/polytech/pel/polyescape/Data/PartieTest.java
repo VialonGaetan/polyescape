@@ -31,7 +31,7 @@ public class PartieTest {
        joueur = new Joueur("Loic",null);
 
        escapeGame = new EscapeGame("titi",enigmes,50);
-       partie = new Partie(escapeGame,joueur,TypePartie.SOLO);
+       partie = new Partie(escapeGame,joueur);
 
     }
 

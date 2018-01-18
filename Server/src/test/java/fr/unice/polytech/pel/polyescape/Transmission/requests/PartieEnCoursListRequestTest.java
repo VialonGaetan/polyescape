@@ -2,7 +2,6 @@ package fr.unice.polytech.pel.polyescape.Transmission.requests;
 
 import fr.unice.polytech.pel.polyescape.Data.Joueur;
 import fr.unice.polytech.pel.polyescape.Data.Partie;
-import fr.unice.polytech.pel.polyescape.Data.TypePartie;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
 
 /**
@@ -14,7 +13,7 @@ public class PartieEnCoursListRequestTest {
     public void setUp(){
         PartieEnCoursListRequest partieEnCoursListRequest = new PartieEnCoursListRequest();
         System.out.println(partieEnCoursListRequest.getAnswer());
-        Gestionnaire.getInstance().createNewPartie(new Partie(Gestionnaire.getInstance().getEscapeGamesDisponible().get(0),new Joueur("lol",null), TypePartie.SOLO));
+        Gestionnaire.getInstance().createNewPartie(new Partie(Gestionnaire.getInstance().getEscapeGamesDisponible().get(0),new Joueur("lol",null)));
         System.out.println(Gestionnaire.getInstance().getPartieEnCours().values().size());
         for (Partie partie: Gestionnaire.getInstance().getPartieEnCours().values()) {
             System.out.println(partie.hasStart());

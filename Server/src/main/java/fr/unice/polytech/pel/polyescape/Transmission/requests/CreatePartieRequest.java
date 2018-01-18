@@ -3,7 +3,6 @@ package fr.unice.polytech.pel.polyescape.Transmission.requests;
 import fr.unice.polytech.pel.polyescape.Data.EscapeGame;
 import fr.unice.polytech.pel.polyescape.Data.Joueur;
 import fr.unice.polytech.pel.polyescape.Data.Partie;
-import fr.unice.polytech.pel.polyescape.Data.TypePartie;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
 import fr.unice.polytech.pel.polyescape.Transmission.InvalidJsonRequest;
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
