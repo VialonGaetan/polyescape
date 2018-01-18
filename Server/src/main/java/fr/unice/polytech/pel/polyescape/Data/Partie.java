@@ -30,8 +30,7 @@ public class Partie implements Serialize {
         attributeEnigme();
     }
 
-    protected void attributeEnigme() {
-    }
+    protected void attributeEnigme() {}
 
     public boolean hasStart() {
         return hasStart;
@@ -53,8 +52,7 @@ public class Partie implements Serialize {
         return false;
     }
 
-    public void setJoueurReadyOrNot(Joueur joueur, Boolean ready){
-    }
+    public void setJoueurReadyOrNot(Joueur joueur, Boolean ready) {}
 
     public String getEscapeGameName(){
         return escapeGame.getName();
@@ -74,10 +72,9 @@ public class Partie implements Serialize {
 
     @Override
     public JSONObject toJson() {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put(JsonArguments.ESCAPEGAME.toString(),escapeGame.getName());
-        jsonObject.put(JsonArguments.TEMPS.toString(),getTime());
-        jsonObject.put(JsonArguments.EQUIPE.toString(),"");
-        return jsonObject;
+        return new JSONObject()
+                .put(JsonArguments.ESCAPEGAME.toString(),escapeGame.getName())
+                .put(JsonArguments.TEMPS.toString(),getTime())
+                .put(JsonArguments.EQUIPE.toString(),"");
     }
 }

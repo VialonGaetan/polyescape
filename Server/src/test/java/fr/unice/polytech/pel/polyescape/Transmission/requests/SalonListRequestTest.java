@@ -3,6 +3,7 @@ package fr.unice.polytech.pel.polyescape.Transmission.requests;
 import fr.unice.polytech.pel.polyescape.Data.Joueur;
 import fr.unice.polytech.pel.polyescape.Data.PartieEnEquipe;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
+import org.junit.Test;
 
 import static org.junit.Assert.*;
 

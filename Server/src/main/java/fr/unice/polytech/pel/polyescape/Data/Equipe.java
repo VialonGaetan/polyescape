@@ -9,77 +9,67 @@ import java.util.*;
 public class Equipe implements Serialize{
 
     private String name;
-    private Map<Joueur, List<Enigme>> association;
-    private Map<Joueur, Boolean> readyToStart;
+    private Map<Joueur, Boolean> joueurs;
 
-    public Equipe(String name, Joueur joueurs){
+    public Equipe(String name, Joueur joueur){
+        this.joueurs = new HashMap<>();
+        this.joueurs.put(joueur,false);
         this.name = name;
-        readyToStart = new HashMap<>();
-        association = new HashMap<>();
-        readyToStart.put(joueurs,false);
     }
 
 
-    void attributeEnigme(EscapeGame escapeGame){
-        for (Joueur joueur: readyToStart.keySet()) {
-            association.put(joueur, new ArrayList<>());
-        }
-        for (Enigme enigme : escapeGame.getEnigmes()) {
-            association.get(getRandomJoueur()).add(new Enigme(enigme.getName(),enigme.getDescription(),enigme.getReponse()));
-        }
-    }
 
     public int numberOfPlayer(){
-        return readyToStart.keySet().size();
+        return joueurs.size();
     }
 
-    private Joueur getRandomJoueur() {
-        return association.keySet().stream().findFirst().get();
+    public Joueur getRandomJoueur() {
+        return joueurs.keySet().stream().findAny().get();
     }
 
-    public List<Enigme> getEnigmesOfaPlayer(Joueur joueur){
-        return association.get(joueur);
-    }
 
-    public Optional<Enigme> getCurrentEnigmesOfaPlayer(Joueur joueur){
-        return association.get(joueur).stream().filter(enigme -> !enigme.isResolve()).findFirst();
-    }
-
-    public boolean joinPartie(Joueur joueur){
-        if (readyToStart.keySet().size()>=4)
+    public boolean joinTeam(Joueur joueur){
+        if (joueurs.size()>=4)
             return false;
-        else {
-            readyToStart.put(joueur,false);
-            return true;
-        }
+        joueurs.put(joueur,false);
+        return true;
     }
 
     public String getName(){
         return name;
     }
 
-    public boolean setJoueurReadyOrNot(Joueur joueur, Boolean ready){
-        readyToStart.replace(joueur,ready);
-        return readyToStart.values().stream().allMatch(aBoolean -> aBoolean);
+
+    public void actualizeSalon(){
+        String message = messageToActualizeSalonInJson().toString();
+        for (Joueur joueur : joueurs.keySet()) {
+            joueur.sendMessageToPlayer(message);
+        }
     }
 
+    private JSONObject messageToActualizeSalonInJson(){
+        JSONArray jsonArray = new JSONArray();
+        for (Joueur joueur : joueurs.keySet()) {
+            jsonArray.put(joueur.toJson().put(JsonArguments.READY.toString(),joueurs.get(joueur)));
+        }
+        return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.ACTUALISE.toString())
+                .put(JsonArguments.JOUEURS.toString(),jsonArray);
+    }
+
+    public Collection<Joueur> getJoueurs(){
+        return joueurs.keySet();
+    }
+
+    public boolean setJoueurReadyOrNot(Joueur joueur, Boolean ready) {
+        joueurs.replace(joueur, ready);
+        actualizeSalon();
+        return !joueurs.values().stream().filter(aBoolean -> !aBoolean).findAny().isPresent();
+    }
 
     @Override
     public JSONObject toJson() {
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put(JsonArguments.NOM.toString(),this.name);
-        JSONArray jsonArray = new JSONArray();
-        for (Joueur joueur: association.keySet()) {
-            JSONArray jsonArrayEnigme = new JSONArray();
-            jsonArray.put(joueur.toJson());
-            for (Enigme enigme : association.get(joueur)) {
-                jsonArrayEnigme.put(enigme.toJson());
-            }
-            jsonArray.put(jsonArrayEnigme);
-        }
-        jsonObject.put(JsonArguments.JOUEURS.toString(),jsonArray);
-        return jsonObject;
+        return new JSONObject().put(JsonArguments.NOM.toString(),this.name);
     }
 
 }

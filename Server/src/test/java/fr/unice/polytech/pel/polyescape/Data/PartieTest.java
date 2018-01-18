@@ -77,6 +77,9 @@ public class PartieTest {
         assertFalse(partieTeam.hasStart());
         partieTeam.setJoueurReadyOrNot(joueur,true);
         assertTrue(partieTeam.hasStart());
+        int nbEnigmes = 0;
+        nbEnigmes = partieTeam.getEnigmesOfaPlayer(joueur).size() + partieTeam.getEnigmesOfaPlayer(secondJoueur).size();
+        assertEquals(escapeGame.getEnigmes().size(),nbEnigmes);
     }
 
 }

@@ -26,18 +26,8 @@ public class Joueur implements Serialize {
 
     public void sendMessageToPlayer(String message) {
         try {
-            session.getBasicRemote().sendText(message);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void sendEnigmeToPlayer(Enigme enigme) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put(JsonArguments.NOM.toString(),enigme.getName())
-                .put(JsonArguments.INFOS.toString(),enigme.getDescription());
-        try {
-            session.getBasicRemote().sendText(jsonObject.toString());
+            if (session != null)
+                session.getBasicRemote().sendText(message);
         } catch (IOException e) {
             e.printStackTrace();
         }

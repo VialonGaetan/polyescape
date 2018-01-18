@@ -24,7 +24,9 @@ public enum  JsonArguments {
     PARTIEENCOURS("partieencours"),
     PARTIEATTENTE("partieattente"),
     IDPARTIE("idpartie"),
-    ISRESOLVE("isresolve");
+    ISRESOLVE("isresolve"),
+    ACTUALISE("actualise"),
+    READY("ready");
 
 
     /**
