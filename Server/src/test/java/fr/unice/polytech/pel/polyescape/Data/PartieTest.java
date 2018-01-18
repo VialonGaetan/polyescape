@@ -18,6 +18,7 @@ public class PartieTest {
 
     private Joueur joueur;
     private Joueur secondJoueur;
+    private GameMaster maitreDuJeu;
     private List<Enigme> enigmes;
     private EscapeGame escapeGame;
     private Partie partieSolo;
@@ -33,10 +34,11 @@ public class PartieTest {
 
        joueur = new Joueur("Loic",null);
        secondJoueur = new Joueur("GuiGui",null);
+        maitreDuJeu = new GameMaster(null);
 
        escapeGame = new EscapeGame("titi",enigmes,50);
-       partieSolo = new Partie(escapeGame,joueur,TypePartie.SOLO);
-       partieTeam = new Partie(escapeGame,joueur,TypePartie.TEAM);
+        partieSolo = new Partie(escapeGame, joueur, maitreDuJeu, TypePartie.SOLO);
+        partieTeam = new Partie(escapeGame, joueur, maitreDuJeu, TypePartie.TEAM);
 
     }
 
@@ -66,7 +68,7 @@ public class PartieTest {
 
 
     @Test
-    public void initialisationTeam(){
+    public void initialisationTeam() {
         assertFalse(partieTeam.hasStart());
         partieTeam.joinPartie(secondJoueur);
         assertFalse(partieTeam.hasStart());

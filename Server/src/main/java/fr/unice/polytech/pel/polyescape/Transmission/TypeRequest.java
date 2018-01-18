@@ -13,6 +13,8 @@ public enum TypeRequest {
     RESPONSE,
     CREATE_PARTIE,
     CREATE_ENIGME,
-    CREATE_ESCAPE;
+    HELP,
+    CREATE_ESCAPE,
+    HELP_RESPONSE;
 
 }

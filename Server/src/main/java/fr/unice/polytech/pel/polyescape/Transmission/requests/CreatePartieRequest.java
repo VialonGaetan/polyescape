@@ -1,9 +1,6 @@
 package fr.unice.polytech.pel.polyescape.Transmission.requests;
 
-import fr.unice.polytech.pel.polyescape.Data.EscapeGame;
-import fr.unice.polytech.pel.polyescape.Data.Joueur;
-import fr.unice.polytech.pel.polyescape.Data.Partie;
-import fr.unice.polytech.pel.polyescape.Data.TypePartie;
+import fr.unice.polytech.pel.polyescape.Data.*;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
 import fr.unice.polytech.pel.polyescape.Transmission.InvalidJsonRequest;
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
@@ -21,14 +18,13 @@ public class CreatePartieRequest implements Request {
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
     private Gestionnaire gestionnaire = Gestionnaire.getInstance();
-    private int id=0;
-    private Session session;
+    private int id = 0;
     private TypePartie typePartie;
     private Joueur joueur;
+    private GameMaster gameMaster;
 
     public CreatePartieRequest(String message, Session session) {
         logger.info("Creation d'une nouvelle partie");
-        System.out.println(message);
         id = decodeCreatePartie(message, session);
     }
 
@@ -39,9 +35,11 @@ public class CreatePartieRequest implements Request {
             EscapeGame escapeGame = gestionnaire.getEscapeGame(decode.getString(JsonArguments.ESCAPEGAME.toString()));
             typePartie = TypePartie.valueOf(decode.getString(JsonArguments.TYPE.toString()));
             joueur = new Joueur(decode.getString(JsonArguments.USERNAME.toString()), session);
+
             if (escapeGame != null)
                 return gestionnaire.createNewPartie(new Partie(escapeGame,
                         joueur,
+                        gameMaster,
                         typePartie));
             return 0;
         } catch (Exception e) {

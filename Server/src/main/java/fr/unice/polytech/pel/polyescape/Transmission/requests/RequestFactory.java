@@ -16,7 +16,7 @@ public class RequestFactory {
     public Request createTypeRequest(String message, Session session) {
         switch (TypeRequest.valueOf(new JSONObject(message).getString(JsonArguments.REQUEST.toString()))) {
             case GET_PARTIES:
-                return new PartieEnCoursListRequest();
+                return new PartieEnCoursListRequest(session);
             case GET_ENIGME:
                 return new EnigmeDispoRequest();
             case GET_ESCAPE:
@@ -29,6 +29,9 @@ public class RequestFactory {
                 return new CreateEscapeRequest();
             case RESPONSE:
                 return new CheckResponseRequest(message, session);
+            case HELP:
+                return new HelpRequest(message, session);
+
             default:
                 return new InvalidJsonRequest("InvalidElementRequest");
         }

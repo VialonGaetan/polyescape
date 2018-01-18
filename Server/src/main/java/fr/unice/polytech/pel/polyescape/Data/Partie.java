@@ -15,13 +15,15 @@ public class Partie implements Serialize {
     private EscapeGame escapeGame;
     private Map<Joueur, List<Enigme>> association;
     private Map<Joueur, Boolean> readyToStart;
+    private GameMaster gameMaster;
     private int time;
     private int id;
     private boolean hasStart=false;
 
-    public Partie(EscapeGame escapeGame, Joueur joueur, TypePartie typePartie) {
+    public Partie(EscapeGame escapeGame, Joueur joueur, GameMaster gameMaster, TypePartie typePartie) {
         this.escapeGame = escapeGame;
         this.time = escapeGame.getTime();
+        this.gameMaster = gameMaster;
         readyToStart = new HashMap<>();
         association = new HashMap<>();
         if (typePartie.equals(TypePartie.SOLO)){
@@ -84,6 +86,7 @@ public class Partie implements Serialize {
         return time;
     }
 
+
     @Override
     public JSONObject toJson() {
         JSONArray jsonArray = new JSONArray();
@@ -99,4 +102,6 @@ public class Partie implements Serialize {
                     .put(JsonArguments.JOUEURS.toString(),jsonArray)
                     .put(JsonArguments.ESCAPEGAME.toString(),escapeGame.getName());
     }
+
+
 }

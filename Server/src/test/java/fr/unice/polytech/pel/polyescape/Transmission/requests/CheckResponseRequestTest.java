@@ -26,6 +26,7 @@ public class CheckResponseRequestTest {
     private Partie partie;
     private EscapeGame escapeGame;
     private Joueur joueur;
+    private GameMaster maitreDuJeu;
     private int idPArtie;
     private CheckResponseRequest checkResponseRequest;
     private final String name = "Jean";
@@ -40,49 +41,49 @@ public class CheckResponseRequestTest {
         enigmes.add(new Enigme("3","3","3"));
         escapeGame = new EscapeGame("1",enigmes,50);
         joueur = new Joueur(name,session);
-        partie = new Partie(escapeGame,joueur,TypePartie.SOLO);
+        partie = new Partie(escapeGame, joueur, maitreDuJeu, TypePartie.SOLO);
         idPArtie = gestionnaire.createNewPartie(partie);
 
     }
 
     @Test
     public void testMauvaiseReponse(){
-        request = new JSONObject().put(JsonArguments.REQUEST.toString(),TypeRequest.RESPONSE)
-                .put(JsonArguments.USERNAME.toString(),name)
-                .put(JsonArguments.IDPARTIE.toString(),idPArtie)
-                .put(JsonArguments.REPONSE.toString(),"mauvaise Reponse").toString();
+        request = new JSONObject().put(JsonArguments.REQUEST.toString(), TypeRequest.RESPONSE)
+                .put(JsonArguments.USERNAME.toString(), name)
+                .put(JsonArguments.IDPARTIE.toString(), idPArtie)
+                .put(JsonArguments.REPONSE.toString(), "mauvaise Reponse").toString();
         checkResponseRequest = new CheckResponseRequest(request,session);
         assertEquals(getReponse(checkResponseRequest.answerInJson()),JsonArguments.KO.toString());
     }
 
     @Test
     public void testBonneReponse(){
-        request = new JSONObject().put(JsonArguments.REQUEST.toString(),TypeRequest.RESPONSE)
-                .put(JsonArguments.USERNAME.toString(),name)
-                .put(JsonArguments.IDPARTIE.toString(),idPArtie)
-                .put(JsonArguments.REPONSE.toString(),"1").toString();
+        request = new JSONObject().put(JsonArguments.REQUEST.toString(), TypeRequest.RESPONSE)
+                .put(JsonArguments.USERNAME.toString(), name)
+                .put(JsonArguments.IDPARTIE.toString(), idPArtie)
+                .put(JsonArguments.REPONSE.toString(), "1").toString();
         checkResponseRequest = new CheckResponseRequest(request,session);
         assertEquals(getReponse(checkResponseRequest.answerInJson()),JsonArguments.OK.toString());
     }
 
     @Test
     public void testFinDuJeu(){
-        request = new JSONObject().put(JsonArguments.REQUEST.toString(),TypeRequest.RESPONSE)
-                .put(JsonArguments.USERNAME.toString(),name)
-                .put(JsonArguments.IDPARTIE.toString(),idPArtie)
-                .put(JsonArguments.REPONSE.toString(),"1").toString();
+        request = new JSONObject().put(JsonArguments.REQUEST.toString(), TypeRequest.RESPONSE)
+                .put(JsonArguments.USERNAME.toString(), name)
+                .put(JsonArguments.IDPARTIE.toString(), idPArtie)
+                .put(JsonArguments.REPONSE.toString(), "1").toString();
         checkResponseRequest = new CheckResponseRequest(request,session);
         assertEquals(getReponse(checkResponseRequest.answerInJson()),JsonArguments.OK.toString());
-        request = new JSONObject().put(JsonArguments.REQUEST.toString(),TypeRequest.RESPONSE)
-                .put(JsonArguments.USERNAME.toString(),name)
-                .put(JsonArguments.IDPARTIE.toString(),idPArtie)
-                .put(JsonArguments.REPONSE.toString(),"2").toString();
+        request = new JSONObject().put(JsonArguments.REQUEST.toString(), TypeRequest.RESPONSE)
+                .put(JsonArguments.USERNAME.toString(), name)
+                .put(JsonArguments.IDPARTIE.toString(), idPArtie)
+                .put(JsonArguments.REPONSE.toString(), "2").toString();
         checkResponseRequest = new CheckResponseRequest(request,session);
-        assertEquals(getReponse(checkResponseRequest.answerInJson()),JsonArguments.OK.toString());
-        request = new JSONObject().put(JsonArguments.REQUEST.toString(),TypeRequest.RESPONSE)
-                .put(JsonArguments.USERNAME.toString(),name)
-                .put(JsonArguments.IDPARTIE.toString(),idPArtie)
-                .put(JsonArguments.REPONSE.toString(),"3").toString();
+        assertEquals(getReponse(checkResponseRequest.answerInJson()), JsonArguments.OK.toString());
+        request = new JSONObject().put(JsonArguments.REQUEST.toString(), TypeRequest.RESPONSE)
+                .put(JsonArguments.USERNAME.toString(), name)
+                .put(JsonArguments.IDPARTIE.toString(), idPArtie)
+                .put(JsonArguments.REPONSE.toString(), "3").toString();
         checkResponseRequest = new CheckResponseRequest(request,session);
         assertEquals(getReponse(checkResponseRequest.answerInJson()),JsonArguments.FINISH.toString());
     }
