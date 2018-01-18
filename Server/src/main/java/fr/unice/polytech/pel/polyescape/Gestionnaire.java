@@ -1,8 +1,6 @@
 package fr.unice.polytech.pel.polyescape;
 
-import fr.unice.polytech.pel.polyescape.Data.Enigme;
-import fr.unice.polytech.pel.polyescape.Data.EscapeGame;
-import fr.unice.polytech.pel.polyescape.Data.Partie;
+import fr.unice.polytech.pel.polyescape.Data.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +17,7 @@ public class Gestionnaire {
     private final Map<String,EscapeGame> escapeGamesDisponible;
     private final Map<String,Enigme> enigmeDisponible;
     private final Map<Integer,Partie> parties;
+    private Partie partie;
     private int id = 0;
 
 
@@ -38,6 +37,8 @@ public class Gestionnaire {
         escapeGamesDisponible.put("Que des numeros 10 dans ma team",new EscapeGame("Que des numeros 10 dans ma team", enigmeDisponible.values().stream().collect(Collectors.toList()).subList(0,2),60));
         escapeGamesDisponible.put("Sherlock",new EscapeGame("Sherlock", enigmeDisponible.values().stream().collect(Collectors.toList()), 60));
         escapeGamesDisponible.put("EscapAtor",new EscapeGame("EscapAtor", enigmeDisponible.values().stream().collect(Collectors.toList()).subList(1,4), 60));
+        partie = new PartieEnEquipe(new EscapeGame("EscapAtor", enigmeDisponible.values().stream().collect(Collectors.toList()).subList(1,4), 60),new Joueur("Paul",null),"LES BG");
+        createNewPartie(partie);
     }
 
 
