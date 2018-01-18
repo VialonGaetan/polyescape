@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import javax.websocket.Session;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * @author Gaetan Vialon
  * Created the 15/01/2018.
@@ -48,8 +50,7 @@ public class CreatePartieRequestTest {
     public void createNewGame(){
         System.out.println(request);
         createPartieRequest = new CreatePartieRequest(request,session);
-//        assertEquals(1,gestionnaire.getPartieEnCours().values().size());
+        assertEquals(1,gestionnaire.getPartieEnCours().values().size());
         System.out.println(createPartieRequest.getAnswer());
-        //assertEquals(new Partie(gestionnaire.getEscapeGamesDisponible().get(0),new Joueur(name,null)),gestionnaire.getPartieByID(1));
     }
 }

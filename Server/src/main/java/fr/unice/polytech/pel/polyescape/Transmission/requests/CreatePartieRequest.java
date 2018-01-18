@@ -22,7 +22,6 @@ public class CreatePartieRequest implements Request {
 
     private Gestionnaire gestionnaire = Gestionnaire.getInstance();
     private int id;
-    private Session session;
     private TypePartie typePartie;
     private Joueur joueur;
 
