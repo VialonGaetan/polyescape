@@ -14,8 +14,8 @@ public class PartieEnCoursListRequestTest {
         PartieEnCoursListRequest partieEnCoursListRequest = new PartieEnCoursListRequest();
         System.out.println(partieEnCoursListRequest.getAnswer());
         Gestionnaire.getInstance().createNewPartie(new Partie(Gestionnaire.getInstance().getEscapeGamesDisponible().get(0),new Joueur("lol",null)));
-        System.out.println(Gestionnaire.getInstance().getPartieEnCours().size());
-        for (Partie partie: Gestionnaire.getInstance().getPartieEnCours().values()) {
+        System.out.println(Gestionnaire.getInstance().getParties().size());
+        for (Partie partie: Gestionnaire.getInstance().getParties().values()) {
             System.out.println(partie.hasStart());
         }
         System.out.println(partieEnCoursListRequest.getAnswer());

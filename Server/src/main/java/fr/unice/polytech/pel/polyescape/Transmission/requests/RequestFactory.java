@@ -29,6 +29,8 @@ public class RequestFactory {
                 return new CreateEscapeRequest();
             case RESPONSE:
                 return new CheckResponseRequest(message, session);
+            case GET_SALONS:
+                return new SalonListRequest();
             default:
                 return new InvalidJsonRequest("InvalidElementRequest");
         }

@@ -20,6 +20,7 @@ public class RequestFactoryTest {
     private String getEscapeGameRequest;
     private String getEnigmeRequest;
     private String getPartieEnCoursRequest;
+    private String getSalonsRequest;
     private RequestFactory requestFactory;
 
     @Before
@@ -32,6 +33,7 @@ public class RequestFactoryTest {
         getEscapeGameRequest = new JSONObject().put(JsonArguments.REQUEST.toString(),TypeRequest.GET_ESCAPE).toString();
         checkReponseRequest = new JSONObject().put(JsonArguments.REQUEST.toString(),TypeRequest.RESPONSE).toString();
         getPartieEnCoursRequest = new JSONObject().put(JsonArguments.REQUEST.toString(),TypeRequest.GET_PARTIES).toString();
+        getSalonsRequest = new JSONObject().put(JsonArguments.REQUEST.toString(),TypeRequest.GET_SALONS).toString();
 
     }
 
@@ -41,7 +43,7 @@ public class RequestFactoryTest {
         assertTrue(requestFactory.createTypeRequest(getEnigmeRequest,null) instanceof EnigmeDispoRequest );
         assertTrue(requestFactory.createTypeRequest(getEscapeGameRequest,null) instanceof EscapeGameDispoListRequest );
         assertTrue(requestFactory.createTypeRequest(getPartieEnCoursRequest,null) instanceof PartieEnCoursListRequest );
-
+        assertTrue(requestFactory.createTypeRequest(getSalonsRequest,null) instanceof SalonListRequest );
 
 
     }

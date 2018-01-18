@@ -25,7 +25,7 @@ public class Partie implements Serialize {
         startTheGame();
     }
 
-    private void startTheGame(){
+    protected void startTheGame(){
         hasStart = true;
         attributeEnigme();
     }
@@ -44,7 +44,16 @@ public class Partie implements Serialize {
     }
 
     public Optional<Enigme> getCurrentEnigmesOfaPlayer(Joueur joueur){
-        return escapeGame.getEnigmes().stream().filter(enigme -> enigme.isResolve()==false).findFirst();
+        if (this.joueur.equals(joueur))
+            return escapeGame.getEnigmes().stream().filter(enigme -> !enigme.isResolve()).findFirst();
+        else return Optional.empty();
+    }
+
+    public boolean joinPartie(Joueur joueur){
+        return false;
+    }
+
+    public void setJoueurReadyOrNot(Joueur joueur, Boolean ready){
     }
 
     public String getEscapeGameName(){
@@ -59,8 +68,8 @@ public class Partie implements Serialize {
         return 1;
     }
 
-    public boolean joinPartie(Joueur joueur){
-        return false;
+    public String getTeamName(){
+        return "";
     }
 
     @Override

@@ -23,12 +23,13 @@ public class PartieEnEquipe extends Partie implements Serialize {
     }
 
     @Override
-    public boolean joinPartie(Joueur joueur){
-        if (hasStart)
-            return false;
-        else {
-            return equipe.joinPartie(joueur);
-        }
+    public boolean joinPartie(Joueur joueur) {
+        return !hasStart && equipe.joinPartie(joueur);
+    }
+
+    @Override
+    public String getTeamName(){
+        return equipe.getName();
     }
 
     @Override
@@ -39,5 +40,11 @@ public class PartieEnEquipe extends Partie implements Serialize {
     @Override
     public List<Enigme> getEnigmesOfaPlayer(Joueur joueur){
         return equipe.getEnigmesOfaPlayer(joueur);
+    }
+
+    @Override
+    public void setJoueurReadyOrNot(Joueur joueur, Boolean ready){
+        if (equipe.setJoueurReadyOrNot(joueur,ready))
+            startTheGame();
     }
 }

@@ -35,8 +35,8 @@ public class PartieTest {
        secondJoueur = new Joueur("GuiGui",null);
 
        escapeGame = new EscapeGame("titi",enigmes,50);
-       partieSolo = new Partie(escapeGame,joueur,TypePartie.SOLO);
-       partieTeam = new Partie(escapeGame,joueur,TypePartie.TEAM);
+       partieSolo = new Partie(escapeGame,joueur);
+       partieTeam = new PartieEnEquipe(escapeGame,joueur,"Grosse team");
 
     }
 

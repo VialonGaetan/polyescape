@@ -39,7 +39,7 @@ public class CreatePartieRequestTest {
         requestTeam = new JSONObject().put(JsonArguments.REQUEST.toString(), TypeRequest.CREATE_PARTIE)
                 .put(JsonArguments.USERNAME.toString(),name)
                 .put(JsonArguments.ESCAPEGAME.toString(),gestionnaire.getEscapeGamesDisponible().get(0).getName())
-                .put(JsonArguments.TYPE.toString(), TypePartie.TEAM)
+                .put(JsonArguments.TEAMNAME.toString(), "Grosse Team")
                 .toString();
         session = null;
 

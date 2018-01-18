@@ -42,7 +42,7 @@ public class Equipe implements Serialize{
     }
 
     public Optional<Enigme> getCurrentEnigmesOfaPlayer(Joueur joueur){
-        return association.get(joueur).stream().filter(enigme -> enigme.isResolve()==false).findFirst();
+        return association.get(joueur).stream().filter(enigme -> !enigme.isResolve()).findFirst();
     }
 
     public boolean joinPartie(Joueur joueur){
@@ -56,6 +56,11 @@ public class Equipe implements Serialize{
 
     public String getName(){
         return name;
+    }
+
+    public boolean setJoueurReadyOrNot(Joueur joueur, Boolean ready){
+        readyToStart.replace(joueur,ready);
+        return readyToStart.values().stream().allMatch(aBoolean -> aBoolean);
     }
 
 
