@@ -48,7 +48,7 @@ public class CreatePartieRequestTest {
     @Test
     public void createNewGame(){
         System.out.println(request);
-        int lol = gestionnaire.getPartieEnCours().values().size();
+        int lol = gestionnaire.getPartieEnCours().size();
         createPartieRequest = new CreatePartieRequest(request,session);
         assertEquals(lol +1 ,gestionnaire.getPartieEnCours().values().size());
         System.out.println(createPartieRequest.getAnswer());

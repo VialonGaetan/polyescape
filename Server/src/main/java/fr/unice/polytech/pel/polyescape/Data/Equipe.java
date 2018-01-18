@@ -29,6 +29,10 @@ public class Equipe implements Serialize{
         }
     }
 
+    public int numberOfPlayer(){
+        return readyToStart.keySet().size();
+    }
+
     private Joueur getRandomJoueur() {
         return association.keySet().stream().findFirst().get();
     }
@@ -41,7 +45,7 @@ public class Equipe implements Serialize{
         return association.get(joueur).stream().filter(enigme -> enigme.isResolve()==false).findFirst();
     }
 
-    boolean joinPartie(Joueur joueur){
+    public boolean joinPartie(Joueur joueur){
         if (readyToStart.keySet().size()>=4)
             return false;
         else {
@@ -49,6 +53,11 @@ public class Equipe implements Serialize{
             return true;
         }
     }
+
+    public String getName(){
+        return name;
+    }
+
 
     @Override
     public JSONObject toJson() {

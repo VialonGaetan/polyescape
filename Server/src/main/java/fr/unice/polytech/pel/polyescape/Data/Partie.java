@@ -11,22 +11,18 @@ import java.util.*;
  */
 public class Partie implements Serialize {
 
-    private EscapeGame escapeGame;
-    private Equipe equipe;
-    private int time;
-    private boolean hasStart=false;
+    protected EscapeGame escapeGame;
+    protected int time;
+    protected boolean hasStart=false;
+    private Joueur joueur;
+
+    protected Partie(){}
 
     public Partie(EscapeGame escapeGame, Joueur joueur) {
         this.escapeGame = escapeGame;
         this.time = escapeGame.getTime();
-        equipe = new Equipe("",joueur);
+        this.joueur = joueur;
         startTheGame();
-    }
-
-    public Partie(EscapeGame escapeGame, Joueur joueur, String teamName) {
-        this.equipe = new Equipe(teamName,joueur);
-        this.escapeGame = escapeGame;
-        this.time = escapeGame.getTime();
     }
 
     private void startTheGame(){
@@ -34,8 +30,7 @@ public class Partie implements Serialize {
         attributeEnigme();
     }
 
-    private void attributeEnigme() {
-        equipe.attributeEnigme(escapeGame);
+    protected void attributeEnigme() {
     }
 
     public boolean hasStart() {
@@ -43,23 +38,29 @@ public class Partie implements Serialize {
     }
 
     public List<Enigme> getEnigmesOfaPlayer(Joueur joueur){
-        return equipe.getEnigmesOfaPlayer(joueur);
+        if (this.joueur.equals(joueur))
+            return escapeGame.getEnigmes();
+        return new ArrayList<>();
     }
 
     public Optional<Enigme> getCurrentEnigmesOfaPlayer(Joueur joueur){
-        return equipe.getCurrentEnigmesOfaPlayer(joueur);
+        return escapeGame.getEnigmes().stream().filter(enigme -> enigme.isResolve()==false).findFirst();
+    }
+
+    public String getEscapeGameName(){
+        return escapeGame.getName();
     }
 
     public int getTime() {
         return time;
     }
 
+    public int numberOfPlayer(){
+        return 1;
+    }
+
     public boolean joinPartie(Joueur joueur){
-        if (hasStart)
-            return false;
-        else {
-            return equipe.joinPartie(joueur);
-        }
+        return false;
     }
 
     @Override
@@ -67,7 +68,7 @@ public class Partie implements Serialize {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put(JsonArguments.ESCAPEGAME.toString(),escapeGame.getName());
         jsonObject.put(JsonArguments.TEMPS.toString(),getTime());
-        jsonObject.put(JsonArguments.EQUIPE.toString(),equipe.toJson());
+        jsonObject.put(JsonArguments.EQUIPE.toString(),"");
         return jsonObject;
     }
 }

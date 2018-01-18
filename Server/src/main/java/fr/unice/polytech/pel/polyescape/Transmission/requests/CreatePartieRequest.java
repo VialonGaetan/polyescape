@@ -3,6 +3,7 @@ package fr.unice.polytech.pel.polyescape.Transmission.requests;
 import fr.unice.polytech.pel.polyescape.Data.EscapeGame;
 import fr.unice.polytech.pel.polyescape.Data.Joueur;
 import fr.unice.polytech.pel.polyescape.Data.Partie;
+import fr.unice.polytech.pel.polyescape.Data.PartieEnEquipe;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
 import fr.unice.polytech.pel.polyescape.Transmission.InvalidJsonRequest;
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
@@ -42,7 +43,7 @@ public class CreatePartieRequest implements Request {
                     return gestionnaire.createNewPartie(new Partie(escapeGame,joueur));
 
                 else
-                    return gestionnaire.createNewPartie(new Partie(escapeGame,joueur,teamName));
+                    return gestionnaire.createNewPartie(new PartieEnEquipe(escapeGame,joueur,teamName));
             }
 
             return 0;

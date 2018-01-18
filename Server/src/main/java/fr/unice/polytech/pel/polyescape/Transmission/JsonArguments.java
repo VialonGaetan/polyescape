@@ -24,6 +24,7 @@ public enum  JsonArguments {
     SCORE("score"),
     JOUEURS("joueurs"),
     PARTIEENCOURS("partieencours"),
+    PARTIEATTENTE("partieattente"),
     IDPARTIE("idpartie"),
     ISRESOLVE("isresolve");
 
