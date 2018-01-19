@@ -16,6 +16,7 @@ export class TeamScreenPage {
   private webSocket:WebSocket;
   private vars;
   private numbers;
+  private actualise;
 
   constructor(public navCtrl: NavController,public navParams:NavParams,public toastCtrl: ToastController) {
     this._id = 99;
@@ -53,11 +54,11 @@ export class TeamScreenPage {
     this.webSocket.send(JSON.stringify({request:"JOIN_TEAM",username:this.userName,idpartie:v.idpartie}));
     this.webSocket.onmessage = function (event) {
       var jsonData = JSON.parse(event.data);
-      if(jsonData.reponse == "ok"){
-        this.navCtrl.push(TeamWaitScreen,{teamname:v.teamname});
+      if(jsonData.reponse == "actualise"){
+        this.actualise = jsonData.joueurs;
       }
       else {
-        this.presentTeamToast();
+        this.navCtrl.push(TeamWaitScreen, {teamname: this.teamName,username: this.userName,name: v.escapegame,websocket: this.webSocket,idpartie: v.idpartie,joueurs: this.actualise});
       }
     }.bind(this);
   }

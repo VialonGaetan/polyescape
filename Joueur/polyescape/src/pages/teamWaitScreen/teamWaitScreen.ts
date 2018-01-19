@@ -18,8 +18,8 @@ export class TeamWaitScreen {
     this.webSocket = this.navParams.get("websocket");
     this.userName = this.navParams.get("username");
     this.teamName = this.navParams.get("teamname");
-    this.escapeName = navParams.get("name");
-    this.idpartie = navParams.get("idpartie");
+    this.escapeName = this.navParams.get("name");
+    this.idpartie = this.navParams.get("idpartie");
     this.webSocket.onmessage = function (event) {
       var jsonData = JSON.parse(event.data);
         if(jsonData.reponse == "actualise"){
