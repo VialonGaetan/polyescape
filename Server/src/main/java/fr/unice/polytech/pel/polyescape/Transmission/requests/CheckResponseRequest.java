@@ -50,9 +50,13 @@ public class CheckResponseRequest implements Request {
             else if (gestionnaire.getPartieByID(partieID).someOneHaveNotFinish().isPresent())
                 return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.FINISH.toString())
                         .put(JsonArguments.NOM.toString(),gestionnaire.getPartieByID(partieID).someOneHaveNotFinish().get());
+            else if (gestionnaire.getPartieByID(partieID).isFinish()) {
+                gestionnaire.deletePartie(partieID);
+                return new JSONObject().put(JsonArguments.REPONSE.toString(), JsonArguments.FINISH.toString())
+                        .put(JsonArguments.SCORE.toString(), 100);
+            }
             else
-                return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.FINISH.toString())
-                        .put(JsonArguments.SCORE.toString(),100);
+                return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.NOTFINISH.toString());
         }else
             return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.KO.toString());
     }

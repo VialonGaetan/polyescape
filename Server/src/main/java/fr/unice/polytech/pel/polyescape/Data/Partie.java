@@ -12,7 +12,7 @@ import java.util.*;
 public class Partie implements Serialize {
 
     protected EscapeGame escapeGame;
-    private int time;
+    protected int time;
     protected boolean hasStart=false;
     private Joueur joueur;
 
@@ -68,6 +68,10 @@ public class Partie implements Serialize {
 
     public String getTeamName(){
         return "";
+    }
+
+    public boolean isFinish(){
+        return escapeGame.getEnigmes().stream().allMatch(Enigme::isResolve);
     }
 
     public Optional<List<Joueur>> someOneHaveNotFinish(){

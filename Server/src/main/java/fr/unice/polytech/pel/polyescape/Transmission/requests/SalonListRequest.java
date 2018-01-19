@@ -1,8 +1,6 @@
 package fr.unice.polytech.pel.polyescape.Transmission.requests;
 
-import fr.unice.polytech.pel.polyescape.Data.Joueur;
 import fr.unice.polytech.pel.polyescape.Data.Partie;
-import fr.unice.polytech.pel.polyescape.Data.PartieEnEquipe;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
 import org.json.JSONArray;
@@ -13,10 +11,6 @@ import org.json.JSONObject;
  * Created the 18/01/2018.
  */
 public class SalonListRequest implements Request {
-
-
-    public SalonListRequest() {
-    }
 
     @Override
     public JSONObject answerInJson() {

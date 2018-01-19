@@ -30,9 +30,7 @@ public class PartieEnEquipe extends Partie implements Serialize {
 
     @Override
     public boolean joinPartie(Joueur joueur) {
-        if (!hasStart)
-            return equipe.joinTeam(joueur);
-        return false;
+        return !hasStart && equipe.joinTeam(joueur);
 
     }
 
@@ -55,7 +53,7 @@ public class PartieEnEquipe extends Partie implements Serialize {
 
     private void sendPlayerHerEnigmes() {
         for (Joueur joueur : association.keySet()) {
-            joueur.sendMessageToPlayer(new StartGameMultiPlayerSender(getCurrentEnigmesOfaPlayer(joueur).get()).createMessageToSend());
+            joueur.sendMessageToPlayer(new StartGameMultiPlayerSender(getCurrentEnigmesOfaPlayer(joueur).get(),time).createMessageToSend());
         }
     }
 

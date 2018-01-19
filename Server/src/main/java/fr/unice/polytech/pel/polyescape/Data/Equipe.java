@@ -4,10 +4,7 @@ import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
 import fr.unice.polytech.pel.polyescape.Transmission.sender.ActualizeSalonSender;
 import org.json.JSONObject;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class Equipe implements Serialize{
 
@@ -30,14 +27,10 @@ public class Equipe implements Serialize{
     }
 
     public Joueur getNextJoueur() {
-        Iterator<Joueur> iterator = joueurs.keySet().iterator();
+        List<Joueur> tempList = new ArrayList<>(joueurs.keySet());
         if (index >= joueurs.keySet().size())
             index=0;
-        for (int i = 0; i < index ; i++) {
-            iterator.next();
-        }
-        index++;
-        return iterator.next();
+        return tempList.get(index++);
     }
 
 
