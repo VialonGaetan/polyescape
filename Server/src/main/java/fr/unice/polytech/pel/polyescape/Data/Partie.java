@@ -16,7 +16,10 @@ public class Partie implements Serialize {
     protected boolean hasStart=false;
     private Joueur joueur;
 
-    protected Partie(){}
+    protected Partie(EscapeGame escapeGame){
+        this.escapeGame = escapeGame;
+        this.time = escapeGame.getTime();
+    }
 
     public Partie(EscapeGame escapeGame, Joueur joueur) {
         this.escapeGame = escapeGame;

@@ -17,9 +17,8 @@ public class PartieEnEquipe extends Partie implements Serialize {
     private Map<Joueur, List<Enigme>> association;
 
     public PartieEnEquipe(EscapeGame escapeGame, Joueur joueur, String teamName) {
-        super();
+        super(escapeGame);
         association = new HashMap<>();
-        this.escapeGame = escapeGame;
         equipe = new Equipe(teamName, joueur);
     }
 
