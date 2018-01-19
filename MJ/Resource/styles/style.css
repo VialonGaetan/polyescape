@@ -58,6 +58,8 @@
 }
 
 #listPlayer{
+    -fx-font: 20px Tahoma;
+    -fx-font-weight: bold;
 }
 
 #remindedTime{

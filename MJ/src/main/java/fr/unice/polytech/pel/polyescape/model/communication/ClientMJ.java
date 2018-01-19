@@ -70,13 +70,13 @@ public class ClientMJ {
     }
 
     @OnMessage
-    public void onMessage(String message, Session session) throws InterruptedException {
+    public void onMessage(String message, Session session) throws InterruptedException, IOException {
         System.out.println(message);
         dataParser = new DataParser(message);
         this.answer = message;
         JSONObject jsonObject = new JSONObject(message);
         if (new JSONObject(message).getString(JsonArguments.REPONSE.toString()).equals("infos")) {
-            System.out.println("protocol infos");
+            AdressBook.getInstance().setServerSession(session);
             protocolInfos();
             this.needHelp = true;
             return;
@@ -85,7 +85,7 @@ public class ClientMJ {
             System.out.println("on est bien la");
             this.currentEnigma = jsonObject.getString("enigme");
             this.nameOfThePlayer = jsonObject.getString("username");
-            protocolHelp();
+            protocolHelp(this.nameOfThePlayer, this.currentEnigma);
         }
         return;
     }
@@ -99,12 +99,13 @@ public class ClientMJ {
         return answer;
     }
 
-    private void protocolHelp() {
+    private void protocolHelp(String nameOfThePlayer, String currentEnigma) {
         System.out.println("demande d'aide");
         try {
             Media hit = new Media(getClass().getClassLoader().getResource("sound/aide.mp3").toString());
             MediaPlayer mediaPlayer = new MediaPlayer(hit);
             mediaPlayer.play();
+            updateListPlayer(nameOfThePlayer,true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,56 +116,12 @@ public class ClientMJ {
             this.timeInMinute = this.dataParser.getTime();
             this.listPlayer.setItems(this.dataParser.getPlayers());
             this.escapeGameName.setText(this.dataParser.getTeamName());
-            updateListPlayer(this.nameOfThePlayer, false);
             firstTime = false;
         }
     }
 
-    public String getMessage() {
-        return message;
-    }
 
-    public DataParser getDataParser() {
-        return dataParser;
-    }
-
-    public ProgressIndicator getProgressIndicatorTime() {
-        return progressIndicatorTime;
-    }
-
-    public Text getEscapeGameName() {
-        return escapeGameName;
-    }
-
-    public Text getTeamName() {
-        return teamName;
-    }
-
-    public ComboBox getListPlayer() {
-        return listPlayer;
-    }
-
-    public Boolean getFirstTime() {
-        return firstTime;
-    }
-
-    public int getTimeInMinute() {
-        return timeInMinute;
-    }
-
-    public Boolean getNeedHelp() {
-        return needHelp;
-    }
-
-    public String getCurrentEnigma() {
-        return currentEnigma;
-    }
-
-    public String getNameOfThePlayer() {
-        return nameOfThePlayer;
-    }
-
-    public void updateListPlayer(String username, boolean isHelped) {
+    public void updateListPlayer(String username, boolean askForHelp) {
         listPlayer.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
             @Override
             public ListCell<String> call(ListView<String> param) {
@@ -179,10 +136,11 @@ public class ClientMJ {
                         if (item != null) {
                             setText(item);
                             if (item.contains(username)) {
-                                if (isHelped) {
-                                    setTextFill(Color.GREEN);
-                                } else {
+                                System.out.println("LA LISTE CONTIENT ITEM");
+                                if (askForHelp) {
                                     setTextFill(Color.RED);
+                                } else {
+                                    setTextFill(Color.GREEN);
                                 }
                             }
                         } else {
