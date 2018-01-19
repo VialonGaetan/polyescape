@@ -29,7 +29,7 @@ public class Joueur implements Serialize {
 
     public void sendMessageToPlayer(String message) {
         try {
-            if (session != null) {
+            if (session != null && session.isOpen()) {
                 session.getBasicRemote().sendText(message);
                 logger.info("Send message : " + message + " to " + session.getId());
             }

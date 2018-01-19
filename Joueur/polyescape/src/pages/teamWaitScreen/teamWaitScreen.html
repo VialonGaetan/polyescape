@@ -15,15 +15,18 @@
     <br />
     <label id="userName3" >{{teamName}}</label>
   </div>
-
-  <ion-list *ngFor="let name of playersNames;let ready of playersReady">
-    <ion-item class="listItem">
-      <ion-icon name="person"></ion-icon>
-      <ion-label id="waitLabel">{{name}}</ion-label>
-    <ion-icon name="{{setIcon(ready)}}"></ion-icon>
-    </ion-item>
-  </ion-list>
-
+  <ion-label id="title">
+    {{escapeName}}
+  </ion-label>
+  <div style="overflow-y:scroll;width:100%; height:300px;">
+      <ion-list margin-left="10px" margin-right="10px">
+        <ion-item style="background: lavender" *ngFor="let player of players;">
+          <ion-icon item-left class="item-icons" name="person"></ion-icon>
+          <ion-label id="waitLabel">{{player.name}}</ion-label>
+          <ion-icon item-right class="item-icons" name="{{setIcon(player.ready)}}"></ion-icon>
+        </ion-item>
+      </ion-list>
+  </div>
   <button id="readyButton"(click)="ready()" ion-button>Prêt</button>
 </ion-content>
 

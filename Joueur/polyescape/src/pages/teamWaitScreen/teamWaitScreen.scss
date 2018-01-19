@@ -10,7 +10,14 @@
 #userIcon3{
   font-size: 30px;
 }
-
+#title{
+  text-align: center;
+  white-space:pre;
+  color: #488aff;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 15%;
+}
 #userName3{
   text-align: center;
   font-size: 15px;
@@ -23,17 +30,20 @@
   bottom:0
 }
 
-.waitLabel {
+#waitLabel {
   color: #488aff;
   margin-top: 50px;
   margin-left: 32px;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 80%;
 }
 
 .listItem {
   margin:10px auto;
   border: hidden #488aff;
   outline: #488aff;
+}
 
+.item-icons{
+  color: #488aff;
+  font-size: 100%;
 }
