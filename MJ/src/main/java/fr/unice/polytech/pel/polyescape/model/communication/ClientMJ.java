@@ -85,7 +85,7 @@ public class ClientMJ {
         if (jsonObject.getString(JsonArguments.REPONSE.toString()).equals("HELP")) {
             this.currentEnigma = jsonObject.getString("enigme");
             this.nameOfThePlayer = jsonObject.getString("username");
-            this.idPartie = jsonObject.getString("idGame");
+            this.idPartie = ""+jsonObject.getInt("idGame");
             this.teamName.setText(this.idPartie);
             protocolHelp(this.nameOfThePlayer, this.currentEnigma);
         }
@@ -138,7 +138,6 @@ public class ClientMJ {
                         if (item != null) {
                             setText(item);
                             if (item.contains(username)) {
-                                System.out.println("LA LISTE CONTIENT ITEM");
                                 if (askForHelp) {
                                     setTextFill(Color.RED);
                                 } else {
