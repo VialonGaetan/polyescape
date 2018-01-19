@@ -19,12 +19,6 @@ public class ActualizeSalonSender implements Sender {
         this.joueurBooleanMap = joueurBooleanMap;
     }
 
-
-    @Override
-    public String createMessageToSend() {
-        return messageInJson().toString();
-    }
-
     @Override
     public JSONObject messageInJson() {
         JSONArray jsonArray = new JSONArray();

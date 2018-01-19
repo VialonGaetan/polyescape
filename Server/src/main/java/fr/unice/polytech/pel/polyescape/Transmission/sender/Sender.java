@@ -8,7 +8,9 @@ import org.json.JSONObject;
  */
 public interface Sender {
 
-    String createMessageToSend();
+    default String createMessageToSend(){
+        return messageInJson().toString();
+    }
 
     JSONObject messageInJson();
 }

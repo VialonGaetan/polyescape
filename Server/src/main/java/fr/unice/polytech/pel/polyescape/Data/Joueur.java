@@ -31,7 +31,7 @@ public class Joueur implements Serialize {
         try {
             if (session != null) {
                 session.getBasicRemote().sendText(message);
-                logger.info("Send message : " + message + " to " + session);
+                logger.info("Send message : " + message + " to " + session.getId());
             }
         } catch (IOException e) {
             e.printStackTrace();
