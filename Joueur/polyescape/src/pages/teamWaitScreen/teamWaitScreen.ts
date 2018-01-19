@@ -15,7 +15,7 @@ export class TeamWaitScreen {
   private playersReady = [];
   private idpartie = '';
 
-  constructor(public navCtrl: NavController,public navParams:NavParams,public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams:NavParams, public toastCtrl: ToastController) {
     this.webSocket = this.navParams.get("websocket");
     this.userName = this.navParams.get("username");
     this.teamName = this.navParams.get("teamname");

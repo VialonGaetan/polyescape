@@ -52,7 +52,7 @@ export class EscapeScreenPage {
       this.navCtrl.push(EnigmePage,{teamname:this.teamName,username:this.userName, name:game, websocket:this.webSocket});
     }
     else{
-      var request = {request: "CREATE_PARTIE",teamname:this.teamName,username:this.userName,escapegame:game};
+      var request = {request: "CREATE_PARTIE", teamname:this.teamName,username:this.userName, escapegame:game};
       this.webSocket.send(JSON.stringify(request));
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);

@@ -24,6 +24,7 @@ import {TeamProgressionScreenPage} from "../pages/teamProgressionScreenPage/team
     EnigmePage,
     TeamWaitScreen,
     TeamProgressionScreenPage
+
   ],
   imports: [
     BrowserModule,

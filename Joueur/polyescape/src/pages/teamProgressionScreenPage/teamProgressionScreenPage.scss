@@ -15,7 +15,7 @@ $mute: #DFE3E4;
     position: relative;
     display: table-cell;
     text-align: center;
-    font-size: 3em;
+    font-size: 0.8em;
 
     &:before {
       content: attr(data-step);
@@ -64,4 +64,39 @@ $mute: #DFE3E4;
       }
     }
   }
+}
+
+/**
+ * Size Extensions
+ */
+.progress--medium {
+  font-size: 1.5em;
+}
+.progress--large {
+  font-size: 2em;
+}
+
+/**
+ * Some Generic Stylings
+ */
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+h1 {
+  margin-bottom: 1.5em;
+}
+.progress {
+  margin-bottom: 3em;
+}
+a {
+  color: $active;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+body {
+  text-align: center;
+  color: #444;
 }
