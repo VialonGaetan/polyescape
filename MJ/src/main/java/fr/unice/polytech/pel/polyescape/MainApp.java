@@ -16,12 +16,5 @@ public class MainApp extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         MasterGame masterGame = new MasterGame();
-        //JSONObject jsonObject = new JSONObject().put(JsonArguments.REQUEST.toString(), TypeRequest.GET_PARTIES);
-//        JSONObject jsonObject = new JSONObject("{\"request\":\"HELP\",\"idpartie\":2,\"username\":\"bob\",\"enigme\":\"Dans quel rayon se trouve le livre \\\"Le code pour les nuls\\\"\"}");
-//        String request = jsonObject.toString();
-//        ClientMJ clientMJ = new ClientMJ(request);
-//        ClientManager client = ClientManager.createClient();
-//        client.connectToServer(clientMJ, new URI("ws://localhost:15555/websockets/gameserver"));
-//        System.out.println(clientMJ.getAnswer());
     }
 }

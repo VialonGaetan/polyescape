@@ -1,6 +1,5 @@
 package fr.unice.polytech.pel.polyescape.controller;
 
-import fr.unice.polytech.pel.polyescape.Gestionnaire;
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
 import fr.unice.polytech.pel.polyescape.Transmission.TypeRequest;
 import fr.unice.polytech.pel.polyescape.model.communication.AdressBook;
@@ -20,7 +19,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.util.Callback;
 import org.controlsfx.control.Notifications;
 import org.glassfish.tyrus.client.ClientManager;
 import org.json.JSONObject;
@@ -57,7 +58,6 @@ public class MJController {
     private ResponseMaker responseMaker;
 
     public MJController(Scene scene, StackPane topPane, ProgressBar progressBar, Label choicePlayer, ComboBox listPlayer, HBox timeHB, StackPane bottomPane, Button btn, Label progressLabel, ProgressIndicator timeIndicator) throws URISyntaxException, DeploymentException, InterruptedException {
-        //il faut ici recuperer les hours et minutes en instanciant un client et envoyant des requetes
         this.progressIndicatorTime = timeIndicator;
         this.scene = scene;
         this.topPane = topPane;
@@ -124,8 +124,7 @@ public class MJController {
     }
 
     public void envoieIndice() throws IOException {
-        if (this.teamName.getText().equals(""))return;
-        System.out.println(AdressBook.getInstance().getServerSession() == null);
+        if (this.teamName.getText().equals("")) return;
         AdressBook.getInstance().getServerSession().getBasicRemote().sendText("okok");
         try {
             Media hit = new Media(getClass().getClassLoader().getResource("sound/notification.wav").toString());
@@ -134,11 +133,10 @@ public class MJController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("envoie");
         Notifications.create().title("Indice envoyé").text("Indice envoyé au joueur " + selectedPlayer).darkStyle().position(Pos.TOP_LEFT).showWarning();
-        System.out.println(answerField.getText());
-        responseMaker = new ResponseMaker(answerField.getText(),selectedPlayer, this.teamName.getText());
+        responseMaker = new ResponseMaker(answerField.getText(), selectedPlayer, this.teamName.getText());
         answerField.setText("");
+        updateListPlayer(selectedPlayer, false);
         AdressBook.getInstance().getServerSession().getBasicRemote().sendText(responseMaker.getAnswer());
     }
 
@@ -180,14 +178,40 @@ public class MJController {
     }
 
     public void makeRequest(String request) throws URISyntaxException, DeploymentException, InterruptedException {
-//        System.out.println(request);
-//        System.out.println(new JSONObject(request).getString(JsonArguments.REPONSE.toString()));
-//        if (new JSONObject(request).getString(JsonArguments.REPONSE.toString()).equals("infos")){
-//            envoieIndice();
-//        }
-        //request = "{\"request\":\"HELP\",\"idpartie\":2,\"username\":\"bob\",\"enigme\":\"Dans quel rayon se trouve le livre \\\"Le code pour les nuls\\\"\"}";
         ClientMJ clientMJ = new ClientMJ(request, progressIndicatorTime, teamName, escapeGameName, listPlayer, this);
         ClientManager client = ClientManager.createClient();
         client.connectToServer(clientMJ, new URI("ws://localhost:15555/websockets/gameserver"));
+    }
+
+
+    public void updateListPlayer(String username, boolean askForHelp) {
+        listPlayer.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+            @Override
+            public ListCell<String> call(ListView<String> param) {
+                final ListCell<String> cell = new ListCell<String>() {
+                    {
+                        super.setPrefWidth(100);
+                    }
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item != null) {
+                            setText(item);
+                            if (item.contains(username)) {
+                                if (askForHelp) {
+                                    setTextFill(Color.RED);
+                                } else {
+                                    setTextFill(Color.GREEN);
+                                }
+                            }
+                        } else {
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
     }
 }

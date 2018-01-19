@@ -138,7 +138,6 @@ public class ClientMJ {
                         if (item != null) {
                             setText(item);
                             if (item.contains(username)) {
-                                System.out.println("LA LISTE CONTIENT ITEM");
                                 if (askForHelp) {
                                     setTextFill(Color.RED);
                                 } else {
