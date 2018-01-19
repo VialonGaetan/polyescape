@@ -124,6 +124,7 @@ public class MJController {
     }
 
     public void envoieIndice() throws IOException {
+        if (this.teamName.getText().equals(""))return;
         System.out.println(AdressBook.getInstance().getServerSession() == null);
         AdressBook.getInstance().getServerSession().getBasicRemote().sendText("okok");
         try {
@@ -134,9 +135,9 @@ public class MJController {
             e.printStackTrace();
         }
         System.out.println("envoie");
-        Notifications.create().title("Nouvelle notif").text("Joueur " + selectedPlayer + " a demandé de l'aide").darkStyle().position(Pos.TOP_LEFT).showWarning();
+        Notifications.create().title("Indice envoyé").text("Indice envoyé au joueur " + selectedPlayer).darkStyle().position(Pos.TOP_LEFT).showWarning();
         System.out.println(answerField.getText());
-        responseMaker = new ResponseMaker(answerField.getText());
+        responseMaker = new ResponseMaker(answerField.getText(),selectedPlayer, this.teamName.getText());
         answerField.setText("");
         AdressBook.getInstance().getServerSession().getBasicRemote().sendText(responseMaker.getAnswer());
     }

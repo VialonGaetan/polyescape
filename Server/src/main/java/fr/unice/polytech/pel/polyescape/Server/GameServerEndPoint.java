@@ -32,6 +32,7 @@ public class GameServerEndPoint {
 
     @OnMessage
     public String onMessage(String message, Session session) throws IOException {
+        System.out.println(message);
         if (new JSONObject(message).getString(JsonArguments.REQUEST.toString()).equals(TypeRequest.GET_PARTIES.toString())){
             Gestionnaire.getInstance().setSessionMG(session);
         }
@@ -40,10 +41,8 @@ public class GameServerEndPoint {
             System.out.println(Gestionnaire.getInstance().getSessionMG() == null);
             Gestionnaire.getInstance().getSessionMG().getBasicRemote().sendText(helpRequest.getAnswer());
         }
-        if (new JSONObject(message).getString(JsonArguments.REQUEST.toString()).equals(TypeRequest.HELP_RESPONSE.toString())){
-//            HelpResponseRequest helpRequest = new HelpResponseRequest(message, sessionAppli);
-//            sessionAppli.getBasicRemote().sendText(message);
-//            return helpRequest.getAnswer();
+        if (new JSONObject(message).getString(JsonArguments.REQUEST.toString()).equals(TypeRequest.INDICE.toString())){
+
         }
         logger.info("Message Receive : " + message);
         Request request = new RequestFactory().createTypeRequest(message, session);

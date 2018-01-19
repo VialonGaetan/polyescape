@@ -34,6 +34,7 @@ public class ClientMJ {
     private Boolean needHelp = false;
     private String currentEnigma = "";
     private String nameOfThePlayer = "";
+    private String idPartie;
 
 
     public ClientMJ(String message, ProgressIndicator progressIndicator, Text teamNameText, Text escapeGameName, ComboBox listPlayer, MJController mjController) {
@@ -82,9 +83,10 @@ public class ClientMJ {
             return;
         }
         if (jsonObject.getString(JsonArguments.REPONSE.toString()).equals("HELP")) {
-            System.out.println("on est bien la");
             this.currentEnigma = jsonObject.getString("enigme");
             this.nameOfThePlayer = jsonObject.getString("username");
+            this.idPartie = jsonObject.getString("idGame");
+            this.teamName.setText(this.idPartie);
             protocolHelp(this.nameOfThePlayer, this.currentEnigma);
         }
         return;
