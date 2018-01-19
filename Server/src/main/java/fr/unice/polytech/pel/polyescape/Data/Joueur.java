@@ -5,12 +5,15 @@ import org.json.JSONObject;
 
 import javax.websocket.Session;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * @author Gaetan Vialon
  * Created the 12/01/2018.
  */
 public class Joueur implements Serialize {
+
+    private Logger logger = Logger.getLogger(this.getClass().getName());
     private String nom;
     private Session session;
 
@@ -26,8 +29,10 @@ public class Joueur implements Serialize {
 
     public void sendMessageToPlayer(String message) {
         try {
-            if (session != null)
+            if (session != null) {
                 session.getBasicRemote().sendText(message);
+                logger.info("Send message : " + message + " to " + session.getId());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

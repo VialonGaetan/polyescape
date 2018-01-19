@@ -22,10 +22,6 @@ public class EnigmeDispoRequest implements Request {
         logger.info("Recuperation de la liste des enigmes");
     }
 
-    @Override
-    public String getAnswer() {
-        return answerInJson().toString();
-    }
 
     @Override
     public JSONObject answerInJson() {

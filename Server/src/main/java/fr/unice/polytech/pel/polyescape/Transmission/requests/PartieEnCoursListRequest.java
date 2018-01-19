@@ -20,10 +20,6 @@ public class PartieEnCoursListRequest implements Request {
         logger.info("Recupération de la liste des parties en cours");
     }
 
-    @Override
-    public String getAnswer() {
-        return answerInJson().toString();
-    }
 
     @Override
     public JSONObject answerInJson() {

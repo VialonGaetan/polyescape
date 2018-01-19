@@ -36,11 +36,6 @@ public class JoinTeamRequest implements Request {
     }
 
     @Override
-    public String getAnswer() {
-        return answerInJson().toString();
-    }
-
-    @Override
     public JSONObject answerInJson() {
         if(hasJoin){
             return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.OK.toString());

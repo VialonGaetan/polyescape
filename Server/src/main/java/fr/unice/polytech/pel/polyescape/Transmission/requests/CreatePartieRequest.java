@@ -27,7 +27,6 @@ public class CreatePartieRequest implements Request {
 
     public CreatePartieRequest(String message, Session session) {
         logger.info("Creation d'une nouvelle partie");
-        System.out.println(message);
         id = decodeCreatePartie(message, session);
     }
 
@@ -50,12 +49,6 @@ public class CreatePartieRequest implements Request {
         } catch (Exception e) {
             throw new InvalidJsonRequest();
         }
-    }
-
-
-    @Override
-    public String getAnswer() {
-        return answerInJson().toString();
     }
 
     @Override

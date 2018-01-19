@@ -52,7 +52,7 @@ public class Partie implements Serialize {
         return false;
     }
 
-    public void setJoueurReadyOrNot(Joueur joueur, Boolean ready) {}
+    public void setJoueurReadyOrNot(Joueur joueur) {}
 
     public String getEscapeGameName(){
         return escapeGame.getName();
@@ -68,6 +68,10 @@ public class Partie implements Serialize {
 
     public String getTeamName(){
         return "";
+    }
+
+    public Optional<List<Joueur>> someOneHaveNotFinish(){
+        return Optional.empty();
     }
 
     @Override
