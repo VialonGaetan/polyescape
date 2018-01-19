@@ -7,6 +7,6 @@ import {NavController, NavParams, ToastController} from 'ionic-angular';
 })
 export class TeamWaitScreen {
 
-  constructor(public navCtrl: NavController,public navParams:NavParams,public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams:NavParams, public toastCtrl: ToastController) {
   }
 }

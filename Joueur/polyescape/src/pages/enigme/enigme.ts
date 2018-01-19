@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
+import {TeamProgressionScreenPage} from "../teamProgressionScreenPage/teamProgressionScreenPage";
 
 @Component({
   selector: 'page-enigme',
@@ -97,4 +98,12 @@ export class EnigmePage {
       }.bind(this);
     }
   }
+
+  swipeEvent(e) {
+    if (e.direction == 2) {
+      this.navCtrl.setRoot(TeamProgressionScreenPage);
+    }
+  }
+
+
 }

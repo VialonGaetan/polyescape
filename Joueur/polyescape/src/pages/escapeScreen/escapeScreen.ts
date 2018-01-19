@@ -46,7 +46,7 @@ export class EscapeScreenPage {
   }
 
   startGame(game : any) {
-    this.webSocket.send(JSON.stringify({request:"CREATE_PARTIE",teamname:this.userName,escapegame:game}))
+    this.webSocket.send(JSON.stringify({request:"CREATE_PARTIE", teamname:this.userName, escapegame:game}))
     this.navCtrl.setRoot(EnigmePage,{username:this.userName, name:game, websocket:this.webSocket});
   }
 
