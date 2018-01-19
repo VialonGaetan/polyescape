@@ -19,11 +19,6 @@ public class SalonListRequest implements Request {
     }
 
     @Override
-    public String getAnswer() {
-        return answerInJson().toString();
-    }
-
-    @Override
     public JSONObject answerInJson() {
         Gestionnaire gestionnaire = Gestionnaire.getInstance();
         JSONArray jsonArray = new JSONArray();

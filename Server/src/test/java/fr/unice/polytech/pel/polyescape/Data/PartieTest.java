@@ -70,12 +70,12 @@ public class PartieTest {
         assertFalse(partieTeam.hasStart());
         partieTeam.joinPartie(secondJoueur);
         assertFalse(partieTeam.hasStart());
-        partieTeam.setJoueurReadyOrNot(joueur,true);
+        partieTeam.setJoueurReadyOrNot(joueur);
         assertFalse(partieTeam.hasStart());
-        partieTeam.setJoueurReadyOrNot(joueur,false);
-        partieTeam.setJoueurReadyOrNot(secondJoueur,true);
+        partieTeam.setJoueurReadyOrNot(joueur);
+        partieTeam.setJoueurReadyOrNot(secondJoueur);
         assertFalse(partieTeam.hasStart());
-        partieTeam.setJoueurReadyOrNot(joueur,true);
+        partieTeam.setJoueurReadyOrNot(joueur);
         assertTrue(partieTeam.hasStart());
         int nbEnigmes = 0;
         nbEnigmes = partieTeam.getEnigmesOfaPlayer(joueur).size() + partieTeam.getEnigmesOfaPlayer(secondJoueur).size();

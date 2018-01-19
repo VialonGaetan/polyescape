@@ -59,8 +59,8 @@ public class PartieEnEquipe extends Partie implements Serialize {
     }
 
     @Override
-    public void setJoueurReadyOrNot(Joueur joueur, Boolean ready) {
-        if (equipe.setJoueurReadyOrNot(joueur,ready))
+    public void setJoueurReadyOrNot(Joueur joueur) {
+        if (equipe.setJoueurReadyOrNot(joueur))
             startTheGame();
     }
 

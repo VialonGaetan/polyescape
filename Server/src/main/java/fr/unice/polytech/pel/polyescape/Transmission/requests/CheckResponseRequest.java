@@ -47,11 +47,13 @@ public class CheckResponseRequest implements Request {
                 return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.OK.toString())
                         .put(JsonArguments.NOM.toString(),gestionnaire.getPartieByID(partieID).getCurrentEnigmesOfaPlayer(joueur).get().getName())
                         .put(JsonArguments.INFOS.toString(),gestionnaire.getPartieByID(partieID).getCurrentEnigmesOfaPlayer(joueur).get().getDescription());
+            else if (gestionnaire.getPartieByID(partieID).someOneHaveNotFinish().isPresent())
+                return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.FINISH.toString())
+                        .put(JsonArguments.NOM.toString(),gestionnaire.getPartieByID(partieID).someOneHaveNotFinish().get());
             else
                 return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.FINISH.toString())
                         .put(JsonArguments.SCORE.toString(),100);
         }else
             return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.KO.toString());
-
     }
 }

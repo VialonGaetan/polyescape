@@ -8,7 +8,9 @@ import org.json.JSONObject;
  */
 public interface Request {
 
-    String getAnswer();
+    default String getAnswer(){
+        return answerInJson().toString();
+    }
 
     JSONObject answerInJson();
 

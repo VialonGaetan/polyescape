@@ -23,11 +23,6 @@ public class EscapeGameDispoListRequest implements Request {
     }
 
     @Override
-    public String getAnswer() {
-        return answerInJson().toString();
-    }
-
-    @Override
     public JSONObject answerInJson() {
         JSONArray jsonArray = new JSONArray();
         for (EscapeGame escapeGame : gestionnaire.getEscapeGamesDisponible()) {
