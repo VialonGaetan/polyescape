@@ -48,29 +48,31 @@ public class GameServerEndPoint {
                 Joueur j = joueurs.next();
                 if (j.getNom().equals(new JSONObject(message).getString("username"))) {
                     j.setSession(session);
-                }
-                HelpRequest helpRequest = new HelpRequest(message, Gestionnaire.getInstance().getSessionMG());
-                System.out.println(Gestionnaire.getInstance().getSessionMG() == null);
-                Gestionnaire.getInstance().getSessionMG().getBasicRemote().sendText(helpRequest.getAnswer());
-            }
-        }
-            if (new JSONObject(message).getString(JsonArguments.REQUEST.toString()).equals(TypeRequest.INDICE.toString())) {
-                idpartie = new JSONObject(message).getInt("idGame");
-                currentGame = Gestionnaire.getInstance().getPartieByID(idpartie);
-                joueurs = currentGame.getReadyToStart().keySet().iterator();
-                while (joueurs.hasNext()) {
-                    Joueur j = joueurs.next();
-                    if (j.getNom().equals(new JSONObject(message).getString("username"))) {
-                        j.getSession().getBasicRemote().sendText(message);
-                    }
+                    System.out.println(j.getNom());
                 }
             }
-            logger.info("Message Receive : " + message);
-            Request request = new RequestFactory().createTypeRequest(message, session);
-            logger.info("Message send : " + request.getAnswer());
-            return request.getAnswer();
+            HelpRequest helpRequest = new HelpRequest(message, Gestionnaire.getInstance().getSessionMG());
+            System.out.println(Gestionnaire.getInstance().getSessionMG() == null);
+            System.out.println("helprequest : " + helpRequest.getAnswer());
+            Gestionnaire.getInstance().getSessionMG().getBasicRemote().sendText(helpRequest.getAnswer());
         }
-
+        if (new JSONObject(message).getString(JsonArguments.REQUEST.toString()).equals(TypeRequest.INDICE.toString())) {
+            System.out.println("on est la");
+            idpartie = Integer.valueOf(new JSONObject(message).getString("idGame"));
+            currentGame = Gestionnaire.getInstance().getPartieByID(idpartie);
+            joueurs = currentGame.getReadyToStart().keySet().iterator();
+            while (joueurs.hasNext()) {
+                Joueur j = joueurs.next();
+                if (j.getNom().equals(new JSONObject(message).getString("username"))) {
+                    j.getSession().getBasicRemote().sendText(message);
+                }
+            }
+        }
+        logger.info("Message Receive : " + message);
+        Request request = new RequestFactory().createTypeRequest(message, session);
+        logger.info("Message send : " + request.getAnswer());
+        return request.getAnswer();
+    }
 
 
     @OnClose
