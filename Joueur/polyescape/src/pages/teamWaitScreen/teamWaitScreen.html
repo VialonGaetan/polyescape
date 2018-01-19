@@ -16,12 +16,15 @@
     <label id="userName3" >{{teamName}}</label>
   </div>
 
-  <ion-list *ngFor="let name of players">
-    <ion-icon name="person"></ion-icon>
-    <ion-label>{{name}}</ion-label>
+  <ion-list *ngFor="let name of playersNames;let ready of playersReady">
+    <ion-item class="listItem">
+      <ion-icon name="person"></ion-icon>
+      <ion-label id="waitLabel">{{name}}</ion-label>
+    <ion-icon name="{{setIcon(ready)}}"></ion-icon>
+    </ion-item>
   </ion-list>
 
-  <button (click)="ready()">Prêt</button>
+  <button id="readyButton"(click)="ready()" ion-button>Prêt</button>
 </ion-content>
 
 </html>

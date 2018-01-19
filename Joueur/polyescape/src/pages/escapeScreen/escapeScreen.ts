@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {EnigmePage} from "../enigme/enigme";
+import {TeamWaitScreen} from "../teamWaitScreen/teamWaitScreen";
 
 @Component({
   selector: 'page-escape',
@@ -12,6 +13,7 @@ export class EscapeScreenPage {
   private userName = '';
   private webSocket:WebSocket;
   private teamName = '';
+  private actualise;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.webSocket = this.navParams.get("websocket");
@@ -46,8 +48,22 @@ export class EscapeScreenPage {
   }
 
   startGame(game : any) {
-    this.webSocket.send(JSON.stringify({request:"CREATE_PARTIE",teamname:this.userName,escapegame:game}))
-    this.navCtrl.setRoot(EnigmePage,{username:this.userName, name:game, websocket:this.webSocket});
+    if(this.navParams.get("type") == "solo"){
+      this.navCtrl.push(EnigmePage,{teamname:this.teamName,username:this.userName, name:game, websocket:this.webSocket});
+    }
+    else{
+      var request = {request: "CREATE_PARTIE",teamname:this.teamName,username:this.userName,escapegame:game};
+      this.webSocket.send(JSON.stringify(request));
+      this.webSocket.onmessage = function(event) {
+        var jsonData = JSON.parse(event.data);
+        if(jsonData.reponse == "actualise"){
+          this.actualise = jsonData.joueurs;
+        }
+        else{
+          this.navCtrl.push(TeamWaitScreen,{teamname:this.teamName,username:this.userName, name:game, websocket:this.webSocket,idpartie:jsonData.idpartie,joueurs:this.actualise});
+        }
+      }.bind(this);
+    }
   }
 
 }

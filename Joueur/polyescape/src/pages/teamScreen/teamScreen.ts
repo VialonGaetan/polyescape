@@ -56,6 +56,9 @@ export class TeamScreenPage {
       if(jsonData.reponse == "ok"){
         this.navCtrl.push(TeamWaitScreen,{teamname:v.teamname});
       }
+      else {
+        this.presentTeamToast();
+      }
     }.bind(this);
   }
 
@@ -64,7 +67,7 @@ export class TeamScreenPage {
    */
   createTeam(){
     if(this.qty.length == 0){
-      this.presentToast();
+      this.presentNameToast();
     }
     else {
       this.teamName = this.qty;
@@ -73,14 +76,20 @@ export class TeamScreenPage {
     }
   }
 
-  presentToast() {
+  presentNameToast() {
     let toast = this.toastCtrl.create({
       message: 'Veuillez entrer un nom valide (au moins 1 caractère)',
       duration: 3000,
       position: 'bottom'
     });
-
-
+    toast.present();
+  }
+  presentTeamToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Cet équipe est déjà pleine, vous ne pouvez pas la rejoindre',
+      duration: 3000,
+      position: 'bottom'
+    });
     toast.present();
   }
 }

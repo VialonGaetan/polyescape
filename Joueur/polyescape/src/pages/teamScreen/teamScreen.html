@@ -28,6 +28,9 @@
   </div>
   <ion-label id="label1">
     Rejoindre une équipe
+    <button style="background: lavender;" (click)="loadTeams()">
+      <ion-icon style="color: #488aff;font-size: 300%" name="refresh-circle"></ion-icon>
+    </button>
   </ion-label>
   <div style=" overflow-y:scroll;width:100%; height:300px;">
     <ion-list *ngFor="let nb of numbers;">
@@ -35,8 +38,8 @@
       <ion-list margin-left="10px" margin-right="10px" *ngFor="let v of vars;">
         <button *ngIf="(v.nombreJoueurs == nb)" ion-item (click)="joinTeam(v);" class="listButton">
           <ion-icon name="people" item-start></ion-icon>
-          <ion-label style="text-align: left" m>{{v.teamname}}</ion-label>
-          <ion-label style="text-align: right">{{v.escapegame}}</ion-label>
+          <ion-label style="text-align: left;font-size: 90%">{{v.teamname}}</ion-label>
+          <ion-label style="text-align: right;font-size: 90%">{{v.escapegame}}</ion-label>
         </button>
       </ion-list>
     </ion-list>

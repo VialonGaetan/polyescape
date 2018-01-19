@@ -9,12 +9,31 @@
 
 #userIcon3{
   font-size: 30px;
-  color: #488aff;
 }
 
-#userNam3{
+#userName3{
   text-align: center;
   font-size: 15px;
   font-weight: bold;
   color: #488aff;
+}
+
+#readyButton{
+  position: absolute;
+  bottom:0
+}
+
+.waitLabel {
+  color: #488aff;
+  margin-top: 50px;
+  margin-left: 32px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.listItem {
+  margin:10px auto;
+  border: hidden #488aff;
+  outline: #488aff;
+
 }

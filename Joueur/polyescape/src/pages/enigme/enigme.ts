@@ -14,6 +14,7 @@ export class EnigmePage {
   private nomEnigme:string ='';
   private nomEscape = '';
   private enigmeInfos:string = '';
+  private teamName;
   private webSocket:WebSocket;
   private minutes:number = 0;
   private secondes:number = 0;
@@ -24,7 +25,8 @@ export class EnigmePage {
     this.userName = navParams.get("username");
     this.nomEscape = navParams.get("name");
     this.webSocket = navParams.get("websocket");
-    var request = {request: "CREATE_PARTIE", type:"SOLO",username:this.userName,escapegame:this.nomEscape};
+    this.teamName = this.navParams.get("teamname");
+    var request = {request: "CREATE_PARTIE",teamname:this.teamName,username:this.userName,escapegame:this.nomEscape};
     this.webSocket.send(JSON.stringify(request));
     this.webSocket.onmessage = function(event) {
       var jsonData = JSON.parse(event.data);
