@@ -50,13 +50,12 @@ public class PartieEnEquipe extends Partie implements Serialize {
         for (Enigme enigme : escapeGame.getEnigmes()) {
             association.get(equipe.getNextJoueur()).add(new Enigme(enigme.getName(),enigme.getDescription(),enigme.getReponse()));
         }
-        System.out.println(association);
         sendPlayerHerEnigmes();
     }
 
     private void sendPlayerHerEnigmes() {
         for (Joueur joueur : association.keySet()) {
-            joueur.sendMessageToPlayer(new StartGameMultiPlayerSender(getCurrentEnigmesOfaPlayer(joueur).get()).toString());
+            joueur.sendMessageToPlayer(new StartGameMultiPlayerSender(getCurrentEnigmesOfaPlayer(joueur).get()).createMessageToSend());
         }
     }
 
