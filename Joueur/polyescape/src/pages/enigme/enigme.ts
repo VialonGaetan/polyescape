@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
+import {LocalNotifications} from "@ionic-native/local-notifications";
 
 @Component({
   selector: 'page-enigme',
@@ -20,7 +21,7 @@ export class EnigmePage {
   private timer:number;
 
 
-  constructor(public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public localNotifications: LocalNotifications) {
     this.userName = navParams.get("username");
     this.nomEscape = navParams.get("name");
     this.webSocket = navParams.get("websocket");
@@ -36,6 +37,8 @@ export class EnigmePage {
         this.timer = setInterval(this.decreaseTime.bind(this),1000);
       }
     }.bind(this);
+
+
   }
 
   presentToastNoAnswer() {
@@ -44,7 +47,6 @@ export class EnigmePage {
       duration: 3000,
       position: 'bottom'
     });
-
 
     toast.present();
   }
@@ -57,6 +59,24 @@ export class EnigmePage {
     });
 
     toast.present();
+  }
+
+  presentToastHelpSend() {
+    let toast = this.toastCtrl.create({
+      message: 'Demande envoyée',
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    toast.present();
+  }
+
+  scheduleNotification(text) {
+    this.localNotifications.schedule({
+      id: 1,
+      title: 'Aide',
+      text: text
+    });
   }
 
   decreaseTime(){
@@ -101,12 +121,12 @@ export class EnigmePage {
   requestHelp() {
     var request = {request:"HELP", idpartie:this.idPartie, username:this.userName, enigme: this.enigmeInfos};
     this.webSocket.send(JSON.stringify(request));
+    this.presentToastHelpSend();
+
 
     this.webSocket.onmessage = function(event) {
       var jsonData = JSON.parse(event.data);
-      alert(jsonData.description);
-
-
+      this.scheduleNotification(jsonData.description);
     }.bind(this);
   }
 }
