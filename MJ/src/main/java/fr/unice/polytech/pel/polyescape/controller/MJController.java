@@ -1,8 +1,11 @@
 package fr.unice.polytech.pel.polyescape.controller;
 
+import fr.unice.polytech.pel.polyescape.Gestionnaire;
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
 import fr.unice.polytech.pel.polyescape.Transmission.TypeRequest;
+import fr.unice.polytech.pel.polyescape.model.communication.AdressBook;
 import fr.unice.polytech.pel.polyescape.model.communication.ClientMJ;
+import fr.unice.polytech.pel.polyescape.model.communication.ResponseMaker;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,6 +26,7 @@ import org.glassfish.tyrus.client.ClientManager;
 import org.json.JSONObject;
 
 import javax.websocket.DeploymentException;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Timer;
@@ -50,6 +54,7 @@ public class MJController {
     private int hour;
     private int minute;
     private int givenMinutes;
+    private ResponseMaker responseMaker;
 
     public MJController(Scene scene, StackPane topPane, ProgressBar progressBar, Label choicePlayer, ComboBox listPlayer, HBox timeHB, StackPane bottomPane, Button btn, Label progressLabel, ProgressIndicator timeIndicator) throws URISyntaxException, DeploymentException, InterruptedException {
         //il faut ici recuperer les hours et minutes en instanciant un client et envoyant des requetes
@@ -102,7 +107,11 @@ public class MJController {
         this.btnAnswer.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                envoieIndice();
+                try {
+                    envoieIndice();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
         this.listPlayer.valueProperty().addListener(new ChangeListener<String>() {
@@ -114,7 +123,10 @@ public class MJController {
         });
     }
 
-    public void envoieIndice() {
+    public void envoieIndice() throws IOException {
+        if (this.teamName.getText().equals(""))return;
+        System.out.println(AdressBook.getInstance().getServerSession() == null);
+        AdressBook.getInstance().getServerSession().getBasicRemote().sendText("okok");
         try {
             Media hit = new Media(getClass().getClassLoader().getResource("sound/notification.wav").toString());
             MediaPlayer mediaPlayer = new MediaPlayer(hit);
@@ -123,9 +135,11 @@ public class MJController {
             e.printStackTrace();
         }
         System.out.println("envoie");
-        Notifications.create().title("Nouvelle notif").text("Joueur " + selectedPlayer + " a demandé de l'aide").darkStyle().position(Pos.TOP_LEFT).showWarning();
+        Notifications.create().title("Indice envoyé").text("Indice envoyé au joueur " + selectedPlayer).darkStyle().position(Pos.TOP_LEFT).showWarning();
         System.out.println(answerField.getText());
+        responseMaker = new ResponseMaker(answerField.getText(),selectedPlayer, this.teamName.getText());
         answerField.setText("");
+        AdressBook.getInstance().getServerSession().getBasicRemote().sendText(responseMaker.getAnswer());
     }
 
     public void display() throws InterruptedException {
@@ -171,7 +185,7 @@ public class MJController {
 //        if (new JSONObject(request).getString(JsonArguments.REPONSE.toString()).equals("infos")){
 //            envoieIndice();
 //        }
-        request = "{\"request\":\"HELP\",\"idpartie\":2,\"username\":\"bob\",\"enigme\":\"Dans quel rayon se trouve le livre \\\"Le code pour les nuls\\\"\"}";
+        //request = "{\"request\":\"HELP\",\"idpartie\":2,\"username\":\"bob\",\"enigme\":\"Dans quel rayon se trouve le livre \\\"Le code pour les nuls\\\"\"}";
         ClientMJ clientMJ = new ClientMJ(request, progressIndicatorTime, teamName, escapeGameName, listPlayer, this);
         ClientManager client = ClientManager.createClient();
         client.connectToServer(clientMJ, new URI("ws://localhost:15555/websockets/gameserver"));

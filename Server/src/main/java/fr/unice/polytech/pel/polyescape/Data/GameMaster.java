@@ -6,7 +6,7 @@ import javax.websocket.Session;
 
 public class GameMaster implements Serialize {
 
-    private Session session;
+    private final Session session;
 
     public GameMaster(Session session) {
         this.session = session;

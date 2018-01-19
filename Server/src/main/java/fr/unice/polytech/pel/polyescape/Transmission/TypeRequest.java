@@ -15,6 +15,6 @@ public enum TypeRequest {
     CREATE_ENIGME,
     HELP,
     CREATE_ESCAPE,
-    HELP_RESPONSE;
+    INDICE;
 
 }

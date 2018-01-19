@@ -65,4 +65,12 @@ public class Joueur implements Serialize {
         result = 31 * result + (session != null ? session.hashCode() : 0);
         return result;
     }
+
+    public void setSession(Session session) {
+        this.session = session;
+    }
+
+    public Session getSession() {
+        return session;
+    }
 }
