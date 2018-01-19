@@ -12,14 +12,14 @@ import java.util.logging.Logger;
  * @author Gaetan Vialon
  * Created the 19/01/2018.
  */
-public class setReadyOrNotRequest implements Request {
+public class SetReadyOrNotRequest implements Request {
 
     private Gestionnaire gestionnaire = Gestionnaire.getInstance();
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private Joueur joueur;
     private int partieID;
 
-    public setReadyOrNotRequest(String message, Session session) {
+    public SetReadyOrNotRequest(String message, Session session) {
         JSONObject decode = new JSONObject(message);
         partieID = decode.getInt(JsonArguments.IDPARTIE.toString());
         joueur = new Joueur(decode.getString(JsonArguments.USERNAME.toString()),session);

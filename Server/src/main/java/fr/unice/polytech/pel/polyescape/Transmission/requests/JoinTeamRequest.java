@@ -13,23 +13,21 @@ import java.util.logging.Logger;
 public class JoinTeamRequest implements Request {
 
     private int gameId;
-    private String playerName;
-    private boolean hasJoin;
+    private Joueur player;
+    private boolean hasJoin = false;
 
     public JoinTeamRequest(String message, Session session){
         Logger logger = Logger.getLogger(this.getClass().getName());
         logger.info("Connexion à la partie");
-        decodeJoinTeam(message);
-        Gestionnaire gestionnaire = Gestionnaire.getInstance();
-        hasJoin = gestionnaire.getPartieByID(gameId).joinPartie(new Joueur(playerName,session));
+        decodeJoinTeam(message,session);
     }
 
-    private void decodeJoinTeam(String message){
+    private void decodeJoinTeam(String message, Session session){
         try {
             JSONObject decode = new JSONObject(message);
             gameId = decode.getInt(JsonArguments.IDPARTIE.toString());
-            playerName = decode.getString(JsonArguments.USERNAME.toString());
-
+            player = new Joueur(decode.getString(JsonArguments.USERNAME.toString()),session);
+            hasJoin = Gestionnaire.getInstance().getPartieByID(gameId).joinPartie(player);
         } catch (Exception e) {
             throw new InvalidJsonRequest();
         }

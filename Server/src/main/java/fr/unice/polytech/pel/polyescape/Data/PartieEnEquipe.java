@@ -1,6 +1,7 @@
 package fr.unice.polytech.pel.polyescape.Data;
 
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
+import fr.unice.polytech.pel.polyescape.Transmission.sender.StartGameMultiPlayerSender;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -29,8 +30,9 @@ public class PartieEnEquipe extends Partie implements Serialize {
 
     @Override
     public boolean joinPartie(Joueur joueur) {
-        return !hasStart && equipe.joinTeam(joueur);
-
+        if (!hasStart)
+            return equipe.joinTeam(joueur);
+        return false;
 
     }
 
@@ -44,8 +46,17 @@ public class PartieEnEquipe extends Partie implements Serialize {
         for (Joueur joueur: equipe.getJoueurs()) {
             association.put(joueur, new ArrayList<>());
         }
+        Collections.shuffle(escapeGame.getEnigmes());
         for (Enigme enigme : escapeGame.getEnigmes()) {
-            association.get(equipe.getRandomJoueur()).add(new Enigme(enigme.getName(),enigme.getDescription(),enigme.getReponse()));
+            association.get(equipe.getNextJoueur()).add(new Enigme(enigme.getName(),enigme.getDescription(),enigme.getReponse()));
+        }
+        System.out.println(association);
+        sendPlayerHerEnigmes();
+    }
+
+    private void sendPlayerHerEnigmes() {
+        for (Joueur joueur : association.keySet()) {
+            joueur.sendMessageToPlayer(new StartGameMultiPlayerSender(getCurrentEnigmesOfaPlayer(joueur).get()).toString());
         }
     }
 

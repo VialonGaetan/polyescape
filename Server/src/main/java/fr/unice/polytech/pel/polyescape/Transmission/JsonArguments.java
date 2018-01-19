@@ -13,6 +13,7 @@ public enum  JsonArguments {
     TEMPS("temps"),
     EQUIPE("equipe"),
     ENIGMES("enigmes"),
+    ENIGME("enigme"),
     ESCAPEGAMES("escapegames"),
     ESCAPEGAME("escapegame"),
     USERNAME("username"),

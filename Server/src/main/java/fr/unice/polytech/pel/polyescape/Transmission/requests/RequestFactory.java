@@ -34,7 +34,7 @@ public class RequestFactory {
             case GET_SALONS:
                 return new SalonListRequest();
             case SET_READY:
-                return new setReadyOrNotRequest(message,session);
+                return new SetReadyOrNotRequest(message,session);
             default:
                 return new InvalidJsonRequest("InvalidElementRequest");
         }

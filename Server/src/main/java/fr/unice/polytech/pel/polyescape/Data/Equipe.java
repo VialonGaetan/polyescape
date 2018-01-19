@@ -2,14 +2,17 @@ package fr.unice.polytech.pel.polyescape.Data;
 
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
 import fr.unice.polytech.pel.polyescape.Transmission.sender.ActualizeSalonSender;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Equipe implements Serialize{
 
     private final int maxSize = 4;
+    private int index = 0;
     private String name;
     private Map<Joueur, Boolean> joueurs;
 
@@ -26,8 +29,15 @@ public class Equipe implements Serialize{
         return joueurs.size();
     }
 
-    public Joueur getRandomJoueur() {
-        return joueurs.keySet().stream().findAny().get();
+    public Joueur getNextJoueur() {
+        Iterator<Joueur> iterator = joueurs.keySet().iterator();
+        if (index >= joueurs.keySet().size())
+            index=0;
+        for (int i = 0; i < index ; i++) {
+            iterator.next();
+        }
+        index++;
+        return iterator.next();
     }
 
 
@@ -50,7 +60,7 @@ public class Equipe implements Serialize{
     public boolean setJoueurReadyOrNot(Joueur joueur) {
         joueurs.replace(joueur, !joueurs.get(joueur));
         actualizeSalon();
-        return !joueurs.values().stream().filter(aBoolean -> !aBoolean).findAny().isPresent();
+        return joueurs.values().stream().allMatch(aBoolean -> aBoolean);
     }
 
     private void actualizeSalon(){
