@@ -103,8 +103,8 @@ export class EnigmePage {
     this.webSocket.send(JSON.stringify(request));
 
     this.webSocket.onmessage = function(event) {
-      //var jsonData = JSON.parse(event.data);
-      alert(event.data);
+      var jsonData = JSON.parse(event.data);
+      alert(jsonData.description);
 
 
     }.bind(this);
