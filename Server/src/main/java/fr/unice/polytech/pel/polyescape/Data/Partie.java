@@ -14,6 +14,7 @@ public class Partie implements Serialize {
 
     private EscapeGame escapeGame;
     private Map<Joueur, List<Enigme>> association;
+
     private Map<Joueur, Boolean> readyToStart;
     private GameMaster gameMaster;
     private int time;
@@ -103,5 +104,8 @@ public class Partie implements Serialize {
                     .put(JsonArguments.ESCAPEGAME.toString(),escapeGame.getName());
     }
 
+    public Map<Joueur, Boolean> getReadyToStart() {
+        return readyToStart;
+    }
 
 }
