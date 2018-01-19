@@ -32,6 +32,10 @@ public class HelpRequest implements Request {
 
     @Override
     public JSONObject answerInJson() {
-        return new JSONObject(message);
+        JSONObject tmpJson = new JSONObject(message);
+        JSONObject jsonObject = new JSONObject().put("reponse",tmpJson.getString(JsonArguments.REQUEST.toString()));
+        jsonObject.put("username",tmpJson.getString("username"));
+        jsonObject.put("enigme", tmpJson.getString("enigme"));
+        return jsonObject;
     }
 }

@@ -37,10 +37,8 @@ public class GameServerEndPoint {
         }
         if (new JSONObject(message).getString(JsonArguments.REQUEST.toString()).equals(TypeRequest.HELP.toString())){
             HelpRequest helpRequest = new HelpRequest(message, Gestionnaire.getInstance().getSessionMG());
-            System.out.println("message envoyé : "+message);
-            System.out.println("ok");
             System.out.println(Gestionnaire.getInstance().getSessionMG() == null);
-            Gestionnaire.getInstance().getSessionMG().getBasicRemote().sendText(message);
+            Gestionnaire.getInstance().getSessionMG().getBasicRemote().sendText(helpRequest.getAnswer());
         }
         if (new JSONObject(message).getString(JsonArguments.REQUEST.toString()).equals(TypeRequest.HELP_RESPONSE.toString())){
 //            HelpResponseRequest helpRequest = new HelpResponseRequest(message, sessionAppli);

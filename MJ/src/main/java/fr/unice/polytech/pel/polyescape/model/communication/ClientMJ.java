@@ -1,26 +1,19 @@
 package fr.unice.polytech.pel.polyescape.model.communication;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
 import fr.unice.polytech.pel.polyescape.controller.MJController;
-import javafx.geometry.Pos;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.cell.ComboBoxListCell;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
-import org.controlsfx.control.Notifications;
 import org.json.JSONObject;
 
 import javax.websocket.*;
-import java.awt.*;
 import java.io.IOException;
 import java.util.logging.Logger;
 
@@ -81,20 +74,15 @@ public class ClientMJ {
         System.out.println(message);
         dataParser = new DataParser(message);
         this.answer = message;
-        System.out.println(this.answer);
+        JSONObject jsonObject = new JSONObject(message);
         if (new JSONObject(message).getString(JsonArguments.REPONSE.toString()).equals("infos")) {
             System.out.println("protocol infos");
             protocolInfos();
             this.needHelp = true;
             return;
         }
-        JSONObject jsonObject = new JSONObject(message);
-        /*
-        System.out.println("request : " + jsonObject.getString("request"));
-        System.out.println("enigme : "+jsonObject.getString("enigme"));
-        System.out.println("Nom du joueur : "+jsonObject.getString("username"));
-         */
-        if (jsonObject.getString("request").equals("HELP")) {
+        if (jsonObject.getString(JsonArguments.REPONSE.toString()).equals("HELP")) {
+            System.out.println("on est bien la");
             this.currentEnigma = jsonObject.getString("enigme");
             this.nameOfThePlayer = jsonObject.getString("username");
             protocolHelp();
