@@ -18,7 +18,7 @@ export class TeamScreenPage {
   private numbers;
   private actualise;
 
-  constructor(public navCtrl: NavController,public navParams:NavParams,public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams:NavParams, public toastCtrl: ToastController) {
     this._id = 99;
     this.userName = this.navParams.get("username");
     this.webSocket = this.navParams.get("websocket");

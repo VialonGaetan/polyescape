@@ -48,8 +48,9 @@ export class EscapeScreenPage {
   }
 
   startGame(game : any) {
-    if(this.navParams.get("type") == "solo"){
-      this.navCtrl.push(EnigmePage,{teamname:this.teamName,username:this.userName, name:game, websocket:this.webSocket});
+    var type = this.navParams.get("type")
+    if(type == "solo"){
+      this.navCtrl.push(EnigmePage,{teamname:this.teamName,username:this.userName, name:game, type: type, websocket:this.webSocket});
     }
     else{
       var request = {request: "CREATE_PARTIE", teamname:this.teamName,username:this.userName, escapegame:game};
@@ -60,7 +61,7 @@ export class EscapeScreenPage {
           this.actualise = jsonData.joueurs;
         }
         else{
-          this.navCtrl.push(TeamWaitScreen,{teamname:this.teamName,username:this.userName, name:game, websocket:this.webSocket,idpartie:jsonData.idpartie,joueurs:this.actualise});
+          this.navCtrl.push(TeamWaitScreen,{teamname:this.teamName,username:this.userName, name:game, type: type, websocket:this.webSocket,idpartie:jsonData.idpartie, joueurs:this.actualise});
         }
       }.bind(this);
     }
