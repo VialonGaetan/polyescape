@@ -16,6 +16,12 @@ export class TeamProgressionScreenPage {
 
   }
 
+  swipeEvent(e) {
+    if (e.direction == 4) {
+      this.navCtrl.setRoot(EnigmePage);
+    }
+  }
+
 
 
 }

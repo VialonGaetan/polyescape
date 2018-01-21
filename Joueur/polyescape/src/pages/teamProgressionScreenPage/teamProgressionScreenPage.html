@@ -7,7 +7,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content style="background: lavender;">
+<ion-content (swipe)="swipeEvent($event)" style="background: lavender;">
 
     <ion-list margin-left="10px" margin-right="10px" *ngFor="let player of players">
       <ol class="progress">
