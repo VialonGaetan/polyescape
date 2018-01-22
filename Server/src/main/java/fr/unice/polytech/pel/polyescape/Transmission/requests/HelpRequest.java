@@ -2,11 +2,14 @@ package fr.unice.polytech.pel.polyescape.Transmission.requests;
 
 import fr.unice.polytech.pel.polyescape.Data.Joueur;
 import fr.unice.polytech.pel.polyescape.Data.GameMaster;
+import fr.unice.polytech.pel.polyescape.Data.Partie;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
 import org.json.JSONObject;
 
 import javax.websocket.Session;
+import java.io.IOException;
+import java.util.Iterator;
 import java.util.logging.Logger;
 
 public class HelpRequest implements Request {
@@ -18,11 +21,19 @@ public class HelpRequest implements Request {
     private int partieID;
     private String message;
 
-    public HelpRequest(String message, Session session) {
+    public HelpRequest(String message, Session session) throws IOException {
         logger.info("Demande d'aide");
-//        JSONObject decode = new JSONObject(message);
-//        partieID = decode.getInt(JsonArguments.IDPARTIE.toString());
         this.message = message;
+        int idpartie = new JSONObject(message).getInt("idpartie");
+        Partie currentGame = Gestionnaire.getInstance().getPartieByID(idpartie);
+        Iterator<Joueur> joueurs = currentGame.getReadyToStart().keySet().iterator();
+        while (joueurs.hasNext()) {
+            Joueur j = joueurs.next();
+            if (j.getNom().equals(new JSONObject(message).getString("username"))) {
+                j.setSession(session);
+            }
+        }
+        Gestionnaire.getInstance().getSessionMG().getBasicRemote().sendText(getAnswer());
     }
 
     @Override

@@ -6,6 +6,7 @@ import fr.unice.polytech.pel.polyescape.Transmission.TypeRequest;
 import org.json.JSONObject;
 
 import javax.websocket.Session;
+import java.io.IOException;
 
 /**
  * @author Gaetan Vialon
@@ -13,7 +14,7 @@ import javax.websocket.Session;
  */
 public class RequestFactory {
 
-    public Request createTypeRequest(String message, Session session) {
+    public Request createTypeRequest(String message, Session session) throws IOException {
         switch (TypeRequest.valueOf(new JSONObject(message).getString(JsonArguments.REQUEST.toString()))) {
             case GET_PARTIES:
                 return new PartieEnCoursListRequest(session);
@@ -31,6 +32,9 @@ public class RequestFactory {
                 return new CheckResponseRequest(message, session);
             case HELP:
                 return new HelpRequest(message, session);
+            case INDICE:
+                return new IndiceRequest(message, session);
+
 
             default:
                 return new InvalidJsonRequest("InvalidElementRequest");

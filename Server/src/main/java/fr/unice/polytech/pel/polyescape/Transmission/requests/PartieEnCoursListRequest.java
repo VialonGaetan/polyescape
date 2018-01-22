@@ -21,6 +21,8 @@ public class PartieEnCoursListRequest implements Request {
 
     public PartieEnCoursListRequest(Session session) {
         gameMaster = new GameMaster(session);
+        Gestionnaire.getInstance().setSessionMG(session);
+
     }
 
     @Override

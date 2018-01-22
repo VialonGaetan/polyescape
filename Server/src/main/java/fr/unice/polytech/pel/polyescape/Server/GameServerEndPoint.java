@@ -24,10 +24,6 @@ import java.util.logging.Logger;
 public class GameServerEndPoint {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
-    private int idpartie;
-    private int idGame;
-    private Partie currentGame;
-    private Iterator<Joueur> joueurs;
 
     @OnOpen
     public void onOpen(Session session) {
@@ -37,37 +33,6 @@ public class GameServerEndPoint {
     @OnMessage
     public String onMessage(String message, Session session) throws IOException {
         System.out.println(message);
-        if (new JSONObject(message).getString(JsonArguments.REQUEST.toString()).equals(TypeRequest.GET_PARTIES.toString())) {
-            Gestionnaire.getInstance().setSessionMG(session);
-        }
-        if (new JSONObject(message).getString(JsonArguments.REQUEST.toString()).equals(TypeRequest.HELP.toString())) {
-            int idpartie = new JSONObject(message).getInt("idpartie");
-            Partie currentGame = Gestionnaire.getInstance().getPartieByID(idpartie);
-            Iterator<Joueur> joueurs = currentGame.getReadyToStart().keySet().iterator();
-            while (joueurs.hasNext()) {
-                Joueur j = joueurs.next();
-                if (j.getNom().equals(new JSONObject(message).getString("username"))) {
-                    j.setSession(session);
-                    System.out.println(j.getNom());
-                }
-            }
-            HelpRequest helpRequest = new HelpRequest(message, Gestionnaire.getInstance().getSessionMG());
-            System.out.println(Gestionnaire.getInstance().getSessionMG() == null);
-            System.out.println("helprequest : " + helpRequest.getAnswer());
-            Gestionnaire.getInstance().getSessionMG().getBasicRemote().sendText(helpRequest.getAnswer());
-        }
-        if (new JSONObject(message).getString(JsonArguments.REQUEST.toString()).equals(TypeRequest.INDICE.toString())) {
-            System.out.println("on est la");
-            idpartie = Integer.valueOf(new JSONObject(message).getString("idGame"));
-            currentGame = Gestionnaire.getInstance().getPartieByID(idpartie);
-            joueurs = currentGame.getReadyToStart().keySet().iterator();
-            while (joueurs.hasNext()) {
-                Joueur j = joueurs.next();
-                if (j.getNom().equals(new JSONObject(message).getString("username"))) {
-                    j.getSession().getBasicRemote().sendText(message);
-                }
-            }
-        }
         logger.info("Message Receive : " + message);
         Request request = new RequestFactory().createTypeRequest(message, session);
         logger.info("Message send : " + request.getAnswer());

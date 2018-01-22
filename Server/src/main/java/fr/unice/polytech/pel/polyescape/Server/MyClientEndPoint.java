@@ -46,17 +46,4 @@ public class MyClientEndPoint {
     public void onClose(Session session, CloseReason closeReason) {
         logger.info(String.format("Session %s close because of %s", session.getId(), closeReason));
     }
-
-    /*public static void main(String[] args) {
-
-        MyClientEndPoint myClientEndPoint = new MyClientEndPoint("lol");
-        ClientManager client = ClientManager.createClient();
-        try {
-            client.connectToServer(myClientEndPoint, new URI("ws://localhost:15555/websockets/gameserver"));
-
-        } catch (DeploymentException | URISyntaxException e) {
-            throw new RuntimeException(e);
-        }
-    }*/
-
 }
