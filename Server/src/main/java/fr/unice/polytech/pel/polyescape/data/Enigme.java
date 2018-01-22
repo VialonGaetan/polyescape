@@ -53,9 +53,14 @@ public class Enigme implements Serialize {
 
     @Override
     public boolean equals(Object o) {
+        if (o == null)
+            return false;
+
+        if (this.getClass() != o.getClass())
+            return false;
 
         Enigme enigme = (Enigme) o;
-        return enigme != null && this.name.equals(enigme.name) && this.description.equals(enigme.description) && this.reponse.equals(enigme.reponse);
+        return this.name.equals(enigme.name) && this.description.equals(enigme.description) && this.reponse.equals(enigme.reponse);
     }
 
     @Override

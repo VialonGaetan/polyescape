@@ -40,11 +40,17 @@ public class Joueur implements Serialize {
 
     @Override
     public JSONObject toJson() {
-        return new JSONObject().put(JsonArguments.NOM.toString(),this.nom);
+        return new JSONObject().put(JsonArguments.USERNAME.toString(),this.nom);
     }
 
     @Override
     public boolean equals(Object o) {
+        if (o == null)
+            return false;
+
+        if (this.getClass() != o.getClass())
+            return false;
+
         Joueur joueur = (Joueur) o;
         if (this.session == null || joueur.session == null)//Uniquement pour faire des test
             return this.nom.equals(joueur.nom);

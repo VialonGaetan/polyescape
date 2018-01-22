@@ -9,11 +9,15 @@ import org.json.JSONObject;
  */
 public class EndGameMessage implements MultiPlayerAdditionalMessage {
 
+    private int score;
 
+    public EndGameMessage(int score) {
+        this.score = score;
+    }
 
     @Override
     public JSONObject messageInJson() {
         return new JSONObject().put(JsonArguments.REPONSE.toString(), JsonArguments.FINISH.toString())
-                .put(JsonArguments.SCORE.toString(), 100);
+                .put(JsonArguments.SCORE.toString(), score);
     }
 }

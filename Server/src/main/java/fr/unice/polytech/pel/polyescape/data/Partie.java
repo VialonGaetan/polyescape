@@ -35,6 +35,9 @@ public class Partie implements Serialize {
         attributeEnigme();
     }
 
+    /**
+     * En jeu seul, le joueur possede toutes les enigmes
+     */
     protected void attributeEnigme() {}
 
     public boolean hasStart() {
@@ -86,9 +89,10 @@ public class Partie implements Serialize {
         return true;
     }
 
-    protected void sendProgressPlayer(){
-
-    }
+    /**
+     * Ne fonctionne pas si on est seul
+     */
+    protected void sendProgressPlayer(){}
 
     @Override
     public JSONObject toJson() {

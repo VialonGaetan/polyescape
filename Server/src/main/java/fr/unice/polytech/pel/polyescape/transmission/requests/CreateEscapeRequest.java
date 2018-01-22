@@ -8,7 +8,6 @@ import org.json.JSONObject;
  */
 public class CreateEscapeRequest implements Request{
 
-
     @Override
     public JSONObject answerInJson() {
         return null;
