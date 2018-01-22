@@ -17,6 +17,7 @@ public class IndiceRequest implements Request {
     private String message;
 
     public IndiceRequest(String message, Session session) throws IOException {
+        System.out.println(message);
         idpartie = Integer.valueOf(new JSONObject(message).getString("idGame"));
         currentGame = Gestionnaire.getInstance().getPartieByID(idpartie);
         joueurs = currentGame.getReadyToStart().keySet().iterator();
@@ -29,6 +30,8 @@ public class IndiceRequest implements Request {
         while (joueurs.hasNext()) {
             Joueur j = joueurs.next();
             if (j.getNom().equals(new JSONObject(message).getString("username"))) {
+                System.out.println("nom : "+j.getNom());
+                System.out.println(j.getSession()==null);
                 j.getSession().getBasicRemote().sendText(message);
             }
         }

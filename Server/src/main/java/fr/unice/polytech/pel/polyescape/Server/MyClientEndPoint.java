@@ -46,4 +46,5 @@ public class MyClientEndPoint {
     public void onClose(Session session, CloseReason closeReason) {
         logger.info(String.format("Session %s close because of %s", session.getId(), closeReason));
     }
+
 }

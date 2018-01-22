@@ -30,8 +30,9 @@ public class RequestFactory {
                 return new CreateEscapeRequest();
             case RESPONSE:
                 return new CheckResponseRequest(message, session);
-            case HELP:
+            case HELP:{
                 return new HelpRequest(message, session);
+            }
             case INDICE:
                 return new IndiceRequest(message, session);
 
