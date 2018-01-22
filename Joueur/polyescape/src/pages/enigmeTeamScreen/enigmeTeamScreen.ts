@@ -1,6 +1,5 @@
 import {Component} from "@angular/core";
 import {NavController, NavParams, ToastController} from "ionic-angular";
-import {TimerService} from "../../app/timerservice";
 import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
 
 
@@ -23,7 +22,7 @@ export class EnigmeTeamPage {
   private timer:number;
   private type;
 
-  constructor(public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController, public timerService: TimerService) {
+  constructor(public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController) {
     this.userName = navParams.get("username");
     this.nomEscape = navParams.get("name");
     this.webSocket = navParams.get("websocket");
@@ -97,19 +96,4 @@ export class EnigmeTeamPage {
       }.bind(this);
     }
   }
-
-  /*swipeEvent(e) {
-    if (e.direction == 2 && this.type != "solo") {
-      this.navCtrl.setRoot(TeamProgressionScreenPage, {teamname: this.teamName,
-        username: this.userName,
-        type: this.type,
-        name:this.nomEscape,
-        websocket:this.webSocket,
-        infos:this.enigmeInfos,
-        idpartie:this.idPartie,
-        temps: this.minutes,
-        nomenigme: this.nomEnigme});
-    }
-  }*/
-
 }

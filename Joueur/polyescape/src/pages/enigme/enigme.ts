@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {Events, NavController, NavParams, ToastController} from 'ionic-angular';
 import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
-import {TeamProgressionScreenPage} from "../teamProgressionScreenPage/teamProgressionScreenPage";
-import {TimerService} from "../../app/timerservice";
+
+
 
 @Component({
   selector: 'page-enigme',
@@ -23,7 +23,7 @@ export class EnigmePage {
   private timer:number;
   private type;
 
-  constructor(public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController, public timerService: TimerService) {
+  constructor(public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController) {
     this.userName = navParams.get("username");
     this.nomEscape = navParams.get("name");
     this.webSocket = navParams.get("websocket");
@@ -34,8 +34,7 @@ export class EnigmePage {
     this.minutes = this.navParams.get("temps");
     this.type = this.navParams.get("type");
 
-    //this.timer = setInterval(this.decreaseTime.bind(this.minutes, this.secondes, this),1000);
-    this.timer = setInterval(this.timerService.decreaseTime(this.minutes, this.secondes),1000);
+    this.timer = setInterval(this.decreaseTime.bind(this),1000);
   }
 
   presentToastNoAnswer() {
@@ -59,17 +58,17 @@ export class EnigmePage {
   }
 
 
-  decreaseTime(minutes, secondes){
-    if(secondes == 0 && minutes != 0){
-      secondes = 59;
-      minutes--;
+  decreaseTime(){
+    if(this.secondes == 0 && this.minutes != 0){
+      this.secondes = 59;
+      this.minutes--;
     }
-    else if(secondes == 0 && minutes == 0){
+    else if(this.secondes == 0 && this.minutes == 0){
       clearInterval(this.timer);
       this.navCtrl.push(EndGameScreenPage,{score:0});
     }
     else {
-      secondes--;
+      this.secondes--;
     }
 
   }
@@ -98,19 +97,4 @@ export class EnigmePage {
       }.bind(this);
     }
   }
-
-  swipeEvent(e) {
-    if (e.direction == 2 && this.type != "solo") {
-      this.navCtrl.setRoot(TeamProgressionScreenPage, {teamname: this.teamName,
-                                                            username: this.userName,
-                                                            type: this.type,
-                                                            name:this.nomEscape,
-                                                            websocket:this.webSocket,
-                                                            infos:this.enigmeInfos,
-                                                            idpartie:this.idPartie,
-                                                            temps: this.minutes,
-                                                            nomenigme: this.nomEnigme});
-    }
-  }
-
 }
