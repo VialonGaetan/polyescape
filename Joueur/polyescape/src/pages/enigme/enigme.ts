@@ -27,18 +27,11 @@ export class EnigmePage {
     this.nomEscape = navParams.get("name");
     this.webSocket = navParams.get("websocket");
     this.teamName = this.navParams.get("teamname");
-    var request = {request: "CREATE_PARTIE",teamname:this.teamName,username:this.userName,escapegame:this.nomEscape};
-    this.webSocket.send(JSON.stringify(request));
-    this.webSocket.onmessage = function(event) {
-      var jsonData = JSON.parse(event.data);
-      if(jsonData.reponse == "ok"){
-        this.nomEnigme = jsonData.nom;
-        this.enigmeInfos = jsonData.infos;
-        this.idPartie = jsonData.idpartie;
-        this.minutes = jsonData.temps;
-        this.timer = setInterval(this.decreaseTime.bind(this),1000);
-      }
-    }.bind(this);
+    this.nomEnigme = this.navParams.get("infosenigme").nom;
+    this.enigmeInfos = this.navParams.get("infosenigme").infos;
+    this.idPartie = this.navParams.get("idpartie");
+    this.minutes = this.navParams.get("infosenigme").temps;
+    this.timer = setInterval(this.decreaseTime.bind(this),1000);
   }
 
   presentToastNoAnswer() {
@@ -47,7 +40,6 @@ export class EnigmePage {
       duration: 3000,
       position: 'bottom'
     });
-
 
     toast.present();
   }

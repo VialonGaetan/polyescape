@@ -50,7 +50,14 @@ export class EscapeScreenPage {
   startGame(game : any) {
     var type = this.navParams.get("type");
     if(type == "solo"){
-      this.navCtrl.push(EnigmePage,{teamname:this.teamName,username:this.userName, type: type, name:game, websocket:this.webSocket});
+      var request = {request: "CREATE_PARTIE",teamname:this.teamName,username:this.userName,escapegame:game};
+      this.webSocket.send(JSON.stringify(request));
+      this.webSocket.onmessage = function(event) {
+        var jsonData = JSON.parse(event.data);
+        if(jsonData.reponse == "ok"){
+          this.navCtrl.push(EnigmePage,{teamname:this.teamName,username:this.userName, type: type, name:game, websocket:this.webSocket,infosenigme:jsonData,idpartie:jsonData.idpartie});
+        }
+      }.bind(this);
     }
     else{
       var request = {request: "CREATE_PARTIE", teamname:this.teamName,username:this.userName, escapegame:game};
