@@ -27,10 +27,10 @@ export class EnigmePage {
     this.nomEscape = navParams.get("name");
     this.webSocket = navParams.get("websocket");
     this.teamName = this.navParams.get("teamname");
-    this.nomEnigme = this.navParams.get("infosenigme").nom;
-    this.enigmeInfos = this.navParams.get("infosenigme").infos;
+    this.nomEnigme = this.navParams.get("nomenigme");
+    this.enigmeInfos = this.navParams.get("infos");
     this.idPartie = this.navParams.get("idpartie");
-    this.minutes = this.navParams.get("infosenigme").temps;
+    this.minutes = this.navParams.get("temps");
     this.timer = setInterval(this.decreaseTime.bind(this),1000);
   }
 
