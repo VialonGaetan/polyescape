@@ -1,6 +1,6 @@
 package fr.unice.polytech.pel.polyescape;
 
-import fr.unice.polytech.pel.polyescape.Data.*;
+import fr.unice.polytech.pel.polyescape.data.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -71,9 +71,5 @@ public class Gestionnaire {
 
     public Partie getPartieByID(int id){
         return parties.get(id);
-    }
-
-    public void deletePartie(int id){
-        parties.remove(id);
     }
 }

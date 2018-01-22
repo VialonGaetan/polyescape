@@ -1,6 +1,6 @@
 package fr.unice.polytech.pel.polyescape;
 
-import fr.unice.polytech.pel.polyescape.Server.GameServerEndPoint;
+import fr.unice.polytech.pel.polyescape.server.GameServerEndPoint;
 import org.glassfish.tyrus.server.Server;
 
 /**
