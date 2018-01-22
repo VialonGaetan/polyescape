@@ -29,7 +29,7 @@ export class TeamWaitScreen {
           this.actualise(jsonData.joueurs);
         }
         else if(jsonData.reponse == "enigme"){
-          this.navCtrl.push(EnigmePage,{teamname:this.teamName,username:this.userName,name:this.escapeName,websocket:this.webSocket,infos:jsonData.infos,temps:jsonData.temps,nomenigme:jsonData.nom,idpartie:this.idpartie})
+          this.navCtrl.setRoot(EnigmePage,{teamname:this.teamName,username:this.userName,name:this.escapeName,websocket:this.webSocket,infos:jsonData.infos,temps:jsonData.temps,nomenigme:jsonData.nom,idpartie:this.idpartie})
         }
 
     }.bind(this);
