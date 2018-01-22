@@ -31,18 +31,11 @@ public class DataParser {
     }
 
     public ObservableList<String> getPlayers() {
-//        System.out.println(answer);
-//        System.out.println("parsing players :\n");
         JSONObject jsonObject = new JSONObject(answer);
         for (int i=0; i<jsonObject.getJSONArray("partieencours").getJSONObject(0).getJSONArray("joueurs").length(); i++){
             players.add(jsonObject.getJSONArray("partieencours").getJSONObject(0).getJSONArray("joueurs").getJSONObject(0).get("nom").toString());
         }
-//        System.out.println("time aff : "+jsonObject.getJSONArray("partieencours").getJSONObject(0).get("temps"));
-//        System.out.println("time : "+this.timeInMinutes);
-//        System.out.println("taille : "+this.players.size());
-//        for (int i =0; i<this.players.size(); i++){
-//            System.out.println(this.players.get(i));
-//        }
+
         return this.players;
 
     }

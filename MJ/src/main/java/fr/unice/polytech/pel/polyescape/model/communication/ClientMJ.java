@@ -31,13 +31,13 @@ public class ClientMJ {
     private Boolean firstTime = true;
     private int timeInMinute = 0;
     MJController mjController;
-    private Boolean needHelp = false;
     private String currentEnigma = "";
     private String nameOfThePlayer = "";
     private String idPartie;
+    private Text descriptionEnigma;
 
 
-    public ClientMJ(String message, ProgressIndicator progressIndicator, Text teamNameText, Text escapeGameName, ComboBox listPlayer, MJController mjController) {
+    public ClientMJ(String message, ProgressIndicator progressIndicator, Text teamNameText, Text escapeGameName, ComboBox listPlayer, MJController mjController, Text descriptionEnigma) {
         this.message = message;
         this.answer = "";
         this.dataParser = new DataParser(message);
@@ -46,6 +46,7 @@ public class ClientMJ {
         this.escapeGameName = escapeGameName;
         this.teamName = teamNameText;
         this.mjController = mjController;
+        this.descriptionEnigma = descriptionEnigma;
     }
 
     public ClientMJ(String message) {
@@ -79,14 +80,17 @@ public class ClientMJ {
         if (new JSONObject(message).getString(JsonArguments.REPONSE.toString()).equals("infos")) {
             AdressBook.getInstance().setServerSession(session);
             protocolInfos();
-            this.needHelp = true;
             return;
         }
         if (jsonObject.getString(JsonArguments.REPONSE.toString()).equals("HELP")) {
             this.currentEnigma = jsonObject.getString("enigme");
             this.nameOfThePlayer = jsonObject.getString("username");
             this.idPartie = ""+jsonObject.getInt("idGame");
-            this.teamName.setText(this.idPartie);
+            this.mjController.setIdPartie(jsonObject.getInt("idGame"));
+            AdressBook.getInstance().updateEnigma(nameOfThePlayer, currentEnigma);
+            AdressBook.getInstance().updateSessions(this.nameOfThePlayer,session);
+            System.out.println(AdressBook.getInstance().getPlayersEnigma().get(nameOfThePlayer));
+            System.out.println(AdressBook.getInstance().getAPlayerSession(nameOfThePlayer).toString());
             protocolHelp(this.nameOfThePlayer, this.currentEnigma);
         }
         return;
@@ -102,11 +106,11 @@ public class ClientMJ {
     }
 
     private void protocolHelp(String nameOfThePlayer, String currentEnigma) {
-        System.out.println("demande d'aide");
         try {
             Media hit = new Media(getClass().getClassLoader().getResource("sound/aide.mp3").toString());
             MediaPlayer mediaPlayer = new MediaPlayer(hit);
             mediaPlayer.play();
+            System.out.println(nameOfThePlayer);
             updateListPlayer(nameOfThePlayer,true);
         } catch (Exception e) {
             e.printStackTrace();

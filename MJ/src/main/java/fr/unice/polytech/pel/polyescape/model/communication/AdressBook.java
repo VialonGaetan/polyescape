@@ -1,11 +1,17 @@
 package fr.unice.polytech.pel.polyescape.model.communication;
 
 import javax.websocket.Session;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class AdressBook {
 
     private static AdressBook adressBook = new AdressBook();
     private Session serverSession;
+    private HashMap<String, Session> adressPlayers = new HashMap<>();
+    Iterator<String> joueurs;
+    HashMap<String, String> playersEnigma = new HashMap<>();
+
 
     public static AdressBook getInstance() {
         return adressBook;
@@ -18,4 +24,26 @@ public class AdressBook {
     public void setServerSession(Session serverSession) {
         this.serverSession = serverSession;
     }
+
+    public HashMap<String, Session> getAdressPlayers() {
+        return adressPlayers;
+    }
+
+    public void updateSessions(String playerName, Session hisSession) {
+        this.adressPlayers.put(playerName, hisSession);
+    }
+
+    public Session getAPlayerSession(String playerName) {
+        return this.adressPlayers.get(playerName);
+    }
+
+    public void updateEnigma(String nameOfThePlayer, String hisEnigma){
+        this.playersEnigma.put(nameOfThePlayer, hisEnigma);
+    }
+
+    public HashMap<String, String> getPlayersEnigma() {
+        return playersEnigma;
+    }
+
+
 }

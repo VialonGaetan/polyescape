@@ -182,7 +182,7 @@ public class MasterGame extends Stage{
         this.getScene().getStylesheets().addAll(getClass().getClassLoader().getResource("styles/style.css").toExternalForm());
 
         this.show();
-        control = new MJController(scene, topPane,progressBar,choicePlayer, listPlayer,timeHB,bottomPane, btnAnswer, progressLabel, timeIndicator);
+        control = new MJController(scene, topPane,progressBar,choicePlayer, listPlayer,timeHB,bottomPane, btnAnswer, progressLabel, timeIndicator, descriptionEnigma);
         return control;
     }
 

@@ -35,6 +35,7 @@ import java.util.TimerTask;
 
 public class MJController {
 
+    private int idPartie;
     private Scene scene;
     Boolean finDuJeu = false;
     private StackPane topPane;
@@ -56,8 +57,9 @@ public class MJController {
     private int minute;
     private int givenMinutes;
     private ResponseMaker responseMaker;
+    private Text descriptionEnigma;
 
-    public MJController(Scene scene, StackPane topPane, ProgressBar progressBar, Label choicePlayer, ComboBox listPlayer, HBox timeHB, StackPane bottomPane, Button btn, Label progressLabel, ProgressIndicator timeIndicator) throws URISyntaxException, DeploymentException, InterruptedException {
+    public MJController(Scene scene, StackPane topPane, ProgressBar progressBar, Label choicePlayer, ComboBox listPlayer, HBox timeHB, StackPane bottomPane, Button btn, Label progressLabel, ProgressIndicator timeIndicator, Text descriptionEnigma) throws URISyntaxException, DeploymentException, InterruptedException {
         this.progressIndicatorTime = timeIndicator;
         this.scene = scene;
         this.topPane = topPane;
@@ -71,6 +73,7 @@ public class MJController {
         this.remindedTime = ((Label) (timeHB.getChildren().get(0)));
         this.answerField = ((TextArea) (bottomPane.getChildren().get(0)));
         this.selectedPlayer = "";
+        this.descriptionEnigma = descriptionEnigma;
         this.hour = 0;
         this.minute = 2;
         this.givenMinutes = 2;
@@ -119,13 +122,17 @@ public class MJController {
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 selectedPlayer = listPlayer.getValue().toString();
                 ((Text) (topPane.getChildren().get(2))).setText(selectedPlayer);
+                if (!AdressBook.getInstance().getPlayersEnigma().containsKey(selectedPlayer)){
+                    descriptionEnigma.setText("Le joueur n'a pas encore eu de problèmes particuliers");
+                }else{
+                    descriptionEnigma.setText("Dernière enigme rencontrée :\n"+AdressBook.getInstance().getPlayersEnigma().get(selectedPlayer));
+                }
             }
         });
     }
 
     public void envoieIndice() throws IOException {
         if (this.teamName.getText().equals("")) return;
-        AdressBook.getInstance().getServerSession().getBasicRemote().sendText("okok");
         try {
             Media hit = new Media(getClass().getClassLoader().getResource("sound/notification.wav").toString());
             MediaPlayer mediaPlayer = new MediaPlayer(hit);
@@ -134,7 +141,7 @@ public class MJController {
             e.printStackTrace();
         }
         Notifications.create().title("Indice envoyé").text("Indice envoyé au joueur " + selectedPlayer).darkStyle().position(Pos.TOP_LEFT).showWarning();
-        responseMaker = new ResponseMaker(answerField.getText(), selectedPlayer, this.teamName.getText());
+        responseMaker = new ResponseMaker(answerField.getText(), selectedPlayer, ""+this.idPartie);
         answerField.setText("");
         updateListPlayer(selectedPlayer, false);
         AdressBook.getInstance().getServerSession().getBasicRemote().sendText(responseMaker.getAnswer());
@@ -154,7 +161,7 @@ public class MJController {
             MediaPlayer mediaPlayer = new MediaPlayer(hit);
             mediaPlayer.play();
         }
-        if (this.hour == 0 && this.minute == 1) {//A MODIF
+        if (this.hour == 0 && this.minute == 1) {
             Notifications.create().title("Temps faible").text("Temps restant :1 minute !").darkStyle().position(Pos.CENTER).showWarning();
             Media hit = new Media(getClass().getClassLoader().getResource("sound/1min.mp3").toString());
             MediaPlayer mediaPlayer = new MediaPlayer(hit);
@@ -178,7 +185,7 @@ public class MJController {
     }
 
     public void makeRequest(String request) throws URISyntaxException, DeploymentException, InterruptedException {
-        ClientMJ clientMJ = new ClientMJ(request, progressIndicatorTime, teamName, escapeGameName, listPlayer, this);
+        ClientMJ clientMJ = new ClientMJ(request, progressIndicatorTime, teamName, escapeGameName, listPlayer, this,this.descriptionEnigma);
         ClientManager client = ClientManager.createClient();
         client.connectToServer(clientMJ, new URI("ws://localhost:15555/websockets/gameserver"));
     }
@@ -213,5 +220,13 @@ public class MJController {
                 return cell;
             }
         });
+    }
+
+    public int getIdPartie() {
+        return idPartie;
+    }
+
+    public void setIdPartie(int idPartie) {
+        this.idPartie = idPartie;
     }
 }
