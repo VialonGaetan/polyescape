@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
-import {Events, NavController, NavParams, ToastController} from 'ionic-angular';
-import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
-import {TeamProgressionScreenPage} from "../teamProgressionScreenPage/teamProgressionScreenPage";
+import {Component} from "@angular/core";
+import {NavController, NavParams, ToastController} from "ionic-angular";
 import {TimerService} from "../../app/timerservice";
+import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
+
 
 @Component({
-  selector: 'page-enigme',
-  templateUrl: 'enigme.html'
+  selector: 'page-enigmeTeam',
+  templateUrl: 'enigmeTeamScreen.html'
 })
-export class EnigmePage {
+export class EnigmeTeamPage {
 
   private inputAnswer = '';
   private userName = '';
@@ -34,9 +34,8 @@ export class EnigmePage {
     this.minutes = this.navParams.get("temps");
     this.type = this.navParams.get("type");
 
-    //this.timer = setInterval(this.decreaseTime.bind(this.minutes, this.secondes, this),1000);
-    this.timer = setInterval(this.timerService.decreaseTime(this.minutes, this.secondes),1000);
-  }
+    this.timer = setInterval(this.decreaseTime.bind(this),1000);
+    }
 
   presentToastNoAnswer() {
     let toast = this.toastCtrl.create({
@@ -59,17 +58,17 @@ export class EnigmePage {
   }
 
 
-  decreaseTime(minutes, secondes){
-    if(secondes == 0 && minutes != 0){
-      secondes = 59;
-      minutes--;
+  decreaseTime(){
+    if(this.secondes == 0 && this.minutes != 0){
+      this.secondes = 59;
+      this.minutes--;
     }
-    else if(secondes == 0 && minutes == 0){
+    else if(this.secondes == 0 && this.minutes == 0){
       clearInterval(this.timer);
       this.navCtrl.push(EndGameScreenPage,{score:0});
     }
     else {
-      secondes--;
+      this.secondes--;
     }
 
   }
@@ -99,18 +98,18 @@ export class EnigmePage {
     }
   }
 
-  swipeEvent(e) {
+  /*swipeEvent(e) {
     if (e.direction == 2 && this.type != "solo") {
       this.navCtrl.setRoot(TeamProgressionScreenPage, {teamname: this.teamName,
-                                                            username: this.userName,
-                                                            type: this.type,
-                                                            name:this.nomEscape,
-                                                            websocket:this.webSocket,
-                                                            infos:this.enigmeInfos,
-                                                            idpartie:this.idPartie,
-                                                            temps: this.minutes,
-                                                            nomenigme: this.nomEnigme});
+        username: this.userName,
+        type: this.type,
+        name:this.nomEscape,
+        websocket:this.webSocket,
+        infos:this.enigmeInfos,
+        idpartie:this.idPartie,
+        temps: this.minutes,
+        nomenigme: this.nomEnigme});
     }
-  }
+  }*/
 
 }

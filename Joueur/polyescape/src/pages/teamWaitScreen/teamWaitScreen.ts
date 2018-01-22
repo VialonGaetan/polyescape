@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {EnigmePage} from "../enigme/enigme";
+import {EnigmeTeamPage} from "../enigmeTeamScreen/enigmeTeamScreen";
 
 @Component({
   selector: 'page-WaitTeam',
@@ -29,7 +30,7 @@ export class TeamWaitScreen {
           this.actualise(jsonData.joueurs);
         }
         else if(jsonData.reponse == "enigme"){
-          this.navCtrl.setRoot(EnigmePage,{teamname:this.teamName,username:this.userName,name:this.escapeName,websocket:this.webSocket,infos:jsonData.infos,temps:jsonData.temps,nomenigme:jsonData.nom,idpartie:this.idpartie})
+          this.navCtrl.setRoot(EnigmeTeamPage,{teamname:this.teamName,username:this.userName,name:this.escapeName,websocket:this.webSocket,infos:jsonData.infos,temps:jsonData.temps,nomenigme:jsonData.nom,idpartie:this.idpartie})
         }
 
     }.bind(this);

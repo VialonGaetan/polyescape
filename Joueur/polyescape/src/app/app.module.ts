@@ -13,6 +13,8 @@ import {TeamWaitScreen} from "../pages/teamWaitScreen/teamWaitScreen";
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import {TeamProgressionScreenPage} from "../pages/teamProgressionScreenPage/teamProgressionScreenPage";
+import {TimerService} from "./timerservice";
+import {EnigmeTeamPage} from "../pages/enigmeTeamScreen/enigmeTeamScreen";
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import {TeamProgressionScreenPage} from "../pages/teamProgressionScreenPage/team
     HomePage,
     EnigmePage,
     TeamWaitScreen,
+    EnigmeTeamPage,
     TeamProgressionScreenPage
 
   ],
@@ -39,6 +42,7 @@ import {TeamProgressionScreenPage} from "../pages/teamProgressionScreenPage/team
     HomePage,
     EnigmePage,
     TeamWaitScreen,
+    EnigmeTeamPage,
     TeamProgressionScreenPage
 
   ],
@@ -46,6 +50,7 @@ import {TeamProgressionScreenPage} from "../pages/teamProgressionScreenPage/team
     LocalNotifications,
     StatusBar,
     SplashScreen,
+    TimerService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

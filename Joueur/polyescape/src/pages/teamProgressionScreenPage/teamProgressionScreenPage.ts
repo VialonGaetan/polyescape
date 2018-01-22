@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, ToastController} from 'ionic-angular';
+import {Events, NavController, NavParams, ToastController} from 'ionic-angular';
 import {EnigmePage} from "../enigme/enigme";
 
 @Component({
@@ -19,7 +19,7 @@ export class TeamProgressionScreenPage {
   private type;
   private minutes:number = 0;
 
-  constructor(public navCtrl: NavController, public navParams:NavParams) {
+  constructor(public navCtrl: NavController, public navParams:NavParams, public events: Events) {
     this.userName = navParams.get("username");
     this.nomEscape = navParams.get("name");
     this.webSocket = navParams.get("websocket");
@@ -31,7 +31,10 @@ export class TeamProgressionScreenPage {
     this.type = this.navParams.get("type");
     for (var i = 0; i < 4; i++)
       this.players.push('Bob');
+
   }
+
+
 
   swipeEvent(e) {
     if (e.direction == 4) {

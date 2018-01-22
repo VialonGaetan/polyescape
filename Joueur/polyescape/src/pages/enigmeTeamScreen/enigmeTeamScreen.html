@@ -1,0 +1,98 @@
+<ion-header>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <ion-navbar>
+    <ion-title>
+      Enigme
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content style="background: lavender;">
+  <ion-slides pager>
+    <ion-slide>
+      <div style="background: lavender;">
+        <div id="usr1">
+          <ion-icon id="userIcon1" name="person"></ion-icon>
+          <br />
+          <label id="userName1" >{{userName}}</label>
+        </div>
+        <ion-label id="title"> Escape game en cours:
+          {{nomEscape}}
+        </ion-label>
+        <div id="timeDiv">
+          <div class="block">
+            <ion-icon name="alarm" style="color: #1abc9c;margin-top: 10px;"></ion-icon>
+            <span class="digit" item-right style="vertical-align: 15%;">{{ minutes }}:{{ secondes }}</span>
+          </div>
+        </div>
+        <ion-label style="margin-left: 20px;">
+          Nom de l'énigme:
+        </ion-label>
+        <ion-label style="margin-left: 20px;">
+          {{nomEnigme}}
+        </ion-label>
+        <ion-label style="margin-left: 20px;">
+          Description
+        </ion-label>
+        <div style=" overflow-y:scroll;width:100%; height:200px;">
+          <ion-label text-wrap="true" style="margin-left: 20px; margin-right: 20px">
+            {{enigmeInfos}}
+          </ion-label>
+        </div>
+        <ion-item class="input1">
+          <ion-input [(ngModel)]="inputAnswer" type="text" placeholder="Votre réponse"></ion-input>
+        </ion-item>
+        <div id="enigmeButtonsDiv" padding-bottom="10px">
+          <button class="enigmeButtons" (click)='submitAnswer()' ion-button margin-left="150px" icon-right>
+            valider
+            <ion-icon name="key"></ion-icon>
+          </button>
+          <button class="enigmeButtons" ion-button id="help" icon-right>
+            demander de l'aide
+            <ion-icon name="help-circle"></ion-icon>
+          </button>
+        </div>
+      </div>
+    </ion-slide>
+    <ion-slide>
+      <div style="background: lavender;">
+
+          <ion-list margin-left="10px" margin-right="10px" *ngFor="let player of players">
+            <ion-icon id="userIcon1" name="person"></ion-icon>
+            <div style="border:1px solid black;height:100px;overflow-y:hidden;overflow-x:scroll;">
+              <ol class="progress">
+                <li class="is-active" data-step="1">
+                  Step 1
+                </li>
+                <li data-step="2">
+                  Step 2
+                </li>
+                <li data-step="3" class="progress__last">
+                  Step 3
+                </li>
+                <li data-step="3" class="progress__last">
+                            Step 4
+                </li>
+                <li data-step="3" class="progress__last">
+                            Step 5
+                </li>
+                <li data-step="3" class="progress__last">
+                            Step 6
+                </li>
+                <li data-step="3" class="progress__last">
+                                      Step 6
+                          </li>
+                          <li data-step="3" class="progress__last">
+                                                Step 6
+                                    </li>
+                                    <li data-step="3" class="progress__last">
+                                                          Step 6
+                                              </li>
+              </ol>
+            </div>
+          </ion-list>
+
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
