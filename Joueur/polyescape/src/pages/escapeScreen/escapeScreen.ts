@@ -49,8 +49,8 @@ export class EscapeScreenPage {
 
   startGame(game : any) {
     var type = this.navParams.get("type");
+    var request = {request: "CREATE_PARTIE",teamname:this.teamName,username:this.userName,escapegame:game};
     if(type == "solo"){
-      var request = {request: "CREATE_PARTIE",teamname:this.teamName,username:this.userName,escapegame:game};
       this.webSocket.send(JSON.stringify(request));
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);
@@ -60,7 +60,6 @@ export class EscapeScreenPage {
       }.bind(this);
     }
     else{
-      var request = {request: "CREATE_PARTIE", teamname:this.teamName,username:this.userName, escapegame:game};
       this.webSocket.send(JSON.stringify(request));
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);

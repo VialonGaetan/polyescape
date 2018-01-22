@@ -99,6 +99,4 @@ export class EnigmePage {
     }
   }
 
-
-
 }
