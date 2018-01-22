@@ -20,6 +20,7 @@ export class EnigmePage {
   private minutes:number = 0;
   private secondes:number = 0;
   private timer:number;
+  private type;
 
 
   constructor(public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController) {
@@ -31,6 +32,7 @@ export class EnigmePage {
     this.enigmeInfos = this.navParams.get("infos");
     this.idPartie = this.navParams.get("idpartie");
     this.minutes = this.navParams.get("temps");
+    this.type = this.navParams.get("type");
     this.timer = setInterval(this.decreaseTime.bind(this),1000);
   }
 
@@ -73,7 +75,7 @@ export class EnigmePage {
       this.presentToastNoAnswer();
     }
     else {
-      var request = {request:"RESPONSE", "idpartie":this.idPartie,"reponse":this.inputAnswer,username:this.userName};
+      var request = {request:"RESPONSE", "idpartie":this.idPartie, "reponse":this.inputAnswer, username:this.userName};
       this.webSocket.send(JSON.stringify(request));
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);
@@ -94,8 +96,16 @@ export class EnigmePage {
   }
 
   swipeEvent(e) {
-    if (e.direction == 2 && this.navParams.get("type") != "solo") {
-      this.navCtrl.setRoot(TeamProgressionScreenPage, {websocket: this.webSocket});
+    if (e.direction == 2 && this.type != "solo") {
+      this.navCtrl.setRoot(TeamProgressionScreenPage, {teamname: this.teamName,
+                                                            username: this.userName,
+                                                            type: this.type,
+                                                            name:this.nomEscape,
+                                                            websocket:this.webSocket,
+                                                            infos:this.enigmeInfos,
+                                                            idpartie:this.idPartie,
+                                                            temps: this.minutes,
+                                                            nomenigme: this.nomEnigme});
     }
   }
 

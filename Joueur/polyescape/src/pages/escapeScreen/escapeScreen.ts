@@ -55,7 +55,7 @@ export class EscapeScreenPage {
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);
         if(jsonData.reponse == "ok"){
-          this.navCtrl.push(EnigmePage,{teamname:this.teamName,username:this.userName, type: type, name:game, websocket:this.webSocket,infos:jsonData.infos,temps:jsonData.temps,idpartie:jsonData.idpartie,nomenigme:jsonData.nom});
+          this.navCtrl.setRoot(EnigmePage,{teamname:this.teamName,username:this.userName, type: type, name:game, websocket:this.webSocket,infos:jsonData.infos,temps:jsonData.temps,idpartie:jsonData.idpartie,nomenigme:jsonData.nom});
         }
       }.bind(this);
     }
@@ -67,7 +67,7 @@ export class EscapeScreenPage {
           this.actualise = jsonData.joueurs;
         }
         else{
-          this.navCtrl.push(TeamWaitScreen,{teamname:this.teamName,username:this.userName, type: type, name:game, websocket:this.webSocket,idpartie:jsonData.idpartie,joueurs:this.actualise});
+          this.navCtrl.setRoot(TeamWaitScreen,{teamname:this.teamName,username:this.userName, type: type, name:game, websocket:this.webSocket,idpartie:jsonData.idpartie,joueurs:this.actualise});
         }
       }.bind(this);
     }
