@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, ToastController} from 'ionic-angular';
+import {EnigmePage} from "../enigme/enigme";
 
 @Component({
   selector: 'page-WaitTeam',
@@ -13,6 +14,7 @@ export class TeamWaitScreen {
   private escapeName = '';
   private players = [];
   private idpartie = '';
+  private buttonColor;
 
   constructor(public navCtrl: NavController, public navParams:NavParams, public toastCtrl: ToastController) {
     this.webSocket = this.navParams.get("websocket");
@@ -20,11 +22,16 @@ export class TeamWaitScreen {
     this.teamName = this.navParams.get("teamname");
     this.escapeName = this.navParams.get("name");
     this.idpartie = this.navParams.get("idpartie");
+    this.buttonColor = "#ff0000";
     this.webSocket.onmessage = function (event) {
       var jsonData = JSON.parse(event.data);
         if(jsonData.reponse == "actualise"){
           this.actualise(jsonData.joueurs);
         }
+        else if(jsonData.reponse == "enigme"){
+          this.navCtrl.push(EnigmePage,{teamname:this.teamName,username:this.userName,name:this.escapeName,websocket:this.webSocket,infosenigme:jsonData,idpartie:this.idpartie})
+        }
+
     }.bind(this);
     var jsonJoueurs = navParams.get("joueurs");
     this.actualise(jsonJoueurs);
@@ -44,9 +51,11 @@ export class TeamWaitScreen {
 
   setIcon(ready:boolean){
     if(ready){
+      this.buttonColor = "#008000";
       return "checkmark-circle";
     }
     else {
+      this.buttonColor = "#ff0000";
       return "close-circle";
     }
   }

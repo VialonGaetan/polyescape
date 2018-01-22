@@ -22,12 +22,12 @@ export class EnigmePage {
   private timer:number;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController) {
     this.userName = navParams.get("username");
     this.nomEscape = navParams.get("name");
     this.webSocket = navParams.get("websocket");
     this.teamName = this.navParams.get("teamname");
-    var request = {request: "CREATE_PARTIE", teamname:this.teamName, username:this.userName, escapegame:this.nomEscape};
+    var request = {request: "CREATE_PARTIE",teamname:this.teamName,username:this.userName,escapegame:this.nomEscape};
     this.webSocket.send(JSON.stringify(request));
     this.webSocket.onmessage = function(event) {
       var jsonData = JSON.parse(event.data);
@@ -35,7 +35,7 @@ export class EnigmePage {
         this.nomEnigme = jsonData.nom;
         this.enigmeInfos = jsonData.infos;
         this.idPartie = jsonData.idpartie;
-        this.minutes = this.navParams.get("type");
+        this.minutes = jsonData.temps;
         this.timer = setInterval(this.decreaseTime.bind(this),1000);
       }
     }.bind(this);
@@ -102,7 +102,7 @@ export class EnigmePage {
   }
 
   swipeEvent(e) {
-    if (e.direction == 2 && this.navParams.get("type") == "multi") {
+    if (e.direction == 2) {
       this.navCtrl.setRoot(TeamProgressionScreenPage);
     }
   }

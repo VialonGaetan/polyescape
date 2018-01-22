@@ -57,8 +57,11 @@ export class TeamScreenPage {
       if(jsonData.reponse == "actualise"){
         this.actualise = jsonData.joueurs;
       }
+      else if (jsonData.reponse == "ok"){
+        this.navCtrl.push(TeamWaitScreen, {teamname: v.teamname,username: this.userName,name: v.escapegame,websocket: this.webSocket,idpartie: v.idpartie,joueurs: this.actualise});
+      }
       else {
-        this.navCtrl.push(TeamWaitScreen, {teamname: this.teamName,username: this.userName,name: v.escapegame,websocket: this.webSocket,idpartie: v.idpartie,joueurs: this.actualise});
+        this.presentTeamToast();
       }
     }.bind(this);
   }

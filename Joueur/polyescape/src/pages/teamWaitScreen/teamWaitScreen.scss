@@ -9,6 +9,7 @@
 
 #userIcon3{
   font-size: 30px;
+  color: gray
 }
 #title{
   text-align: center;
@@ -32,9 +33,7 @@
 
 #waitLabel {
   color: #488aff;
-  margin-top: 50px;
-  margin-left: 32px;
-  font-size: 80%;
+  font-size: 130%;
 }
 
 .listItem {
@@ -42,8 +41,11 @@
   border: hidden #488aff;
   outline: #488aff;
 }
+#item-icon1{
+  color: gray;
+  font-size: 150%;
+}
 
-.item-icons{
-  color: #488aff;
-  font-size: 100%;
+#item-icon2{
+  font-size: 150%;
 }

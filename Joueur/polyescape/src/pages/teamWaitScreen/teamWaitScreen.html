@@ -18,12 +18,12 @@
   <ion-label id="title">
     {{escapeName}}
   </ion-label>
-  <div style="overflow-y:scroll;width:100%; height:300px;">
+  <div style="overflow-y:scroll;width:100%; height:80%; display: table">
       <ion-list margin-left="10px" margin-right="10px">
         <ion-item style="background: lavender" *ngFor="let player of players;">
-          <ion-icon item-left class="item-icons" name="person"></ion-icon>
-          <ion-label id="waitLabel">{{player.name}}</ion-label>
-          <ion-icon item-right class="item-icons" name="{{setIcon(player.ready)}}"></ion-icon>
+          <ion-icon item-left id="item-icon1" name="person"></ion-icon>
+          <span id="waitLabel" item-left style="vertical-align: 5%;">{{player.name}}</span>
+          <ion-icon item-right id="item-icon2" [style.color]="buttonColor" name="{{setIcon(player.ready)}}"></ion-icon>
         </ion-item>
       </ion-list>
   </div>
