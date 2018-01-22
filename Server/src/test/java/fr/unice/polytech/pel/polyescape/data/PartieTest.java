@@ -32,7 +32,7 @@ public class PartieTest {
        joueur = new Joueur("Loic",null);
        secondJoueur = new Joueur("GuiGui",null);
 
-       escapeGame = new EscapeGame("titi",enigmes,50);
+       escapeGame = new EscapeGame("titi","toto",enigmes,50);
        partieSolo = new Partie(escapeGame,joueur);
        partieTeam = new PartieEnEquipe(escapeGame,joueur,"Grosse team");
 

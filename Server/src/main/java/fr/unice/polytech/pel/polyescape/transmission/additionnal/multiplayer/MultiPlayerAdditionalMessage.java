@@ -1,4 +1,4 @@
-package fr.unice.polytech.pel.polyescape.transmission.sender;
+package fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer;
 
 import org.json.JSONObject;
 
@@ -6,7 +6,7 @@ import org.json.JSONObject;
  * @author Gaetan Vialon
  * Created the 19/01/2018.
  */
-public interface Sender {
+public interface MultiPlayerAdditionalMessage {
 
     default String createMessageToSend(){
         return messageInJson().toString();

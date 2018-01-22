@@ -49,7 +49,7 @@ public class CheckResponseRequest implements Request {
                 return new JSONObject().put(JsonArguments.REPONSE.toString(), JsonArguments.FINISH.toString())
                         .put(JsonArguments.SCORE.toString(), 100);
             else
-                return new JSONObject().put(JsonArguments.REPONSE.toString(), JsonArguments.NOTFINISH.toString());
+                return new JSONObject().put(JsonArguments.REPONSE.toString(), JsonArguments.WAITINGALL.toString());
         } else
             return new JSONObject().put(JsonArguments.REPONSE.toString(), JsonArguments.KO.toString());
     }

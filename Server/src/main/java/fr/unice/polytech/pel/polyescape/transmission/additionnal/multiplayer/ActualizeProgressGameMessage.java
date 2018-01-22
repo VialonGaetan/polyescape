@@ -1,4 +1,4 @@
-package fr.unice.polytech.pel.polyescape.transmission.sender;
+package fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer;
 
 import fr.unice.polytech.pel.polyescape.data.Enigme;
 import fr.unice.polytech.pel.polyescape.data.Joueur;
@@ -14,12 +14,12 @@ import java.util.Optional;
  * @author Gaetan Vialon
  * Created the 22/01/2018.
  */
-public class ActualizeProgressGameSender implements Sender {
+public class ActualizeProgressGameMessage implements MultiPlayerAdditionalMessage {
 
 
     private Map<Joueur,List<Enigme>> association;
 
-    public ActualizeProgressGameSender(Map<Joueur,List<Enigme>> association) {
+    public ActualizeProgressGameMessage(Map<Joueur,List<Enigme>> association) {
         this.association = association;
     }
 
@@ -33,7 +33,7 @@ public class ActualizeProgressGameSender implements Sender {
                 jsonArray.put(new JSONObject()
                     .put(JsonArguments.USERNAME.toString(),joueur.getNom())
                     .put(JsonArguments.TOTAL.toString(),enigmes.size())
-                    .put(JsonArguments.ACTUAL.toString(),enigmes.indexOf(currentEnigme)));
+                    .put(JsonArguments.ACTUAL.toString(),enigmes.indexOf(currentEnigme.get())));
             else
                 jsonArray.put(new JSONObject()
                         .put(JsonArguments.USERNAME.toString(),joueur.getNom())
