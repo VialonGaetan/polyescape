@@ -26,7 +26,7 @@ public class EscapeGameTest {
         enigmes.add(new Enigme("1","1","1"));
         enigmes.add(new Enigme("2","2","2"));
         enigmes.add(new Enigme("3","3","3"));
-        escapeGame = new EscapeGame(nom,enigmes,temps);
+        escapeGame = new EscapeGame(nom,"1",enigmes,temps);
     }
 
 

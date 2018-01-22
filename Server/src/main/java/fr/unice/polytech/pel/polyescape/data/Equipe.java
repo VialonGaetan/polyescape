@@ -1,7 +1,7 @@
 package fr.unice.polytech.pel.polyescape.data;
 
 import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
-import fr.unice.polytech.pel.polyescape.transmission.sender.ActualizeSalonSender;
+import fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer.ActualizeWaitingScreenMessage;
 import org.json.JSONObject;
 
 import java.util.*;
@@ -57,7 +57,7 @@ public class Equipe implements Serialize{
     }
 
     private void actualizeSalon(){
-        String message = new ActualizeSalonSender(joueurs).createMessageToSend();
+        String message = new ActualizeWaitingScreenMessage(joueurs).createMessageToSend();
         for (Joueur joueur : joueurs.keySet()) {
             joueur.sendMessageToPlayer(message);
         }

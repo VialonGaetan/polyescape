@@ -41,7 +41,7 @@ public class CheckResponseRequestTest {
         enigmes.add(new Enigme("1","1","1"));
         enigmes.add(new Enigme("2","2","2"));
         enigmes.add(new Enigme("3","3","3"));
-        escapeGame = new EscapeGame("1",enigmes,50);
+        escapeGame = new EscapeGame("1","1",enigmes,50);
         joueur = new Joueur(name,session);
         partie = new Partie(escapeGame,joueur);
         idPArtie = gestionnaire.createNewPartie(partie);

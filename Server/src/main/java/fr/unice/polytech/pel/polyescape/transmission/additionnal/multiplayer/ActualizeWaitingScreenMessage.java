@@ -1,4 +1,4 @@
-package fr.unice.polytech.pel.polyescape.transmission.sender;
+package fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer;
 
 import fr.unice.polytech.pel.polyescape.data.Joueur;
 import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
@@ -11,11 +11,11 @@ import java.util.Map;
  * @author Gaetan Vialon
  * Created the 19/01/2018.
  */
-public class ActualizeSalonSender implements Sender {
+public class ActualizeWaitingScreenMessage implements MultiPlayerAdditionalMessage {
 
     private Map<Joueur,Boolean> joueurBooleanMap;
 
-    public ActualizeSalonSender(Map<Joueur,Boolean> joueurBooleanMap) {
+    public ActualizeWaitingScreenMessage(Map<Joueur,Boolean> joueurBooleanMap) {
         this.joueurBooleanMap = joueurBooleanMap;
     }
 

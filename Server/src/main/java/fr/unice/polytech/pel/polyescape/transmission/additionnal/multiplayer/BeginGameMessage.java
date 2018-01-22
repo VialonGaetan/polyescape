@@ -1,4 +1,4 @@
-package fr.unice.polytech.pel.polyescape.transmission.sender;
+package fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer;
 
 import fr.unice.polytech.pel.polyescape.data.Enigme;
 import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
@@ -8,12 +8,12 @@ import org.json.JSONObject;
  * @author Gaetan Vialon
  * Created the 19/01/2018.
  */
-public class StartGameMultiPlayerSender implements Sender {
+public class BeginGameMessage implements MultiPlayerAdditionalMessage {
 
     private Enigme enigme;
     private int time;
 
-    public StartGameMultiPlayerSender(Enigme enigme, int time) {
+    public BeginGameMessage(Enigme enigme, int time) {
         this.enigme = enigme;
         this.time = time;
     }

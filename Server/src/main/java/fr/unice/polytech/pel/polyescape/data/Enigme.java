@@ -9,7 +9,9 @@ import org.json.JSONObject;
  */
 public class Enigme implements Serialize {
 
-    private String name, description, reponse;
+    private String name;
+    private String description;
+    private String reponse;
     private Boolean isResolve = false;
 
     public Enigme(String name, String description, String reponse) {
@@ -37,15 +39,16 @@ public class Enigme implements Serialize {
             return false;
     }
 
+    public Boolean isResolve() {
+        return isResolve;
+    }
+
+    @Override
     public JSONObject toJson(){
         return new JSONObject().put(JsonArguments.NOM.toString(),name)
                 .put(JsonArguments.INFOS.toString(),description)
                 .put(JsonArguments.REPONSE.toString(),reponse)
                 .put(JsonArguments.ISRESOLVE.toString(),isResolve);
-    }
-
-    public Boolean isResolve() {
-        return isResolve;
     }
 
     @Override

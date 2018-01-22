@@ -1,8 +1,9 @@
 package fr.unice.polytech.pel.polyescape.data;
 
 import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
-import fr.unice.polytech.pel.polyescape.transmission.sender.ActualizeProgressGameSender;
-import fr.unice.polytech.pel.polyescape.transmission.sender.StartGameMultiPlayerSender;
+import fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer.ActualizeProgressGameMessage;
+import fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer.BeginGameMessage;
+import fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer.EndGameMessage;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -48,12 +49,8 @@ public class PartieEnEquipe extends Partie implements Serialize {
         for (Enigme enigme : escapeGame.getEnigmes()) {
             association.get(equipe.getNextJoueur()).add(new Enigme(enigme.getName(),enigme.getDescription(),enigme.getReponse()));
         }
-        sendPlayerHerEnigmes();
-    }
-
-    private void sendPlayerHerEnigmes() {
         for (Joueur joueur : association.keySet()) {
-            joueur.sendMessageToPlayer(new StartGameMultiPlayerSender(getCurrentEnigmesOfaPlayer(joueur).get(),time).createMessageToSend());
+            joueur.sendMessageToPlayer(new BeginGameMessage(getCurrentEnigmesOfaPlayer(joueur).get(),time).createMessageToSend());
         }
     }
 
@@ -63,6 +60,7 @@ public class PartieEnEquipe extends Partie implements Serialize {
             if (association.get(joueur).stream().anyMatch(enigme -> !enigme.isResolve()))
                 return false;
         }
+        sendMessageToAllPlayer(new EndGameMessage().createMessageToSend());
         return true;
     }
 
@@ -84,8 +82,12 @@ public class PartieEnEquipe extends Partie implements Serialize {
 
     @Override
     protected void sendProgressPlayer(){
+        sendMessageToAllPlayer(new ActualizeProgressGameMessage(association).createMessageToSend());
+    }
+
+    private void sendMessageToAllPlayer(String message){
         for (Joueur joueur : association.keySet()) {
-            joueur.sendMessageToPlayer(new ActualizeProgressGameSender(association).createMessageToSend());
+            joueur.sendMessageToPlayer(message);
         }
     }
 
