@@ -120,12 +120,12 @@ public class ClientMJ {
     private void protocolInfos() {
         if (firstTime) {
             this.timeInMinute = this.dataParser.getTime();
+            this.mjController.startTime(this.timeInMinute);
             this.listPlayer.setItems(this.dataParser.getPlayers());
             this.escapeGameName.setText(this.dataParser.getTeamName());
             firstTime = false;
         }
     }
-
 
     public void updateListPlayer(String username, boolean askForHelp) {
         listPlayer.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {

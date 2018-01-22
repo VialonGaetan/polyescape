@@ -74,27 +74,11 @@ public class MJController {
         this.answerField = ((TextArea) (bottomPane.getChildren().get(0)));
         this.selectedPlayer = "";
         this.descriptionEnigma = descriptionEnigma;
-        this.hour = 0;
-        this.minute = 2;
-        this.givenMinutes = 2;
         this.teamName = ((Text) (topPane.getChildren().get(1)));
         this.escapeGameName = ((Text) (topPane.getChildren().get(0)));
         JSONObject jsonObject = new JSONObject().put(JsonArguments.REQUEST.toString(), TypeRequest.GET_PARTIES);
         String request = jsonObject.toString();
         makeRequest(request);
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(() -> {
-                    try {
-                        display();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                });
-            }
-        }, 60000, 60000);
         initialize();
     }
 
@@ -176,6 +160,8 @@ public class MJController {
     }
 
     private void firstRemainingTime() {
+        this.minute=this.givenMinutes%60;
+        this.hour=this.givenMinutes/60;
         if (this.minute < 10 && this.hour < 10) this.remindedTime.setText("0" + this.hour + " : " + "0" + this.minute);
         else if (this.minute < 10 && !(this.hour < 10))
             this.remindedTime.setText(this.hour + " : " + "0" + this.minute);
@@ -222,11 +208,25 @@ public class MJController {
         });
     }
 
-    public int getIdPartie() {
-        return idPartie;
-    }
-
     public void setIdPartie(int idPartie) {
         this.idPartie = idPartie;
+    }
+
+    public void startTime(int timeInMinutes){
+        this.givenMinutes = timeInMinutes;
+        firstRemainingTime();
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    try {
+                        display();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+        }, 60000, 60000);
     }
 }
