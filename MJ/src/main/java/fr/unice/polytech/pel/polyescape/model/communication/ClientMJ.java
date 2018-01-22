@@ -22,7 +22,6 @@ public class ClientMJ {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private final String message;
-    private String answer;
     private DataParser dataParser;
     private ProgressIndicator progressIndicatorTime;
     private javafx.scene.text.Text escapeGameName;
@@ -39,7 +38,6 @@ public class ClientMJ {
 
     public ClientMJ(String message, ProgressIndicator progressIndicator, Text teamNameText, Text escapeGameName, ComboBox listPlayer, MJController mjController, Text descriptionEnigma) {
         this.message = message;
-        this.answer = "";
         this.dataParser = new DataParser(message);
         this.listPlayer = listPlayer;
         this.progressIndicatorTime = progressIndicator;
@@ -75,7 +73,6 @@ public class ClientMJ {
     public void onMessage(String message, Session session) throws InterruptedException, IOException {
         System.out.println(message);
         dataParser = new DataParser(message);
-        this.answer = message;
         JSONObject jsonObject = new JSONObject(message);
         if (new JSONObject(message).getString(JsonArguments.REPONSE.toString()).equals("infos")) {
             AdressBook.getInstance().setServerSession(session);
@@ -99,10 +96,6 @@ public class ClientMJ {
     @OnClose
     public void onClose(Session session, CloseReason closeReason) {
         logger.info(String.format("Session %s close because of %s", session.getId(), closeReason));
-    }
-
-    public String getAnswer() {
-        return answer;
     }
 
     private void protocolHelp(String nameOfThePlayer, String currentEnigma) {

@@ -35,29 +35,37 @@ import java.util.TimerTask;
 
 public class MJController {
 
-    private int idPartie;
     private Scene scene;
     Boolean finDuJeu = false;
+
     private StackPane topPane;
-    private ProgressBar progressBar;
-    private ProgressIndicator progressIndicatorTime;
-    private Label choicePlayer;
-    private ComboBox listPlayer;
     private HBox timeHB;
     private StackPane bottomPane;
-    private Button btnAnswer;
-    private TextArea answerField;
+
+    private ProgressBar progressBar;
+    private ProgressIndicator progressIndicatorTime;
+    private ComboBox listPlayer;
+
+    private Label choicePlayer;
     private Label remindedTime;
     private Label progressLabel;
+
     private Text teamName;
     private Text escapeGameName;
+    private Text descriptionEnigma;
+
+
+    private Button btnAnswer;
+    private TextArea answerField;
+
     private String selectedPlayer;
 
+    private int idPartie;
     private int hour;
     private int minute;
     private int givenMinutes;
+
     private ResponseMaker responseMaker;
-    private Text descriptionEnigma;
 
     public MJController(Scene scene, StackPane topPane, ProgressBar progressBar, Label choicePlayer, ComboBox listPlayer, HBox timeHB, StackPane bottomPane, Button btn, Label progressLabel, ProgressIndicator timeIndicator, Text descriptionEnigma) throws URISyntaxException, DeploymentException, InterruptedException {
         this.progressIndicatorTime = timeIndicator;

@@ -17,16 +17,8 @@ public class DataParser {
     }
 
     public int getTime(){
-//        System.out.println(answer);
-//        System.out.println("parsing time :\n");
         JSONObject jsonObject = new JSONObject(answer);
         this.timeInMinutes=Integer.valueOf(jsonObject.getJSONArray("partieencours").getJSONObject(0).get("temps").toString());
-       /* System.out.println("time aff : "+jsonObject.getJSONArray("partieencours").getJSONObject(0).get("temps"));
-        System.out.println("time : "+this.timeInMinutes);
-        System.out.println("taille : "+this.players.size());
-        for (int i =0; i<this.players.size(); i++){
-            System.out.println(this.players.get(i));
-        }*/
         return this.timeInMinutes;
     }
 

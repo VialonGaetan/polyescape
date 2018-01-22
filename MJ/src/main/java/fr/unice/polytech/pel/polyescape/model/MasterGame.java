@@ -25,32 +25,34 @@ import java.net.URISyntaxException;
 public class MasterGame extends Stage{
 
     private ImageView logo;
-    private ProgressBar progressBar;
-    private Label progressLabel;
-    private ProgressIndicator timeIndicator;
-    private StackPane bottomPane;
-
-    private MJController control;
-
-    private StackPane topPane;
-
-    private Pane basePane;
-
-    private HBox timeHB;
-
-    private Group root ;
     private Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
     private final int HAUTEUR = (int)dimension.getHeight();
     private final int LARGEUR  = (int)dimension.getWidth();
-    Text teamName;
-    Text escapeGameName;
-    Text playerName;
-    Label remindedTime;
-    Text descriptionEnigma;
-    ComboBox listPlayer;
+
+    private StackPane bottomPane;
+    private StackPane topPane;
+    private Pane basePane;
+    private HBox timeHB;
+
+    private ProgressBar progressBar;
+    private ProgressIndicator timeIndicator;
+
+    private Text descriptionEnigma;
+    private Text teamName;
+    private Text escapeGameName;
+    private Text playerName;
     private TextArea answer;
-    private Button btnAnswer;
+
+
+    private Label remindedTime;
     private Label choicePlayer;
+    private Label progressLabel;
+
+    private ComboBox listPlayer;
+    private Button btnAnswer;
+
+    private Group root;
+    private MJController control;
 
     public MasterGame() throws URISyntaxException, DeploymentException, InterruptedException {
         init();

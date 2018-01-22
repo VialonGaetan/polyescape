@@ -1,19 +1,11 @@
 package fr.unice.polytech.pel.polyescape.Server;
 
-import fr.unice.polytech.pel.polyescape.Data.Joueur;
-import fr.unice.polytech.pel.polyescape.Data.Partie;
-import fr.unice.polytech.pel.polyescape.Gestionnaire;
-import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
-import fr.unice.polytech.pel.polyescape.Transmission.TypeRequest;
-import fr.unice.polytech.pel.polyescape.Transmission.requests.HelpRequest;
 import fr.unice.polytech.pel.polyescape.Transmission.requests.Request;
 import fr.unice.polytech.pel.polyescape.Transmission.requests.RequestFactory;
-import org.json.JSONObject;
 
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.logging.Logger;
 
 /**
