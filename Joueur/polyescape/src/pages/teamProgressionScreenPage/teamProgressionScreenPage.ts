@@ -9,8 +9,10 @@ import {EnigmePage} from "../enigme/enigme";
 export class TeamProgressionScreenPage {
 
   players = [];
+  private webSocket:WebSocket;
 
   constructor(public navCtrl: NavController, public navParams:NavParams, public toastCtrl: ToastController) {
+    this.webSocket = navParams.get("websocket");
     for (var i = 0; i < 4; i++)
       this.players.push('Bob');
 
@@ -18,7 +20,7 @@ export class TeamProgressionScreenPage {
 
   swipeEvent(e) {
     if (e.direction == 4) {
-      this.navCtrl.setRoot(EnigmePage);
+      this.navCtrl.setRoot(EnigmePage, {websocket: this.webSocket});
     }
   }
 

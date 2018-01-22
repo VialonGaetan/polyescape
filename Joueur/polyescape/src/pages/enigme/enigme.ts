@@ -102,10 +102,11 @@ export class EnigmePage {
   }
 
   swipeEvent(e) {
-    if (e.direction == 2) {
-      this.navCtrl.setRoot(TeamProgressionScreenPage);
+    if (e.direction == 2 && this.navParams.get("type") != "solo") {
+      this.navCtrl.setRoot(TeamProgressionScreenPage, {websocket: this.webSocket});
     }
   }
+
 
 
 }

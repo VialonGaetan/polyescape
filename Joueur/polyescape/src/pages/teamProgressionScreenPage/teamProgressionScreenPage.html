@@ -10,17 +10,38 @@
 <ion-content (swipe)="swipeEvent($event)" style="background: lavender;">
 
     <ion-list margin-left="10px" margin-right="10px" *ngFor="let player of players">
-      <ol class="progress">
-        <li class="is-active" data-step="1">
-          Step 1
-        </li>
-        <li data-step="2">
-          Step 2
-        </li>
-        <li data-step="3" class="progress__last">
-          Step 3
-        </li>
-      </ol>
+      <ion-icon id="userIcon1" name="person"></ion-icon>
+      <div style="border:1px solid black;height:100px;overflow-y:hidden;overflow-x:scroll;">
+        <ol class="progress">
+          <li class="is-active" data-step="1">
+            Step 1
+          </li>
+          <li data-step="2">
+            Step 2
+          </li>
+          <li data-step="3" class="progress__last">
+            Step 3
+          </li>
+          <li data-step="3" class="progress__last">
+                      Step 4
+          </li>
+          <li data-step="3" class="progress__last">
+                      Step 5
+          </li>
+          <li data-step="3" class="progress__last">
+                      Step 6
+          </li>
+          <li data-step="3" class="progress__last">
+                                Step 6
+                    </li>
+                    <li data-step="3" class="progress__last">
+                                          Step 6
+                              </li>
+                              <li data-step="3" class="progress__last">
+                                                    Step 6
+                                        </li>
+        </ol>
+      </div>
     </ion-list>
 
 </ion-content>
