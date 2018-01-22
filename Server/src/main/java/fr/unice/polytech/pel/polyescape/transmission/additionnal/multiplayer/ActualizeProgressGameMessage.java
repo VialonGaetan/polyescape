@@ -33,7 +33,7 @@ public class ActualizeProgressGameMessage implements MultiPlayerAdditionalMessag
                 jsonArray.put(new JSONObject()
                     .put(JsonArguments.USERNAME.toString(),joueur.getNom())
                     .put(JsonArguments.TOTAL.toString(),enigmes.size())
-                    .put(JsonArguments.ACTUAL.toString(),enigmes.indexOf(currentEnigme)));
+                    .put(JsonArguments.ACTUAL.toString(),enigmes.indexOf(currentEnigme.get())));
             else
                 jsonArray.put(new JSONObject()
                         .put(JsonArguments.USERNAME.toString(),joueur.getNom())

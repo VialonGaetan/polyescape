@@ -52,6 +52,7 @@ public class PartieEnEquipe extends Partie implements Serialize {
         for (Joueur joueur : association.keySet()) {
             joueur.sendMessageToPlayer(new BeginGameMessage(getCurrentEnigmesOfaPlayer(joueur).get(),time).createMessageToSend());
         }
+        sendMessageToAllPlayer(new ActualizeProgressGameMessage(association).createMessageToSend());
     }
 
     @Override
