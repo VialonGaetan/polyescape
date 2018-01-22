@@ -19,6 +19,7 @@ public class EscapeGame implements Serialize {
 
     public EscapeGame(String name,String description,List<Enigme> enigmes, int time) {
         this.name = name;
+        this.description = description;
         this.enigmes = enigmes;
         this.time = time;
     }
@@ -34,6 +35,10 @@ public class EscapeGame implements Serialize {
 
     public int getTime() {
         return time;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override
