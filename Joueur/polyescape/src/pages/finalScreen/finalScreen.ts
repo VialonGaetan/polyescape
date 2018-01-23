@@ -27,6 +27,14 @@ export class FinalScreenPage {
     }.bind(this);
   }
 
+  array(n:number){
+    var array = new Array();
+    for(let i = 0; i < n; i++){
+      array.push(i);
+    }
+    return array;
+  }
+
   updateProgression(jsonData:any){
     this.progressions = [];
     for(let i = 0; i < jsonData.joueurs.length; i++) {

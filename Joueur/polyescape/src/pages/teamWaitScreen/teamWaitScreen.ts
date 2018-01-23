@@ -15,6 +15,7 @@ export class TeamWaitScreen {
   private players = [];
   private idpartie = '';
   private buttonColor;
+  private pret = "prêt";
 
   constructor(public navCtrl: NavController, public navParams:NavParams, public toastCtrl: ToastController) {
     this.webSocket = this.navParams.get("websocket");
@@ -46,6 +47,7 @@ export class TeamWaitScreen {
   }
 
   ready(){
+    this.pret == "prêt" ? this.pret = "pas prêt" : this.pret = "prêt";
     this.webSocket.send(JSON.stringify({request:"SET_READY",idpartie:this.idpartie,username:this.userName}));
   }
 

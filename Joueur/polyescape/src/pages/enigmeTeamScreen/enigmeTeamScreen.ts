@@ -64,6 +64,7 @@ export class EnigmeTeamPage {
     }
     return array;
   }
+
   presentToastNoAnswer() {
     let toast = this.toastCtrl.create({
       message: 'Veuillez entrer une réponse',
@@ -128,9 +129,9 @@ export class EnigmeTeamPage {
           this.nomEnigme = jsonData.nom;
           this.inputAnswer = "";
         }
-        else if(jsonData.reponse == "notYet"){
+        else if(jsonData.reponse == "notyet"){
           clearInterval(this.timer);
-          this.navCtrl.setRoot(FinalScreenPage,{teamname:this.teamname,progressions:this.progressions});
+          this.navCtrl.setRoot(FinalScreenPage,{websocket:this.webSocket,teamname:this.teamname,progressions:this.progressions});
         }
         else if(jsonData.reponse == "finish"){
           clearInterval(this.timer);
