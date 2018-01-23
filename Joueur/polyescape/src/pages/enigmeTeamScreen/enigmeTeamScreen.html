@@ -41,12 +41,12 @@
         <ion-item class="input1">
           <ion-input [(ngModel)]="inputAnswer" type="text" placeholder="Votre réponse"></ion-input>
         </ion-item>
-        <div id="enigmeButtonsDiv" padding-bottom="10px">
-          <button class="enigmeButtons" (click)='submitAnswer()' ion-button margin-left="150px" icon-right>
+        <div id="enigmeButtonsDiv">
+          <button class="enigmeButtons" (click)='submitAnswer()' ion-button icon-right>
             valider
             <ion-icon name="key"></ion-icon>
           </button>
-          <button class="enigmeButtons" ion-button id="help" icon-right>
+          <button class="enigmeButtons" ion-button icon-right>
             demander de l'aide
             <ion-icon name="help-circle"></ion-icon>
           </button>
