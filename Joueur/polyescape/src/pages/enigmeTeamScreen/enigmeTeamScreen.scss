@@ -10,22 +10,22 @@ page-enigmeTeam{
 }
 
 .input1{
+  background: lavender;
+  width: 80%;
   position:absolute;
   bottom:60px;
-  background: lavender;
 }
 .enigmeButtons{
   width: 45%;
   height: 100%;
   font-size: 60%;
-  bottom: 25%;
 }
 #enigmeButtonsDiv{
-  height: 9%;
+  text-align: left;
+  position: absolute;
+  bottom: 10px;
+  height: 7%;
   width: 100%;
-  position:absolute;
-  bottom:0;
-  margin-bottom: 5px;
 
 }
 
