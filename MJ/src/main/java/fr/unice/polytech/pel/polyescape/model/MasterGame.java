@@ -131,7 +131,7 @@ public class MasterGame extends Stage{
         remindedTime.setId("remindedTime");
 
         timeIndicator = new ProgressIndicator();
-        timeIndicator.setProgress(1);
+        timeIndicator.setProgress(0.0);
         timeIndicator.setId("timeIndicator");
         timeIndicator.setPrefSize(250,250);
 

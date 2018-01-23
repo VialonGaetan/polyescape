@@ -84,7 +84,8 @@ public class ClientMJ {
         }
         if (jsonObject.getString(JsonArguments.REPONSE.toString()).equals("HELP")) {
             this.currentEnigma = jsonObject.getString("enigme");
-            System.out.println(this.currentEnigma);
+            System.out.println(this.currentEnigma
+            );
             this.nameOfThePlayer = jsonObject.getString("username");
             this.idPartie = ""+jsonObject.getInt("idGame");
             this.mjController.setIdPartie(jsonObject.getInt("idGame"));

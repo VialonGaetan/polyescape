@@ -183,7 +183,7 @@ public class MJController {
         else if (!(this.minute < 10) && this.hour < 10) tobeDisplayed = "0" + this.hour + " : " + this.minute;
         else if (!(this.minute < 10) && !(this.hour < 10)) tobeDisplayed = this.hour + " : " + this.minute;
         remindedTime.setText(tobeDisplayed);
-        progressIndicatorTime.setProgress(((double) (hour * 60 + minute)) / ((double) (givenMinutes)));
+        progressIndicatorTime.setProgress((((double)(givenMinutes))-(double) (hour * 60 + minute)) / ((double) (givenMinutes)));
     }
 
     private void firstRemainingTime() {
