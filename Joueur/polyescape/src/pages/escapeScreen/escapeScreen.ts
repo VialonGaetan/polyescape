@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {EnigmePage} from "../enigme/enigme";
 import {TeamWaitScreen} from "../teamWaitScreen/teamWaitScreen";
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-escape',
@@ -9,13 +10,13 @@ import {TeamWaitScreen} from "../teamWaitScreen/teamWaitScreen";
 })
 export class EscapeScreenPage {
 
-  escapeGames = [];
+  escapeGames : EscapeGame[] = [];
   private userName = '';
   private webSocket:WebSocket;
   private teamName = '';
   private actualise;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public alerCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
     this.webSocket = this.navParams.get("websocket");
     var request = {request: "GET_ESCAPE"};
     this.webSocket.send(JSON.stringify(request));
@@ -23,7 +24,7 @@ export class EscapeScreenPage {
     this.webSocket.onmessage = function(event) {
       var jsonData = JSON.parse(event.data);
       for (let i = 0; i < jsonData.escapegames.length; i++)
-        this.escapeGames.push(jsonData.escapegames[i].nom);
+        this.escapeGames.push({nom:jsonData.escapegames[i].nom, infos : jsonData.escapegames[i].infos});
     }.bind(this);
     this.userName = this.navParams.get("username");
     this.teamName = this.navParams.get("teamname");
@@ -73,4 +74,18 @@ export class EscapeScreenPage {
     }
   }
 
+  moreInformations(game : EscapeGame){
+    let alert = this.alerCtrl.create({
+      title : game.nom,
+      message: game.infos,
+      buttons: ['Ok']
+    });
+    alert.present()
+  }
+
+}
+
+interface EscapeGame {
+  nom : string,
+  infos : string;
 }

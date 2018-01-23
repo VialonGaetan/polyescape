@@ -10,8 +10,8 @@
 <ion-content style="background: lavender;" padding onload="setLabel()">
   <div id="usr1">
     <ion-icon id="userIcon1" name={{logo()}}></ion-icon>
-    <br />
-    <label id="userName1" >{{name()}}</label>
+    <br/>
+    <label id="userName1">{{name()}}</label>
   </div>
   <ion-label id="escapeLabel">
     Démarrer un escape game
@@ -21,7 +21,12 @@
   <ion-scroll scrollY="true" style="width: 100%; height: 100%;">
 
     <ion-list margin-left="10px" margin-right="10px" *ngFor="let game of escapeGames">
-      <button ion-item class="listButton" (click)="startGame(game)">{{game}}</button>
+      <div ion-item class="listButton">
+        <ion-label (click)="startGame(game.nom)" align="left">
+          {{game.nom}}
+        </ion-label>
+        <ion-label id="labelInfos" align="right" (click)="moreInformations(game)">Plus d'informations</ion-label>
+      </div>
     </ion-list>
 
   </ion-scroll>
