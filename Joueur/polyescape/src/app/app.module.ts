@@ -12,7 +12,7 @@ import {TeamWaitScreen} from "../pages/teamWaitScreen/teamWaitScreen";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import {TeamProgressionScreenPage} from "../pages/teamProgressionScreenPage/teamProgressionScreenPage";
+
 import {EnigmeTeamPage} from "../pages/enigmeTeamScreen/enigmeTeamScreen";
 
 @NgModule({
@@ -24,8 +24,8 @@ import {EnigmeTeamPage} from "../pages/enigmeTeamScreen/enigmeTeamScreen";
     HomePage,
     EnigmePage,
     TeamWaitScreen,
-    EnigmeTeamPage,
-    TeamProgressionScreenPage
+    EnigmeTeamPage
+
 
   ],
   imports: [
@@ -41,8 +41,8 @@ import {EnigmeTeamPage} from "../pages/enigmeTeamScreen/enigmeTeamScreen";
     HomePage,
     EnigmePage,
     TeamWaitScreen,
-    EnigmeTeamPage,
-    TeamProgressionScreenPage
+    EnigmeTeamPage
+
 
   ],
   providers: [

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {Events, NavController, NavParams, ToastController} from 'ionic-angular';
+import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
 
 
@@ -37,9 +37,8 @@ export class EnigmePage {
 
     this.timer = setInterval(this.decreaseTime.bind(this),1000);
     this.progressions = this.navParams.get("progressions");
-    this.timer = setInterval(this.decreaseTime.bind(this),1000);
-    if(this.navParams.get("type") != "solo"){
-    }
+
+
   }
 
   presentToastNoAnswer() {
@@ -74,7 +73,6 @@ export class EnigmePage {
     else {
       this.secondes--;
     }
-
   }
 
   submitAnswer() {
