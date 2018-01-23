@@ -78,7 +78,7 @@ public class Partie implements Serialize {
         return "";
     }
 
-    public boolean isFinish(Joueur joueur){
+    public boolean isFinish(){
         return escapeGame.getEnigmes().stream().allMatch(Enigme::isResolve);
     }
 
