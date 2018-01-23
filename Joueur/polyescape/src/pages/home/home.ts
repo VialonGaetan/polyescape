@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, ToastController} from 'ionic-angular';
+import {AlertController, NavController, ToastController} from 'ionic-angular';
 import {EscapeScreenPage} from "../escapeScreen/escapeScreen";
 import {TeamScreenPage} from "../teamScreen/teamScreen";
 
@@ -13,8 +13,15 @@ export class HomePage {
   private userName = '';
   private webSocket:WebSocket;
 
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public alerCtrl: AlertController) {
     this.webSocket = new WebSocket("ws://localhost:15555/websockets/gameserver");
+    this.webSocket.onerror = function (ev) {
+      this.alerCtrl.create({
+        title : "Error",
+        message: "Le serveur du jeu est actuellement indisponible",
+        buttons: ['Ok']
+      }).present();
+    }.bind(this);
   }
 
   presentToast() {
