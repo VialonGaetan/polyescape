@@ -1,4 +1,4 @@
-package fr.unice.polytech.pel.polyescape.Transmission.requests;
+package fr.unice.polytech.pel.polyescape.transmission.requests;
 
 import org.json.JSONObject;
 

@@ -1,9 +1,9 @@
-package fr.unice.polytech.pel.polyescape.Transmission.requests;
+package fr.unice.polytech.pel.polyescape.transmission.requests;
 
-import fr.unice.polytech.pel.polyescape.Data.*;
+import fr.unice.polytech.pel.polyescape.data.*;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
-import fr.unice.polytech.pel.polyescape.Transmission.InvalidJsonRequest;
-import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
+import fr.unice.polytech.pel.polyescape.transmission.InvalidJsonRequest;
+import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import org.json.JSONObject;
 
 import javax.websocket.Session;

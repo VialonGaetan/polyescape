@@ -1,6 +1,6 @@
 package fr.unice.polytech.pel.polyescape;
 
-import fr.unice.polytech.pel.polyescape.Data.*;
+import fr.unice.polytech.pel.polyescape.data.*;
 
 import javax.websocket.Session;
 import java.util.HashMap;

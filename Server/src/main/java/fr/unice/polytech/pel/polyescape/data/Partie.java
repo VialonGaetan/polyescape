@@ -1,6 +1,6 @@
-package fr.unice.polytech.pel.polyescape.Data;
+package fr.unice.polytech.pel.polyescape.data;
 
-import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
+import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

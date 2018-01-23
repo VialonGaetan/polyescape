@@ -1,13 +1,11 @@
 package fr.unice.polytech.pel.polyescape.controller;
 
-import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
-import fr.unice.polytech.pel.polyescape.Transmission.TypeRequest;
+import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
+import fr.unice.polytech.pel.polyescape.transmission.TypeRequest;
 import fr.unice.polytech.pel.polyescape.model.communication.AdressBook;
 import fr.unice.polytech.pel.polyescape.model.communication.ClientMJ;
 import fr.unice.polytech.pel.polyescape.model.communication.ResponseMaker;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,7 +13,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;

@@ -1,8 +1,8 @@
-package fr.unice.polytech.pel.polyescape.Transmission.requests;
+package fr.unice.polytech.pel.polyescape.transmission.requests;
 
-import fr.unice.polytech.pel.polyescape.Data.Enigme;
+import fr.unice.polytech.pel.polyescape.data.Enigme;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
-import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
+import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

@@ -1,4 +1,4 @@
-package fr.unice.polytech.pel.polyescape.Transmission;
+package fr.unice.polytech.pel.polyescape.transmission;
 
 /**
  * @author Gaetan Vialon

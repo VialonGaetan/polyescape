@@ -1,4 +1,4 @@
-package fr.unice.polytech.pel.polyescape.Transmission.requests;
+package fr.unice.polytech.pel.polyescape.transmission.requests;
 
 import org.json.JSONObject;
 
@@ -6,7 +6,7 @@ import org.json.JSONObject;
  * @author Gaetan Vialon
  * Created the 16/01/2018.
  */
-public class CreateEnigmeRequest implements Request {
+public class CreateEscapeRequest implements Request{
     @Override
     public String getAnswer() {
         return null;

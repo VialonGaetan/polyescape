@@ -1,4 +1,4 @@
-package fr.unice.polytech.pel.polyescape.Data;
+package fr.unice.polytech.pel.polyescape.data;
 
 /**
  * @author Gaetan Vialon

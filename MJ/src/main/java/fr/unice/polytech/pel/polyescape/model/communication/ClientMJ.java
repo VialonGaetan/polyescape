@@ -1,6 +1,6 @@
 package fr.unice.polytech.pel.polyescape.model.communication;
 
-import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
+import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import fr.unice.polytech.pel.polyescape.controller.MJController;
 import fr.unice.polytech.pel.polyescape.model.parser.DataParser;
 import javafx.scene.control.ComboBox;
