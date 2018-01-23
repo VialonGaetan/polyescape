@@ -20,7 +20,7 @@ public enum  JsonArguments {
     OK("ok"),
     KO("ko"),
     FINISH("finish"),
-    WAITINGALL("waitingall"),
+    NOTYET("notyet"),
     SCORE("score"),
     JOUEURS("joueurs"),
     PARTIEENCOURS("partieencours"),

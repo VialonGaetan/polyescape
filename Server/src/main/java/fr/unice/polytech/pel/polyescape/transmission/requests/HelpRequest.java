@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import javax.websocket.Session;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.logging.Logger;
 
@@ -19,21 +20,32 @@ public class HelpRequest implements Request {
     private Joueur joueur;
     private GameMaster gameMaster;
     private int partieID;
+    private boolean mjPresent;
     private String message;
 
-    public HelpRequest(String message, Session session) throws IOException {
+    public HelpRequest(String message, Session session) {
         logger.info("Demande d'aide");
         this.message = message;
         int idpartie = new JSONObject(message).getInt("idpartie");
         Partie currentGame = Gestionnaire.getInstance().getPartieByID(idpartie);
-        Iterator<Joueur> joueurs = currentGame.getReadyToStart().keySet().iterator();
-        while (joueurs.hasNext()) {
-            Joueur j = joueurs.next();
-            if (j.getNom().equals(new JSONObject(message).getString("username"))) {
-                j.setSession(session);
-            }
+        mjPresent = sendInfoToMJ();
+    }
+
+    public Boolean sendInfoToMJ() {
+        JSONObject tmpJson = new JSONObject(message);
+        JSONObject jsonObject = new JSONObject().put("reponse", tmpJson.getString(JsonArguments.REQUEST.toString()));
+        jsonObject.put("username", tmpJson.getString("username"));
+        jsonObject.put("enigme", tmpJson.getString("enigme"));
+        jsonObject.put("idGame", tmpJson.getInt("idpartie"));
+        try {
+            Session sessionMJ = Gestionnaire.getInstance().getSessionMG();
+            if (sessionMJ != null && sessionMJ.isOpen())
+                sessionMJ.getBasicRemote().sendText(jsonObject.toString());
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        Gestionnaire.getInstance().getSessionMG().getBasicRemote().sendText(getAnswer());
+        return false;
     }
 
     @Override
@@ -43,11 +55,8 @@ public class HelpRequest implements Request {
 
     @Override
     public JSONObject answerInJson() {
-        JSONObject tmpJson = new JSONObject(message);
-        JSONObject jsonObject = new JSONObject().put("reponse",tmpJson.getString(JsonArguments.REQUEST.toString()));
-        jsonObject.put("username",tmpJson.getString("username"));
-        jsonObject.put("enigme", tmpJson.getString("enigme"));
-        jsonObject.put("idGame",tmpJson.getInt("idpartie"));
-        return jsonObject;
+        if (mjPresent)
+            return new JSONObject().put(JsonArguments.REPONSE.toString(), JsonArguments.OK.toString());
+        return new JSONObject().put(JsonArguments.REPONSE.toString(), JsonArguments.KO.toString());
     }
 }

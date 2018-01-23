@@ -1,10 +1,7 @@
 package fr.unice.polytech.pel.polyescape.transmission.requests;
 
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
-import fr.unice.polytech.pel.polyescape.data.EscapeGame;
-import fr.unice.polytech.pel.polyescape.data.Joueur;
-import fr.unice.polytech.pel.polyescape.data.Partie;
-import fr.unice.polytech.pel.polyescape.data.PartieEnEquipe;
+import fr.unice.polytech.pel.polyescape.data.*;
 import fr.unice.polytech.pel.polyescape.transmission.InvalidJsonRequest;
 import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import org.json.JSONObject;
@@ -44,7 +41,6 @@ public class CreatePartieRequest implements Request {
                 else
                     return gestionnaire.createNewPartie(new PartieEnEquipe(escapeGame,joueur,teamName));
             }
-
             return 0;
         } catch (Exception e) {
             throw new InvalidJsonRequest();

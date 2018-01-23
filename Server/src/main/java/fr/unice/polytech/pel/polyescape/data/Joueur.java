@@ -66,11 +66,4 @@ public class Joueur implements Serialize {
         return result;
     }
 
-    public void setSession(Session session) {
-        this.session = session;
-    }
-
-    public Session getSession() {
-        return session;
-    }
 }

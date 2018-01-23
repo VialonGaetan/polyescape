@@ -48,7 +48,7 @@ public class Gestionnaire {
         escapeGamesDisponible.put("TOUT",new EscapeGame("TOUT","2016. Un signal d’un vaisseau, dont la mission dans les années 90 était de faire des prélèvement de matière sur la lune Europa mais qui s’était perdu lors du voyage retour, est capté. Les derniers calculs font état d’un crash sur Mercure dans 60 minutes. Votre équipe est envoyée à bord pour tenter de modifier sa trajectoire et de récupérer des échantillons scientifiques à bord depuis 20 ans",new ArrayList<>(enigmeDisponible.values()), 120));
         Partie partie = new PartieEnEquipe(new EscapeGame("EscapAtor","Le professeur Franck Tipler a toujours convoité le trésor secret de sa famille. Après de nombreux échecs, il comprit qu’il n’y arriverai pas seul.\n" +
                 "Pour l’aider dans sa tâche, il a créé “Lisa”." ,enigmeDisponible.values().stream().collect(Collectors.toList()).subList(1,4), 60),new Joueur("Paul",null),"LES BG");
-        createNewPartie(partie);
+        //createNewPartie(partie);
     }
 
 

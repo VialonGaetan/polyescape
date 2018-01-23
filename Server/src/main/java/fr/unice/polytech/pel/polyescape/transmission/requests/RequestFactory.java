@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class RequestFactory {
 
-    public Request createTypeRequest(String message, Session session) throws IOException {
+    public Request createTypeRequest(String message, Session session){
         switch (TypeRequest.valueOf(new JSONObject(message).getString(JsonArguments.REQUEST.toString()))) {
             case GET_PARTIES:
                 return new PartieEnCoursListRequest(session);
@@ -30,13 +30,10 @@ public class RequestFactory {
                 return new CreateEscapeRequest();
             case RESPONSE:
                 return new CheckResponseRequest(message, session);
-            case HELP:{
+            case HELP:
                 return new HelpRequest(message, session);
-            }
             case INDICE:
                 return new IndiceRequest(message, session);
-
-
             case JOIN_TEAM:
                 return new JoinTeamRequest(message,session);
             case GET_SALONS:

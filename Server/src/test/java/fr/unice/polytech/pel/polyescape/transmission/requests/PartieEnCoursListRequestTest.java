@@ -11,7 +11,7 @@ import fr.unice.polytech.pel.polyescape.data.Partie;
 public class PartieEnCoursListRequestTest {
 
     public void setUp(){
-        PartieEnCoursListRequest partieEnCoursListRequest = new PartieEnCoursListRequest();
+        PartieEnCoursListRequest partieEnCoursListRequest = new PartieEnCoursListRequest(null);
         System.out.println(partieEnCoursListRequest.getAnswer());
         Gestionnaire.getInstance().createNewPartie(new Partie(Gestionnaire.getInstance().getEscapeGamesDisponible().get(0),new Joueur("lol",null)));
         System.out.println(Gestionnaire.getInstance().getParties().size());

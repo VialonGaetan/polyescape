@@ -36,6 +36,11 @@ public class PartieEnEquipe extends Partie implements Serialize {
     }
 
     @Override
+    public Collection<Joueur> getJoueurs(){
+        return equipe.getJoueurs();
+    }
+
+    @Override
     public String getTeamName() {
         return equipe.getName();
     }
@@ -61,6 +66,7 @@ public class PartieEnEquipe extends Partie implements Serialize {
             if (association.get(joueur).stream().anyMatch(enigme -> !enigme.isResolve()))
                 return false;
         }
+        sendMessageToAllPlayer(new EndGameMessage(100).createMessageToSend());
         return true;
     }
 
