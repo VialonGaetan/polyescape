@@ -22,7 +22,7 @@ page-enigmeTeam{
 .enigmeButtons{
   width: 45%;
   height: 100%;
-  font-size: 80%;
+  font-size: 60%;
   bottom: 25%;
 }
 #enigmeButtonsDiv{
@@ -58,23 +58,24 @@ page-enigmeTeam{
 #userIcon2{
   font-size: 30px;
   color: gray;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 
 #timeDiv{
-  background-color: #34498e;
-  width: 30%;
-  margin-left: 5%;
-}
-.block {
+  background-color: #488aff;
+  margin-top: 10px;
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 40px;
   display: flex;
   flex-direction: row;
-  margin: 20px;
+  border-radius: 5px;
 }
 
 .digit {
-  color: #1abc9c;
+  color: #000000;
   font-size: 100%;
   font-weight: bold;
 
@@ -102,7 +103,7 @@ $mute: #DFE3E4;
     font-size: 0.8em;
 
     &:before {
-      content: attr(data-step);
+      content: attr(id);
       display: block;
       margin: 0 auto;
       background: $mute;

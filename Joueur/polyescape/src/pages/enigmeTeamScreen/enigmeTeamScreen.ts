@@ -82,6 +82,10 @@ export class EnigmeTeamPage {
     toast.present();
   }
 
+  pad2(number) {
+    return (number < 10 ? '0' : '') + number
+  }
+
   decreaseTime(){
     if(this.secondes == 0 && this.minutes != 0){
       this.secondes = 59;

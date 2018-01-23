@@ -16,26 +16,24 @@
           <br />
           <label id="userName1" >{{userName}}</label>
         </div>
+        <div id="timeDiv">
+          <ion-icon margin-left="50%" name="alarm" style="color: #000000;margin-top: 10px;"></ion-icon>
+          <span margin-left="50%" class="digit" item-right style="vertical-align: 15%;">{{ minutes }}:{{ pad2(secondes) }}</span>
+        </div>
         <ion-label id="title"> Escape game en cours:
           {{nomEscape}}
         </ion-label>
-        <div id="timeDiv">
-          <div class="block">
-            <ion-icon name="alarm" style="color: #1abc9c;margin-top: 10px;"></ion-icon>
-            <span class="digit" item-right style="vertical-align: 15%;">{{ minutes }}:{{ secondes }}</span>
-          </div>
-        </div>
         <ion-label style="margin-left: 20px;">
           Nom de l'énigme:
         </ion-label>
         <ion-label style="margin-left: 20px;">
           {{nomEnigme}}
         </ion-label>
-        <ion-label style="margin-left: 20px;">
+        <ion-label style="margin-left: 20px;color: #488aff;font-weight: bold">
           Description
         </ion-label>
         <div style=" overflow-y:scroll;width:100%; height:200px;">
-          <ion-label text-wrap="true" style="margin-left: 20px; margin-right: 20px">
+          <ion-label text-wrap="true" style="margin-left: 20px; margin-right: 20px;color: #488aff">
             {{enigmeInfos}}
           </ion-label>
         </div>
@@ -56,22 +54,19 @@
     </ion-slide>
     <ion-slide style="background: lavender">
       <ion-list style="height: 100%" margin-left="10px" margin-right="10px" *ngFor="let progression of progressions">
-
-            <ion-icon id="userIcon2" name="person"> {{progression.username}}</ion-icon>
-            <div class="wrapper">
-              <div style="height:100px;overflow-y:hidden;" >
-                <ol class="progress">
-                  <li *ngFor="let p of array(progression.actual)" class="is-complete" id={{p}}>
-                  </li>
-                  <li class="is-active" id={{progression.actual}}>
-                  </li>
-                  <li *ngFor="let e of array(progression.total - progression.actual - 2)" id={{e+progression.actual+1}}>
-                  </li>
-                  <li class="progress__last" id={{progression.total-1}}>
-                  </li>
-                </ol>
-            </div>
-            </div>
+        <ion-icon id="userIcon2" name="person"> {{progression.username}}</ion-icon><div class="wrapper">
+        <div style="height:100px;overflow-y:hidden;">
+          <ol class="progress">
+            <li *ngFor="let p of array(progression.actual)" class="is-complete" id={{p}}>
+            Enigme{{p}}</li>
+            <li *ngIf="progression.total != progression.actual"class="is-active" id={{progression.actual}}>
+            Enigme{{progression.actual}}</li>
+            <li *ngFor="let e of array(progression.total - progression.actual - 2)" id={{e+progression.actual+1}}>Enigme{{e+progression.actual+1}}
+            </li>
+            <li *ngIf="progression.total - progression.actual > 1"class="progress__last" id={{progression.total-1}}>Enigme{{progression.total-1}}
+            </li>
+          </ol>
+        </div></div>
       </ion-list>
     </ion-slide>
   </ion-slides>
