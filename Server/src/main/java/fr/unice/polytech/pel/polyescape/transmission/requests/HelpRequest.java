@@ -39,9 +39,10 @@ public class HelpRequest implements Request {
         jsonObject.put("idGame", tmpJson.getInt("idpartie"));
         try {
             Session sessionMJ = Gestionnaire.getInstance().getSessionMG();
-            if (sessionMJ != null && sessionMJ.isOpen())
+            if (sessionMJ != null && sessionMJ.isOpen()){
                 sessionMJ.getBasicRemote().sendText(jsonObject.toString());
-            return true;
+                return true;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, ToastController} from 'ionic-angular';
+import {AlertController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
 import {LocalNotifications} from "@ionic-native/local-notifications";
 
@@ -25,7 +25,7 @@ export class EnigmePage {
   private type;
   private progressions;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public localNotifications: LocalNotifications) {
+  constructor(public alerCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public localNotifications: LocalNotifications) {
     this.userName = navParams.get("username");
     this.nomEscape = navParams.get("name");
     this.webSocket = navParams.get("websocket");
@@ -128,13 +128,26 @@ export class EnigmePage {
   requestHelp() {
     var request = {request:"HELP", idpartie:this.idPartie, username:this.userName, enigme: this.enigmeInfos};
     this.webSocket.send(JSON.stringify(request));
-    this.presentToastHelpSend();
-
-
     this.webSocket.onmessage = function(event) {
       var jsonData = JSON.parse(event.data);
-      this.scheduleNotification(jsonData.description);
-	  alert(jsonData.description);
+      if (jsonData.reponse == "ko"){
+        this.alerCtrl.create({
+          title : "Erreur",
+          message: "Aucun maitre du jeu disponible",
+          buttons: ['Ok']
+        }).present();
+      }else if (jsonData.reponse == "ok"){
+        this.presentToastHelpSend();
+      }
+      else {
+        this.alerCtrl.create({
+          title : "Indice",
+          message: jsonData.description,
+          buttons: ['Ok']
+        }).present();
+        this.scheduleNotification(jsonData.description);
+      }
+
     }.bind(this);
   }
 }

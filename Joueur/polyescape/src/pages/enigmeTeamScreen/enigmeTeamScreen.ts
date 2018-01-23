@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
-import {NavController, NavParams, ToastController} from "ionic-angular";
+import {AlertController, NavController, NavParams, ToastController} from "ionic-angular";
 import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
+import {LocalNotifications} from "@ionic-native/local-notifications";
 
 
 @Component({
@@ -23,7 +24,7 @@ export class EnigmeTeamPage {
   private type;
   private progressions;
 
-  constructor(public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController) {
+  constructor(public alerCtrl: AlertController, public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController, public localNotifications: LocalNotifications) {
     this.userName = navParams.get("username");
     this.nomEscape = navParams.get("name");
     this.webSocket = navParams.get("websocket");
@@ -70,6 +71,14 @@ export class EnigmeTeamPage {
     });
 
     toast.present();
+  }
+
+  presentToastHelpSend() {
+    let toast = this.toastCtrl.create({
+      message: 'Demande envoyée',
+      duration: 3000,
+      position: 'bottom'
+    });
   }
 
   presentToastIncorectAnswer() {
@@ -127,5 +136,39 @@ export class EnigmeTeamPage {
         }
       }.bind(this);
     }
+  }
+
+  scheduleNotification(text) {
+    this.localNotifications.schedule({
+      id: 1,
+      title: 'Aide',
+      text: text
+    });
+  }
+
+  requestHelp() {
+    var request = {request:"HELP", idpartie:this.idPartie, username:this.userName, enigme: this.enigmeInfos};
+    this.webSocket.send(JSON.stringify(request));
+    this.webSocket.onmessage = function(event) {
+      var jsonData = JSON.parse(event.data);
+      if (jsonData.reponse == "ko"){
+        this.alerCtrl.create({
+          title : "Erreur",
+          message: "Aucun maitre du jeu disponible",
+          buttons: ['Ok']
+        }).present();
+      }else if (jsonData.reponse == "ok"){
+        this.presentToastHelpSend();
+      }
+      else {
+        this.alerCtrl.create({
+          title : "Indice",
+          message: jsonData.description,
+          buttons: ['Ok']
+        }).present();
+        this.scheduleNotification(jsonData.description);
+      }
+
+    }.bind(this);
   }
 }
