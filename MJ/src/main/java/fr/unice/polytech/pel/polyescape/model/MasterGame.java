@@ -15,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -33,7 +34,7 @@ public class MasterGame extends Stage{
     private StackPane bottomPane;
     private StackPane topPane;
     private Pane basePane;
-    private HBox timeHB;
+    private VBox timeHB;
 
     private ProgressIndicator teamProgress;
     private ProgressIndicator timeIndicator;
@@ -86,13 +87,13 @@ public class MasterGame extends Stage{
         teamProgress = new ProgressIndicator();
         teamProgress.setId("teamProgress");
         teamProgress.setProgress(0.4);
-        System.out.println(teamProgress.getProgress());
         teamProgress.layoutXProperty().bind(basePane.widthProperty().subtract(teamProgress.widthProperty()).divide(2));
         teamProgress.setLayoutY(HAUTEUR*0.10);
-        progressLabel = new Label("50%");
+        teamProgress.setPrefSize(100,100);
+        progressLabel = new Label("Progression de l'équipe :");
         progressLabel.setId("progressLabel");
         progressLabel.layoutXProperty().bind(basePane.widthProperty().subtract(progressLabel.widthProperty()).divide(2));
-        progressLabel.setLayoutY(teamProgress.getLayoutY()+HAUTEUR/50);
+        progressLabel.setLayoutY(teamProgress.getLayoutY()-HAUTEUR/30);
 
 
         basePane.getChildren().addAll(teamProgress, progressLabel);
@@ -119,19 +120,20 @@ public class MasterGame extends Stage{
         basePane.getChildren().addAll(choicePlayer, listPlayer);
 
         //definition temps restant + graph minuteur
-        timeHB = new HBox(2);
+        timeHB = new VBox(2);
         remindedTime = new Label("1:00:00");
         remindedTime.setId("remindedTime");
 
         timeIndicator = new ProgressIndicator();
         timeIndicator.setProgress(1);
         timeIndicator.setId("timeIndicator");
+        timeIndicator.setPrefSize(250,250);
 
         timeHB.getChildren().addAll(remindedTime, timeIndicator);
 
         timeHB.layoutXProperty().bind(basePane.widthProperty().subtract(timeHB.widthProperty()).divide(1.1));
-        timeHB.setLayoutY(6*HAUTEUR/15);
-        timeHB.setSpacing(LARGEUR/40);
+        timeHB.setLayoutY(HAUTEUR/4);
+        timeHB.setSpacing(LARGEUR/50);
 
         basePane.getChildren().addAll(timeHB);
 

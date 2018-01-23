@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -39,7 +40,7 @@ public class MJController {
     Boolean finDuJeu = false;
 
     private StackPane topPane;
-    private HBox timeHB;
+    private VBox timeHB;
     private StackPane bottomPane;
 
     private ProgressIndicator teamProgress;
@@ -67,7 +68,7 @@ public class MJController {
 
     private ResponseMaker responseMaker;
 
-    public MJController(Scene scene, StackPane topPane, ProgressIndicator teamProgress, Label choicePlayer, ComboBox listPlayer, HBox timeHB, StackPane bottomPane, Button btn, Label progressLabel, ProgressIndicator timeIndicator, Text descriptionEnigma) throws URISyntaxException, DeploymentException, InterruptedException, IOException {
+    public MJController(Scene scene, StackPane topPane, ProgressIndicator teamProgress, Label choicePlayer, ComboBox listPlayer, VBox timeHB, StackPane bottomPane, Button btn, Label progressLabel, ProgressIndicator timeIndicator, Text descriptionEnigma) throws URISyntaxException, DeploymentException, InterruptedException, IOException {
         this.progressIndicatorTime = timeIndicator;
         this.scene = scene;
         this.topPane = topPane;
