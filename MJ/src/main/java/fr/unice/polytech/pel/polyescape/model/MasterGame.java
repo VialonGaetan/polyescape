@@ -52,6 +52,7 @@ public class MasterGame extends Stage{
 
     private ComboBox listPlayer;
     private Button btnAnswer;
+    private Button btnUpdate;
 
     private Group root;
     private MJController control;
@@ -116,8 +117,13 @@ public class MasterGame extends Stage{
         listPlayer.setLayoutX(0);
         listPlayer.setLayoutY(HAUTEUR*0.3);
 
+        btnUpdate = new Button("MaJ");
+        btnUpdate.setId("btnUpdate");
+        btnUpdate.setLayoutX(LARGEUR/11);
+        btnUpdate.setLayoutY(HAUTEUR*0.3);
 
-        basePane.getChildren().addAll(choicePlayer, listPlayer);
+
+        basePane.getChildren().addAll(choicePlayer, listPlayer, btnUpdate);
 
         //definition temps restant + graph minuteur
         timeHB = new VBox(2);
@@ -188,7 +194,7 @@ public class MasterGame extends Stage{
         this.getScene().getStylesheets().addAll(getClass().getClassLoader().getResource("styles/style.css").toExternalForm());
 
         this.show();
-        control = new MJController(scene, topPane, teamProgress,choicePlayer, listPlayer,timeHB,bottomPane, btnAnswer, progressLabel, timeIndicator, descriptionEnigma);
+        control = new MJController(scene, topPane, teamProgress,choicePlayer, listPlayer,timeHB,bottomPane, btnAnswer, progressLabel, timeIndicator, descriptionEnigma, btnUpdate);
         return control;
     }
 

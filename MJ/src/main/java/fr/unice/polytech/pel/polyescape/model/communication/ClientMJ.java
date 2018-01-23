@@ -74,7 +74,7 @@ public class ClientMJ {
 
     @OnMessage
     public void onMessage(String message, Session session) throws InterruptedException, IOException {
-        System.out.println(message);
+        //System.out.println(message);
         dataParser = new DataParser(message);
         JSONObject jsonObject = new JSONObject(message);
         if (new JSONObject(message).getString(JsonArguments.REPONSE.toString()).equals("infos")) {
@@ -84,6 +84,7 @@ public class ClientMJ {
         }
         if (jsonObject.getString(JsonArguments.REPONSE.toString()).equals("HELP")) {
             this.currentEnigma = jsonObject.getString("enigme");
+            System.out.println(this.currentEnigma);
             this.nameOfThePlayer = jsonObject.getString("username");
             this.idPartie = ""+jsonObject.getInt("idGame");
             this.mjController.setIdPartie(jsonObject.getInt("idGame"));
@@ -104,7 +105,6 @@ public class ClientMJ {
             Media hit = new Media(getClass().getClassLoader().getResource("sound/aide.mp3").toString());
             MediaPlayer mediaPlayer = new MediaPlayer(hit);
             mediaPlayer.play();
-            System.out.println(nameOfThePlayer);
             updateListPlayer(nameOfThePlayer,true);
         } catch (Exception e) {
             e.printStackTrace();

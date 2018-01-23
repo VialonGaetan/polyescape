@@ -57,6 +57,7 @@ public class MJController {
 
 
     private Button btnAnswer;
+    private Button btnUpdate;
     private TextArea answerField;
 
     private String selectedPlayer;
@@ -68,7 +69,7 @@ public class MJController {
 
     private ResponseMaker responseMaker;
 
-    public MJController(Scene scene, StackPane topPane, ProgressIndicator teamProgress, Label choicePlayer, ComboBox listPlayer, VBox timeHB, StackPane bottomPane, Button btn, Label progressLabel, ProgressIndicator timeIndicator, Text descriptionEnigma) throws URISyntaxException, DeploymentException, InterruptedException, IOException {
+    public MJController(Scene scene, StackPane topPane, ProgressIndicator teamProgress, Label choicePlayer, ComboBox listPlayer, VBox timeHB, StackPane bottomPane, Button btn, Label progressLabel, ProgressIndicator timeIndicator, Text descriptionEnigma, Button btnUpdate) throws URISyntaxException, DeploymentException, InterruptedException, IOException {
         this.progressIndicatorTime = timeIndicator;
         this.scene = scene;
         this.topPane = topPane;
@@ -79,6 +80,7 @@ public class MJController {
         this.timeHB = timeHB;
         this.bottomPane = bottomPane;
         this.btnAnswer = btn;
+        this.btnUpdate = btnUpdate;
         this.progressLabel = progressLabel;
         this.remindedTime = ((Label) (timeHB.getChildren().get(0)));
         this.answerField = ((TextArea) (bottomPane.getChildren().get(0)));
@@ -111,15 +113,30 @@ public class MJController {
                 }
             }
         });
-        this.listPlayer.valueProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+
+        this.listPlayer.valueProperty().addListener((obs, oldItem, newItem) -> {
+            this.selectedPlayer = this.listPlayer.getValue().toString();
+            System.out.println("HANDLE");
+            System.out.println(AdressBook.getInstance().getPlayersEnigma().get(selectedPlayer));
+            selectedPlayer = listPlayer.getValue().toString();
+            ((Text) (topPane.getChildren().get(2))).setText(selectedPlayer);
+            if (!AdressBook.getInstance().getPlayersEnigma().containsKey(selectedPlayer)) {
+                descriptionEnigma.setText("Le joueur n'a pas encore eu de problèmes particuliers");
+            } else {
+                descriptionEnigma.setText("Dernière enigme rencontrée :\n" + AdressBook.getInstance().getPlayersEnigma().get(selectedPlayer));
+            }
+        });
+
+        this.btnUpdate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                System.out.println("HANDLE");
+                System.out.println(AdressBook.getInstance().getPlayersEnigma().get(selectedPlayer));
                 selectedPlayer = listPlayer.getValue().toString();
                 ((Text) (topPane.getChildren().get(2))).setText(selectedPlayer);
-                if (!AdressBook.getInstance().getPlayersEnigma().containsKey(selectedPlayer)){
+                if (!AdressBook.getInstance().getPlayersEnigma().containsKey(selectedPlayer)) {
                     descriptionEnigma.setText("Le joueur n'a pas encore eu de problèmes particuliers");
-                }else{
-                    descriptionEnigma.setText("Dernière enigme rencontrée :\n"+AdressBook.getInstance().getPlayersEnigma().get(selectedPlayer));
+                } else {
+                    descriptionEnigma.setText("Dernière enigme rencontrée :\n" + AdressBook.getInstance().getPlayersEnigma().get(selectedPlayer));
                 }
             }
         });
@@ -255,6 +272,6 @@ public class MJController {
                     }
                 });
             }
-        }, 5000, 5000);
+        }, 10000, 10000);
     }
 }
