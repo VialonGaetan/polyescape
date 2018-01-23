@@ -14,6 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import {EnigmeTeamPage} from "../pages/enigmeTeamScreen/enigmeTeamScreen";
+import {FinalScreenPage} from "../pages/finalScreen/finalScreen";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {EnigmeTeamPage} from "../pages/enigmeTeamScreen/enigmeTeamScreen";
     HomePage,
     EnigmePage,
     TeamWaitScreen,
-    EnigmeTeamPage
+    EnigmeTeamPage,
+    FinalScreenPage
 
 
   ],
@@ -41,9 +43,8 @@ import {EnigmeTeamPage} from "../pages/enigmeTeamScreen/enigmeTeamScreen";
     HomePage,
     EnigmePage,
     TeamWaitScreen,
-    EnigmeTeamPage
-
-
+    EnigmeTeamPage,
+    FinalScreenPage
   ],
   providers: [
     LocalNotifications,
