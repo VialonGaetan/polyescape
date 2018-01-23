@@ -16,7 +16,7 @@ export class EscapeScreenPage {
   private teamName = '';
   private actualise;
 
-  constructor(public alerCtrl: AlertController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public alerCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams) {
     this.webSocket = this.navParams.get("websocket");
     var request = {request: "GET_ESCAPE"};
     this.webSocket.send(JSON.stringify(request));
@@ -56,7 +56,7 @@ export class EscapeScreenPage {
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);
         if(jsonData.reponse == "ok"){
-          this.navCtrl.setRoot(EnigmePage,{teamname:this.teamName,username:this.userName, type: type, name:game, websocket:this.webSocket,infos:jsonData.infos,temps:jsonData.temps,idpartie:jsonData.idpartie,nomenigme:jsonData.nom,progressions:[]});
+          this.navCtrl.setRoot(EnigmePage,{teamname:this.teamName,username:this.userName, type: type, name:game, websocket:this.webSocket,infos:jsonData.infos,temps:jsonData.temps,idpartie:jsonData.idpartie,nomenigme:jsonData.nom, progressions:[]});
         }
       }.bind(this);
     }

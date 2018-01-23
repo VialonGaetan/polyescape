@@ -23,21 +23,21 @@ export class EnigmePage {
   private secondes:number = 0;
   private timer:number;
   private type;
-  private progressions;
+  private score:number = 0;
+  private nbTry:number = 0;
+  private nbEnigma:number;
 
   constructor(public alerCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public localNotifications: LocalNotifications) {
     this.userName = navParams.get("username");
     this.nomEscape = navParams.get("name");
     this.webSocket = navParams.get("websocket");
-    this.teamName =this.navParams.get("teamname");
-    this.nomEnigme =
-    this.navParams.get("nomenigme");
-        this.enigmeInfos =
-        this.navParams.get("infos");
-        this.idPartie = this.navParams.get("idpartie");
-        this.minutes = this.navParams.get("temps");
-    this.type = this.navParams.get("type");    this.timer = setInterval(this.decreaseTime.bind(this),1000);
-      this.progressions = this.navParams.get("progressions");
+    this.teamName = this.navParams.get("teamname");
+    this.nomEnigme = this.navParams.get("nomenigme");
+    this.enigmeInfos = this.navParams.get("infos");
+    this.idPartie = this.navParams.get("idpartie");
+    this.minutes = this.navParams.get("temps");
+    this.type = this.navParams.get("type");
+    this.timer = setInterval(this.decreaseTime.bind(this),1000);
 
   }
 
@@ -86,7 +86,7 @@ export class EnigmePage {
     }
     else if(this.secondes == 0 && this.minutes == 0){
       clearInterval(this.timer);
-      this.navCtrl.push(EndGameScreenPage,{score:0});
+      this.navCtrl.push(EndGameScreenPage,{score: this.score});
     }
     else {
       this.secondes--;
@@ -103,23 +103,20 @@ export class EnigmePage {
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);
         if(jsonData.reponse == "ko") {
+          this.nbTry++;
           this.presentToastIncorectAnswer();
         }
         else if(jsonData.reponse == "ok"){
+          if (this.nbTry <= 3)
+            this.score++;
           this.enigmeInfos = jsonData.infos;
           this.nomEnigme = jsonData.nom;
           this.inputAnswer = "";
+          this.nbTry = 0;
         }
         else if(jsonData.reponse == "finish"){
           clearInterval(this.timer);
-          this.navCtrl.setRoot(EndGameScreenPage,{score:jsonData.score});
-        }
-        else if(jsonData.reponse == "success"){
-          this.progressions = [];
-          for(let i = 0; i < jsonData.joueurs.length; i++){
-            var progression = {username:jsonData.joueurs[i].username,total:jsonData.joueurs[i].total,actual:jsonData.joueurs[i].actual};
-            this.progressions.push(progression);
-          }
+          this.navCtrl.setRoot(EndGameScreenPage,{score: this.score});
         }
       }.bind(this);
     }
