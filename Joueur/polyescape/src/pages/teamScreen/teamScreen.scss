@@ -26,6 +26,7 @@ div #teamName{
   color: #488aff;
   margin-top: 20px;
   margin-left: 32px;
+  text-align: justify;
   font-size: 20px;
   font-weight: bold;
 }
@@ -34,32 +35,13 @@ div #teamName{
   color: #488aff;
   margin-top: 30px;
   margin-left: 32px;
+  text-align: justify;
   font-size: 20px;
   font-weight: bold;
 }
 
 #input2{
   background: lavender;
-}
-#usr{
-  position: absolute;
-  right: 0;
-  top: 0;
-  margin-top: 10px;
-  margin-right: 20px;
-  text-align: center;
-}
-
-#userIcon1{
-  font-size: 30px;
-  color: gray;
-}
-
-#userName{
-  text-align: center;
-  font-size: 15px;
-  font-weight: bold;
-  color: #488aff;
 }
 
 .ion-card-header{

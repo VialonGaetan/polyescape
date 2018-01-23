@@ -1,13 +1,12 @@
 page-enigmeTeam{
 
 }
-#title{
+#title1{
   text-align: center;
-  white-space:pre;
   color: #488aff;
   font-size: 18px;
   font-weight: bold;
-  margin-right: 15%;
+  height: 10%;
 }
 
 .input1{
@@ -46,13 +45,6 @@ page-enigmeTeam{
   &::-webkit-scrollbar {
     display: none;
   }
-}
-
-
-
-#userIcon1{
-  font-size: 30px;
-  color: gray;
 }
 
 #userIcon2{
@@ -149,16 +141,6 @@ $mute: #DFE3E4;
       }
     }
   }
-}
-
-/**
- * Size Extensions
- */
-.progress--medium {
-  font-size: 1.5em;
-}
-.progress--large {
-  font-size: 2em;
 }
 
 /**
