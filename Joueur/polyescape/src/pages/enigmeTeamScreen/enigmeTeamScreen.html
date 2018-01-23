@@ -1,17 +1,16 @@
-<ion-header>
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-  <ion-navbar>
-    <ion-title>
-      Enigme
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content style="background: lavender;">
   <ion-slides pager>
     <ion-slide>
+      <ion-header>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <ion-navbar>
+          <ion-title class="padding-0" text-center>
+            Enigme
+          </ion-title>
+        </ion-navbar>
+      </ion-header>
       <div style="background: lavender;">
-        <div id="usr3">
+        <div id="usr2">
           <ion-icon id="userIcon3" name="person"></ion-icon>
           <br />
           <label id="userName3" >{{userName}}</label>
@@ -55,7 +54,15 @@
       </div>
     </ion-slide>
     <ion-slide style="background: lavender">
-      <ion-list style="height: 100%" margin-left="10px" margin-right="10px" *ngFor="let progression of progressions">
+      <ion-header>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <ion-navbar>
+          <ion-title style="font-size: 20px">
+            Progression de l'équipe
+          </ion-title>
+        </ion-navbar>
+      </ion-header>
+      <ion-list margin-left="10px" margin-right="10px" *ngFor="let progression of progressions">
         <ion-icon id="userIcon2" name="person"> {{progression.username}}</ion-icon>
         <div class="wrapper">
           <div style="height:35px;">

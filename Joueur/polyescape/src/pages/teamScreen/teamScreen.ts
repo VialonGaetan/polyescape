@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {List, NavController, NavParams, ToastController} from 'ionic-angular';
+import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {EscapeScreenPage} from "../escapeScreen/escapeScreen";
 import {TeamWaitScreen} from "../teamWaitScreen/teamWaitScreen";
 

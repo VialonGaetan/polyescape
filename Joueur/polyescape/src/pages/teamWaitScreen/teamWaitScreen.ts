@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, ToastController} from 'ionic-angular';
-import {EnigmePage} from "../enigme/enigme";
 import {EnigmeTeamPage} from "../enigmeTeamScreen/enigmeTeamScreen";
 
 @Component({
