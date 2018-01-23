@@ -127,6 +127,7 @@ export class EnigmePage {
     this.webSocket.onmessage = function(event) {
       var jsonData = JSON.parse(event.data);
       this.scheduleNotification(jsonData.description);
+	  alert(jsonData.description);
     }.bind(this);
   }
 }
