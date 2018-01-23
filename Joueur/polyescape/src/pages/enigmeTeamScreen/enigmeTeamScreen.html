@@ -54,45 +54,22 @@
         </div>
       </div>
     </ion-slide>
-    <ion-slide>
-      <div style="background: lavender;">
-
-          <ion-list margin-left="10px" margin-right="10px" *ngFor="let player of players">
-            <ion-icon id="userIcon1" name="person"></ion-icon>
-            <div style="border:1px solid black;height:100px;overflow-y:hidden;overflow-x:scroll;">
-              <ol class="progress">
-                <li class="is-active" data-step="1">
-                  Step 1
-                </li>
-                <li data-step="2">
-                  Step 2
-                </li>
-                <li data-step="3" class="progress__last">
-                  Step 3
-                </li>
-                <li data-step="3" class="progress__last">
-                            Step 4
-                </li>
-                <li data-step="3" class="progress__last">
-                            Step 5
-                </li>
-                <li data-step="3" class="progress__last">
-                            Step 6
-                </li>
-                <li data-step="3" class="progress__last">
-                                      Step 6
-                          </li>
-                          <li data-step="3" class="progress__last">
-                                                Step 6
-                                    </li>
-                                    <li data-step="3" class="progress__last">
-                                                          Step 6
-                                              </li>
-              </ol>
-            </div>
-          </ion-list>
-
-      </div>
+    <ion-slide style="background: lavender">
+      <ion-list style="height: 100%" margin-left="10px" margin-right="10px" *ngFor="let progression of progressions">
+        <ion-icon id="userIcon2" name="person"> {{progression.username}}</ion-icon>
+        <div style="height:100px;overflow-y:hidden;">
+          <ol class="progress">
+            <li *ngFor="let p of array(progression.actual)" class="is-complete" id={{p}}>
+            </li>
+            <li class="is-active" id={{progression.actual}}>
+            </li>
+            <li *ngFor="let e of array(progression.total - progression.actual - 2)" id={{e+progression.actual+1}}>
+            </li>
+            <li class="progress__last" id={{progression.total-1}}>
+            </li>
+          </ol>
+        </div>
+      </ion-list>
     </ion-slide>
   </ion-slides>
 </ion-content>

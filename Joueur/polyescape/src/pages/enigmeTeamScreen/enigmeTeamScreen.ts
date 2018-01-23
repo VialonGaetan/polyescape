@@ -21,6 +21,7 @@ export class EnigmeTeamPage {
   private secondes:number = 0;
   private timer:number;
   private type;
+  private progressions;
 
   constructor(public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController) {
     this.userName = navParams.get("username");
@@ -32,10 +33,35 @@ export class EnigmeTeamPage {
     this.idPartie = this.navParams.get("idpartie");
     this.minutes = this.navParams.get("temps");
     this.type = this.navParams.get("type");
-
+    this.progressions = this.navParams.get("progressions");
     this.timer = setInterval(this.decreaseTime.bind(this),1000);
+    this.webSocket.onmessage = function (event) {
+      var jsonData = JSON.parse(event.data);
+      if(jsonData.reponse == "success"){
+          this.updateProgression(jsonData);
+      }
+    }.bind(this);
     }
 
+  updateProgression(jsonData:any){
+    this.progressions = [];
+    for(let i = 0; i < jsonData.joueurs.length; i++) {
+      var progression = {
+        username: jsonData.joueurs[i].username,
+        total: jsonData.joueurs[i].total,
+        actual: jsonData.joueurs[i].actual
+      };
+      this.progressions.push(progression);
+    }
+  }
+
+  array(n:number){
+    var array = new Array();
+    for(let i = 0; i < n; i++){
+      array.push(i);
+    }
+    return array;
+  }
   presentToastNoAnswer() {
     let toast = this.toastCtrl.create({
       message: 'Veuillez entrer une réponse',
@@ -92,6 +118,9 @@ export class EnigmeTeamPage {
         else if(jsonData.reponse == "finish"){
           clearInterval(this.timer);
           this.navCtrl.setRoot(EndGameScreenPage,{score:jsonData.score});
+        }
+        else if(jsonData.reponse == "success"){
+          this.updateProgression(jsonData);
         }
       }.bind(this);
     }

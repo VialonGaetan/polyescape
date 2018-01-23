@@ -30,7 +30,7 @@ export class TeamWaitScreen {
           this.actualise(jsonData.joueurs);
         }
         else if(jsonData.reponse == "enigme"){
-          this.navCtrl.setRoot(EnigmeTeamPage,{teamname:this.teamName,username:this.userName,name:this.escapeName,websocket:this.webSocket,infos:jsonData.infos,temps:jsonData.temps,nomenigme:jsonData.nom,idpartie:this.idpartie})
+          this.navCtrl.setRoot(EnigmeTeamPage,{teamname:this.teamName,username:this.userName,name:this.escapeName,websocket:this.webSocket,infos:jsonData.infos,temps:jsonData.temps,nomenigme:jsonData.nom,idpartie:this.idpartie,progressions:[]})
         }
 
     }.bind(this);
@@ -41,7 +41,7 @@ export class TeamWaitScreen {
   actualise(jsonJoueurs:any){
     this.players = [];
     for (let i = 0; i < jsonJoueurs.length; i++) {
-      var player = {name: jsonJoueurs[i].nom, ready: jsonJoueurs[i].ready};
+      var player = {name: jsonJoueurs[i].username, ready: jsonJoueurs[i].ready};
       this.players.push(player);
     }
   }

@@ -18,13 +18,13 @@ $mute: #DFE3E4;
     font-size: 0.8em;
 
     &:before {
-      content: attr(data-step);
+      content: attr(id);
       display: block;
       margin: 0 auto;
       background: $mute;
       width: 3em;
       height: 3em;
-      text-align: center; //IE8 doesn't inherit this style
+      text-align: center;
       margin-bottom: 0.25em;
       line-height: 3em;
       border-radius: 100%;

@@ -18,6 +18,8 @@ export class TeamProgressionScreenPage {
   private teamName;
   private type;
   private minutes:number = 0;
+  private progressions;
+  private arr = Array;
 
   constructor(public navCtrl: NavController, public navParams:NavParams, public events: Events) {
     this.userName = navParams.get("username");
@@ -29,9 +31,20 @@ export class TeamProgressionScreenPage {
     this.idPartie = this.navParams.get("idpartie");
     this.minutes = this.navParams.get("temps");
     this.type = this.navParams.get("type");
+    this.progressions = this.navParams.get("progressions");
+    this.arr = Array;
+    alert(this.progressions[0].actual);
     for (var i = 0; i < 4; i++)
       this.players.push('Bob');
 
+    this.webSocket.onmessage = function (event) {
+      this.progressions = [];
+      var jsonData = JSON.parse(event.data);
+      for(let i = 0; i < jsonData.partieattente.length; i++){
+        var progression = {username:jsonData.joueurs[i].username,total:jsonData.joueurs[i].total,actual:jsonData.joueurs[i].actual};
+        this.progressions.push(progression);
+      }
+    }.bind(this);
   }
 
 
@@ -46,7 +59,8 @@ export class TeamProgressionScreenPage {
                                              infos: this.enigmeInfos,
                                              temps: this.minutes,
                                              idpartie: this.idPartie,
-                                             nomenigme: this.nomEnigme
+                                             nomenigme: this.nomEnigme,
+                                             progressions:this.progressions
                                              });
     }
   }

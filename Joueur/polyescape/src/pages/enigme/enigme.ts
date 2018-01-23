@@ -22,6 +22,7 @@ export class EnigmePage {
   private secondes:number = 0;
   private timer:number;
   private type;
+  private progressions;
 
   constructor(public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController) {
     this.userName = navParams.get("username");
@@ -35,6 +36,10 @@ export class EnigmePage {
     this.type = this.navParams.get("type");
 
     this.timer = setInterval(this.decreaseTime.bind(this),1000);
+    this.progressions = this.navParams.get("progressions");
+    this.timer = setInterval(this.decreaseTime.bind(this),1000);
+    if(this.navParams.get("type") != "solo"){
+    }
   }
 
   presentToastNoAnswer() {
@@ -56,7 +61,6 @@ export class EnigmePage {
 
     toast.present();
   }
-
 
   decreaseTime(){
     if(this.secondes == 0 && this.minutes != 0){
@@ -93,6 +97,13 @@ export class EnigmePage {
         else if(jsonData.reponse == "finish"){
           clearInterval(this.timer);
           this.navCtrl.setRoot(EndGameScreenPage,{score:jsonData.score});
+        }
+        else if(jsonData.reponse == "success"){
+          this.progressions = [];
+          for(let i = 0; i < jsonData.joueurs.length; i++){
+            var progression = {username:jsonData.joueurs[i].username,total:jsonData.joueurs[i].total,actual:jsonData.joueurs[i].actual};
+            this.progressions.push(progression);
+          }
         }
       }.bind(this);
     }
