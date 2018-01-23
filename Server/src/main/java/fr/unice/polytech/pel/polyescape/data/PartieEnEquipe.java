@@ -3,7 +3,6 @@ package fr.unice.polytech.pel.polyescape.data;
 import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer.ActualizeProgressGameMessage;
 import fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer.BeginGameMessage;
-import fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer.EndGameMessage;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -41,28 +40,23 @@ public class PartieEnEquipe extends Partie implements Serialize {
     }
 
     @Override
-    protected void attributeEnigme(){
-        for (Joueur joueur: equipe.getJoueurs()) {
+    protected void attributeEnigme() {
+        for (Joueur joueur : equipe.getJoueurs()) {
             association.put(joueur, new ArrayList<>());
         }
         Collections.shuffle(escapeGame.getEnigmes());
         for (Enigme enigme : escapeGame.getEnigmes()) {
-            association.get(equipe.getNextJoueur()).add(new Enigme(enigme.getName(),enigme.getDescription(),enigme.getReponse()));
+            association.get(equipe.getNextJoueur()).add(new Enigme(enigme.getName(), enigme.getDescription(), enigme.getReponse()));
         }
         for (Joueur joueur : association.keySet()) {
-            joueur.sendMessageToPlayer(new BeginGameMessage(getCurrentEnigmesOfaPlayer(joueur).get(),time).createMessageToSend());
+            joueur.sendMessageToPlayer(new BeginGameMessage(getCurrentEnigmesOfaPlayer(joueur).get(), time).createMessageToSend());
         }
         sendMessageToAllPlayer(new ActualizeProgressGameMessage(association).createMessageToSend());
     }
 
     @Override
-    public boolean isFinish() {
-        for (Joueur joueur : association.keySet()) {
-            if (association.get(joueur).stream().anyMatch(enigme -> !enigme.isResolve()))
-                return false;
-        }
-        sendMessageToAllPlayer(new EndGameMessage(100).createMessageToSend());
-        return true;
+    public boolean isFinish(Joueur joueur) {
+         return association.get(joueur).stream().anyMatch(enigme -> !enigme.isResolve());
     }
 
     @Override
@@ -82,11 +76,11 @@ public class PartieEnEquipe extends Partie implements Serialize {
     }
 
     @Override
-    protected void sendProgressPlayer(){
+    protected void sendProgressPlayer() {
         sendMessageToAllPlayer(new ActualizeProgressGameMessage(association).createMessageToSend());
     }
 
-    private void sendMessageToAllPlayer(String message){
+    private void sendMessageToAllPlayer(String message) {
         for (Joueur joueur : association.keySet()) {
             joueur.sendMessageToPlayer(message);
         }
@@ -95,16 +89,16 @@ public class PartieEnEquipe extends Partie implements Serialize {
     @Override
     public JSONObject toJson() {
         JSONArray jsonArray = new JSONArray();
-        for (Joueur joueur: association.keySet()) {
+        for (Joueur joueur : association.keySet()) {
             JSONArray jsonArrayEnigme = new JSONArray();
             for (Enigme enigme : association.get(joueur)) {
                 jsonArrayEnigme.put(enigme.toJson());
             }
-            jsonArray.put(joueur.toJson().put(JsonArguments.ENIGMES.toString(),jsonArrayEnigme));
+            jsonArray.put(joueur.toJson().put(JsonArguments.ENIGMES.toString(), jsonArrayEnigme));
         }
 
-        return new JSONObject().put(JsonArguments.TEMPS.toString(),getTime())
-                .put(JsonArguments.JOUEURS.toString(),jsonArray)
-                .put(JsonArguments.ESCAPEGAME.toString(),escapeGame.getName());
+        return new JSONObject().put(JsonArguments.TEMPS.toString(), getTime())
+                .put(JsonArguments.JOUEURS.toString(), jsonArray)
+                .put(JsonArguments.ESCAPEGAME.toString(), escapeGame.getName());
     }
 }
