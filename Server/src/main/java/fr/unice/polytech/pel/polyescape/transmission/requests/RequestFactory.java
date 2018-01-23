@@ -37,6 +37,12 @@ public class RequestFactory {
                 return new IndiceRequest(message, session);
 
 
+            case JOIN_TEAM:
+                return new JoinTeamRequest(message,session);
+            case GET_SALONS:
+                return new SalonListRequest();
+            case SET_READY:
+                return new SetReadyOrNotRequest(message,session);
             default:
                 return new InvalidJsonRequest("InvalidElementRequest");
         }

@@ -7,10 +7,7 @@ import org.json.JSONObject;
  * Created the 16/01/2018.
  */
 public class CreateEnigmeRequest implements Request {
-    @Override
-    public String getAnswer() {
-        return null;
-    }
+
 
     @Override
     public JSONObject answerInJson() {

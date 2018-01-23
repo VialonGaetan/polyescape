@@ -3,6 +3,8 @@ import {NavController, NavParams, ToastController} from 'ionic-angular';
 import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
 import {LocalNotifications} from "@ionic-native/local-notifications";
 
+
+
 @Component({
   selector: 'page-enigme',
   templateUrl: 'enigme.html'
@@ -15,29 +17,27 @@ export class EnigmePage {
   private nomEnigme:string ='';
   private nomEscape = '';
   private enigmeInfos:string = '';
+  private teamName;
   private webSocket:WebSocket;
   private minutes:number = 0;
   private secondes:number = 0;
   private timer:number;
-
+  private type;
+  private progressions;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public localNotifications: LocalNotifications) {
     this.userName = navParams.get("username");
     this.nomEscape = navParams.get("name");
     this.webSocket = navParams.get("websocket");
-    var request = {request: "CREATE_PARTIE", type:"SOLO",username:this.userName,escapegame:this.nomEscape};
-    this.webSocket.send(JSON.stringify(request));
-    this.webSocket.onmessage = function(event) {
-      var jsonData = JSON.parse(event.data);
-      if(jsonData.reponse == "ok"){
-        this.nomEnigme = jsonData.nom;
-        this.enigmeInfos = jsonData.infos;
-        this.idPartie = jsonData.idpartie;
-        this.minutes = jsonData.temps;
-        this.timer = setInterval(this.decreaseTime.bind(this),1000);
-      }
-    }.bind(this);
-
+    this.teamName =this.navParams.get("teamname");
+    this.nomEnigme =
+    this.navParams.get("nomenigme");
+        this.enigmeInfos =
+        this.navParams.get("infos");
+        this.idPartie = this.navParams.get("idpartie");
+        this.minutes = this.navParams.get("temps");
+    this.type = this.navParams.get("type");    this.timer = setInterval(this.decreaseTime.bind(this),1000);
+      this.progressions = this.navParams.get("progressions");
 
   }
 
@@ -113,6 +113,13 @@ export class EnigmePage {
         else if(jsonData.reponse == "finish"){
           clearInterval(this.timer);
           this.navCtrl.setRoot(EndGameScreenPage,{score:jsonData.score});
+        }
+        else if(jsonData.reponse == "success"){
+          this.progressions = [];
+          for(let i = 0; i < jsonData.joueurs.length; i++){
+            var progression = {username:jsonData.joueurs[i].username,total:jsonData.joueurs[i].total,actual:jsonData.joueurs[i].actual};
+            this.progressions.push(progression);
+          }
         }
       }.bind(this);
     }

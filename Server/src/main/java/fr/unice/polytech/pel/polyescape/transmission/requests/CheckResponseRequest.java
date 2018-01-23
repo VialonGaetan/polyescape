@@ -16,7 +16,7 @@ public class CheckResponseRequest implements Request {
 
     private Gestionnaire gestionnaire = Gestionnaire.getInstance();
     private Logger logger = Logger.getLogger(this.getClass().getName());
-    private Boolean isGood = false;
+    private Boolean isGood;
     private Joueur joueur;
     private int partieID;
 
@@ -28,10 +28,8 @@ public class CheckResponseRequest implements Request {
         isGood = checkReponse(decode.getString(JsonArguments.REPONSE.toString()));
     }
 
-    private boolean checkReponse(String reponse){
-        if (gestionnaire.getPartieByID(partieID).getCurrentEnigmesOfaPlayer(joueur).isPresent())
-            return gestionnaire.getPartieByID(partieID).getCurrentEnigmesOfaPlayer(joueur).get().checkAnswer(reponse);
-        else return false;
+    private boolean checkReponse(String reponse) {
+        return gestionnaire.getPartieByID(partieID).checkReponse(joueur,reponse);
     }
 
     @Override
@@ -41,16 +39,14 @@ public class CheckResponseRequest implements Request {
 
     @Override
     public JSONObject answerInJson() {
-        if (isGood){
+        if (isGood) {
             if (gestionnaire.getPartieByID(partieID).getCurrentEnigmesOfaPlayer(joueur).isPresent())
                 return new JSONObject().put(JsonArguments.REPONSE.toString(), JsonArguments.OK.toString())
                         .put(JsonArguments.NOM.toString(), gestionnaire.getPartieByID(partieID).getCurrentEnigmesOfaPlayer(joueur).get().getName())
                         .put(JsonArguments.INFOS.toString(), gestionnaire.getPartieByID(partieID).getCurrentEnigmesOfaPlayer(joueur).get().getDescription());
-            else
                 return new JSONObject().put(JsonArguments.REPONSE.toString(), JsonArguments.FINISH.toString())
                         .put(JsonArguments.SCORE.toString(), 100);
         } else
-            return new JSONObject().put(JsonArguments.REPONSE.toString(),JsonArguments.KO.toString());
-
+            return new JSONObject().put(JsonArguments.REPONSE.toString(), JsonArguments.KO.toString());
     }
 }

@@ -1,7 +1,7 @@
 package fr.unice.polytech.pel.polyescape.transmission.requests;
 
-import fr.unice.polytech.pel.polyescape.data.Enigme;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
+import fr.unice.polytech.pel.polyescape.data.Enigme;
 import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,10 +22,6 @@ public class EnigmeDispoRequest implements Request {
         logger.info("Recuperation de la liste des enigmes");
     }
 
-    @Override
-    public String getAnswer() {
-        return answerInJson().toString();
-    }
 
     @Override
     public JSONObject answerInJson() {

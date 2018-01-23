@@ -11,8 +11,10 @@ export class HomePage {
 
   private inputName = '';
   private userName = '';
+  private webSocket:WebSocket;
 
   constructor(public navCtrl: NavController, public toastCtrl: ToastController) {
+    this.webSocket = new WebSocket("ws://localhost:15555/websockets/gameserver");
   }
 
   presentToast() {
@@ -26,6 +28,10 @@ export class HomePage {
     toast.present();
   }
 
+  /**
+   * Get the username specified in the right textfield
+   * @returns {boolean}
+   */
   verifyInputName() {
     if (this.inputName.length == 0) {
       this.presentToast();
@@ -36,16 +42,23 @@ export class HomePage {
     return true;
   }
 
+
+  /**
+   * If you choose to play solo you directly go to the escape game choose page
+   */
   goToEscapePage() {
     if (this.verifyInputName()){
-      var us = this.userName;
-      this.navCtrl.push(EscapeScreenPage,{username:us});
+      this.navCtrl.push(EscapeScreenPage,{username:this.userName,websocket:this.webSocket,type:"solo",teamname:""});
     }
 
   }
 
+  /**
+   * If you choose to play with partners go to the team selection page
+   */
   goToTeamPage() {
-    if (this.verifyInputName())
-      this.navCtrl.push(TeamScreenPage);
+    if (this.verifyInputName()){
+      this.navCtrl.push(TeamScreenPage,{username:this.userName,websocket:this.webSocket});
+    }
   }
 }

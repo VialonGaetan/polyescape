@@ -6,24 +6,32 @@ package fr.unice.polytech.pel.polyescape.transmission;
  */
 public enum  JsonArguments {
     REQUEST("request"),
-    TYPE("type"),
-    SOLO("solo"),
+    TEAMNAME("teamname"),
     NOM("nom"),
     INFOS("infos"),
     REPONSE("reponse"),
     TEMPS("temps"),
+    EQUIPE("equipe"),
     ENIGMES("enigmes"),
+    ENIGME("enigme"),
     ESCAPEGAMES("escapegames"),
     ESCAPEGAME("escapegame"),
     USERNAME("username"),
     OK("ok"),
     KO("ko"),
     FINISH("finish"),
+    WAITINGALL("waitingall"),
     SCORE("score"),
     JOUEURS("joueurs"),
     PARTIEENCOURS("partieencours"),
+    PARTIEATTENTE("partieattente"),
     IDPARTIE("idpartie"),
-    ISRESOLVE("isresolve");
+    ISRESOLVE("isresolve"),
+    ACTUALISE("actualise"),
+    TOTAL("total"),
+    ACTUAL("actual"),
+    SUCCESS("success"),
+    READY("ready");
 
 
     /**

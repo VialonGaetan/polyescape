@@ -1,0 +1,176 @@
+page-enigmeTeam{
+
+}
+#title1{
+  text-align: center;
+  color: #488aff;
+  font-size: 18px;
+  font-weight: bold;
+  height: 10%;
+}
+
+.input1{
+  position:absolute;
+  bottom:60px;
+  background: lavender;
+}
+.enigmeButtons{
+  width: 45%;
+  height: 100%;
+  font-size: 60%;
+  bottom: 25%;
+}
+#enigmeButtonsDiv{
+  height: 9%;
+  width: 100%;
+  position:absolute;
+  bottom:0;
+  margin-bottom: 5px;
+
+}
+
+.wrapper {
+
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  padding: 1rem;
+
+  // Toggle this depending upon whether you want to see the scrollbar
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+#userIcon2{
+  font-size: 20px;
+  color: gray;
+  margin-bottom: 10px;
+}
+
+#usr2{
+  position: absolute;
+  right: 0;
+  top: 40px;
+  margin-top: 3%;
+  margin-right: 10px;
+  text-align: center;
+}
+
+
+#timeDiv{
+  background-color: #488aff;
+  margin-top: 10px;
+  position: absolute;
+  top: 10%;
+  width: 120px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
+}
+
+.digit {
+  color: #000000;
+  font-size: 100%;
+  font-weight: bold;
+
+  margin: 10px;
+  text-align: center;
+}
+
+$complete: #2ECC71;
+$active: #3498DB;
+$mute: #DFE3E4;
+
+
+
+.progress {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: table;
+  table-layout: fixed;
+
+  color: darken($mute, 33%);
+
+  > li {
+    position: relative;
+    display: table-cell;
+    text-align: center;
+    font-size: 0.7em;
+
+    &:before {
+      content: attr(id);
+      display: block;
+      margin: 0 auto;
+      background: $mute;
+      width: 3em;
+      height: 3em;
+      text-align: center;
+      margin-bottom: 0.25em;
+      line-height: 3em;
+      border-radius: 100%;
+      position: relative;
+      z-index: 1000;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      display: block;
+      background: $mute;
+      width: 100%;
+      height: 0.5em;
+      top: 1.25em;
+      left: 50%;
+      margin-left: 1.5em\9;
+      z-index: -1;
+    }
+    &:last-child:after {
+      display: none;
+    }
+    &.is-complete {
+      color: $complete;
+
+      &:before,
+      &:after {
+        color: #FFF;
+        background: $complete;
+      }
+    }
+    &.is-active {
+      color: $active;
+
+      &:before {
+        color: #FFF;
+        background: $active;
+      }
+    }
+  }
+}
+
+/**
+ * Some Generic Stylings
+ */
+*, *:after, *:before {
+  box-sizing: border-box;
+}
+h1 {
+  margin-bottom: 1.5em;
+}
+.progress {
+  margin-bottom: 3em;
+}
+a {
+  color: $active;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+body {
+  text-align: center;
+  color: #444;
+}

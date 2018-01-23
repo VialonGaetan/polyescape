@@ -5,12 +5,15 @@ import org.json.JSONObject;
 
 import javax.websocket.Session;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * @author Gaetan Vialon
  * Created the 12/01/2018.
  */
 public class Joueur implements Serialize {
+
+    private Logger logger = Logger.getLogger(this.getClass().getName());
     private String nom;
     private Session session;
 
@@ -26,36 +29,33 @@ public class Joueur implements Serialize {
 
     public void sendMessageToPlayer(String message) {
         try {
-            session.getBasicRemote().sendText(message);
+            if (session != null && session.isOpen()) {
+                session.getBasicRemote().sendText(message);
+                logger.info("Send message : " + message + " to " + session.getId());
+            }
         } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void sendEnigmeToPlayer(Enigme enigme) {
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put(JsonArguments.NOM.toString(),enigme.getName())
-                .put(JsonArguments.INFOS.toString(),enigme.getDescription());
-        try {
-            session.getBasicRemote().sendText(jsonObject.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
+            logger.info("Impossible d'envoie de message + " + e);
         }
     }
 
     @Override
     public JSONObject toJson() {
-        return new JSONObject().put(JsonArguments.NOM.toString(),this.nom);
+        return new JSONObject().put(JsonArguments.USERNAME.toString(),this.nom);
     }
 
     @Override
     public boolean equals(Object o) {
+        if (o == null)
+            return false;
+
+        if (this.getClass() != o.getClass())
+            return false;
+
         Joueur joueur = (Joueur) o;
         if (this.session == null || joueur.session == null)//Uniquement pour faire des test
             return this.nom.equals(joueur.nom);
         else {
-            return joueur.nom != null && this.nom != null && this.session != null && joueur.session != null &&
-                    this.nom.equals(joueur.nom) && this.session.getId().equals(joueur.session.getId());
+            return joueur.nom != null && this.nom != null && this.nom.equals(joueur.nom) && this.session.getId().equals(joueur.session.getId());
         }
     }
 

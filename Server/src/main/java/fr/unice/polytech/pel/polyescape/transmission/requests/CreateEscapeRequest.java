@@ -7,10 +7,6 @@ import org.json.JSONObject;
  * Created the 16/01/2018.
  */
 public class CreateEscapeRequest implements Request{
-    @Override
-    public String getAnswer() {
-        return null;
-    }
 
     @Override
     public JSONObject answerInJson() {

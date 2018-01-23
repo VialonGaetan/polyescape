@@ -14,10 +14,12 @@ public class EscapeGame implements Serialize {
 
     private String name;
     private List<Enigme> enigmes;
+    private String description;
     private int time;
 
-    public EscapeGame(String name,List<Enigme> enigmes, int time) {
+    public EscapeGame(String name,String description,List<Enigme> enigmes, int time) {
         this.name = name;
+        this.description = description;
         this.enigmes = enigmes;
         this.time = time;
     }
@@ -35,6 +37,10 @@ public class EscapeGame implements Serialize {
         return time;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     @Override
     public JSONObject toJson() {
         JSONArray jsonArray = new JSONArray();
@@ -44,6 +50,7 @@ public class EscapeGame implements Serialize {
 
         return new JSONObject().put(JsonArguments.NOM.toString(),name)
                 .put(JsonArguments.TEMPS.toString(),time)
+                .put(JsonArguments.INFOS.toString(),description)
                 .put(JsonArguments.ENIGMES.toString(),jsonArray);
     }
 }

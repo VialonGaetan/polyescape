@@ -1,4 +1,4 @@
-package fr.unice.polytech.pel.polyescape.Server;
+package fr.unice.polytech.pel.polyescape.server;
 
 import javax.websocket.*;
 import java.io.IOException;

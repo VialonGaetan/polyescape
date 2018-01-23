@@ -1,7 +1,7 @@
 package fr.unice.polytech.pel.polyescape.transmission.requests;
 
-import fr.unice.polytech.pel.polyescape.data.EscapeGame;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
+import fr.unice.polytech.pel.polyescape.data.EscapeGame;
 import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,11 +20,6 @@ public class EscapeGameDispoListRequest implements Request {
 
     public EscapeGameDispoListRequest() {
         logger.info("Recuperation de la liste des escape game");
-    }
-
-    @Override
-    public String getAnswer() {
-        return answerInJson().toString();
     }
 
     @Override

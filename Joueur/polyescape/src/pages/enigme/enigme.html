@@ -16,9 +16,12 @@
   <ion-label id="title"> Escape game en cours:
     {{nomEscape}}
   </ion-label>
-  <ion-label id="time">
-    Temps restant: {{minutes}}minutes : {{secondes}}secondes
-  </ion-label>
+  <div id="timeDiv">
+    <div class="block">
+      <ion-icon name="alarm" style="color: #1abc9c;margin-top: 10px;"></ion-icon>
+      <span class="digit" item-right style="vertical-align: 15%;">{{ minutes }}:{{ secondes }}</span>
+    </div>
+  </div>
   <ion-label style="margin-left: 20px;">
     Nom de l'énigme:
   </ion-label>
