@@ -1,6 +1,7 @@
 import {Component} from "@angular/core";
 import {AlertController, NavController, NavParams, ToastController} from "ionic-angular";
 import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
+import {FinalScreenPage} from "../finalScreen/finalScreen";
 import {LocalNotifications} from "@ionic-native/local-notifications";
 
 
@@ -42,7 +43,7 @@ export class EnigmeTeamPage {
           this.updateProgression(jsonData);
       }
     }.bind(this);
-    }
+  }
 
   updateProgression(jsonData:any){
     this.progressions = [];
@@ -126,6 +127,10 @@ export class EnigmeTeamPage {
           this.enigmeInfos = jsonData.infos;
           this.nomEnigme = jsonData.nom;
           this.inputAnswer = "";
+        }
+        else if(jsonData.reponse == "notYet"){
+          clearInterval(this.timer);
+          this.navCtrl.setRoot(FinalScreenPage,{teamname:this.teamname,progressions:this.progressions});
         }
         else if(jsonData.reponse == "finish"){
           clearInterval(this.timer);
