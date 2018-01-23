@@ -61,7 +61,6 @@ public class PartieEnEquipe extends Partie implements Serialize {
             if (association.get(joueur).stream().anyMatch(enigme -> !enigme.isResolve()))
                 return false;
         }
-        sendMessageToAllPlayer(new EndGameMessage(100).createMessageToSend());
         return true;
     }
 
