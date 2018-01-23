@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 
 import javax.websocket.DeploymentException;
 import java.awt.*;
+import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class MasterGame extends Stage{
@@ -34,7 +35,7 @@ public class MasterGame extends Stage{
     private Pane basePane;
     private HBox timeHB;
 
-    private ProgressBar progressBar;
+    private ProgressIndicator teamProgress;
     private ProgressIndicator timeIndicator;
 
     private Text descriptionEnigma;
@@ -54,11 +55,11 @@ public class MasterGame extends Stage{
     private Group root;
     private MJController control;
 
-    public MasterGame() throws URISyntaxException, DeploymentException, InterruptedException {
+    public MasterGame() throws URISyntaxException, DeploymentException, InterruptedException, IOException {
         init();
     }
 
-    public MJController init() throws URISyntaxException, DeploymentException, InterruptedException {
+    public MJController init() throws URISyntaxException, DeploymentException, InterruptedException, IOException {
         //Definition de base
         basePane = new Pane();
         root = new Group();
@@ -81,19 +82,20 @@ public class MasterGame extends Stage{
         topPane.setAlignment(playerName,Pos.TOP_RIGHT);
         basePane.getChildren().addAll(topPane);
 
-        //definition de la progressBar + progressLabel
-        progressBar = new ProgressBar();
-        progressBar.setId("progressBar");
-        progressBar.setProgress(0.5);
-        progressBar.layoutXProperty().bind(basePane.widthProperty().subtract(progressBar.widthProperty()).divide(2));
-        progressBar.setLayoutY(HAUTEUR*0.10);
+        //definition de la teamProgress + progressLabel
+        teamProgress = new ProgressIndicator();
+        teamProgress.setId("teamProgress");
+        teamProgress.setProgress(0.4);
+        System.out.println(teamProgress.getProgress());
+        teamProgress.layoutXProperty().bind(basePane.widthProperty().subtract(teamProgress.widthProperty()).divide(2));
+        teamProgress.setLayoutY(HAUTEUR*0.10);
         progressLabel = new Label("50%");
         progressLabel.setId("progressLabel");
         progressLabel.layoutXProperty().bind(basePane.widthProperty().subtract(progressLabel.widthProperty()).divide(2));
-        progressLabel.setLayoutY(progressBar.getLayoutY()+HAUTEUR/50);
+        progressLabel.setLayoutY(teamProgress.getLayoutY()+HAUTEUR/50);
 
 
-        basePane.getChildren().addAll(progressBar, progressLabel);
+        basePane.getChildren().addAll(teamProgress, progressLabel);
 
         //definition de la liste des joueurs
         choicePlayer =new Label("choix du joueur :");
@@ -184,7 +186,7 @@ public class MasterGame extends Stage{
         this.getScene().getStylesheets().addAll(getClass().getClassLoader().getResource("styles/style.css").toExternalForm());
 
         this.show();
-        control = new MJController(scene, topPane,progressBar,choicePlayer, listPlayer,timeHB,bottomPane, btnAnswer, progressLabel, timeIndicator, descriptionEnigma);
+        control = new MJController(scene, topPane, teamProgress,choicePlayer, listPlayer,timeHB,bottomPane, btnAnswer, progressLabel, timeIndicator, descriptionEnigma);
         return control;
     }
 

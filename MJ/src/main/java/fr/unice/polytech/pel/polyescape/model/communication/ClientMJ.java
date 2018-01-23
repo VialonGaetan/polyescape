@@ -2,6 +2,7 @@ package fr.unice.polytech.pel.polyescape.model.communication;
 
 import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
 import fr.unice.polytech.pel.polyescape.controller.MJController;
+import fr.unice.polytech.pel.polyescape.model.parser.DataParser;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -24,19 +25,20 @@ public class ClientMJ {
     private final String message;
     private DataParser dataParser;
     private ProgressIndicator progressIndicatorTime;
+    private ProgressIndicator progressEnigma;
     private javafx.scene.text.Text escapeGameName;
     private javafx.scene.text.Text teamName;
     private ComboBox listPlayer;
     private Boolean firstTime = true;
     private int timeInMinute = 0;
-    MJController mjController;
+    private MJController mjController;
     private String currentEnigma = "";
     private String nameOfThePlayer = "";
     private String idPartie;
     private Text descriptionEnigma;
 
 
-    public ClientMJ(String message, ProgressIndicator progressIndicator, Text teamNameText, Text escapeGameName, ComboBox listPlayer, MJController mjController, Text descriptionEnigma) {
+    public ClientMJ(String message, ProgressIndicator progressIndicator, Text teamNameText, Text escapeGameName, ComboBox listPlayer, MJController mjController, Text descriptionEnigma, ProgressIndicator progressEnigma) throws IOException {
         this.message = message;
         this.dataParser = new DataParser(message);
         this.listPlayer = listPlayer;
@@ -45,6 +47,7 @@ public class ClientMJ {
         this.teamName = teamNameText;
         this.mjController = mjController;
         this.descriptionEnigma = descriptionEnigma;
+        this.progressEnigma = progressEnigma;
     }
 
     public ClientMJ(String message) {
@@ -86,9 +89,7 @@ public class ClientMJ {
             this.mjController.setIdPartie(jsonObject.getInt("idGame"));
             AdressBook.getInstance().updateEnigma(nameOfThePlayer, currentEnigma);
             AdressBook.getInstance().updateSessions(this.nameOfThePlayer,session);
-            System.out.println(AdressBook.getInstance().getPlayersEnigma().get(nameOfThePlayer));
-            System.out.println(AdressBook.getInstance().getAPlayerSession(nameOfThePlayer).toString());
-            protocolHelp(this.nameOfThePlayer, this.currentEnigma);
+            protocolHelp(this.nameOfThePlayer);
         }
         return;
     }
@@ -98,7 +99,7 @@ public class ClientMJ {
         logger.info(String.format("Session %s close because of %s", session.getId(), closeReason));
     }
 
-    private void protocolHelp(String nameOfThePlayer, String currentEnigma) {
+    private void protocolHelp(String nameOfThePlayer) {
         try {
             Media hit = new Media(getClass().getClassLoader().getResource("sound/aide.mp3").toString());
             MediaPlayer mediaPlayer = new MediaPlayer(hit);
@@ -117,6 +118,10 @@ public class ClientMJ {
             this.listPlayer.setItems(this.dataParser.getPlayers());
             this.escapeGameName.setText(this.dataParser.getTeamName());
             firstTime = false;
+        }
+        if (!firstTime){
+            mjController.startProgress();
+            this.progressEnigma.setProgress(this.dataParser.getProgress());
         }
     }
 

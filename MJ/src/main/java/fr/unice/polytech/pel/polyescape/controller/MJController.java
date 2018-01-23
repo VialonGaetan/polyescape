@@ -42,7 +42,7 @@ public class MJController {
     private HBox timeHB;
     private StackPane bottomPane;
 
-    private ProgressBar progressBar;
+    private ProgressIndicator teamProgress;
     private ProgressIndicator progressIndicatorTime;
     private ComboBox listPlayer;
 
@@ -67,11 +67,12 @@ public class MJController {
 
     private ResponseMaker responseMaker;
 
-    public MJController(Scene scene, StackPane topPane, ProgressBar progressBar, Label choicePlayer, ComboBox listPlayer, HBox timeHB, StackPane bottomPane, Button btn, Label progressLabel, ProgressIndicator timeIndicator, Text descriptionEnigma) throws URISyntaxException, DeploymentException, InterruptedException {
+    public MJController(Scene scene, StackPane topPane, ProgressIndicator teamProgress, Label choicePlayer, ComboBox listPlayer, HBox timeHB, StackPane bottomPane, Button btn, Label progressLabel, ProgressIndicator timeIndicator, Text descriptionEnigma) throws URISyntaxException, DeploymentException, InterruptedException, IOException {
         this.progressIndicatorTime = timeIndicator;
         this.scene = scene;
         this.topPane = topPane;
-        this.progressBar = progressBar;
+        this.teamProgress = teamProgress;
+        this.teamProgress.setProgress(0.1);
         this.choicePlayer = choicePlayer;
         this.listPlayer = listPlayer;
         this.timeHB = timeHB;
@@ -178,8 +179,8 @@ public class MJController {
         else if (!(this.minute < 10) && !(this.hour < 10)) this.remindedTime.setText(this.hour + " : " + this.minute);
     }
 
-    public void makeRequest(String request) throws URISyntaxException, DeploymentException, InterruptedException {
-        ClientMJ clientMJ = new ClientMJ(request, progressIndicatorTime, teamName, escapeGameName, listPlayer, this,this.descriptionEnigma);
+    public void makeRequest(String request) throws URISyntaxException, DeploymentException, InterruptedException, IOException {
+        ClientMJ clientMJ = new ClientMJ(request, progressIndicatorTime, teamName, escapeGameName, listPlayer, this,this.descriptionEnigma, this.teamProgress);
         ClientManager client = ClientManager.createClient();
         client.connectToServer(clientMJ, new URI("ws://localhost:15555/websockets/gameserver"));
     }
@@ -236,5 +237,23 @@ public class MJController {
                 });
             }
         }, 60000, 60000);
+    }
+
+    public void startProgress(){
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    JSONObject jsonObject = new JSONObject().put(JsonArguments.REQUEST.toString(), TypeRequest.GET_PARTIES);
+                    String request = jsonObject.toString();
+                    try {
+                        AdressBook.getInstance().getServerSession().getBasicRemote().sendText(request);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+            }
+        }, 5000, 5000);
     }
 }
