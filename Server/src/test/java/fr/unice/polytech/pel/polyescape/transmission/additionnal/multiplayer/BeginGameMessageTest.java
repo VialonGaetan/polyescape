@@ -1,12 +1,12 @@
-package fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer;
+package fr.unice.polytech.pel.polyescape.Transmission.additionnal.multiplayer;
 
-import fr.unice.polytech.pel.polyescape.data.Enigme;
-import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
+import fr.unice.polytech.pel.polyescape.Data.Enigme;
+import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Gaetan Vialon
