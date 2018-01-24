@@ -24,6 +24,8 @@ export class EnigmeTeamPage {
   private timer:number;
   private type;
   private progressions;
+  private score:number = 0;
+  private nbTry:number = 0;
 
   constructor(public alerCtrl: AlertController, public navCtrl: NavController,public navParams: NavParams, public toastCtrl: ToastController, public localNotifications: LocalNotifications) {
     this.userName = navParams.get("username");
@@ -104,7 +106,7 @@ export class EnigmeTeamPage {
     }
     else if(this.secondes == 0 && this.minutes == 0){
       clearInterval(this.timer);
-      this.navCtrl.push(EndGameScreenPage,{score:0});
+      this.navCtrl.push(EndGameScreenPage,{score: this.score});
     }
     else {
       this.secondes--;
@@ -122,12 +124,16 @@ export class EnigmeTeamPage {
       this.webSocket.onmessage = function(event) {
         var jsonData = JSON.parse(event.data);
         if(jsonData.reponse == "ko") {
+          this.nbTry++;
           this.presentToastIncorectAnswer();
         }
         else if(jsonData.reponse == "ok"){
+          if (this.nbTry <= 3)
+            this.score++;
           this.enigmeInfos = jsonData.infos;
           this.nomEnigme = jsonData.nom;
           this.inputAnswer = "";
+          this.nbTry = 0;
         }
         else if(jsonData.reponse == "notyet"){
           clearInterval(this.timer);
@@ -135,7 +141,7 @@ export class EnigmeTeamPage {
         }
         else if(jsonData.reponse == "finish"){
           clearInterval(this.timer);
-          this.navCtrl.setRoot(EndGameScreenPage,{score:jsonData.score});
+          this.navCtrl.setRoot(EndGameScreenPage,{score: this.score});
         }
         else if(jsonData.reponse == "success"){
           this.updateProgression(jsonData);
