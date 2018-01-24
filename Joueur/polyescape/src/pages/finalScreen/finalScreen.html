@@ -13,14 +13,14 @@
         <div id="usr2">
           <ion-icon id="userIcon3" name="person"></ion-icon>
           <br />
-          <label id="userName3" >{{teamName}}</label>
+          <label id="userName3" >{{userName}}</label>
         </div>
       </div>
       <ion-label text-wrap="unrestricted" id="successLabel">
         Félicitations, vous avez terminé toutes vos énigmes. Swippez pour visualiser la progression de vos équipiers et
         aidez-les à terminer dans le temps imparti si vous le souhaitez.
       </ion-label>
-      <ion-img style="width: 80%" margin-top="20px" src="../../assets/imgs/victory.gif"></ion-img>
+      <ion-img style="width: 80%" margin-top="20px" src="assets/imgs/victory.gif"></ion-img>
     </ion-slide>
     <ion-slide style="background: lavender">
       <ion-header>
@@ -38,11 +38,11 @@
             <ol class="progress">
               <li *ngFor="let p of array(progression.actual)" class="is-complete" id={{p}}>
               </li>
-              <li *ngIf="progression.total != progression.actual"class="is-active" id={{progression.actual}}>
+              <li *ngIf="progression.total != progression.actual" class="is-active" id={{progression.actual}}>
               </li>
               <li *ngFor="let e of array(progression.total - progression.actual - 2)" id={{e+progression.actual+1}}>
               </li>
-              <li *ngIf="progression.total - progression.actual > 1"class="progress__last" id={{progression.total-1}}>
+              <li *ngIf="progression.total - progression.actual > 1" class="progress__last" id={{progression.total-1}}>
               </li>
             </ol>
           </div>

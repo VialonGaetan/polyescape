@@ -7,12 +7,13 @@ import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
 })
 export class FinalScreenPage {
 
-  private teamName = '';
+  private userName = '';
   private webSocket:WebSocket;
   private progressions = [];
 
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public navParams: NavParams) {
-    this.teamName = this.navParams.get("teamname");
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.userName = this.navParams.get("username");
+    alert(this.userName);
     this.progressions = this.navParams.get("progressions");
     this.webSocket = navParams.get("websocket");
     this.webSocket.onmessage = function (event) {

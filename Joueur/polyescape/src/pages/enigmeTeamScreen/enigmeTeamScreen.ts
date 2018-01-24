@@ -137,7 +137,7 @@ export class EnigmeTeamPage {
         }
         else if(jsonData.reponse == "notyet"){
           clearInterval(this.timer);
-          this.navCtrl.setRoot(FinalScreenPage,{websocket:this.webSocket,teamname:this.teamname,progressions:this.progressions});
+          this.navCtrl.setRoot(FinalScreenPage,{websocket:this.webSocket,username:this.userName,progressions:this.progressions});
         }
         else if(jsonData.reponse == "finish"){
           clearInterval(this.timer);
