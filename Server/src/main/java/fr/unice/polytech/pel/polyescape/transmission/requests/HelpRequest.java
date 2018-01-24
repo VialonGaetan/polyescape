@@ -40,6 +40,7 @@ public class HelpRequest implements Request {
         try {
             Session sessionMJ = Gestionnaire.getInstance().getSessionMG();
             if (sessionMJ != null && sessionMJ.isOpen()){
+                logger.info("Message envoyé au mj" + jsonObject.toString());
                 sessionMJ.getBasicRemote().sendText(jsonObject.toString());
                 return true;
             }
