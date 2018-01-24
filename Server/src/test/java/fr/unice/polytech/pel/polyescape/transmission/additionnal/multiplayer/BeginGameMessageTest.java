@@ -1,7 +1,7 @@
-package fr.unice.polytech.pel.polyescape.Transmission.additionnal.multiplayer;
+package fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer;
 
-import fr.unice.polytech.pel.polyescape.Data.Enigme;
-import fr.unice.polytech.pel.polyescape.Transmission.JsonArguments;
+import fr.unice.polytech.pel.polyescape.data.Enigme;
+import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
