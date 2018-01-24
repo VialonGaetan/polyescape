@@ -14,7 +14,6 @@ export class FinalScreenPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.userName = this.navParams.get("username");
-    alert(this.userName);
     this.progressions = this.navParams.get("progressions");
     this.webSocket = navParams.get("websocket");
     this.score = navParams.get("score");
