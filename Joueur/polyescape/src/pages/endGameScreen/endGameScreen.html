@@ -9,6 +9,8 @@
 
 
 <ion-content style="background: lavender;" padding>
+
+
   <ion-label id="escapeNameLabel">
     Escape game terminé :
   </ion-label>
@@ -16,6 +18,16 @@
   <ion-label id="score">
     Votre score est de : {{score}}
   </ion-label>
+
+
+  <ion-card >
+    <ion-card-header >
+      <ion-label id="resume">Résumé</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
 
 
 
