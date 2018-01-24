@@ -122,6 +122,10 @@ export class EnigmePage {
     }
   }
 
+  pad2(number) {
+    return (number < 10 ? '0' : '') + number
+  }
+
   requestHelp() {
     var request = {request:"HELP", idpartie:this.idPartie, username:this.userName, enigme: this.enigmeInfos};
     this.webSocket.send(JSON.stringify(request));

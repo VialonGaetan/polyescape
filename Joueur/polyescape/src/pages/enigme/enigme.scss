@@ -10,6 +10,15 @@ page-enigme{
   margin-right: 15%;
 }
 
+#title2{
+  margin-top: 80px;
+  text-align: center;
+  color: indianred;
+  font-size: 18px;
+  font-weight: bold;
+  height: 10%;
+}
+
 .input1{
   position:absolute;
   bottom:60px;
@@ -22,24 +31,29 @@ page-enigme{
   height: 100%;
   font-size: 80%;
 }
-#enigmeButtonsDiv{
+#enigmeButtonsDiv1{
   height: 9%;
   width: 100%;
   position:absolute;
-  bottom:0;
-  margin-bottom: 30px;
+  bottom: 0;
+  margin-bottom: 10px;
 }
 
-
-#timeDiv{
-  background-color: #34498e;
-  width: 30%;
-  margin-left: 5%;
+#timeDiv1{
+  margin-bottom: 5px;
+  background-color: #488aff;
+  position: absolute;
+  top: 2%;
+  width: 120px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  border-radius: 5px;
 }
+
 .block {
   display: flex;
   flex-direction: row;
-  margin: 20px;
 }
 
 .digit {
