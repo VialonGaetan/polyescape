@@ -91,7 +91,6 @@ export class EnigmeTeamPage {
       duration: 3000,
       position: 'bottom'
     });
-
     toast.present();
   }
 
