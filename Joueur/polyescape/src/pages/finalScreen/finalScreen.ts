@@ -10,12 +10,14 @@ export class FinalScreenPage {
   private userName = '';
   private webSocket:WebSocket;
   private progressions = [];
+  private score;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.userName = this.navParams.get("username");
     alert(this.userName);
     this.progressions = this.navParams.get("progressions");
     this.webSocket = navParams.get("websocket");
+    this.score = navParams.get("score");
     this.webSocket.onmessage = function (event) {
       var jsonData = JSON.parse(event.data);
       if(jsonData.reponse == "success"){
@@ -23,7 +25,7 @@ export class FinalScreenPage {
       }
       else if(jsonData.reponse == "finish"){
         clearInterval(this.timer);
-        this.navCtrl.setRoot(EndGameScreenPage,{score:jsonData.score});
+        this.navCtrl.setRoot(EndGameScreenPage,{score:this.score});
       }
     }.bind(this);
   }

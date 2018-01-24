@@ -128,7 +128,8 @@ export class EnigmeTeamPage {
           this.presentToastIncorectAnswer();
         }
         else if(jsonData.reponse == "ok"){
-
+          if (this.nbTry <= 3)
+            this.score = this.score + 1;
           this.enigmeInfos = jsonData.infos;
           this.nomEnigme = jsonData.nom;
           this.inputAnswer = "";
@@ -136,15 +137,13 @@ export class EnigmeTeamPage {
         }
         else if(jsonData.reponse == "notyet"){
           clearInterval(this.timer);
-          this.navCtrl.setRoot(FinalScreenPage,{websocket:this.webSocket,username:this.userName,progressions:this.progressions});
+          this.navCtrl.setRoot(FinalScreenPage,{websocket:this.webSocket,username:this.userName,progressions:this.progressions, score: this.score});
         }
         else if(jsonData.reponse == "finish"){
           clearInterval(this.timer);
           this.navCtrl.setRoot(EndGameScreenPage,{score: this.score});
         }
         else if(jsonData.reponse == "success"){
-          if (this.nbTry <= 3)
-            this.score = this.score + 1;
           this.updateProgression(jsonData);
         }
       }.bind(this);
