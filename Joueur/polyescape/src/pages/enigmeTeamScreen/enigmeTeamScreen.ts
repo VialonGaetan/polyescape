@@ -82,7 +82,7 @@ export class EnigmeTeamPage {
       message: 'Demande envoyée',
       duration: 3000,
       position: 'bottom'
-    });
+    }).present();
   }
 
   presentToastIncorectAnswer() {
