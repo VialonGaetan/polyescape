@@ -161,7 +161,8 @@ export class EnigmeTeamPage {
             idpartie: this.idPartie,
             indices: this.indices,
             minutes: this.minutes,
-            secondes: this.secondes
+            secondes: this.secondes,
+            name: this.nomEscape
           });
         }
         else if (jsonData.reponse == "finish") {
@@ -185,7 +186,8 @@ export class EnigmeTeamPage {
             progressions: this.progressions,
             teamname: this.teamName,
             username: this.userName,
-            indices: this.indices
+            indices: this.indices,
+            name: this.nomEscape
           });
         }
 

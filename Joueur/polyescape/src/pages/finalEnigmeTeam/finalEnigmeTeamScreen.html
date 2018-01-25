@@ -52,33 +52,6 @@
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
         <ion-navbar>
           <ion-title style="font-size: 20px">
-            Progression de l'équipe
-          </ion-title>
-        </ion-navbar>
-      </ion-header>
-      <ion-list margin-left="10px" margin-right="10px" *ngFor="let progression of progressions">
-        <ion-icon id="userIcon2" name="person"> {{progression.username}}</ion-icon>
-        <div class="wrapper">
-          <div style="height:35px;">
-            <ol class="progress">
-              <li *ngFor="let p of array(progression.actual)" class="is-complete" id={{p}}>
-              </li>
-              <li *ngIf="progression.total != progression.actual" class="is-active" id={{progression.actual}}>
-              </li>
-              <li *ngFor="let e of array(progression.total - progression.actual - 2)" id={{e+progression.actual+1}}>
-              </li>
-              <li *ngIf="progression.total - progression.actual > 1" class="progress__last" id={{progression.total-1}}>
-              </li>
-            </ol>
-          </div>
-        </div>
-      </ion-list>
-    </ion-slide>
-    <ion-slide style="background: lavender">
-      <ion-header>
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-        <ion-navbar>
-          <ion-title style="font-size: 20px">
             Liste des indices
           </ion-title>
         </ion-navbar>
