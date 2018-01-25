@@ -33,7 +33,7 @@ public class Gestionnaire {
         enigmeDisponible.put("Loi de Newton",new Enigme("Loi de Newton","En quelle année a été ecrit la deuxieme loi de Newton","1686"));
         enigmeDisponible.put("Le code pour les nuls",new Enigme("Le code pour les nuls","Dans quel rayon se trouve le livre \"Le code pour les nuls\" au learning centre","Informatique"));
         enigmeDisponible.put("Upside down",new Enigme("Upside down","Quelle salle se trouve juste au dessus de la salle O+124","O+225"));
-        enigmeDisponible.put("Le mot caché",new Enigme("Le mot caché","4 images forment un mot","escape"));
+        enigmeDisponible.put("Le mot caché",new Enigme("Le mot caché","bonjour Etudiant afin de Savoir tes Connaissances tu devrAs rePondre à cette Enigme","escape"));
         enigmeDisponible.put("Le garde du château", new Enigme("Le garde du château","Pour entrer dans le château, il est nécessaire de connaître le mot de passe. Alors vous observez et écoutez les gens qui se présentent à la porte. Un enfant arrive ; le garde lui dit \"5\", l'enfant répond \"4\" et le garde le laisse entrer. Une femme se présente ; le garde lui dit \"6\", elle répond \"3\" et passe. Un homme paraît ; le garde lui dit \"4\", l'homme répond \"6\" et entre. C'est votre tour. Le garde vous dit \"7\". \n" + "Que répondez-vous ?","4"));
         enigmeDisponible.put("A la piscine", new Enigme("A la piscine","Sur le couloir n°1, Paul part en crawl côté plongeoir, mais avec un départ non plongé.\n" +
                 "\n" +
@@ -46,8 +46,8 @@ public class Gestionnaire {
                 "Pour l’aider dans sa tâche, il a créé “Lisa”.",enigmeDisponible.values().stream().collect(Collectors.toList()).subList(1,4), 60));
         escapeGamesDisponible.put("TOUT",new EscapeGame("TOUT","2016. Un signal d’un vaisseau, dont la mission dans les années 90 était de faire des prélèvement de matière sur la lune Europa mais qui s’était perdu lors du voyage retour, est capté. Les derniers calculs font état d’un crash sur Mercure dans 60 minutes. Votre équipe est envoyée à bord pour tenter de modifier sa trajectoire et de récupérer des échantillons scientifiques à bord depuis 20 ans",new ArrayList<>(enigmeDisponible.values()), 120));
         finalEnigmeMap.put("Colle les tous",new FinalEnigme("Colle les tous", "Recupere les indices de tout le monde et assemble les chiffres pour former le mot de passe final","1234"));
-        finalEnigmeMap.put("Retrouve la phrase",new FinalEnigme("Retrouve la phrase", "Recupere les indices de tout le monde et assemble les mots pour former le mot de passe final","pokemon"));
-        finalEnigmeMap.put("Colle les tous",new FinalEnigme("Colle les tous", "Recupere les indices de tout le monde et assemble les chiffres pour former le mot de passe final","1234"));
+        finalEnigmeMap.put("Retrouve le mot caché",new FinalEnigme("Retrouve le mot caché", "Recupere les indices de tout le monde et assemble les pour pour former le mot de passe final","polyescape"));
+        finalEnigmeMap.put("Pierre Feuille Ciseau",new FinalEnigme("Pierre Feuille Ciseau", "Recupere les indices de tout le monde et assemble les pour trouver le bon signe pour gagner","pierre"));
     }
 
 

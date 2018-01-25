@@ -1,6 +1,8 @@
+
 import {NavController, NavParams} from 'ionic-angular';
 import {HomePage} from "../home/home";
-import {Component, ViewChild} from '@angular/core';
+import { Chart } from 'chart.js';
+import {ViewChildren, Component, ViewChild, ElementRef} from '@angular/core';
 
 @Component({
   selector: 'page-end',
@@ -20,7 +22,7 @@ export class EndGameScreenPage {
 
   }
 
-  /*ionViewDidLoad() {
+  ionViewDidLoad() {
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
 
       type: 'doughnut',
@@ -41,7 +43,7 @@ export class EndGameScreenPage {
       }
 
     });
-  }*/
+  }
 
   goToHomePage() {
     this.navCtrl.setRoot(HomePage);

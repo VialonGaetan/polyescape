@@ -40,7 +40,7 @@
           <ion-input [(ngModel)]="inputAnswer" type="text" placeholder="Votre réponse"></ion-input>
         </ion-item>
         <div id="enigmeButtonsDiv">
-          <button class="enigmeButtons" (click)='submitAnswer()' ion-button icon-right>
+          <button id="enigmeButton"  (click)='submitAnswer()' ion-button icon-right>
             valider
             <ion-icon name="key"></ion-icon>
           </button>
@@ -56,9 +56,10 @@
           </ion-title>
         </ion-navbar>
       </ion-header>
-      <ion-label>Liste des indices récupérés :</ion-label>
+      <ion-label text-wrap="true" style="margin-left: 20px; font-size: 20px; color: darkorange">Inventaire des indices récupérés : </ion-label>
+      <br/>
       <ion-list margin-left="10px" margin-right="10px" *ngFor="let indice of indices">
-        <ion-label text-wrap="true" style="text-align: justify;margin-left: 20px; margin-right: 20px;color: #488aff">
+        <ion-label text-wrap="true" style="text-align: justify;margin-left: 40px; font-size: 14px">
           {{indice}}
         </ion-label>
       </ion-list>
