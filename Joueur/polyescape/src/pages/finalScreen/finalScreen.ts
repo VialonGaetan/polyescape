@@ -32,6 +32,7 @@ export class FinalScreenPage {
     this.progressions = this.navParams.get("progressions");
     this.indices = this.navParams.get("indices");
     this.score = this.navParams.get("score");
+    this.nomEscape = this.navParams.get("name");
     this.timer = setInterval(this.decreaseTime.bind(this),1000);
     this.webSocket.onmessage = function (event) {
       var jsonData = JSON.parse(event.data);
@@ -41,7 +42,8 @@ export class FinalScreenPage {
       else if(jsonData.reponse == "finish"){
         clearInterval(this.timer);
         this.navCtrl.setRoot(EndGameScreenPage,{score:this.score});
-      }
+      }else if (jsonData.reponse == "indices")
+        this.updateIndice(jsonData);
       else if(jsonData.reponse == "enigme"){
         clearInterval(this.timer);
         this.navCtrl.setRoot(finalEnigmeTeamScreen, {
@@ -98,5 +100,12 @@ export class FinalScreenPage {
       this.secondes--;
     }
 
+  }
+
+  updateIndice(jsonData: any) {
+    this.indices = [];
+    for (let i = 0; i < jsonData.indices.length; i++) {
+      this.indices.push("Indice : " + jsonData.indices[i].indice + " decouvert par : " + jsonData.indices[i].username);
+    }
   }
 }

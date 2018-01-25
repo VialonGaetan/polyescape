@@ -33,12 +33,13 @@ export class finalEnigmeTeamScreen {
     this.webSocket = navParams.get("websocket");
     this.teamName = this.navParams.get("teamname");
     this.nomEnigme = this.navParams.get("nomenigme");
+    this.nomEscape = this.navParams.get("name");
     this.enigmeInfos = this.navParams.get("infos");
     this.idPartie = this.navParams.get("idpartie");
     this.minutes = this.navParams.get("minutes");
     this.secondes = this.navParams.get("secondes");
     this.score = this.navParams.get("minutes");
-    this.progressions = this.navParams.get("progressions");
+    this.indices = this.navParams.get("indices");
     this.timer = setInterval(this.decreaseTime.bind(this), 1000);
     this.webSocket.onmessage = function (event) {
       var jsonData = JSON.parse(event.data);
