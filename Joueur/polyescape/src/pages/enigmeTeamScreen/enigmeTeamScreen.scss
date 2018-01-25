@@ -9,7 +9,8 @@ page-enigmeTeam{
   color: indianred;
   font-size: 18px;
   font-weight: bold;
-  height: 10%;
+  padding-top: 30px;
+  height: 100px;
 }
 
 .input1{
@@ -73,6 +74,7 @@ page-enigmeTeam{
   display: flex;
   flex-direction: row;
   border-radius: 5px;
+  margin-left: 5px;
 }
 
 .digit {
