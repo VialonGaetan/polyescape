@@ -15,6 +15,7 @@ public class Partie implements Serialize {
     protected EscapeGame escapeGame;
     protected int time;
     protected boolean hasStart=false;
+    private List<Enigme> enigmes;
     private Joueur joueur;
 
     protected Partie(EscapeGame escapeGame){
@@ -26,6 +27,7 @@ public class Partie implements Serialize {
         this.escapeGame = escapeGame;
         this.time = escapeGame.getTime();
         this.joueur = joueur;
+        enigmes = new ArrayList<>();
         startTheGame();
     }
 
@@ -34,10 +36,12 @@ public class Partie implements Serialize {
         attributeEnigme();
     }
 
-    /**
-     * En jeu seul, le joueur possede toutes les enigmes
-     */
-    protected void attributeEnigme() {}
+
+    protected void attributeEnigme() {
+        for (Enigme enigme : escapeGame.getEnigmes()) {
+            enigmes.add(new Enigme(enigme.name,enigme.description,enigme.reponse));
+        }
+    }
 
     public boolean hasStart() {
         return hasStart;
@@ -45,13 +49,13 @@ public class Partie implements Serialize {
 
     public List<Enigme> getEnigmesOfaPlayer(Joueur joueur){
         if (this.joueur.equals(joueur))
-            return escapeGame.getEnigmes();
+            return enigmes;
         return new ArrayList<>();
     }
 
     public Optional<Enigme> getCurrentEnigmesOfaPlayer(Joueur joueur){
         if (this.joueur.equals(joueur))
-            return escapeGame.getEnigmes().stream().filter(enigme -> !enigme.isResolve()).findFirst();
+            return enigmes.stream().filter(enigme -> !enigme.isResolve()).findFirst();
         else return Optional.empty();
     }
 
@@ -78,14 +82,11 @@ public class Partie implements Serialize {
     }
 
     public boolean isFinish(){
-        return escapeGame.getEnigmes().stream().allMatch(Enigme::isResolve);
+        return enigmes.stream().allMatch(Enigme::isResolve);
     }
 
     public boolean checkReponse(Joueur joueur, String reponse){
-        if (!getCurrentEnigmesOfaPlayer(joueur).get().checkAnswer(reponse))
-            return false;
-        sendProgressPlayer();
-        return true;
+        return getCurrentEnigmesOfaPlayer(joueur).get().checkAnswer(reponse);
     }
 
     public Collection<Joueur> getJoueurs(){
@@ -93,11 +94,6 @@ public class Partie implements Serialize {
         joueurs.add(joueur);
         return joueurs;
     }
-
-    /**
-     * Ne fonctionne pas si on est seul
-     */
-    protected void sendProgressPlayer(){}
 
     @Override
     public JSONObject toJson() {

@@ -3,10 +3,7 @@ package fr.unice.polytech.pel.polyescape;
 import fr.unice.polytech.pel.polyescape.data.*;
 
 import javax.websocket.Session;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -18,6 +15,7 @@ public class Gestionnaire {
     private static Gestionnaire ourInstance = new Gestionnaire();
     private final Map<String,EscapeGame> escapeGamesDisponible;
     private final Map<String,Enigme> enigmeDisponible;
+    private final Map<String, FinalEnigme> finalEnigmeMap;
     private final Map<Integer,Partie> parties;
     private int id = 0;
     private Session sessionMG;
@@ -30,6 +28,7 @@ public class Gestionnaire {
         escapeGamesDisponible = new HashMap<>();
         enigmeDisponible = new HashMap<>();
         parties = new HashMap<>();
+        finalEnigmeMap = new HashMap<>();
         enigmeDisponible.put("Resoud l'operation",new Enigme("Resoud l'operation","Chaise * Tables =","42"));
         enigmeDisponible.put("Loi de Newton",new Enigme("Loi de Newton","En quelle année a été ecrit la deuxieme loi de Newton","1686"));
         enigmeDisponible.put("Le code pour les nuls",new Enigme("Le code pour les nuls","Dans quel rayon se trouve le livre \"Le code pour les nuls\" au learning centre","Informatique"));
@@ -46,9 +45,9 @@ public class Gestionnaire {
         escapeGamesDisponible.put("Lisa",new EscapeGame("Lisa", "Le professeur Franck Tipler a toujours convoité le trésor secret de sa famille. Après de nombreux échecs, il comprit qu’il n’y arriverai pas seul.\n" +
                 "Pour l’aider dans sa tâche, il a créé “Lisa”.",enigmeDisponible.values().stream().collect(Collectors.toList()).subList(1,4), 60));
         escapeGamesDisponible.put("TOUT",new EscapeGame("TOUT","2016. Un signal d’un vaisseau, dont la mission dans les années 90 était de faire des prélèvement de matière sur la lune Europa mais qui s’était perdu lors du voyage retour, est capté. Les derniers calculs font état d’un crash sur Mercure dans 60 minutes. Votre équipe est envoyée à bord pour tenter de modifier sa trajectoire et de récupérer des échantillons scientifiques à bord depuis 20 ans",new ArrayList<>(enigmeDisponible.values()), 120));
-        Partie partie = new PartieEnEquipe(new EscapeGame("EscapAtor","Le professeur Franck Tipler a toujours convoité le trésor secret de sa famille. Après de nombreux échecs, il comprit qu’il n’y arriverai pas seul.\n" +
-                "Pour l’aider dans sa tâche, il a créé “Lisa”." ,enigmeDisponible.values().stream().collect(Collectors.toList()).subList(1,4), 60),new Joueur("Paul",null),"LES BG");
-        //createNewPartie(partie);
+        finalEnigmeMap.put("Colle les tous",new FinalEnigme("Colle les tous", "Recupere les indices de tout le monde et assemble les chiffres pour former le mot de passe final","1234"));
+        finalEnigmeMap.put("Retrouve la phrase",new FinalEnigme("Retrouve la phrase", "Recupere les indices de tout le monde et assemble les mots pour former le mot de passe final","pokemon"));
+        finalEnigmeMap.put("Colle les tous",new FinalEnigme("Colle les tous", "Recupere les indices de tout le monde et assemble les chiffres pour former le mot de passe final","1234"));
     }
 
 
@@ -90,5 +89,9 @@ public class Gestionnaire {
 
     public Session getSessionMG() {
         return sessionMG;
+    }
+
+    public FinalEnigme getRandomFinalEnigme(){
+        return finalEnigmeMap.values().toArray(new FinalEnigme[0])[new Random().nextInt(finalEnigmeMap.values().size())];
     }
 }

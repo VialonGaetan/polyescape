@@ -3,14 +3,13 @@ import {AlertController, NavController, NavParams, ToastController} from "ionic-
 import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
 import {FinalScreenPage} from "../finalScreen/finalScreen";
 import {LocalNotifications} from "@ionic-native/local-notifications";
-import {finalEnigmeTeamScreen} from "../finalEnigmeTeam/finalEnigmeTeamScreen";
 
 
 @Component({
-  selector: 'page-enigmeTeam',
-  templateUrl: 'enigmeTeamScreen.html'
+  selector: 'page-finalEnigmeTeam',
+  templateUrl: 'finalEnigmeTeamScreen.html'
 })
-export class EnigmeTeamPage {
+export class finalEnigmeTeamScreen {
 
   private inputAnswer = '';
   private userName = '';
@@ -23,13 +22,12 @@ export class EnigmeTeamPage {
   private minutes: number = 0;
   private secondes: number = 0;
   private timer: number;
-  private type;
   private progressions;
   private indices;
-  private score: number = 0;
+  private score: number;
   private nbTry: number = 0;
 
-  constructor(public alerCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public localNotifications: LocalNotifications) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController, public localNotifications: LocalNotifications) {
     this.userName = navParams.get("username");
     this.nomEscape = navParams.get("name");
     this.webSocket = navParams.get("websocket");
@@ -37,16 +35,17 @@ export class EnigmeTeamPage {
     this.nomEnigme = this.navParams.get("nomenigme");
     this.enigmeInfos = this.navParams.get("infos");
     this.idPartie = this.navParams.get("idpartie");
-    this.minutes = this.navParams.get("temps");
-    this.type = this.navParams.get("type");
+    this.minutes = this.navParams.get("minutes");
+    this.secondes = this.navParams.get("secondes");
+    this.score = this.navParams.get("minutes");
     this.progressions = this.navParams.get("progressions");
     this.timer = setInterval(this.decreaseTime.bind(this), 1000);
     this.webSocket.onmessage = function (event) {
       var jsonData = JSON.parse(event.data);
-      if (jsonData.reponse == "success")
-        this.updateProgression(jsonData);
-      else if (jsonData.reponse == "indices")
-        this.updateIndice(jsonData)
+      if(jsonData.reponse == "finish"){
+        clearInterval(this.timer);
+        this.navCtrl.setRoot(EndGameScreenPage, {score: this.score});
+      }
     }.bind(this);
   }
 
@@ -80,20 +79,13 @@ export class EnigmeTeamPage {
   }
 
   presentToastNoAnswer() {
-    this.toastCtrl.create({
+    let toast = this.toastCtrl.create({
       message: 'Veuillez entrer une réponse',
       duration: 3000,
       position: 'bottom'
-    }).present();
+    });
 
-  }
-
-  presentToastHelpSend() {
-    this.toastCtrl.create({
-      message: 'Demande envoyée',
-      duration: 3000,
-      position: 'bottom'
-    }).present();
+    toast.present();
   }
 
   presentToastIncorectAnswer() {
@@ -142,88 +134,13 @@ export class EnigmeTeamPage {
           this.nbTry++;
           this.presentToastIncorectAnswer();
         }
-        else if (jsonData.reponse == "ok") {
+        else if (jsonData.reponse == "finish") {
           if (this.nbTry <= 3)
             this.score = this.score + 1;
-          this.enigmeInfos = jsonData.infos;
-          this.nomEnigme = jsonData.nom;
-          this.inputAnswer = "";
-          this.nbTry = 0;
-        }
-        else if (jsonData.reponse == "notyet") {
           clearInterval(this.timer);
-          this.navCtrl.setRoot(FinalScreenPage, {
-            websocket: this.webSocket,
-            username: this.userName,
-            teamname: this.teamName,
-            progressions: this.progressions,
-            score: this.score,
-            idpartie: this.idPartie,
-            indices: this.indices,
-            minutes: this.minutes,
-            secondes: this.secondes
-          });
+          this.navCtrl.setRoot(EndGameScreenPage, {score: this.score});;
         }
-        else if (jsonData.reponse == "finish") {
-          clearInterval(this.timer);
-          this.navCtrl.setRoot(EndGameScreenPage, {score: this.score});
-        }
-        else if (jsonData.reponse == "success") {
-          this.updateProgression(jsonData);
-        } else if (jsonData.reponse == "indices")
-          this.updateIndice(jsonData);
-        else if(jsonData.reponse == "enigme"){
-          clearInterval(this.timer);
-          this.navCtrl.setRoot(finalEnigmeTeamScreen, {
-            score: this.score,
-            minutes: this.minutes,
-            secondes: this.secondes,
-            websocket: this.webSocket,
-            infos: jsonData.infos,
-            nomenigme: jsonData.nom,
-            idpartie: this.idPartie,
-            progressions: this.progressions,
-            teamname: this.teamName,
-            username: this.userName,
-            indices: this.indices
-          });
-        }
-
       }.bind(this);
     }
-  }
-
-  scheduleNotification(text) {
-    this.localNotifications.schedule({
-      id: 1,
-      title: 'Aide',
-      text: text
-    });
-  }
-
-  requestHelp() {
-    var request = {request: "HELP", idpartie: this.idPartie, username: this.userName, enigme: this.enigmeInfos};
-    this.webSocket.send(JSON.stringify(request));
-    this.webSocket.onmessage = function (event) {
-      var jsonData = JSON.parse(event.data);
-      if (jsonData.reponse == "ko") {
-        this.alerCtrl.create({
-          title: "Erreur",
-          message: "Aucun maitre du jeu disponible",
-          buttons: ['Ok']
-        }).present();
-      } else if (jsonData.reponse == "ok") {
-        this.presentToastHelpSend();
-      }
-      else {
-        this.alerCtrl.create({
-          title: "Indice",
-          message: jsonData.description,
-          buttons: ['Ok']
-        }).present();
-        this.scheduleNotification(jsonData.description);
-      }
-
-    }.bind(this);
   }
 }

@@ -12,9 +12,9 @@
       <div style="background: lavender;">
         <div id="usr2">
           <ion-icon id="userIcon3" name="person"></ion-icon>
-          <br />
-        <label id="userName3" >{{userName}}</label>
-      </div>
+          <br/>
+          <label id="userName3">{{userName}}</label>
+        </div>
         <div id="timeDiv">
           <ion-icon margin-left="50%" name="alarm" style="color: #000000;margin-top: 10px;"></ion-icon>
           <span margin-left="50%" class="digit" item-right style="vertical-align: 15%;">{{ minutes }}:{{ pad2(secondes) }}</span>
@@ -67,16 +67,34 @@
             <ol class="progress">
               <li *ngFor="let p of array(progression.actual)" class="is-complete" id={{p}}>
               </li>
-              <li *ngIf="progression.total != progression.actual"class="is-active" id={{progression.actual}}>
+              <li *ngIf="progression.total != progression.actual" class="is-active" id={{progression.actual}}>
               </li>
               <li *ngFor="let e of array(progression.total - progression.actual - 2)" id={{e+progression.actual+1}}>
               </li>
-              <li *ngIf="progression.total - progression.actual > 1"class="progress__last" id={{progression.total-1}}>
+              <li *ngIf="progression.total - progression.actual > 1" class="progress__last" id={{progression.total-1}}>
               </li>
             </ol>
           </div>
         </div>
       </ion-list>
+    </ion-slide>
+    <ion-slide style="background: lavender">
+      <ion-header>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <ion-navbar>
+          <ion-title style="font-size: 20px">
+            Liste des indices
+          </ion-title>
+        </ion-navbar>
+      </ion-header>
+
+      <ion-label>Liste des indices récupérés :</ion-label>
+      <ion-list margin-left="10px" margin-right="10px" *ngFor="let indice of indices">
+        <ion-label text-wrap="true" style="text-align: justify;margin-left: 20px; margin-right: 20px;color: #488aff">
+          {{indice}}
+        </ion-label>
+      </ion-list>
+
     </ion-slide>
   </ion-slides>
 </ion-content>

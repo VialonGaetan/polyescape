@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AlertController, NavController, ToastController} from 'ionic-angular';
 import {EscapeScreenPage} from "../escapeScreen/escapeScreen";
 import {TeamScreenPage} from "../teamScreen/teamScreen";

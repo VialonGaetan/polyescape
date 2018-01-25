@@ -26,7 +26,7 @@ public class DataParser {
     public ObservableList<String> getPlayers() {
         JSONObject jsonObject = new JSONObject(answer);
         for (int i=0; i<jsonObject.getJSONArray("partieencours").getJSONObject(0).getJSONArray("joueurs").length(); i++){
-            players.add(jsonObject.getJSONArray("partieencours").getJSONObject(0).getJSONArray("joueurs").getJSONObject(0).get("username").toString());
+            players.add(jsonObject.getJSONArray("partieencours").getJSONObject(0).getJSONArray("joueurs").getJSONObject(i).get("username").toString());
         }
 
         return this.players;

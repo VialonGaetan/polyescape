@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AlertController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {EndGameScreenPage} from "../endGameScreen/endGameScreen";
 import {LocalNotifications} from "@ionic-native/local-notifications";
-
 
 
 @Component({

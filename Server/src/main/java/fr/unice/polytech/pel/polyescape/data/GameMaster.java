@@ -1,8 +1,8 @@
 package fr.unice.polytech.pel.polyescape.data;
 
-import org.json.JSONObject;
+        import org.json.JSONObject;
 
-import javax.websocket.Session;
+        import javax.websocket.Session;
 
 public class GameMaster implements Serialize {
 

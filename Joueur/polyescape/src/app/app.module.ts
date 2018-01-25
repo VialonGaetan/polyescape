@@ -9,6 +9,7 @@ import { TeamScreenPage } from '../pages/teamScreen/teamScreen';
 import { HomePage } from '../pages/home/home';
 import {EnigmePage} from "../pages/enigme/enigme";
 import {TeamWaitScreen} from "../pages/teamWaitScreen/teamWaitScreen";
+import {finalEnigmeTeamScreen} from "../pages/finalEnigmeTeam/finalEnigmeTeamScreen";
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -26,7 +27,8 @@ import {FinalScreenPage} from "../pages/finalScreen/finalScreen";
     EnigmePage,
     TeamWaitScreen,
     EnigmeTeamPage,
-    FinalScreenPage
+    FinalScreenPage,
+    finalEnigmeTeamScreen
 
 
   ],
@@ -44,7 +46,8 @@ import {FinalScreenPage} from "../pages/finalScreen/finalScreen";
     EnigmePage,
     TeamWaitScreen,
     EnigmeTeamPage,
-    FinalScreenPage
+    FinalScreenPage,
+    finalEnigmeTeamScreen
   ],
   providers: [
     LocalNotifications,

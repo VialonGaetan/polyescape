@@ -31,6 +31,8 @@ public enum  JsonArguments {
     TOTAL("total"),
     ACTUAL("actual"),
     SUCCESS("success"),
+    INDICE("indice"),
+    INDICES("indices"),
     READY("ready");
 
 

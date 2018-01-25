@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {AlertController, NavController, NavParams} from 'ionic-angular';
 import {EnigmePage} from "../enigme/enigme";
 import {TeamWaitScreen} from "../teamWaitScreen/teamWaitScreen";
-import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-escape',

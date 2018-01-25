@@ -63,6 +63,10 @@ public class Equipe implements Serialize{
         }
     }
 
+    public int getTailleEquipe(){
+        return joueurs.keySet().size();
+    }
+
 
     @Override
     public JSONObject toJson() {

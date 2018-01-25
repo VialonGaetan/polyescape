@@ -9,10 +9,10 @@ import org.json.JSONObject;
  */
 public class Enigme implements Serialize {
 
-    private String name;
-    private String description;
-    private String reponse;
-    private Boolean isResolve = false;
+    protected String name;
+    protected String description;
+    protected String reponse;
+    protected Boolean isResolve = false;
 
     public Enigme(String name, String description, String reponse) {
         this.name = name;

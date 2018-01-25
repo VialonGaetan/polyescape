@@ -5,27 +5,46 @@
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
         <ion-navbar>
           <ion-title class="padding-0" text-center>
-            Fin des énigmes
+            Enigme
           </ion-title>
         </ion-navbar>
       </ion-header>
       <div style="background: lavender;">
         <div id="usr2">
           <ion-icon id="userIcon3" name="person"></ion-icon>
-          <br />
-          <label id="userName3" >{{userName}}</label>
+          <br/>
+          <label id="userName3">{{userName}}</label>
         </div>
         <div id="timeDiv">
           <ion-icon margin-left="50%" name="alarm" style="color: #000000;margin-top: 10px;"></ion-icon>
           <span margin-left="50%" class="digit" item-right style="vertical-align: 15%;">{{ minutes }}:{{ pad2(secondes) }}</span>
         </div>
-      </div>
-      <div padding-top="120px">
-        <img style="width: 80%" src="assets/imgs/victory.gif" margin-bottom="40px"/>
-        <ion-label text-wrap="unrestricted" id="successLabel">
-          Félicitations, vous avez terminé toutes vos énigmes. Swippez pour visualiser la progression de vos équipiers et
-          aidez-les à terminer dans le temps imparti si vous le souhaitez.
+        <ion-label id="title1" style="white-space: pre">Escape game en cours:
+          {{nomEscape}}
         </ion-label>
+        <ion-label style="text-align: justify;color: darkslategrey;font-weight: bold;margin-left: 20px;">
+          Nom de l'énigme:
+        </ion-label>
+        <ion-label style="text-align: justify;color: indigo;margin-left: 20px;">
+          {{nomEnigme}}
+        </ion-label>
+        <ion-label style="text-align: justify;color: darkslategrey;font-weight: bold;margin-left: 20px;">
+          Description
+        </ion-label>
+        <div style=" overflow-y:scroll;width:100%; height:150px;font-size: 15px">
+          <ion-label text-wrap="true" style="text-align: justify;margin-left: 20px; margin-right: 20px;color: #488aff">
+            {{enigmeInfos}}
+          </ion-label>
+        </div>
+        <ion-item class="input1">
+          <ion-input [(ngModel)]="inputAnswer" type="text" placeholder="Votre réponse"></ion-input>
+        </ion-item>
+        <div id="enigmeButtonsDiv">
+          <button class="enigmeButtons" (click)='submitAnswer()' ion-button icon-right>
+            valider
+            <ion-icon name="key"></ion-icon>
+          </button>
+        </div>
       </div>
     </ion-slide>
     <ion-slide style="background: lavender">
@@ -64,8 +83,7 @@
           </ion-title>
         </ion-navbar>
       </ion-header>
-
-      <ion-label>Liste des indices récupérés : </ion-label>
+      <ion-label>Liste des indices récupérés :</ion-label>
       <ion-list margin-left="10px" margin-right="10px" *ngFor="let indice of indices">
         <ion-label text-wrap="true" style="text-align: justify;margin-left: 20px; margin-right: 20px;color: #488aff">
           {{indice}}
