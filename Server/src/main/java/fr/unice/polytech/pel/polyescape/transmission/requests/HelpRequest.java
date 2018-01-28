@@ -1,16 +1,13 @@
 package fr.unice.polytech.pel.polyescape.transmission.requests;
 
-import fr.unice.polytech.pel.polyescape.data.Joueur;
-import fr.unice.polytech.pel.polyescape.data.GameMaster;
-import fr.unice.polytech.pel.polyescape.data.Partie;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
+import fr.unice.polytech.pel.polyescape.data.Joueur;
+import fr.unice.polytech.pel.polyescape.data.Partie;
 import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import org.json.JSONObject;
 
 import javax.websocket.Session;
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.logging.Logger;
 
 public class HelpRequest implements Request {
@@ -18,7 +15,6 @@ public class HelpRequest implements Request {
     private Gestionnaire gestionnaire = Gestionnaire.getInstance();
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private Joueur joueur;
-    private GameMaster gameMaster;
     private int partieID;
     private boolean mjPresent;
     private String message;
@@ -31,7 +27,7 @@ public class HelpRequest implements Request {
         mjPresent = sendInfoToMJ();
     }
 
-    public Boolean sendInfoToMJ() {
+    private Boolean sendInfoToMJ() {
         JSONObject tmpJson = new JSONObject(message);
         JSONObject jsonObject = new JSONObject().put("reponse", tmpJson.getString(JsonArguments.REQUEST.toString()));
         jsonObject.put("username", tmpJson.getString("username"));
@@ -45,7 +41,7 @@ public class HelpRequest implements Request {
                 return true;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.info(e.getMessage());
         }
         return false;
     }

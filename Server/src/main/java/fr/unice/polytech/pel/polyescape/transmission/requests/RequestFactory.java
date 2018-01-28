@@ -6,7 +6,6 @@ import fr.unice.polytech.pel.polyescape.transmission.TypeRequest;
 import org.json.JSONObject;
 
 import javax.websocket.Session;
-import java.io.IOException;
 
 /**
  * @author Gaetan Vialon
@@ -24,10 +23,6 @@ public class RequestFactory {
                 return new EscapeGameDispoListRequest();
             case CREATE_PARTIE:
                 return new CreatePartieRequest(message, session);
-            case CREATE_ENIGME:
-                return new CreateEnigmeRequest();
-            case CREATE_ESCAPE:
-                return new CreateEscapeRequest();
             case RESPONSE:
                 return new CheckResponseRequest(message, session);
             case HELP:

@@ -32,6 +32,7 @@ public class GiveEnigmeMessageTest {
 
     @Test
     public void goodMessage() {
+        System.out.println();
         message = new GiveEnigmeMessage(engine,time).messageInJson();
         assertEquals(description,message.getString(JsonArguments.INFOS.toString()));
         assertEquals(name,message.getString(JsonArguments.NOM.toString()));

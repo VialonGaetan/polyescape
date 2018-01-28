@@ -3,11 +3,16 @@ package fr.unice.polytech.pel.polyescape;
 import fr.unice.polytech.pel.polyescape.server.GameServerEndPoint;
 import org.glassfish.tyrus.server.Server;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @author Gaetan Vialon
  * Created the 11/01/2018.
  */
 public class Main {
+
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     public static void main(String[] args) {
         runServer();
@@ -18,9 +23,9 @@ public class Main {
         boolean listening = true;
         try {
             server.start();
-            System.out.print("Adresse du server ws://localhost:15555/websockets/gameserver");
+            Logger.getGlobal().info("Adresse du server ws://localhost:15555/websockets/gameserver");
         } catch (Exception e) {
-            System.err.println("Could not listen on port: 15555.");
+            Logger.getGlobal().log(Level.WARNING,"Could not listen on port: 15555.");
             System.exit(-1);
         }
         while (listening);

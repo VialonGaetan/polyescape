@@ -3,8 +3,8 @@ package fr.unice.polytech.pel.polyescape.data;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
 import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer.ActualizeProgressGameMessage;
-import fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer.GiveEnigmeMessage;
 import fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer.EndGameMessage;
+import fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer.GiveEnigmeMessage;
 import fr.unice.polytech.pel.polyescape.transmission.additionnal.multiplayer.GiveIndiceMessage;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -66,7 +66,8 @@ public class PartieEnEquipe extends Partie implements Serialize {
         int i = 0;
         for (Joueur joueur : association.keySet()) {
             indiceAssociateToPlayer.put(joueur, new Indice(indice.get(i++)));
-            joueur.sendMessageToPlayer(new GiveEnigmeMessage(getCurrentEnigmesOfaPlayer(joueur).get(), time).createMessageToSend());
+            if (getCurrentEnigmesOfaPlayer(joueur).isPresent())
+                joueur.sendMessageToPlayer(new GiveEnigmeMessage(getCurrentEnigmesOfaPlayer(joueur).get(), time).createMessageToSend());
         }
         sendMessageToAllPlayer(new ActualizeProgressGameMessage(association).createMessageToSend());
     }
@@ -111,7 +112,7 @@ public class PartieEnEquipe extends Partie implements Serialize {
     public boolean checkReponse(Joueur joueur, String reponse) {
         if (!getCurrentEnigmesOfaPlayer(joueur).isPresent())
             return finalEnigme.checkAnswer(reponse);
-        if (!getCurrentEnigmesOfaPlayer(joueur).get().checkAnswer(reponse))
+        else if (!getCurrentEnigmesOfaPlayer(joueur).get().checkAnswer(reponse))
             return false;
         sendMessageToAllPlayer(new ActualizeProgressGameMessage(association).createMessageToSend());
         return true;

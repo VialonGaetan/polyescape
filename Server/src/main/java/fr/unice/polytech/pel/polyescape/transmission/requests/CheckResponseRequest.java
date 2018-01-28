@@ -1,7 +1,7 @@
 package fr.unice.polytech.pel.polyescape.transmission.requests;
 
-import fr.unice.polytech.pel.polyescape.data.Joueur;
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
+import fr.unice.polytech.pel.polyescape.data.Joueur;
 import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import org.json.JSONObject;
 

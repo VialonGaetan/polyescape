@@ -1,6 +1,9 @@
 package fr.unice.polytech.pel.polyescape;
 
-import fr.unice.polytech.pel.polyescape.data.*;
+import fr.unice.polytech.pel.polyescape.data.Enigme;
+import fr.unice.polytech.pel.polyescape.data.EscapeGame;
+import fr.unice.polytech.pel.polyescape.data.FinalEnigme;
+import fr.unice.polytech.pel.polyescape.data.Partie;
 
 import javax.websocket.Session;
 import java.util.*;

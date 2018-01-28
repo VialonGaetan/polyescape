@@ -41,6 +41,7 @@ public class CreatePartieRequestTest {
                 .put(JsonArguments.ESCAPEGAME.toString(),gestionnaire.getEscapeGamesDisponible().get(0).getName())
                 .put(JsonArguments.TEAMNAME.toString(), "Grosse Team")
                 .toString();
+
         session = null;
 
     }
@@ -68,6 +69,7 @@ public class CreatePartieRequestTest {
         int numberPartieBeforeNewPartie = gestionnaire.getParties().values().size();
         createPartieRequest = new CreatePartieRequest(requestTeam,session);
         assertEquals(numberPartieBeforeNewPartie + 1,gestionnaire.getParties().values().size());
+        createPartieRequest.getAnswer();
         checkReponse();
     }
 

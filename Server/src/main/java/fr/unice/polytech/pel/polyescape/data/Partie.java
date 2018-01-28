@@ -4,7 +4,10 @@ import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Gaetan Vialon
@@ -86,7 +89,9 @@ public class Partie implements Serialize {
     }
 
     public boolean checkReponse(Joueur joueur, String reponse){
-        return getCurrentEnigmesOfaPlayer(joueur).get().checkAnswer(reponse);
+        if (getCurrentEnigmesOfaPlayer(joueur).isPresent())
+            return getCurrentEnigmesOfaPlayer(joueur).get().checkAnswer(reponse);
+        return false;
     }
 
     public Collection<Joueur> getJoueurs(){

@@ -2,7 +2,12 @@ package fr.unice.polytech.pel.polyescape.transmission.requests;
 
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
 import fr.unice.polytech.pel.polyescape.data.Joueur;
+import fr.unice.polytech.pel.polyescape.data.Partie;
 import fr.unice.polytech.pel.polyescape.data.PartieEnEquipe;
+import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Gaetan Vialon
@@ -10,12 +15,19 @@ import fr.unice.polytech.pel.polyescape.data.PartieEnEquipe;
  */
 public class SalonListRequestTest {
 
-    public void exemple() {
+    private Gestionnaire gestionnaire;
+    private SalonListRequest request;
 
-        Gestionnaire gestionnaire = Gestionnaire.getInstance();
-        gestionnaire.createNewPartie(new PartieEnEquipe(gestionnaire.getEscapeGamesDisponible().get(0), new Joueur("lol", null), "PierreLeBoloss"));
-        SalonListRequest request = new SalonListRequest();
-        System.out.println(request.getAnswer());
+    @Test
+    public void exemple() {
+        gestionnaire = Gestionnaire.getInstance();
+        request = new SalonListRequest();
+        int partieEnAttente = 0;
+        for (Partie partie: gestionnaire.getParties().values()) {
+            if (!partie.hasStart())
+                partieEnAttente++;
+        }
+        assertEquals(partieEnAttente,request.answerInJson().getJSONArray(JsonArguments.PARTIEATTENTE.toString()).length());
 
     }
 

@@ -7,11 +7,11 @@ package fr.unice.polytech.pel.polyescape.data;
 public class Indice {
 
     private boolean isDiscover;
-    private String indice;
+    private String indiceString;
 
 
     public Indice(String indice) {
-        this.indice = indice;
+        this.indiceString = indice;
         isDiscover = false;
     }
 
@@ -24,6 +24,6 @@ public class Indice {
     }
 
     public String getIndice() {
-        return indice;
+        return indiceString;
     }
 }

@@ -42,6 +42,7 @@ public class PartieTest {
     @Test
     public void initialisationGame()
     {
+        assertFalse(partieSolo.joinPartie(new Joueur("Robert",null)));
         assertTrue(partieSolo.hasStart());
         assertEquals(escapeGame.getEnigmes().size(), partieSolo.getEnigmesOfaPlayer(joueur).size());
         assertEquals(escapeGame.getEnigmes(), partieSolo.getEnigmesOfaPlayer(joueur));
@@ -61,14 +62,19 @@ public class PartieTest {
         assertEquals(escapeGame.getEnigmes().get(1), partieSolo.getCurrentEnigmesOfaPlayer(joueur).get());
         partieSolo.getCurrentEnigmesOfaPlayer(joueur).get().checkAnswer("je suis null");
         assertEquals(escapeGame.getEnigmes().get(1), partieSolo.getCurrentEnigmesOfaPlayer(joueur).get());
+        assertEquals(escapeGame.getEnigmes(),partieSolo.getEnigmesOfaPlayer(joueur));
+        assertEquals(1,partieSolo.getJoueurs().size());
+        assertEquals(1,partieSolo.numberOfPlayer());
     }
 
 
     @Test
     public void initialisationTeam(){
         assertFalse(partieTeam.hasStart());
-        partieTeam.joinPartie(secondJoueur);
+        assertTrue(partieTeam.joinPartie(secondJoueur));
         assertFalse(partieTeam.hasStart());
+        assertEquals(2,partieTeam.getJoueurs().size());
+        assertEquals(2,partieTeam.numberOfPlayer());
         partieTeam.setJoueurReadyOrNot(joueur);
         assertFalse(partieTeam.hasStart());
         partieTeam.setJoueurReadyOrNot(joueur);
@@ -77,6 +83,8 @@ public class PartieTest {
         partieTeam.setJoueurReadyOrNot(joueur);
         assertTrue(partieTeam.hasStart());
         assertFalse(partieTeam.isFinish());
+        assertTrue(escapeGame.getEnigmes().containsAll(partieTeam.getEnigmesOfaPlayer(joueur)));
+        assertTrue(escapeGame.getEnigmes().containsAll(partieTeam.getEnigmesOfaPlayer(secondJoueur)));
         int nbEnigmes = 0;
         nbEnigmes = partieTeam.getEnigmesOfaPlayer(joueur).size() + partieTeam.getEnigmesOfaPlayer(secondJoueur).size();
         assertEquals(escapeGame.getEnigmes().size(),nbEnigmes);

@@ -5,24 +5,25 @@ import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * @author Gaetan Vialon
- * Created the 16/01/2018.
+ * Created the 28/01/2018.
  */
-public class EnigmeDispoRequestTest {
+public class EscapeGameDispoListRequestTest {
+
     private Gestionnaire gestionnaire;
-    private EnigmeDispoRequest request;
+    private EscapeGameDispoListRequest request;
 
     @Before
     public void setUp() throws Exception {
         gestionnaire = Gestionnaire.getInstance();
-        request = new EnigmeDispoRequest();
+        request = new EscapeGameDispoListRequest();
     }
 
     @Test
-    public void checkNumberOfEnigmes() {
-        assertEquals(gestionnaire.getEnigmeDisponible().size(),request.answerInJson().getJSONArray(JsonArguments.ENIGMES.toString()).length());
+    public void checkNumberOfEscapGame() {
+        assertEquals(gestionnaire.getEscapeGamesDisponible().size(),request.answerInJson().getJSONArray(JsonArguments.ESCAPEGAMES.toString()).length());
     }
 }

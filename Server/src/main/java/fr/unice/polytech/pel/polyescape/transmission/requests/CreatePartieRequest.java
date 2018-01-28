@@ -1,7 +1,10 @@
 package fr.unice.polytech.pel.polyescape.transmission.requests;
 
 import fr.unice.polytech.pel.polyescape.Gestionnaire;
-import fr.unice.polytech.pel.polyescape.data.*;
+import fr.unice.polytech.pel.polyescape.data.EscapeGame;
+import fr.unice.polytech.pel.polyescape.data.Joueur;
+import fr.unice.polytech.pel.polyescape.data.Partie;
+import fr.unice.polytech.pel.polyescape.data.PartieEnEquipe;
 import fr.unice.polytech.pel.polyescape.transmission.InvalidJsonRequest;
 import fr.unice.polytech.pel.polyescape.transmission.JsonArguments;
 import org.json.JSONObject;
@@ -20,7 +23,6 @@ public class CreatePartieRequest implements Request {
     private Gestionnaire gestionnaire = Gestionnaire.getInstance();
     private int id;
     private Joueur joueur;
-    private GameMaster gameMaster;
 
     public CreatePartieRequest(String message, Session session) {
         logger.info("Creation d'une nouvelle partie");

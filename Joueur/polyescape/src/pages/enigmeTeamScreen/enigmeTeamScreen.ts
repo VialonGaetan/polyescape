@@ -189,6 +189,13 @@ export class EnigmeTeamPage {
             indices: this.indices,
             name: this.nomEscape
           });
+        }else {
+          this.alerCtrl.create({
+            title: "Indice",
+            message: jsonData.description,
+            buttons: ['Ok']
+          }).present();
+          this.scheduleNotification(jsonData.description);
         }
 
       }.bind(this);

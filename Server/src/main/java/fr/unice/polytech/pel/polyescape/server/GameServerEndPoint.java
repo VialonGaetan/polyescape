@@ -24,7 +24,6 @@ public class GameServerEndPoint {
 
     @OnMessage
     public String onMessage(String message, Session session) throws IOException {
-        System.out.println(message);
         logger.info("Message Receive : " + message);
         Request request = new RequestFactory().createTypeRequest(message, session);
         logger.info("Message send : " + request.getAnswer());
