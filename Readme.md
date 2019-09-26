@@ -1,6 +1,6 @@
-'##README'
+## README
 
-#Documentation : 
+# Documentation : 
 
         1) Scénario - Introduction :
     Le projet tourne autour de deux axes majeurs : Le Server (Java, websocket) et le joueur (JS Angular Ionic).
